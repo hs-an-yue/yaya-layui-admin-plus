@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 响应式配置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- LayUI css库 -->
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../css/yaya-common.css">
+    <title>修改密码</title>
+</head>
+<body>
+    <div class="yaya-container">
+        <div class="layui-container">
+            <div class="layui-row">
+                <div class="layui-col-md10 layui-col-sm10 layui-col-xs10 layui-col-md-offset1 layui-col-sm-offset1 layui-col-xs-offset1">
+                    <form class="layui-form" style="margin-top: 15px;">
+                        <div class="layui-form-item">
+                            <div class="layui-input-wrap">
+                                <div class="layui-input-prefix">
+                                    <i class="layui-icon layui-icon-vercode"></i>
+                                </div>
+                                <input type="password" name="password" value="" lay-verify="required" placeholder="请输入原密码..." lay-reqtext="输入原密码" autocomplete="off" class="layui-input" lay-affix="clear">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-wrap">
+                                <div class="layui-input-prefix">
+                                    <i class="layui-icon layui-icon-vercode"></i>
+                                </div>
+                                <input type="password" name="new_password"  lay-verify="required" placeholder="请输入新密码" lay-reqtext="输入新密码..." autocomplete="off" class="layui-input" lay-affix="clear">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-wrap">
+                                <div class="layui-input-prefix">
+                                    <i class="layui-icon layui-icon-vercode"></i>
+                                </div>
+                                <input type="password" name="repeat_password" lay-verify="required" placeholder="重复新密码..." lay-reqtext="重复新密码" autocomplete="off" class="layui-input" lay-affix="clear">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <button style="background-color: #409eff;" class="layui-btn layui-btn-fluid" lay-submit lay-filter="submitPwd">提交</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../layui/layui.js"></script>
+</body>
+</html>

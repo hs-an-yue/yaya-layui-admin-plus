@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <!-- 响应式配置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 标签icon设置 -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <title>政企协同办公平台 - 用户登录</title>
+    <style>
+        /* 全局样式复位 */
+        * { margin: 0; padding: 0; box-box: border-box; font-family: "Microsoft YaHei", sans-serif; }
+        body { 
+            height: 100vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            background: #f0f2f5;
+            background-image: radial-gradient(#d1d9e6 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        /* 登录容器 */
+        .login-container {
+            width: 1000px;
+            height: 600px;
+            display: flex;
+            background: #fff;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        /* 左侧宣传区 */
+        .login-sidebar {
+            flex: 1.2;
+            background: linear-gradient(135deg, #1b59f8 0%, #062c80 100%);
+            padding: 60px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .sidebar-logo { font-size: 24px; font-weight: bold; letter-spacing: 1px; }
+        .sidebar-content h2 { font-size: 36px; margin-bottom: 20px; }
+        .sidebar-content p { font-size: 16px; opacity: 0.8; line-height: 1.6; }
+        .sidebar-footer { font-size: 12px; opacity: 0.6; }
+        /* 右侧表单区 */
+        .login-main {
+            flex: 1;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        /* 登录方式切换 */
+        .login-tabs {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #eee;
+        }
+        .tab-item {
+            padding-bottom: 10px;
+            cursor: pointer;
+            color: #666;
+            font-size: 18px;
+            position: relative;
+        }
+        .tab-item.active {
+            color: #1b59f8;
+            font-weight: bold;
+        }
+        .tab-item.active::after {
+            content: "";
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #1b59f8;
+        }
+
+        /* 表单元素 */
+        .form-group { margin-bottom: 25px; }
+        .form-group label { display: block; margin-bottom: 8px; color: #333; font-size: 14px; }
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #d9d9d9;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: all 0.3s;
+            box-sizing: border-box;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #1b59f8;
+            box-shadow: 0 0 0 2px rgba(27,89,248,0.1);
+        }
+
+        /* 登录按钮 */
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: #1b59f8;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .submit-btn:hover { background: #0044cc; }
+
+        /* 扫码登录区（默认隐藏） */
+        .qrcode-section {
+            display: none;
+            text-align: center;
+            flex-direction: column;
+            align-items: center;
+        }
+        .qrcode-box {
+            width: 200px;
+            height: 200px;
+            background: #f5f5f5;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* 辅助链接 */
+        .extras {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: #888;
+        }
+        .extras a { color: #1b59f8; text-decoration: none; }
+        .extras>label{height: 20px;display: flex;align-content: center;}
+        .extras>label>input{margin-right: 5px;}
+        .login-footer{
+            font-size: 12px;
+            color: #c0c0c0;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .login-container { width: 90%; height: auto; flex-direction: column; }
+            .login-sidebar { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <!-- 左侧设计区 -->
+        <div class="login-sidebar">
+            <div class="sidebar-logo">YaYa-Layui-Admin-Plus系统</div>
+            <div class="sidebar-content">
+                <h2>数字政企一体化<br>协同办公平台</h2>
+                <p>2026版智慧数字化政务系统，为政府与企业提供高效、安全、合规的数字化连接服务。</p>
+            </div>
+            <div class="sidebar-footer">
+                推荐使用 360浏览器 或 统信浏览器 访问<br>
+                © 2026 YaYa大数据管理局 版权所有
+            </div>
+        </div>
+
+        <!-- 右侧表单区 -->
+        <div class="login-main">
+            <div class="login-tabs">
+                <div class="tab-item active" onclick="switchTab('account')">账号登录</div>
+                <div class="tab-item" onclick="switchTab('qrcode')">扫码登录</div>
+            </div>
+
+            <!-- 账号登录表单 -->
+            <form id="accountForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>账号 / 手机号</label>
+                    <input type="text" id="username" placeholder="请输入您的账号" required>
+                </div>
+                <div class="form-group">
+                    <label>登录密码</label>
+                    <input type="password" id="password" placeholder="请输入密码" required>
+                </div>
+                <button type="submit" class="submit-btn">登 录</button>
+                <div class="extras">
+                    <label><input type="checkbox">记住账号 </label>
+                    <a href="#">忘记密码？</a>
+                </div>
+            </form>
+
+            <!-- 扫码登录 -->
+            <div id="qrcodeSection" class="qrcode-section">
+                <div class="qrcode-box">
+                    <!-- 实际项目中替换为动态二维码图片 -->
+                    <div style="color:#999; font-size: 12px;">二维码占位符<br>请使用政务通扫码</div>
+                </div>
+                <p style="font-size: 14px; color: #666;">请打开 <strong>YaYa App</strong> 扫码登录</p>
+            </div>
+
+            <div style="margin-top: auto; text-align: center; font-size: 12px; color: #bbb;">
+                <a href="#" style="color: #bbb; text-decoration: none;">CA证书登录</a> | 
+                <a href="#" style="color: #bbb; text-decoration: none;">电子营业执照登录</a>
+            </div>
+        </div>
+    </div>
+    <!-- 网站底部 -->
+    <div class="login-footer">
+        <div style="width: 100vw;text-align: center;">Copyright © 2026 YaYa-Layui-Admin-Plus <svg t="1769072378478" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4955" width="15" height="15"><path d="M780.288 750.592H244.736V415.744C244.736 229.376 396.288 79.872 460.8 24.576c29.696-24.576 71.68-24.576 101.376 0 65.536 55.296 217.088 204.8 217.088 391.168v334.848z m-453.632-81.92h371.712V415.744c0-150.528-128-277.504-186.368-326.656-57.344 49.152-186.368 176.128-186.368 326.656v252.928zM509.952 87.04z" fill="#1b59f8" p-id="4956"></path><path d="M326.656 750.592H148.48c-43.008 0-78.848-34.816-78.848-78.848v-76.8c0-26.624 13.312-51.2 34.816-65.536l221.184-146.432v367.616z m-175.104-81.92h92.16v-133.12l-92.16 61.44v71.68zM875.52 750.592H697.344V384l221.184 146.432c22.528 14.336 34.816 38.912 34.816 65.536v76.8c1.024 41.984-34.816 77.824-77.824 77.824z m-96.256-81.92h92.16v-71.68l-92.16-61.44v133.12zM513.024 489.472c-64.512 0-116.736-52.224-116.736-116.736S449.536 256 513.024 256s116.736 52.224 116.736 116.736-52.224 116.736-116.736 116.736z m0-151.552c-18.432 0-34.816 15.36-34.816 34.816s15.36 34.816 34.816 34.816 34.816-15.36 34.816-34.816S532.48 337.92 513.024 337.92zM512 1017.856c-22.528 0-40.96-18.432-40.96-40.96v-163.84c0-22.528 18.432-40.96 40.96-40.96s40.96 18.432 40.96 40.96v163.84c0 22.528-18.432 40.96-40.96 40.96zM351.232 953.344c-22.528 0-40.96-18.432-40.96-40.96v-66.56c0-22.528 18.432-40.96 40.96-40.96s40.96 18.432 40.96 40.96v66.56c0 22.528-18.432 40.96-40.96 40.96zM673.792 953.344c-22.528 0-40.96-18.432-40.96-40.96v-66.56c0-22.528 18.432-40.96 40.96-40.96s40.96 18.432 40.96 40.96v66.56c0 22.528-18.432 40.96-40.96 40.96z" fill="#1b59f8" p-id="4957"></path></svg> MIT Licensed</div>
+    </div>
+    <script>
+        // 切换登录方式逻辑
+        function switchTab(type) {
+            const tabs = document.querySelectorAll('.tab-item');
+            const accountForm = document.getElementById('accountForm');
+            const qrcodeSection = document.getElementById('qrcodeSection');
+
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            if (type === 'account') {
+                tabs[0].classList.add('active');
+                accountForm.style.display = 'block';
+                qrcodeSection.style.display = 'none';
+            } else {
+                tabs[1].classList.add('active');
+                accountForm.style.display = 'none';
+                qrcodeSection.style.display = 'flex';
+            }
+        }
+
+        // 模拟登录提交逻辑
+        function handleLogin(e) {
+            e.preventDefault();
+            const user = document.getElementById('username').value;
+            const pass = document.getElementById('password').value;
+            
+            // 这里可以添加原生 AJAX 或 Fetch 请求
+            console.log("提交数据：", { username: user, password: pass });
+            alert("登录请求已发送（模拟）\n用户：" + user);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <title>登陆</title>
+    <link href="layui/css/layui.css" rel="stylesheet">
+    <style>
+        .footer{
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            text-align: center;
+            width: 100%;
+        }
+        .lg-bg{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            align-content: center;
+            justify-content: center;
+            height: 85vh;
+        }
+        .lg-bg>img{
+            width: 700px;
+        }
+        .lg-form{
+            width: 85%;
+            margin-top: 20px;
+        }
+        .lg-title{
+            text-align: center;
+            margin-top: 180px;
+            width: 85%;
+            color: #1e9fff;
+        }
+    </style>
+</head>
+<body>
+<div class="login-container">
+    <div class="layui-row">
+        <div class="layui-col-md8 lg-bg">
+            <!-- 图片LOGO -->
+            <img src="image/bg/login-bg2.svg" alt="bg">
+        </div>
+        <div class="layui-col-md3" style="display: flex;flex-direction: column;justify-content: center;align-content: center;">
+            <h2 class="lg-title">YaYa-Layui-Admin-Plus系统</h2>
+            <!-- 表单 -->
+            <form class="layui-form lg-form">
+                <div class="demo-login-container">
+                    <div class="layui-form-item">
+                        <div class="layui-input-wrap">
+                            <div class="layui-input-prefix">
+                                <i class="layui-icon layui-icon-username"></i>
+                            </div>
+                            <input type="text" name="username"  lay-verify="required" placeholder="用户名" lay-reqtext="请填写用户名" autocomplete="off" class="layui-input" lay-affix="clear">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-wrap">
+                            <div class="layui-input-prefix">
+                                <i class="layui-icon layui-icon-password"></i>
+                            </div>
+                            <input type="password" name="password"  lay-verify="required" placeholder="密   码" lay-reqtext="请填写密码" autocomplete="off" class="layui-input" lay-affix="eye">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-row">
+                            <div class="layui-col-xs7">
+                                <div class="layui-input-wrap">
+                                    <div class="layui-input-prefix">
+                                        <i class="layui-icon layui-icon-vercode"></i>
+                                    </div>
+                                    <input type="text" name="captcha"  lay-verify="required" placeholder="验证码" lay-reqtext="请填写验证码" autocomplete="off" class="layui-input" lay-affix="clear">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs5">
+                                <div style="margin-left: 10px;">
+                                    <img src="image/captcha.gif">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <input type="checkbox" name="remember" lay-skin="primary" title="记住密码">
+                        <a href="#forget" style="float: right; margin-top: 7px;">忘记密码？</a>
+                    </div>
+                    <div class="layui-form-item">
+                        <button class="layui-btn layui-bg-blue layui-btn-fluid" lay-submit lay-filter="demo-login">登录</button>
+                    </div>
+                    <div>
+                        <label>社交账号登录</label>
+                        <span style="padding: 0 21px 0 6px;">
+                        <a><i class="layui-icon layui-icon-login-qq" style="color: #3492ed;"></i></a>
+                        <a><i class="layui-icon layui-icon-login-wechat" style="color: #4daf29;"></i></a>
+                        <a><i class="layui-icon layui-icon-login-weibo" style="color: #cf1900;"></i></a>
+                    </span>
+                        <a style="float: right;">注册帐号</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="footer" style="font-size: 12px;color: #c0c0c0;">
+    Copyright © 2026 YaYa-Layui-Admin-Plus <svg t="1769072378478" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4955" width="15" height="15"><path d="M780.288 750.592H244.736V415.744C244.736 229.376 396.288 79.872 460.8 24.576c29.696-24.576 71.68-24.576 101.376 0 65.536 55.296 217.088 204.8 217.088 391.168v334.848z m-453.632-81.92h371.712V415.744c0-150.528-128-277.504-186.368-326.656-57.344 49.152-186.368 176.128-186.368 326.656v252.928zM509.952 87.04z" fill="#1e9fff" p-id="4956"></path><path d="M326.656 750.592H148.48c-43.008 0-78.848-34.816-78.848-78.848v-76.8c0-26.624 13.312-51.2 34.816-65.536l221.184-146.432v367.616z m-175.104-81.92h92.16v-133.12l-92.16 61.44v71.68zM875.52 750.592H697.344V384l221.184 146.432c22.528 14.336 34.816 38.912 34.816 65.536v76.8c1.024 41.984-34.816 77.824-77.824 77.824z m-96.256-81.92h92.16v-71.68l-92.16-61.44v133.12zM513.024 489.472c-64.512 0-116.736-52.224-116.736-116.736S449.536 256 513.024 256s116.736 52.224 116.736 116.736-52.224 116.736-116.736 116.736z m0-151.552c-18.432 0-34.816 15.36-34.816 34.816s15.36 34.816 34.816 34.816 34.816-15.36 34.816-34.816S532.48 337.92 513.024 337.92zM512 1017.856c-22.528 0-40.96-18.432-40.96-40.96v-163.84c0-22.528 18.432-40.96 40.96-40.96s40.96 18.432 40.96 40.96v163.84c0 22.528-18.432 40.96-40.96 40.96zM351.232 953.344c-22.528 0-40.96-18.432-40.96-40.96v-66.56c0-22.528 18.432-40.96 40.96-40.96s40.96 18.432 40.96 40.96v66.56c0 22.528-18.432 40.96-40.96 40.96zM673.792 953.344c-22.528 0-40.96-18.432-40.96-40.96v-66.56c0-22.528 18.432-40.96 40.96-40.96s40.96 18.432 40.96 40.96v66.56c0 22.528-18.432 40.96-40.96 40.96z" fill="#1e9fff" p-id="4957"></path></svg> MIT Licensed
+</div>
+<script src="layui/layui.js"></script>
+</body>
+</html>

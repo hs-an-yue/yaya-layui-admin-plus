@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+    <title>用户设置</title>
+    <link href="../layui/css/layui.css" rel="stylesheet">
+    <link href="../css/yaya-common.css">
+    <style>
+        .user-base{
+            width: 100%;
+            background-color: #fff;
+        }
+        .user-base>div{
+            width: 100%;
+        }
+        .user-base>hr{
+            width: 100%;
+        }
+        .user-info{
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .user-info>p{
+            margin-top: 15px;
+        }
+        .user-info-list>img{
+            height: 100px;
+            width: 100px;
+            border-radius: 50px;
+            border: 1px solid #eeeeee;
+            margin: 20px 0;
+        }
+        .user-info-list{
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        .user-info-detail{
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+        }
+        .user-info-detail-item{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            align-items: center;
+            height: 30px;
+        }
+        .user-info-detail-item>p{
+            font-size: 14px;
+        }
+        .layui-tabs-header .layui-this, .layui-tabs-header li:hover{
+            color: #16b777;
+        }
+        .layui-tabs-header .layui-this:after{
+            border-bottom: 3px solid #16b777;
+        }
+        /*头像*/
+        .avatar-container {
+            text-align: center;
+        }
+        .avatar-wrapper {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid #ddd;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+            margin: 0 auto;
+        }
+        .avatar-wrapper:hover {
+            transform: scale(1.05);
+        }
+        .avatar {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .upload-text {
+            margin-top: 10px;
+            color: #666;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+<div class="yaya-container">
+    <div class="layui-fluid">
+        <div class="layui-row layui-col-space20">
+            <div class="layui-col-md3 card-hover">
+                <div class="user-base user-info">
+                    <div style="margin: 10px 0 0 10px">
+                        <h4>个人信息</h4>
+                    </div>
+                    <hr>
+                    <div class="user-info-list">
+                        <div class="avatar-container">
+                            <div class="avatar-wrapper" id="avatar-upload">
+                                <img id="avatarImg" src="../image/avatar.gif" alt="头像" class="avatar">
+                            </div>
+                            <p class="upload-text">点击头像上传新头像</p>
+                        </div>
+                        <div class="user-info-detail">
+                            <hr>
+                            <!--用户账号-->
+                            <div class="user-info-detail-item">
+                                <p>用户账号</p>
+                                <p>19999999901</p>
+                            </div>
+                            <hr>
+                            <!--用户邮箱-->
+                            <div class="user-info-detail-item">
+                                <p>用户邮箱</p>
+                                <p>1999999991@126.com</p>
+                            </div>
+                            <hr>
+                            <!--用户名称-->
+                            <div class="user-info-detail-item">
+                                <p>用户名称</p>
+                                <p>皮卡丘</p>
+                            </div>
+                            <hr>
+                            <!-- 用户性别 -->
+                            <div class="user-info-detail-item">
+                                <p>用户性别</p>
+                                <p>保密</p>
+                            </div>
+                            <hr>
+                            <!--用户部门-->
+                            <div class="user-info-detail-item">
+                                <p>用户部门</p>
+                                <p>人事部</p>
+                            </div>
+                            <hr>
+                            <!--用户角色-->
+                            <div class="user-info-detail-item">
+                                <p>用户角色</p>
+                                <p>运营</p>
+                            </div>
+                            <hr>
+                            <!--创建时间-->
+                            <div class="user-info-detail-item">
+                                <p>创建时间</p>
+                                <p>2025-11-18 16:00:48</p>
+                            </div>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md9 card-hover">
+                <div class="user-base layui-panel">
+                    <!--标题-->
+                    <div style="margin: 10px 0 0 10px">
+                        <h4 style="color:#000000D9;">基本信息</h4>
+                    </div>
+                    <hr>
+                    <div class="user-edit-info">
+                        <!-- 表单提交区 -->
+                        <div style="width: 95%;">
+                            <form class="layui-form">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">用户账号</label>
+                                    <div class="layui-input-block">
+                                        <input type="text"  autocomplete="off" disabled  placeholder="账号" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">用户邮箱</label>
+                                    <div class="layui-input-block">
+                                        <input type="text"  autocomplete="off" lay-affix="clear" placeholder="邮箱" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">用户名称</label>
+                                    <div class="layui-input-block">
+                                        <input type="text"  autocomplete="off" lay-affix="clear" placeholder="名称" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">用户昵称</label>
+                                    <div class="layui-input-block">
+                                        <input type="text"  autocomplete="off" lay-affix="clear" placeholder="昵称" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">用户性别</label>
+                                    <div class="layui-input-block">
+                                        <select>
+                                            <option value="">请选择</option>
+                                            <option value="1">男</option>
+                                            <option value="0">女</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">用户部门</label>
+                                    <div class="layui-input-block">
+                                        <select>
+                                            <option value="">请选择</option>
+                                            <option value="1001">人事部</option>
+                                            <option value="1002">行政部</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">用户角色</label>
+                                    <div class="layui-input-block">
+                                        <select>
+                                            <option value="">请选择</option>
+                                            <option value="1">超级管理员</option>
+                                            <option value="2">运营</option>
+                                            <option value="3">普通</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item" style="display: flex;justify-content: center;">
+                                    <button class="layui-btn layui-bg-blue">修改</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../layui/layui.js"></script>
+<script>
+    layui.use(function(){
+        const $ = layui.$;
+        const upload = layui.upload;
+
+        //头像上传
+        upload.render({
+            elem: '#avatar-upload',
+            url: '服务器上传接口地址',
+            done: function(res){
+                //上传成功
+                $("#avatarImg")[0].src='后端返回的图片地址';
+                //失败自己处理
+            }
+        });
+
+    });
+</script>
+</body>
+</html>

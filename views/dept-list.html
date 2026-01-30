@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 响应式配置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- LayUI css库 -->
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../css/yaya-common.css">
+    <title>部门管理</title>
+    <style>
+        .yaya-search{
+            height: 70px;
+            background-color: white;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            align-items: center;
+        }
+        .yaya-content{
+            background-color: white;
+            border-radius: 5px;
+        }
+        .search-input-body{
+            height: 38px;
+            width: 100%;
+        }
+        .status-tag {
+            padding: 2px 8px; border-radius: 10px; font-size: 12px;
+            background: #f0f9eb; color: #67c23a; border: 1px solid #e1f3d8;
+        }
+        .status-invalid{
+            padding: 2px 8px; border-radius: 10px; font-size: 12px;
+            background: #fef0f0; color: #f56c6c; border: 1px solid #fde2e2;
+        }
+        .layui-input, .layui-select, .layui-textarea{
+            height: 35px;
+        }
+    </style>
+</head>
+<body>
+    <div class="yaya-container">
+        <div class="layui-fluid">
+            <!-- 搜索条件 -->
+            <div class="layui-row">
+                <div class="yaya-search">
+                    <div class="search-input-body">
+                        <form class="layui-form">
+                            <div class="layui-row">
+                                <div class="layui-col-md8">
+                                    <div style="margin-left: 20px;">
+                                        <div class="layui-row">
+                                            <div class="layui-col-md5">
+                                                <div class="layui-input-group">
+                                                    <div class="layui-input-prefix">
+                                                        部门名称
+                                                    </div>
+                                                    <input style="height: 35px;" type="text" placeholder="部门名称" class="layui-input">
+                                                </div>
+                                            </div>
+                                            <div class="layui-col-md5">
+                                                <div class="layui-input-group">
+                                                    <div class="layui-input-prefix">
+                                                        部门状态
+                                                    </div>
+                                                    <select style="height: 35px;">
+                                                        <option value="">请选择</option>
+                                                        <option value="1">可用</option>
+                                                        <option value="0">禁用</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-col-md4" style="display: flex;flex-direction: row;flex-wrap: nowrap;justify-content: flex-end;">
+                                    <button class="layui-btn layui-bg-blue" style="background-color: #1e9fff;height: 35px;" lay-submit lay-filter="search">搜索</button>
+                                    <button type="reset" class="layui-btn layui-btn-primary layui-border-blue" style="margin-right: 20px;height: 35px;">重置</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row" style="margin-top: 15px;">
+                <div class="yaya-content" style="padding: 15px;">
+                    <table class="layui-hide" id="treeTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../layui/layui.js"></script>
+    <script>
+        layui.use(function(){
+            const treeTable = layui.treeTable;
+            treeTable.render({
+                elem: '#treeTable',
+                url: '../data/depts.json',
+                cols: [[
+                    {type: 'checkbox', fixed: 'left'},
+                    {field: 'deptId', title: 'ID',  sort: true, fixed: 'left'},
+                    {field: 'deptName', title: '部门名称',width:300},
+                    {field: 'orderNum', title: '序号'},
+                    {
+                        title: '状态',
+                        templet:function (row){
+                            let status = row.status;
+                            if(status===0){
+                                return '<span class="status-invalid">无效</span>';
+                            }else {
+                                return '<span class="status-tag">有效</span>';
+                            }
+                        }
+                    },
+                    {field: 'createTime', title: '创建时间'},
+                    {
+                        title: "操作",
+                        templet:function (){
+                            let str='<span style="cursor: pointer;color: #409eff;margin-right: 20px;">更新</span>';
+                            str+='<span style="cursor: pointer;color: #f56c6c;margin-right: 20px;">删除</span>';
+                            str+='<span style="cursor: pointer;color: #081bf8;">添加</span>';
+                            return str;
+                        }
+                    }
+                ]],
+                tree:{
+                    customName:{
+                        id:'deptId',
+                        name:'deptName'
+                    },
+                    view:{
+                        expandAllDefault:true
+                    }
+
+                },
+                page: false
+            });
+        })
+    </script>
+</body>
+</html>

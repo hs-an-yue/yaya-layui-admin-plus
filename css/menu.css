@@ -1,0 +1,59 @@
+/* yaya-layui-admin-plus 左侧菜单css配置 2026/01/15 10:22:59;author:夜泊1990;email:hd1611756908@163.com;Licensed:MIT */
+/* LOGO */
+.yaya-logo{
+    height: 48px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.yaya-logo>h4{
+    margin-left: 10px;
+    color: var(--logo-color);
+}
+/* 菜单选中后在右侧的竖的下 */
+.layui-menu .layui-menu-item-checked:after{
+    border-right: unset;/* 取消掉选中右侧带有的竖线 */
+}
+/* 默认菜单的背景色 */
+.layui-menu{
+    background-color: unset;/* 取消掉背景色 */
+}
+/* 菜单标题默认字体 */
+.layui-menu li, .layui-menu-body-title, .layui-menu-body-title a{
+    padding: 7px 15px;
+    color: var(--sidebar-default-text);
+}
+/* 一级菜单选中字体 */
+.layui-menu .layui-menu-item-checked a, .layui-menu .layui-menu-item-checked2 a{
+    color: var(--sidebar-select-text);
+}
+/* 鼠标划过菜单的伪类样式 */
+.layui-menu li:hover{
+    background-color: var(--sidebar-hover-bg);
+    color: var(--sidebar-hover-text);
+}
+/* 菜单选中背景色 */
+.layui-menu .layui-menu-item-checked, .layui-menu .layui-menu-item-checked2{
+    /* 默认菜单字体颜色 */
+    color: var(--sidebar-select-text);
+    /* 选中背景色 */
+    background-color:var(--sidebar-select-bg) !important;
+}
+/* 菜单右侧方向图标 */
+.layui-menu-body-title>.layui-icon{
+    color: var(--sidebar-icon-text);
+}
+.layui-menu .layui-menu-item-down:hover>.layui-menu-body-title>.layui-icon,.layui-menu .layui-menu-item-up>.layui-menu-body-title:hover>.layui-icon {
+    color: var(--sidebar-icon-text);
+}
+/* 右键提示样式 */
+.layui-dropdown-menu .layui-menu-body-title{
+    color: #000 !important;
+}
+.layui-dropdown-menu li:hover{
+    color: #fff !important;
+    background-color: #f8f8f8 !important;
+}

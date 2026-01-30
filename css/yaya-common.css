@@ -1,0 +1,19 @@
+/* yaya-layui-admin-plus 首页css配置 2026/01/13 10:28:59;author:夜泊1990;email:hd1611756908@163.com;Licensed:MIT */
+*{
+    padding: 0;
+    margin: 0;
+}
+.yaya-container{
+    width: 98%;
+    margin: 0 auto;
+    /*background-color: white;*/
+    border-radius: 10px;
+}
+/* 添加动画 */
+.card-hover{
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+.card-hover:hover {
+    transform: translateY(-2px);
+}

@@ -1,0 +1,62 @@
+{
+  "code": 0,
+  "msg": "成功",
+  "data": {
+    "pageNum": 1,
+    "pageSize": 100,
+    "count": 1,
+    "hasPre": false,
+    "hasNext": false,
+    "list": [
+      {
+        "userId": 10000,
+        "deptId": 10014,
+        "roleId": 10000,
+        "username": "管理员",
+        "nickname": "超管",
+        "phone": "admin",
+        "email": "1611756908@qq.com",
+        "password": null,
+        "sex": 1,
+        "avatar": "/file/avatar/2025/12/13/1999711930153480192.jpeg",
+        "isAccountNonExpired": 0,
+        "isAccountNonLocked": 0,
+        "isCredentialsNonExpired": 0,
+        "isEnabled": 1,
+        "isDelete": 0,
+        "createById": 10000,
+        "updateById": 10000,
+        "createTime": "2025-12-10 14:32:55",
+        "expiredTime": "2026-12-31 23:59:59",
+        "updateTime": "2025-12-12 12:21:35",
+        "department": {
+          "deptId": 10014,
+          "deptName": "人事部",
+          "parentId": 10009,
+          "ancestors": "0,10008,10009",
+          "orderNum": 1,
+          "isDelete": 0,
+          "status": 0,
+          "createById": 10000,
+          "updateById": 10000,
+          "createTime": "2025-12-09 16:06:12",
+          "updateTime": "2025-12-09 16:06:12",
+          "children": null
+        },
+        "role": {
+          "roleId": 10000,
+          "roleName": "admin",
+          "mark": "平台管理员",
+          "isDelete": 0,
+          "status": 0,
+          "createById": 10000,
+          "updateById": 10000,
+          "createTime": "2025-12-09 15:20:35",
+          "updateTime": "2025-12-09 15:54:36"
+        }
+      }
+    ]
+  },
+  "timestamp": "2026-01-26 17:47:53",
+  "trackId": "61fce755-d0e6-494c-89dc-0cd53e9670f2"
+}

@@ -1,0 +1,173 @@
+/* yaya-layui-admin-plus 首页css配置 2026/01/05 10:22:59;author:夜泊1990;email:hd1611756908@163.com;Licensed:MIT */
+*{padding: 0;margin: 0;}
+/* 默认主题 */
+:root{
+    --logo-color:#000000;                  /* LOGO主题默认颜色 */
+    --sidebar-bg:#ffffff; 				   /* 左侧导航栏默认背景色 */
+    --sidebar-default-text: #000000CC;     /* 菜单默认字体颜色 */
+    --sidebar-select-text: #16b777; 	   /* 菜单选中字体颜色 */
+    --sidebar-select-bg: #f8f8f8; 		   /* 菜单选中背景颜色 */
+    --sidebar-hover-bg: #f8f8f8; 		   /* 鼠标划过菜单伪类背景颜色 */
+    --sidebar-hover-text: #16b777; 		   /* 鼠标划过菜单伪类字体颜色 */
+    --sidebar-icon-text: #000000CC; 	   /* 鼠标划过菜单伪类字体颜色 */
+    --tab-text: #16b777; 		           /* 选项卡选中字体颜色 */
+}
+/* Dark1主题 */
+[data-theme="dark1"]{
+    --logo-color:#ffffff;                       /* LOGO主题默认颜色 */
+    --sidebar-bg:#2f363c; 				        /* 左侧导航栏Dark主题背景色 */
+    --sidebar-default-text: #ffffffb3;          /* 菜单默认字体颜色 */
+    --sidebar-select-text: #16b777; 	        /* 菜单选中字体颜色 */
+    --sidebar-select-bg: rgba(0,0,0,0.1); 		/* 菜单选中背景颜色 */
+    --sidebar-hover-bg: rgba(0,0,0,0.1); 		/* 鼠标划过菜单伪类背景颜色 */
+    --sidebar-hover-text: #16b777; 		        /* 鼠标划过菜单伪类字体颜色 */
+    --sidebar-icon-text: #ffffffb3; 		    /* 鼠标划过菜单伪类字体颜色 */
+    --tab-text: #16b777; 		                /* 选项卡选中字体颜色 */
+}
+/* Dark2主题 */
+[data-theme="dark2"]{
+    --logo-color:#ffffff;                       /* LOGO主题默认颜色 */
+    --sidebar-bg:#1c1e23; 				        /* 左侧导航栏Dark主题背景色 */
+    --sidebar-default-text: #f2f2f2cc;          /* 菜单默认字体颜色 */
+    --sidebar-select-text: #fafafa; 	        /* 菜单选中字体颜色 */
+    --sidebar-select-bg: #2e3033; 		        /* 菜单选中背景颜色 */
+    --sidebar-hover-bg: #2e3033; 		        /* 鼠标划过菜单伪类背景颜色 */
+    --sidebar-hover-text: #fafafa; 		        /* 鼠标划过菜单伪类字体颜色 */
+    --sidebar-icon-text: #ffffffb3; 		    /* 鼠标划过菜单伪类字体颜色 */
+    --tab-text: #409eff; 		                /* 选项卡选中字体颜色 */
+}
+
+/* 主题配置页面 样式 start */
+.layui-form-radio>.lay-skin-tag,
+.layui-form-checkbox>.lay-skin-tag {
+    font-size: 13px;
+    border-radius: 100px;
+}
+.layui-form-checked>.lay-skin-tag,
+.layui-form-radioed>.lay-skin-tag {
+    color: #fff !important;
+    background-color: #16b777 !important;
+}
+/* 主题配置页面 样式 end */
+
+a{
+    cursor: pointer;
+}
+.yaya-container{
+    /*高度100%*/
+    height: 100vh;
+    /*宽度100%*/
+    width: 100vw;
+    /*flex布局*/
+    display: flex;
+}
+/*首页左侧*/
+.yaya-left{
+    width: 220px;
+    height: 100%;
+    overflow-y: auto;/* 内容溢出时，显示滚动条 */
+    transition: width 0.3s ease;/* 当宽度发生变化时，进行动画重排 */
+    background-color: var(--sidebar-bg);
+}
+/*首页右侧*/
+.yaya-right{
+    flex: 1;
+    height: 100%;
+    transition: width 0.3s ease;/* 当宽度发生变化时，进行动画重排 */
+    background-color: #f1f3f6;
+}
+/* 首页右侧-工具条 */
+.yaya-right-bar{
+    width: 100%;
+    height: 47px;
+    background-color: #fff;
+    border-bottom: 1px solid #ebe6e7;
+    display: flex;
+}
+/* 首页右侧-页面选项卡 */
+#yaya-right-tab{
+    /* 内容区+tab区域总高度 */
+    height: calc(100vh - 48px);
+}
+/* 选项卡默认样式覆盖 */
+.yaya-tabs>.layui-tabs-header{
+    background-color: #ffffff; /*选项卡背景色设置*/
+}
+.yaya-tabs>.layui-tabs-header .layui-this:after{
+    border-bottom:unset;/* 选项卡选中默认下划线去掉 */
+}
+.yaya-tabs>.layui-tabs-header .layui-this, .layui-tabs-header li:hover{
+    color: var(--tab-text);/*覆盖选项卡选中默认字体颜色*/
+}
+
+.yaya-right-bar-left{
+    height: 47px;
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+.yaya-right-bar-left>img{
+    margin-left: 15px;
+    cursor: pointer;
+}
+.yaya-right-bar-right{
+    height: 47px;
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    align-items: center;
+}
+.yaya-right-bar-right>img{
+    cursor: pointer;
+}
+.layui-nav{
+    background-color: #ffffff;
+}
+.layui-nav .layui-nav-item a{
+    height: 47px;
+    line-height: 47px;
+}
+.yaya-left.yaya-hidden{
+    width: 0;
+    padding: 0;
+    overflow: hidden;
+}
+/* 内容区域样式 */
+.layui-tabs-item{
+    height: calc(100vh - 120px);/* 内容显示区域的高度设置 */
+}
+/* 选项卡样式 */
+/*去掉标签选项卡选中底层下划线样式*/
+.layui-tabs-header .layui-this:after{
+    border-bottom:none;
+}
+/* 选项卡鼠标划过的伪类样式 */
+.layui-tabs-header .layui-this, .layui-tabs-header li:hover{
+    color:var(--tab-text);
+}
+/* 修改选项卡标签关闭按钮伪类样式 */
+.layui-tabs-header li .layui-tabs-close:hover{
+    background-color: var(--tab-text);
+    color:#fff;
+}
+/* 选项卡内容水平过多出现滚动条时，距离左侧的选项卡内容距离左侧的边距 */
+.layui-tabs-scroll{
+    background-color: #ffffff;
+    padding: 0 25px;
+}
+/* 内容区距离选项卡的距离 */
+.layui-tabs-body{
+    padding: 14px 0 !important;
+}
+/* 选项卡超长后出现的左右滚动标签 */
+.layui-tabs-bar .layui-icon{
+    font-size: 10px;
+    width: 25px;
+    height: 40px;
+    line-height: 40px;
+    background-color: rgba(255,255,255,0.5);
+}

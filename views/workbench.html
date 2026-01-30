@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 响应式配置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- LayUI css库 -->
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../css/yaya-common.css">
+    <title>工作台</title>
+    <style>
+        .yaya-pend{
+            height: 130px;
+            background-color: #fff;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-items: center;
+        }
+        .yaya-user{
+            width: 97%;
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: space-around;
+            align-items: center;
+            cursor: pointer;
+        }
+        .yaya-user>div{
+            height: 80px;
+        }
+        .yaya-user-left{
+            display: flex;
+            flex-direction: row;
+            width: 60%;
+        }
+        .yaya-user-right{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: flex-end;
+            width: 40%;
+        }
+        .yaya-user-left>img{
+            height: 80px;
+            width: 80px;
+            border-radius: 40px;
+            border: 1px solid rgb(238, 234, 234);
+        }
+        .yaya-user-info{
+            margin-left: 15px;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            justify-content: center;
+        }
+        .yaya-user-container{
+            width: 80%;
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: flex-end;
+        }
+        .yaya-user-container>div{
+            height: 100%;
+            width: 80px;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-items: center;
+        }
+        .grid-demo{
+            background-color: #fff;
+            border-radius: 5px;
+            height: 500px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="yaya-container">
+        <div class="layui-fluid">
+            <!-- 用户首行-代办 -->
+            <div class="yaya-pend card-hover">
+                <div class="yaya-user">
+                    <div class="yaya-user-left">
+                        <img src="../image/avatar.gif" alt="头像">
+                        <div class="yaya-user-info">
+                            <p style="margin-bottom: 3px;font-weight: bold;font-size: 20px;">Hi, YaYa-Layui-Admin-Plus, A Happy And Wonderful Day！</p>
+                            <p style="margin-top: 3px;font-size: 14px;color: #323639cc;">江苏省-南京市 今日晴，10℃ - 22℃！</p>
+                        </div>
+                    </div>
+                    <div class="yaya-user-right">
+                        <div class="yaya-user-container">
+                            <div>
+                                <span style="color: #323639cc;">待办</span>
+                                <span style="color: #020817;font-size: 24px;font-weight: 100;">2/10</span>
+                            </div>
+                            <div>
+                                <span style="color: #323639cc;">项目</span>
+                                <span style="color: #020817;font-size: 24px;font-weight: 100;">9</span>
+                            </div>
+                            <div>
+                                <span style="color: #323639cc;">团队</span>
+                                <span style="color: #020817;font-size: 24px;font-weight: 100;">300</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 显示图表 -->
+            <div class="layui-row layui-col-space10" style="margin-top: 10px;border-radius: 5px;">
+                <div class="layui-col-md6 card-hover">
+                    <!-- 图表1 -->
+                    <div id="echartsId1" class="grid-demo card-hover"></div>
+                </div>
+                <div class="layui-col-md6 card-hover">
+                    <!-- 图表1 -->
+                    <div id="echartsId2" class="grid-demo card-hover"></div>
+                </div>
+            </div>
+            <!-- 表格数据 -->
+            <div class="layui-row layui-col-space10" style="margin-top: 10px;">
+                <div class="layui-col-md8 card-hover">
+                    <div style="background-color: #fff;border-radius: 5px;">
+                        <h3 style="padding-left: 10px;">最新动态</h3>
+                        <table class="layui-table" lay-skin="nob">
+                            <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>发布人</th>
+                                <th>发布数量</th>
+                                <th>完成数量</th>
+                                <th>发布时间</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1000</td>
+                                <td>庄子</td>
+                                <td>10</td>
+                                <td>2</td>
+                                <td>2025-11-10 11:12:13</td>
+                            </tr>
+                            <tr>
+                                <td>1001</td>
+                                <td>孟子</td>
+                                <td>12</td>
+                                <td>3</td>
+                                <td>2025-11-11 11:12:13</td>
+                            </tr>
+                            <tr>
+                                <td>1002</td>
+                                <td>荀子</td>
+                                <td>11</td>
+                                <td>1</td>
+                                <td>2025-11-13 11:12:13</td>
+                            </tr>
+                            <tr>
+                                <td>1003</td>
+                                <td>老子</td>
+                                <td>111</td>
+                                <td>29</td>
+                                <td>2025-11-20 11:12:13</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="layui-col-md4 card-hover">
+                    <div style="background-color: #fff;border-radius: 5px;padding-bottom: 10px;">
+                        <h3 style="padding-left: 10px;">进度</h3>
+                        <div class="layui-progress layui-progress-big" lay-showpercent="true" style="margin: 5px auto 0 auto;width: 95%;">
+                            <div class="layui-progress-bar layui-bg-blue" lay-percent="75%"></div>
+                        </div>
+                        <div class="layui-progress layui-progress-big" lay-showpercent="true" style="margin: 10px auto 0 auto;width: 95%;">
+                            <div class="layui-progress-bar layui-bg-orange" lay-percent="70%"></div>
+                        </div>
+                        <div class="layui-progress layui-progress-big" lay-showpercent="true" style="margin: 10px auto 0 auto;width: 95%;">
+                            <div class="layui-progress-bar" lay-percent="65%"></div>
+                        </div>
+                        <div class="layui-progress layui-progress-big" lay-showpercent="true" style="margin: 10px auto 0 auto;width: 95%;">
+                            <div class="layui-progress-bar layui-bg-purple" lay-percent="55%"></div>
+                        </div>
+                        <div class="layui-progress layui-progress-big" lay-showpercent="true" style="margin: 10px auto 0 auto;width: 95%;">
+                            <div class="layui-progress-bar layui-bg-green" lay-percent="35%"></div>
+                        </div>
+                        <div class="layui-progress layui-progress-big" lay-showpercent="true" style="margin: 10px auto 0 auto;width: 95%;">
+                            <div class="layui-progress-bar layui-bg-red" lay-percent="100%"></div>
+                        </div>
+                        <div class="layui-progress layui-progress-big" lay-showpercent="true" style="margin: 10px auto 0 auto;width: 95%;">
+                            <div class="layui-progress-bar layui-bg-blue" lay-percent="10%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../layui/layui.js"></script>
+    <script src="../js/echarts.min.js"></script>
+    <script>
+        layui.use(function (){
+            //创建报表对象1
+            const echarts_id_1 = echarts.init(document.getElementById('echartsId1'));
+            let option_1 = {
+                title: {
+                    text: '工具偏好 vs 来源偏好'
+                },
+                legend: {
+                    data: ['工具偏好', '来源偏好']
+                },
+                radar: {
+                    // shape: 'circle',
+                    indicator: [
+                        { name: 'Sales', max: 6500 },
+                        { name: 'Administration', max: 16000 },
+                        { name: 'Information Technology', max: 30000 },
+                        { name: 'Customer Support', max: 38000 },
+                        { name: 'Development', max: 52000 },
+                        { name: 'Marketing', max: 25000 }
+                    ]
+                },
+                series: [
+                    {
+                        name: '工具偏好 vs 来源偏好',
+                        type: 'radar',
+                        data: [
+                            {
+                                value: [4200, 3000, 20000, 35000, 50000, 18000],
+                                name: '工具偏好'
+                            },
+                            {
+                                value: [5000, 14000, 28000, 26000, 42000, 21000],
+                                name: '来源偏好'
+                            }
+                        ]
+                    }
+                ]
+            };
+            echarts_id_1.setOption(option_1);
+
+            //创建报表对象1
+            const echarts_id_2 = echarts.init(document.getElementById('echartsId2'));
+            let option_2 = {
+                title: {
+                    text: '用户来源统计'
+                },
+                legend: {
+                    top: 'bottom'
+                },
+                toolbox: {
+                    show: true,
+                    feature: {
+                        mark: { show: true },
+                        dataView: { show: true, readOnly: false },
+                        restore: { show: true },
+                        saveAsImage: { show: true }
+                    }
+                },
+                series: [
+                    {
+                        name: 'Nightingale Chart',
+                        type: 'pie',
+                        radius: [50, 120],
+                        center: ['50%', '50%'],
+                        roseType: 'area',
+                        itemStyle: {
+                            borderRadius: 8
+                        },
+                        data: [
+                            { value: 40, name: 'APP' },
+                            { value: 38, name: 'IPad' },
+                            { value: 32, name: 'Web' },
+                            { value: 30, name: '开发平台' },
+                            { value: 28, name: '第三方' },
+                            { value: 26, name: '内部调用' }
+                        ]
+                    }
+                ]
+            };
+            echarts_id_2.setOption(option_2);
+        });
+    </script>
+</body>
+</html>

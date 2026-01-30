@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 响应式配置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- LayUI css库 -->
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../css/yaya-common.css">
+    <title>用户管理</title>
+    <style>
+        .yaya-user-content{
+            display: flex;
+            justify-content: space-around;
+            border-radius: 5px;
+        }
+        .yaya-user-left{
+            background-color: white;
+            width: 20%;
+            height: calc(100vh);
+            border-radius: 5px;
+            overflow-y: auto;
+            overflow-x: auto;
+        }
+        /* 滚动条样式 */
+        .yaya-user-left {
+            /* 滚动条宽度：auto, thin, 或 none */
+            scrollbar-width: thin;
+            /* 滚动条颜色：前者为滑块(thumb)颜色，后者为轨道(track)颜色 */
+            scrollbar-color: #ffffff #f1f1f1;
+        }
+        .yaya-user-right{
+            width: 79%;
+        }
+        /* 输入框内部placeholder的css样式 */
+        input::placeholder {
+            font-size: 12px;
+        }
+        .yaya-user-search{
+            display: flex;
+        }
+        .yaya-user-search>div{
+            height: 35px;
+        }
+        .yaya-user-search-btn{
+            height: 35px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: flex-end;
+        }
+        .yaya-user-search input{
+            height: 35px;
+        }
+        .yaya-user-label{
+            text-align: center;
+            line-height: 35px;
+        }
+        /* xm-select 样式覆盖 */
+        .yaya-user-condition xm-select{
+            line-height: 35px;
+            min-height: 35px;
+        }
+        .yaya-user-condition xm-select .xm-label .xm-label-block{
+            font-size: 12px;
+        }
+        .yaya-user-condition xm-select > .xm-label .xm-label-block > span{
+            font-size: 12px;
+        }
+        .yaya-user-condition xm-select > .xm-label .xm-label-block > i{
+            font-size: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="yaya-container">
+        <div class="layui-fluid yaya-user-content">
+            <div class="yaya-user-left">
+                <!-- 搜索框 -->
+                <div class="layui-form" style="margin-top: 10px;">
+                    <div class="layui-row">
+                        <div class="layui-col-md11" style="margin-left: 10px;">
+                            <div class="layui-input-wrap" style="line-height: 35px;border-radius: 5px;">
+                                <div class="layui-input-prefix">
+                                    <i class="layui-icon layui-icon-search" style="font-size: 12px;"></i>
+                                </div>
+                                <input style="height: 35px;border-radius: 5px;" type="text" placeholder="请输入所属部门" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 部门树形列表 -->
+                <div id="dept-tree" style="margin-top: 5px;padding-bottom: 20px;"></div>
+            </div>
+            <div class="yaya-user-right">
+                <!-- 搜索条件 -->
+                <div class="layui-row layui-form" style="background-color: white;padding: 10px;">
+                    <!--条件  昵称 - 账号 - 部门 - 状态 - 时间范围 - 搜索|重置 -->
+                    <div class="layui-col-md3">
+                        <div class="layui-row yaya-user-search">
+                            <div class="layui-col-md3 yaya-user-label">昵称</div>
+                            <div class="layui-col-md9 yaya-user-condition">
+                                <input type="text" name="" placeholder="请输入..." class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md3">
+                        <div class="layui-row yaya-user-search">
+                            <div class="layui-col-md3 yaya-user-label">账号</div>
+                            <div class="layui-col-md9 yaya-user-condition">
+                                <input type="text" name="" placeholder="请输入..." class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md3">
+                        <div class="layui-row yaya-user-search">
+                            <div class="layui-col-md3 yaya-user-label">部门</div>
+                            <div class="layui-col-md9 yaya-user-condition" id="deptSelectTreeId">
+                                <!-- 部门列表 -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md3">
+                        <div class="layui-row yaya-user-search">
+                            <div class="layui-col-md3 yaya-user-label">状态</div>
+                            <div class="layui-col-md9 yaya-user-condition">
+                                <select>
+                                    <option value="">请选择</option>
+                                    <option value="1">可用</option>
+                                    <option value="0">禁用</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-row" style="margin-top: 50px;">
+                        <div class="layui-col-md8">
+                            <div class="layui-row yaya-user-search">
+                                <div class="layui-col-md1 yaya-user-label" style="margin-left: 2px;">时间</div>
+                                <div class="layui-col-md11 yaya-user-condition" style="margin-left: 5px;">
+                                    <div class="layui-inline" id="laydateUserId">
+                                        <div class="layui-input-inline">
+                                            <input type="text" autocomplete="off" id="user-start-date" class="layui-input" placeholder="开始...">
+                                        </div>
+                                        <div class="layui-input-inline">
+                                            <input type="text" autocomplete="off" id="user-end-date" class="layui-input" placeholder="结束...">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-col-md4">
+                            <div class="layui-row">
+                                <div class="yaya-user-search-btn">
+                                    <button type="submit" class="layui-btn layui-bg-blue layui-btn-sm" lay-submit lay-filter="search">搜索</button>
+                                    <button type="reset" class="layui-btn layui-btn-primary layui-btn-sm layui-border-blue">重置</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 内容显示 -->
+                <div class="layui-row" style="background-color: white;margin-top: 10px;padding: 10px;">
+                    <table class="layui-hide" id="test" lay-filter="test"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../layui/layui.js"></script>
+    <script src="../js/xm-select.js"></script>
+    <script>
+        layui.use(function (){
+            const tree = layui.tree;
+            const table = layui.table;
+            const layer = layui.layer;
+            const laydate = layui.laydate;
+            const $ = layui.$;
+
+            /* 用户列表 */
+            table.render({
+                elem: '#test',
+                url: '../data/users.json',
+                page: {
+                    prev:'上一页',
+                    next:'下一页',
+                    theme:'#1e9fff'
+                },
+                toolbar:`
+                    <div>
+                        <button type="button" lay-event="add" class="layui-btn layui-btn-sm layui-btn-primary layui-border-blue"><i class="layui-icon layui-icon-addition"></i>新增</button>
+                        <button type="button" lay-event="resetPwd" class="layui-btn layui-btn-sm layui-btn-primary layui-border"><i class="layui-icon layui-icon-key"></i>重置密码</button>
+                        <button type="button" lay-event="userDisEnable" class="layui-btn layui-btn-sm layui-btn-primary layui-border-purple"><i class="layui-icon layui-icon-lock"></i>用户封禁</button>
+                        <button type="button" lay-event="userEnable" class="layui-btn layui-btn-sm layui-btn-primary layui-border-orange"><i class="layui-icon layui-icon-vercode"></i>用户解封</button>
+                        <button type="button" lay-event="userImport" class="layui-btn layui-btn-sm layui-btn-primary layui-border-green"><i class="layui-icon layui-icon-upload-drag"></i>导入</button>
+                        <button type="button" lay-event="batchDel" class="layui-btn layui-btn-sm layui-btn-primary layui-border-red"><i class="layui-icon layui-icon-delete"></i>删除</button>
+                    </div>
+                `,
+                cols: [[
+                    {type: 'checkbox', fixed: 'left'},
+                    {field:'userId', title: '编号', sort: true},
+                    {field:'username', title: '名称'},
+                    {
+                        title: '头像',
+                        templet: function(d){
+                            let avatar = `
+                                <img style="width: 30px;height: 30px;border-radius: 15px;" src="../image/avatar.gif">
+                            `;
+                            return avatar;
+                        }
+                    },
+                    {
+                        title: '性别',
+                        templet: function(d){
+                            return d.sex===1?'男':'女'
+                        }
+                    },
+                    {
+                        title: '部门',
+                        templet: function(d){
+                            return d.department.deptName
+                        }
+                    },
+                    {
+                        title: '角色',
+                        templet: function(d){
+                            return d.role.roleName
+                        }
+                    },
+                    {field:'createTime', title: '创建时间',width: 200},
+                    {
+                        title: '操作',
+                        width: 170,
+                        templet: function(d){
+                            let str='<button type="button" class="layui-btn layui-btn-primary layui-border-orange layui-btn-xs">更新</button>';
+                            str+='<button type="button" class="layui-btn layui-btn-primary layui-border-red layui-btn-xs">删除</button>';
+                            str+='<button type="button" class="layui-btn layui-btn-primary layui-border-blue layui-btn-xs">详情</button>';
+                            return str;
+                        }
+                    }
+                ]],
+                parseData: function(res){ // res 即为原始返回的数据
+                    return {
+                        "code": res.code, // 解析接口状态
+                        "msg": res.msg, // 解析提示文本
+                        "count": res.data.count, // 解析数据长度
+                        "data": res.data.list // 解析数据列表
+                    };
+                }
+            })
+
+            /* 日期范围选择 */
+            laydate.render({
+                elem: '#laydateUserId',
+                range: ['#user-start-date', '#user-end-date'],
+                rangeLinked: true
+            });
+
+            //获取部门列表
+            $.getJSON('../data/depts.json',function (resp) {
+                let data = resp.data;
+
+                /* 左侧树状部门渲染显示 */
+                tree.render({
+                    elem: '#dept-tree',
+                    data: data,
+                    onlyIconControl: true,  // 是否仅允许节点左侧图标控制展开收缩
+                    customName:{
+                        id: 'deptId',
+                        title: 'deptName',
+                        children: 'children'
+                    },
+                    click: function(obj){
+                        layer.msg(JSON.stringify(obj.data));
+                    }
+                });
+                /* 右侧搜索条件树形部门下拉框渲染显示 */
+                xmSelect.render({
+                    el: '#deptSelectTreeId',
+                    language: 'zn',
+                    theme: {
+                        color: '#16b777',
+                    },
+                    model: {
+                        label: {
+                            type: 'block',
+                            block: {
+                                //最大显示数量, 0:不限制
+                                showCount: 1,
+                                //是否显示删除图标
+                                showIcon: true,
+                            }
+                        }
+                    },
+                    data: data,
+                    tree: {
+                        show: true,
+                        expandedKeys:true,
+                        indent: 20,
+                        strict: true,
+                        clickCheck: true
+                    },
+                    prop: {
+                        name: 'deptName',
+                        value: 'deptId',
+                    }
+                })
+            });
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 响应式配置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../css/yaya-common.css">
+    <title>yaya-admin-plus</title>
+    <style>
+        body {
+            background-color: #f8f9fa; /* 浅灰背景，更有管理系统的感觉 */
+        }
+        .table-action-btn {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="yaya-container">
+        <div>
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-white">
+                    <i class="bi bi-search"></i> 查询条件 （基于BootStrap5实现的页面，使用Gemini模型生成）
+                </div>
+                <div class="card-body">
+                    <form class="row g-3">
+                        <div class="col-md-3">
+                            <label for="communityName" class="form-label">小区名称</label>
+                            <input type="text" class="form-control" id="communityName" placeholder="请输入小区名称">
+                        </div>
+
+                        <div class="col-md-3">
+                            <label for="buildingNo" class="form-label">楼栋</label>
+                            <input type="text" class="form-control" id="buildingNo" placeholder="例如：1号楼">
+                        </div>
+
+                        <div class="col-md-3">
+                            <label for="unitNo" class="form-label">单元</label>
+                            <input type="text" class="form-control" id="unitNo" placeholder="例如：2单元">
+                        </div>
+
+                        <div class="col-md-3 d-flex align-items-end">
+                            <button type="button" class="btn btn-primary w-100 me-2">
+                                <i class="bi bi-search"></i> 查询
+                            </button>
+                            <button type="button" class="btn btn-secondary w-100">
+                                <i class="bi bi-arrow-counterclockwise"></i> 重置
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card shadow-sm">
+                <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                    <span><i class="bi bi-list-ul"></i> 房屋列表</span>
+                    <button class="btn btn-success btn-sm"><i class="bi bi-plus-lg"></i> 新增房屋</button>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-striped mb-0 align-middle">
+                            <thead class="table-light">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">小区名称</th>
+                                <th scope="col">小区地址</th>
+                                <th scope="col">楼栋号</th>
+                                <th scope="col">单元号</th>
+                                <th scope="col" style="width: 200px;">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>幸福家园</td>
+                                <td>朝阳区阳光路88号</td>
+                                <td><span class="badge bg-info text-dark">1号楼</span></td>
+                                <td>2单元 301室</td>
+                                <td>
+                                    <button type="button" class="btn btn-primary btn-sm table-action-btn">
+                                        <i class="bi bi-pencil-square"></i> 更新
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-sm table-action-btn">
+                                        <i class="bi bi-trash"></i> 删除
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>碧水湾花园</td>
+                                <td>海淀区清河路12号</td>
+                                <td><span class="badge bg-info text-dark">5号楼</span></td>
+                                <td>1单元 1202室</td>
+                                <td>
+                                    <button type="button" class="btn btn-primary btn-sm table-action-btn">
+                                        <i class="bi bi-pencil-square"></i> 更新
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-sm table-action-btn">
+                                        <i class="bi bi-trash"></i> 删除
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>万科星城</td>
+                                <td>丰台区科技园路66号</td>
+                                <td><span class="badge bg-info text-dark">12号楼</span></td>
+                                <td>3单元 505室</td>
+                                <td>
+                                    <button type="button" class="btn btn-primary btn-sm table-action-btn">
+                                        <i class="bi bi-pencil-square"></i> 更新
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-sm table-action-btn">
+                                        <i class="bi bi-trash"></i> 删除
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer bg-white">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-end mb-0">
+                            <li class="page-item disabled"><a class="page-link" href="#">上一页</a></li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">下一页</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

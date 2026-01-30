@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 响应式配置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/element-plus/dist/index.css" />
+    <script src="//cdn.jsdelivr.net/npm/vue@3"></script>
+    <script src="//cdn.jsdelivr.net/npm/element-plus"></script>
+    <script src="//cdn.jsdelivr.net/npm/element-plus/dist/locale/zh-cn.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/@element-plus/icons-vue"></script>
+    <link rel="stylesheet" href="../css/yaya-common.css">
+    <title>yaya-admin-plus</title>
+    <style>
+        body {
+            background-color: #f5f7fa;
+            margin: 0;
+            font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+        }
+        .header-card {
+            margin-bottom: 20px;
+        }
+        .pagination-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: flex-end;
+        }
+        .el-table {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="yaya-container">
+        <div id="app">
+            <el-card class="header-card" shadow="hover">
+                <template #header>
+                    <div class="card-header">
+                        <span><el-icon style="vertical-align: middle"><Search /></el-icon> 房屋查询（基于Element Plus，使用Gemini模型生成）</span>
+                    </div>
+                </template>
+
+                <el-form :inline="true" :model="searchForm" class="demo-form-inline">
+                    <el-form-item label="小区名称">
+                        <el-input v-model="searchForm.communityName" placeholder="请输入小区名称" clearable></el-input>
+                    </el-form-item>
+
+                    <el-form-item label="楼栋">
+                        <el-input v-model="searchForm.building" placeholder="例如：1号楼" clearable></el-input>
+                    </el-form-item>
+
+                    <el-form-item label="单元">
+                        <el-input v-model="searchForm.unit" placeholder="例如：1单元" clearable></el-input>
+                    </el-form-item>
+
+                    <el-form-item>
+                        <el-button type="primary" @click="handleSearch">
+                            <el-icon><Search /></el-icon> 查询
+                        </el-button>
+                        <el-button @click="resetForm">
+                            <el-icon><Refresh /></el-icon> 重置
+                        </el-button>
+                    </el-form-item>
+                </el-form>
+            </el-card>
+
+            <el-card shadow="hover">
+                <div style="margin-bottom: 15px;">
+                    <el-button type="success" plain @click="handleAdd">
+                        <el-icon><Plus /></el-icon> 新增房屋
+                    </el-button>
+                </div>
+
+                <el-table :data="tableData" border stripe style="width: 100%" v-loading="loading">
+                    <el-table-column type="index" label="#" width="50" align="center"></el-table-column>
+
+                    <el-table-column prop="communityName" label="小区名称" min-width="120"></el-table-column>
+
+                    <el-table-column prop="address" label="小区地址" min-width="200" show-overflow-tooltip></el-table-column>
+
+                    <el-table-column prop="building" label="房子楼栋号" width="120" align="center">
+                        <template #default="scope">
+                            <el-tag>{{ scope.row.building }}</el-tag>
+                        </template>
+                    </el-table-column>
+
+                    <el-table-column prop="unit" label="单元号" width="120" align="center"></el-table-column>
+
+                    <el-table-column prop="room" label="房号" width="100" align="center"></el-table-column>
+
+                    <el-table-column label="操作" width="180" align="center" fixed="right">
+                        <template #default="scope">
+                            <el-button type="primary" link size="small" @click="handleUpdate(scope.row)">
+                                <el-icon><Edit /></el-icon> 更新
+                            </el-button>
+                            <el-button type="danger" link size="small" @click="handleDelete(scope.row)">
+                                <el-icon><Delete /></el-icon> 删除
+                            </el-button>
+                        </template>
+                    </el-table-column>
+                </el-table>
+
+                <div class="pagination-container">
+                    <el-pagination
+                            background
+                            layout="total, prev, pager, next, jumper"
+                            :total="100"
+                            @current-change="handlePageChange">
+                    </el-pagination>
+                </div>
+            </el-card>
+        </div>
+    </div>
+    <script>
+        const { createApp, ref, reactive } = Vue;
+        const { ElMessage, ElMessageBox } = ElementPlus;
+
+        const app = createApp({
+            setup() {
+                // 1. 定义搜索表单数据
+                const searchForm = reactive({
+                    communityName: '',
+                    building: '',
+                    unit: ''
+                });
+
+                // 2. 表格加载状态
+                const loading = ref(false);
+
+                // 3. 模拟表格数据
+                const tableData = ref([
+                    { id: 1, communityName: '阳光花园', address: '朝阳区朝阳北路101号', building: '1号楼', unit: '1单元', room: '101' },
+                    { id: 2, communityName: '碧水湾', address: '海淀区清河中街5号', building: '6号楼', unit: '2单元', room: '302' },
+                    { id: 3, communityName: '万科城市之光', address: '通州区台湖镇', building: '12号楼', unit: '1单元', room: '1204' },
+                    { id: 4, communityName: '龙湖天街', address: '大兴区生物医药基地', building: '3号楼', unit: '3单元', room: '501' },
+                    { id: 5, communityName: '阳光花园', address: '朝阳区朝阳北路101号', building: '2号楼', unit: '1单元', room: '606' },
+                ]);
+
+                // --- 方法定义 ---
+
+                // 查询
+                const handleSearch = () => {
+                    loading.value = true;
+                    console.log('搜索条件:', searchForm);
+                    // 模拟网络请求延迟
+                    setTimeout(() => {
+                        ElMessage.success('查询成功');
+                        loading.value = false;
+                    }, 500);
+                };
+
+                // 重置
+                const resetForm = () => {
+                    searchForm.communityName = '';
+                    searchForm.building = '';
+                    searchForm.unit = '';
+                    handleSearch();
+                };
+
+                // 新增
+                const handleAdd = () => {
+                    ElMessage.info('点击了新增按钮');
+                };
+
+                // 更新
+                const handleUpdate = (row) => {
+                    console.log('更新行:', row);
+                    ElMessage.primary(`准备更新：${row.communityName} ${row.room}室`);
+                };
+
+                // 删除
+                const handleDelete = (row) => {
+                    ElMessageBox.confirm(
+                        `确定要删除 "${row.communityName} - ${row.room}室" 吗?`,
+                        '警告',
+                        {
+                            confirmButtonText: '确定',
+                            cancelButtonText: '取消',
+                            type: 'warning',
+                        }
+                    )
+                        .then(() => {
+                            // 模拟删除操作
+                            tableData.value = tableData.value.filter(item => item.id !== row.id);
+                            ElMessage.success('删除成功');
+                        })
+                        .catch(() => {
+                            ElMessage.info('已取消删除');
+                        });
+                };
+
+                // 分页切换
+                const handlePageChange = (val) => {
+                    console.log(`当前页: ${val}`);
+                };
+
+                return {
+                    searchForm,
+                    tableData,
+                    loading,
+                    handleSearch,
+                    resetForm,
+                    handleAdd,
+                    handleUpdate,
+                    handleDelete,
+                    handlePageChange
+                };
+            }
+        });
+
+        // 使用 Element Plus
+        app.use(ElementPlus, {
+            locale: ElementPlusLocaleZhCn // 设置中文
+        });
+
+        // 注册图标
+        for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+            app.component(key, component)
+        }
+
+        app.mount('#app');
+    </script>
+</body>
+</html>

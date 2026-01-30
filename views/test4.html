@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 响应式配置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/view-ui-plus/dist/styles/viewuiplus.css">
+    <link rel="stylesheet" href="../css/yaya-common.css">
+    <title>yaya-admin-plus</title>
+    <style>
+        body { background-color: #f5f7f9;}
+        .search-card { margin-bottom: 20px; }
+        /* 列表头部操作区域布局 */
+        .table-header-bar {
+            display: flex;
+            justify-content: space-between; /* 左右两端对齐 */
+            align-items: center;
+            margin-bottom: 16px; /* 与表格保持间距 */
+        }
+        .table-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #17233d;
+        }
+        /* 强制覆盖可能的溢出问题 */
+        .ivu-card-body {
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    <div class="yaya-container">
+        <div id="app">
+            <card class="search-card" dis-hover>
+                <template #title>
+                    <icon type="ios-search"></icon> 查询条件（基于View UI Plus，使用Gemini模型生成）
+                </template>
+                <i-form inline :model="searchForm" :label-width="80" @submit.prevent>
+                    <form-item label="小区名称">
+                        <i-input v-model="searchForm.communityName" placeholder="输入小区名" style="width: 180px"></i-input>
+                    </form-item>
+                    <form-item label="楼栋">
+                        <i-input v-model="searchForm.buildingNo" placeholder="如: 1号楼" style="width: 120px"></i-input>
+                    </form-item>
+                    <form-item label="单元">
+                        <i-input v-model="searchForm.unitNo" placeholder="如: 2单元" style="width: 120px"></i-input>
+                    </form-item>
+                    <form-item :label-width="20">
+                        <i-button type="primary" @click="handleSearch" icon="ios-search">查询数据</i-button>
+                        <i-button @click="handleReset" style="margin-left: 8px">重置重填</i-button>
+                    </form-item>
+                </i-form>
+            </card>
+
+            <card dis-hover>
+                <div class="table-header-bar">
+                    <div class="table-title">
+                        <icon type="md-list"></icon> 房屋信息列表
+                    </div>
+                    <div class="table-actions">
+                        <i-button type="success" icon="md-add" @click="showAddModal = true">新增房屋登记</i-button>
+                    </div>
+                </div>
+
+                <i-table :columns="columns" :data="houseData" border stripe>
+                    <template #building="{ row }">
+                        <strong>{{ row.buildingNo }}</strong>
+                    </template>
+
+                    <template #action="{ row, index }">
+                        <i-button type="primary" size="small" ghost style="margin-right: 5px" @click="updateHouse(row)">更新</i-button>
+                        <poptip confirm title="确定要删除该房屋信息吗?" @on-ok="deleteHouse(index)">
+                            <i-button type="error" size="small" ghost>删除</i-button>
+                        </poptip>
+                    </template>
+                </i-table>
+
+                <div style="margin-top: 20px; text-align: right;">
+                    <page :total="houseData.length" show-total show-elevator></page>
+                </div>
+            </card>
+
+            <modal v-model="showAddModal" title="房屋信息登记">
+                <i-form :model="addForm" :label-width="80">
+                    <form-item label="小区名称"><i-input v-model="addForm.communityName"></i-input></form-item>
+                    <form-item label="详细地址"><i-input v-model="addForm.address"></i-input></form-item>
+                    <form-item label="楼栋单元">
+                        <row>
+                            <i-col span="11"><i-input v-model="addForm.buildingNo" placeholder="楼栋"></i-input></i-col>
+                            <i-col span="2" style="text-align: center">-</i-col>
+                            <i-col span="11"><i-input v-model="addForm.unitNo" placeholder="单元"></i-input></i-col>
+                        </row>
+                    </form-item>
+                </i-form>
+            </modal>
+        </div>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/view-ui-plus"></script>
+
+    <script>
+        const { createApp, reactive, ref } = Vue;
+
+        const app = createApp({
+            setup() {
+                const showAddModal = ref(false);
+                const searchForm = reactive({ communityName: '', buildingNo: '', unitNo: '' });
+                const addForm = reactive({ communityName: '', address: '', buildingNo: '', unitNo: '' });
+
+                const columns = [
+                    { title: '小区名称', key: 'communityName', minWidth: 120 },
+                    { title: '小区地址', key: 'address', minWidth: 200 },
+                    { title: '楼栋号', slot: 'building', width: 100 },
+                    { title: '单元号', key: 'unitNo', width: 120 },
+                    { title: '操作', slot: 'action', width: 160, align: 'center' }
+                ];
+
+                const houseData = ref([
+                    { communityName: '金地格林世界', address: '上海市嘉定区南翔镇88弄', buildingNo: '15号楼', unitNo: '1单元 602' },
+                    { communityName: '万科西郊都会', address: '上海市嘉定区安亭镇展阳路', buildingNo: '3号楼', unitNo: '2单元 1201' },
+                    { communityName: '保利湖畔阳光', address: '上海市宝山区菊盛路109号', buildingNo: '8号楼', unitNo: '1单元 303' }
+                ]);
+
+                const handleSearch = () => ViewUIPlus.Message.loading('正在检索数据...');
+                const handleReset = () => { Object.assign(searchForm, { communityName: '', buildingNo: '', unitNo: '' }); };
+                const updateHouse = (row) => ViewUIPlus.Message.info('准备更新: ' + row.communityName);
+                const deleteHouse = (index) => {
+                    houseData.value.splice(index, 1);
+                    ViewUIPlus.Message.success('删除成功');
+                };
+
+                return {
+                    showAddModal, searchForm, addForm, columns, houseData,
+                    handleSearch, handleReset, updateHouse, deleteHouse
+                };
+            }
+        });
+
+        app.use(ViewUIPlus);
+        app.mount('#app');
+    </script>
+</body>
+</html>

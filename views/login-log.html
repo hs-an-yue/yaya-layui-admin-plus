@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 响应式配置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- LayUI css库 -->
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../css/yaya-common.css">
+    <title>登陆日志</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
+            background: #f5f5f5;
+            color: #333;
+            padding: 0 13px;
+        }
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .search-bar {
+            padding: 16px 24px;
+            border-bottom: 1px solid #eee;
+        }
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: flex-end;
+        }
+        .form-item {
+            display: flex;
+            flex-direction: column;
+            min-width: 160px;
+        }
+        .form-item label {
+            font-size: 0.9em;
+            margin-bottom: 6px;
+            color: #555;
+        }
+        input[type="text"] {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1em;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #409eff;
+            box-shadow: 0 0 0 2px rgba(64,158,255,0.2);
+        }
+        button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .btn-primary {
+            background: #409eff;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #66b1ff;
+        }
+        .btn-reset {
+            background: #f5f7fa;
+            color: #606266;
+            border: 1px solid #dcdfe6;
+        }
+        .btn-reset:hover {
+            background: #e6e8eb;
+        }
+        .table-container {
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95em;
+        }
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        th {
+            background: #f8f9fa;
+            font-weight: 500;
+            color: #606266;
+            white-space: nowrap;
+        }
+        tr:hover {
+            background: #f5faff;
+        }
+        .text-center { text-align: center; }
+        .text-muted { color: #909399; }
+        .pagination {
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .pagination-info {
+            color: #909399;
+        }
+        .page-btn {
+            padding: 6px 12px;
+            min-width: 36px;
+            text-align: center;
+            border: 1px solid #dcdfe6;
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .page-btn:hover:not(.disabled) {
+            background: #f5f7fa;
+        }
+        .page-btn.active {
+            background: #409eff;
+            color: white;
+            border-color: #409eff;
+        }
+        .page-btn.disabled {
+            color: #c0c4cc;
+            cursor: not-allowed;
+            background: #f5f7fa;
+        }
+    </style>
+</head>
+<body>
+<div class="yaya-container">
+    <div class="container">
+        <div class="card">
+            <div class="search-bar">
+                <div class="form-row">
+                    <div class="form-item">
+                        <label>账号</label>
+                        <input type="text" id="account" placeholder="支持模糊搜索" />
+                    </div>
+                    <div class="form-item">
+                        <label>昵称</label>
+                        <input type="text" id="nickname" placeholder="用户昵称" />
+                    </div>
+                    <div class="form-item">
+                        <label>IP地址</label>
+                        <input type="text" id="ip" placeholder="如 192.168 或 114." />
+                    </div>
+                    <div>
+                        <button class="btn-primary" onclick="search()">查询</button>
+                        <button class="btn-reset" onclick="resetForm()">重置</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table id="logTable">
+                    <thead>
+                    <tr>
+                        <th class="text-center">日志ID</th>
+                        <th>用户账号</th>
+                        <th>昵称</th>
+                        <th>所在地</th>
+                        <th>IP地址</th>
+                        <th class="text-center">生成时间</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+            </div>
+
+            <div class="pagination">
+                <div class="pagination-info" id="pageInfo">共 0 条记录 • 第 1 / 1 页</div>
+                <div>
+                    <button class="page-btn" onclick="changePage(currentPage - 1)">上一页</button>
+                    <button class="page-btn" onclick="changePage(currentPage + 1)">下一页</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <script src="../layui/layui.js"></script>
+    <script>
+        // =============================================
+        // 数据与状态
+        // =============================================
+        let currentPage = 1;
+        const pageSize = 15;
+        let allLogs = [];         // 全部模拟数据
+        let filteredLogs = [];    // 过滤后的数据
+
+        // 账号脱敏：前3位 + **** + 后4位（不足则显示原值）
+        function maskAccount(account) {
+            if (!account) return '—';
+            if (account.length <= 7) return account;
+            return account.slice(0, 3) + '****' + account.slice(-4);
+        }
+
+        // 格式化时间
+        function formatDate(timestamp) {
+            const d = new Date(timestamp);
+            return d.getFullYear() + '-' +
+                String(d.getMonth()+1).padStart(2,'0') + '-' +
+                String(d.getDate()).padStart(2,'0') + ' ' +
+                String(d.getHours()).padStart(2,'0') + ':' +
+                String(d.getMinutes()).padStart(2,'0') + ':' +
+                String(d.getSeconds()).padStart(2,'0');
+        }
+
+        // 生成模拟数据（实际项目应替换为 fetch 请求）
+        function generateMockData(count = 368) {
+            const nicknames = ['小明','阿龙','风间','樱子','零度','琉璃','夜猫','星尘','琉璃音','云舒'];
+            const regions = ['北京','上海','广州','深圳','杭州','成都','南京','武汉','西安','重庆','天津','苏州','东莞','宁波','青岛'];
+
+            const data = [];
+            for (let i = 0; i < count; i++) {
+                data.push({
+                    id: 100000 + i,
+                    account: `user${10000 + i}@example.com`,
+                    nickname: nicknames[i % nicknames.length] + (i % 13 || ''),
+                    region: regions[i % regions.length],
+                    ip: `114.114.${(i*7)%256}.${(i*13)%256}`,
+                    time: Date.now() - i * 3200000 - Math.floor(Math.random() * 86400000)
+                });
+            }
+            return data;
+        }
+
+        // 渲染表格
+        function renderTable() {
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
+
+            const start = (currentPage - 1) * pageSize;
+            const end = start + pageSize;
+            const pageData = filteredLogs.slice(start, end);
+
+            pageData.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+          <td class="text-center">${item.id}</td>
+          <td>${maskAccount(item.account)}</td>
+          <td>${item.nickname || '—'}</td>
+          <td>${item.region || '—'}</td>
+          <td>${item.ip || '—'}</td>
+          <td class="text-center">${formatDate(item.time)}</td>
+        `;
+                tbody.appendChild(tr);
+            });
+
+            // 更新分页信息
+            const total = filteredLogs.length;
+            const totalPages = Math.ceil(total / pageSize) || 1;
+            currentPage = Math.min(currentPage, totalPages);
+            currentPage = Math.max(currentPage, 1);
+
+            document.getElementById('pageInfo').textContent =
+                `共 ${total} 条记录 • 第 ${currentPage} / ${totalPages} 页`;
+        }
+
+        // 搜索逻辑
+        function search() {
+            const account = document.getElementById('account').value.trim().toLowerCase();
+            const nickname = document.getElementById('nickname').value.trim().toLowerCase();
+            const ip = document.getElementById('ip').value.trim().toLowerCase();
+
+            filteredLogs = allLogs.filter(item => {
+                const matchAccount   = !account   || item.account.toLowerCase().includes(account);
+                const matchNickname  = !nickname  || item.nickname.toLowerCase().includes(nickname);
+                const matchIp        = !ip        || item.ip.toLowerCase().includes(ip);
+                return matchAccount && matchNickname && matchIp;
+            });
+
+            currentPage = 1;
+            renderTable();
+        }
+
+        // 重置
+        function resetForm() {
+            document.getElementById('account').value = '';
+            document.getElementById('nickname').value = '';
+            document.getElementById('ip').value = '';
+            filteredLogs = [...allLogs];
+            currentPage = 1;
+            renderTable();
+        }
+
+        // 翻页
+        function changePage(page) {
+            const totalPages = Math.ceil(filteredLogs.length / pageSize) || 1;
+            if (page < 1 || page > totalPages) return;
+            currentPage = page;
+            renderTable();
+        }
+
+        // 初始化
+        window.onload = function() {
+            allLogs = generateMockData(368);
+            filteredLogs = [...allLogs];
+            renderTable();
+
+            // 按回车搜索
+            document.querySelectorAll('input[type="text"]').forEach(input => {
+                input.addEventListener('keypress', e => {
+                    if (e.key === 'Enter') search();
+                });
+            });
+        };
+    </script>
+</body>
+</html>
