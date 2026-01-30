@@ -17,9 +17,9 @@
 2. 有一颗开源的心
 3. 脑子太笨记不住繁琐的语法、版本和配置,比如vue| vue2/vue3 | 选项式/组合式 | webpack/vite | npm/cnpm/yarn | node版本16以上 | 特别老的项目新员工跑不起来 | node来回切换,版本不兼容 | 组件过度封装,牵一发动全身 等
 4. 只会html/css/js(jquery)做个PC端开发不想学其它东西 (作者是一名后端开发)
-5. 为和我一样的小众群体提供一个新的解决方案
+5. 为和作者一样的小众群体提供一个新的解决方案
 6. 为一些要求纯国产化的公司提供一个新的解决方案
-7. AI模型的发展，我比较懒，模板的核心代码由我设计和实现，很多显示代码由模型生成，如果没有模型，可能我早就放弃了(感谢各个模型)
+7. AI模型的发展，作者比较懒，模板的核心代码由我设计和实现，很多显示代码由模型生成，如果没有模型，可能早就放弃了(感谢各个模型)
 ```
 
 #### 更新日志
@@ -127,6 +127,8 @@ yaya-layui-admin-plus
 #### 参与贡献
 ```
 一个人+AI: 产品、开发、文档撰写、推广、后期维护...
+
+联系邮箱: hd1611756908@163.com
 ```
 #### 致谢
 感谢 [Layui](https://layui.dev)、[Echarts](https://echarts.apache.org/)、[xm-select](https://xm-select.com/file/xm-select/v1.2.4/#/component/install)、[Vue](https://vuejs.org/)、[BootStrap5](https://getbootstrap.com/)、[Element Plus](https://element-plus.org/)、[Naive UI](https://www.naiveui.com/)、[View UI Plus](https://www.iviewui.com/) 等前端跨框架支持;以及 [Gemini](https://gemini.google.com/app)、[Grok](https://grok.com/)、[Qwen](https://www.qianwen.com/chat)、[豆包](https://www.doubao.com/chat/) 等模型的支持。
