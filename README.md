@@ -55,7 +55,9 @@
 
 1.  代码克隆
 ```
-git clone https://gitee.com/ukoko/yaya-layui-admin-plus.git
+Gitee : git clone https://gitee.com/ukoko/yaya-layui-admin-plus.git
+或者
+Github: git clone https://github.com/hs-an-yue/yaya-layui-admin-plus.git
 ```
 2.  开发工具选择
 ```
