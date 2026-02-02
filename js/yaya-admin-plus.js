@@ -496,11 +496,11 @@ function yaya_general_bread(menu_id='') {
         //转换
         let str=[];
         if(arr.length===1){
-            str.push(`<a><cite>${arr[0]}</cite></a>`);
+            str.push(`<a class="yaya-breadcrumb-first"><cite>${arr[0]}</cite></a>`);
         }else {
             $.each(arr,function (i) {
                 if(i===0){
-                    str.push(`<a><cite>${arr[i]}</cite></a>`);
+                    str.push(`<a class="yaya-breadcrumb-first"><cite>${arr[i]}</cite></a>`);
                 }else {
                     str.push(`<a>${arr[i]}</a>`);
                 }
