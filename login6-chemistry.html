@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>ChemLink | 化学科研数字化平台</title>
+    <style>
+        :root {
+            --brand-cyan: #00d2ff;
+            --brand-blue: #3a7bd5;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --border-color: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', 'PingFang SC', sans-serif; }
+
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #0f172a; 
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* 动态背景 Canvas */
+        #molecule-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1;
+        }
+
+        /* 背景浮动文字 */
+        .chem-decoration {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.05);
+            font-size: 60px;
+            font-weight: bold;
+            pointer-events: none;
+            z-index: 2;
+            animation: float 12s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(8deg); }
+        }
+
+        /* 主容器 */
+        .auth-container {
+            display: flex;
+            width: 1000px;
+            height: 640px;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            border-radius: 24px;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+            overflow: hidden;
+            z-index: 10;
+        }
+
+        /* 左侧品牌区 */
+        .brand-section {
+            flex: 1.2;
+            background: linear-gradient(145deg, #1e3a8a 0%, #0f172a 100%);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 60px;
+            color: white;
+        }
+
+        .brand-section::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMzAgMEw1NS45OCAxNUw1NS45OCA0NUwzMCA2MEw0LjAyIDQ1TDQuMDIgMTVMMzAgMFoiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9zdmc+');
+            opacity: 0.4;
+        }
+
+        .brand-section h1 { font-size: 42px; font-weight: 800; line-height: 1.2; z-index: 2; }
+        .brand-section p { margin-top: 20px; font-size: 17px; color: rgba(255,255,255,0.6); z-index: 2; line-height: 1.6; }
+
+        /* 右侧表单区 */
+        .form-section { flex: 1; position: relative; overflow: hidden; background: white; }
+        .form-slider { display: flex; width: 200%; height: 100%; transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1); }
+        .form-block { width: 50%; height: 100%; padding: 50px 50px; display: flex; flex-direction: column; justify-content: center; flex-shrink: 0; }
+        
+        .show-register .form-slider { transform: translateX(-50%); }
+
+        h2 { font-size: 26px; color: var(--text-dark); margin-bottom: 24px; letter-spacing: -0.5px; }
+
+        /* 输入项样式 */
+        .input-item { margin-bottom: 18px; position: relative; }
+        .input-item label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--text-dark); }
+        
+        .input-item input, .input-item select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1.5px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            background: #f8fafc;
+            appearance: none; /* 清除默认样式 */
+        }
+
+        /* 下拉框特有样式 */
+        .input-item select {
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 40px;
+        }
+
+        .input-item input:focus, .input-item select:focus {
+            border-color: var(--brand-blue);
+            background: white;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(58, 123, 213, 0.1);
+        }
+
+        .action-btn {
+            width: 100%; padding: 14px;
+            background: linear-gradient(135deg, var(--brand-blue), var(--brand-cyan));
+            color: white; border: none; border-radius: 10px;
+            font-size: 16px; font-weight: 600; cursor: pointer;
+            margin-top: 10px; transition: 0.3s;
+        }
+        .action-btn:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 10px 20px rgba(58, 123, 213, 0.2); }
+
+        .switch-tip { text-align: center; margin-top: 20px; font-size: 14px; color: var(--text-light); }
+        .switch-tip span { color: var(--brand-blue); font-weight: 600; cursor: pointer; margin-left: 5px; }
+
+    </style>
+</head>
+<body>
+
+    <canvas id="molecule-bg"></canvas>
+
+    <div class="chem-decoration" style="top: 15%; left: 8%;">H₂O</div>
+    <div class="chem-decoration" style="bottom: 10%; left: 15%; font-size: 40px; animation-delay: -3s;">CH₄</div>
+    <div class="chem-decoration" style="top: 10%; right: 10%; animation-delay: -6s;">C₂H₅OH</div>
+    <div class="chem-decoration" style="bottom: 20%; right: 5%; font-size: 30px; animation-delay: -9s;">H₂SO₄</div>
+
+    <div class="auth-container" id="authBox">
+        <div class="brand-section">
+            <h1>ChemLink<br>科研云端实验室</h1>
+            <p>连接全球科研智慧，基于分子动力学的数字化协作空间，让每一次实验都精准可控。</p>
+        </div>
+
+        <div class="form-section">
+            <div class="form-slider">
+                
+                <div class="form-block">
+                    <h2>科研员登录</h2>
+                    <div class="input-item">
+                        <label>实验账号 / 邮箱</label>
+                        <input type="email" placeholder="researcher@lab.com">
+                    </div>
+                    <div class="input-item">
+                        <label>安全密钥</label>
+                        <input type="password" placeholder="请输入您的密码">
+                    </div>
+                    <button class="action-btn">启动科研终端</button>
+                    <div class="switch-tip">首次入驻平台？<span onclick="toggleAuth()">申请账号</span></div>
+                </div>
+
+                <div class="form-block">
+                    <h2>新成员注册</h2>
+                    <div class="input-item">
+                        <label>真实姓名</label>
+                        <input type="text" placeholder="您的称呼">
+                    </div>
+                    
+                    <div class="input-item">
+                        <label>主要研究方向</label>
+                        <select required>
+                            <option value="" disabled selected>请选择研究领域</option>
+                            <option value="polymer">高分子化学</option>
+                            <option value="bio">生物科学</option>
+                            <option value="material">材料开发</option>
+                            <option value="env">环境科学</option>
+                            <option value="energy">可再生能源</option>
+                        </select>
+                    </div>
+
+                    <div class="input-item">
+                        <label>设置密码</label>
+                        <input type="password" placeholder="至少8位字符">
+                    </div>
+                    <button class="action-btn">提交申请</button>
+                    <div class="switch-tip">已有实验室账号？<span onclick="toggleAuth()">返回登录</span></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 1. 切换逻辑
+        function toggleAuth() {
+            document.getElementById('authBox').classList.toggle('show-register');
+        }
+
+        // 2. 动态 Canvas 脚本
+        const canvas = document.getElementById('molecule-bg');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function init() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            particles = [];
+            const count = Math.floor(canvas.width / 20); // 随屏幕大小调整密度
+            for (let i = 0; i < count; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 0.4,
+                    vy: (Math.random() - 0.5) * 0.4,
+                    size: Math.random() * 2 + 1
+                });
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "rgba(0, 210, 255, 0.4)";
+            ctx.strokeStyle = "rgba(0, 210, 255, 0.12)";
+
+            particles.forEach((p, i) => {
+                p.x += p.vx; p.y += p.vy;
+                if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+
+                for (let j = i + 1; j < particles.length; j++) {
+                    const p2 = particles[j];
+                    const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+                    if (dist < 140) {
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.stroke();
+                    }
+                }
+            });
+            requestAnimationFrame(draw);
+        }
+
+        window.addEventListener('resize', init);
+        init(); draw();
+    </script>
+</body>
+</html>
