@@ -184,3 +184,15 @@ a{
         transform: translateX(0);
     }
 }
+/* 选项卡动画样式 */
+.yaya-tabs>.layui-tabs-header>li{
+    opacity: 0;
+    transform: translateX(-10px);
+    animation: fadeInRight .4s ease forwards;
+}
+/* 内容显示动画样式 */
+.yaya-tabs>.layui-tabs-body>.layui-tabs-item{
+    opacity: 0;
+    transform: translateX(-10px);
+    animation: fadeInRight .4s ease forwards;
+}
