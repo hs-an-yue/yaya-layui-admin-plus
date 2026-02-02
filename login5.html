@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 标签icon设置 -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <title>中国航天 - 任务指挥中心控制台</title>
+    <style>
+        :root {
+            --space-blue: #0a192f;
+            --accent-cyan: #00f2ff;
+            --text-gray: #a0aec0;
+            --glass-bg: rgba(16, 22, 42, 0.8);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: radial-gradient(circle at center, #1a365d 0%, #0a192f 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: white;
+        }
+
+        /* 动态背景星空感 */
+        body::before {
+            content: "";
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background-image: url('image/bg/login-stardust.png');
+            opacity: 0.3;
+            animation: rotate 200s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* 登录卡片 - 渐变滑入动画 */
+        .login-card {
+            position: relative;
+            z-index: 10;
+            width: 400px;
+            padding: 40px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(0, 242, 255, 0.3);
+            border-radius: 4px; /* 航天风格偏向硬朗 */
+            box-shadow: 0 0 40px rgba(0, 242, 255, 0.1);
+            
+            /* 页面加载时的向右滑入动效 */
+            opacity: 0;
+            transform: translateX(-50px);
+            animation: slideRightIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes slideRightIn {
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            letter-spacing: 4px;
+            color: var(--accent-cyan);
+            text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+        }
+
+        .header p {
+            font-size: 12px;
+            color: var(--text-gray);
+            margin-top: 8px;
+            text-transform: uppercase;
+        }
+
+        /* 表单样式 */
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            margin-bottom: 8px;
+            color: var(--accent-cyan);
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            color: white;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        input:focus {
+            border-color: var(--accent-cyan);
+            background: rgba(0, 242, 255, 0.05);
+            box-shadow: 0 0 10px rgba(0, 242, 255, 0.2);
+        }
+
+        /* 验证码样式 */
+        .captcha-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .captcha-img {
+            flex: 1;
+            background: #eee;
+            height: 42px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+            font-weight: bold;
+            font-style: italic;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        /* 选项样式 */
+        .options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            margin-bottom: 25px;
+            color: var(--text-gray);
+        }
+
+        .options a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+        }
+
+        .options a:hover { text-decoration: underline; }
+
+        /* 提交按钮 */
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background: transparent;
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.4s;
+        }
+
+        .btn-login:hover {
+            background: var(--accent-cyan);
+            color: var(--space-blue);
+            box-shadow: 0 0 20px var(--accent-cyan);
+        }
+
+        /* 底部装饰线 */
+        .decoration {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 50px;
+            height: 50px;
+            border-right: 2px solid var(--accent-cyan);
+            border-bottom: 2px solid var(--accent-cyan);
+        }
+        .login-footer{
+            font-size: 12px;
+            color: #c0c0c0;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-card">
+    <div class="decoration"></div>
+    <div class="header">
+        <h1>中国航天</h1>
+        <p>China Aerospace Command Center</p>
+    </div>
+
+    <form id="loginForm">
+        <div class="form-group">
+            <label>工号 / 用户名</label>
+            <input type="text" placeholder="请输入航天员编号" required>
+        </div>
+
+        <div class="form-group">
+            <label>访问密钥</label>
+            <input type="password" placeholder="请输入二级密码" required>
+        </div>
+
+        <div class="form-group">
+            <label>图形验证</label>
+            <div class="captcha-container">
+                <input type="text" style="flex: 1.5;" placeholder="验证码" required>
+                <div class="captcha-img" id="captcha" title="点击刷新">8A2F</div>
+            </div>
+        </div>
+
+        <div class="options">
+            <label style="color: var(--text-gray); display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                <input type="checkbox"> 记住身份
+            </label>
+            <a href="#">重置密钥?</a>
+        </div>
+        <button type="submit" class="btn-login">确认授权并登录</button>
+    </form>
+</div>
+<!-- 网站底部 -->
+<div class="login-footer">
+    <div style="width: 100vw;text-align: center;">Copyright © 2026 YaYa-Layui-Admin-Plus <svg t="1769072378478" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4955" width="15" height="15"><path d="M780.288 750.592H244.736V415.744C244.736 229.376 396.288 79.872 460.8 24.576c29.696-24.576 71.68-24.576 101.376 0 65.536 55.296 217.088 204.8 217.088 391.168v334.848z m-453.632-81.92h371.712V415.744c0-150.528-128-277.504-186.368-326.656-57.344 49.152-186.368 176.128-186.368 326.656v252.928zM509.952 87.04z" fill="#1b59f8" p-id="4956"></path><path d="M326.656 750.592H148.48c-43.008 0-78.848-34.816-78.848-78.848v-76.8c0-26.624 13.312-51.2 34.816-65.536l221.184-146.432v367.616z m-175.104-81.92h92.16v-133.12l-92.16 61.44v71.68zM875.52 750.592H697.344V384l221.184 146.432c22.528 14.336 34.816 38.912 34.816 65.536v76.8c1.024 41.984-34.816 77.824-77.824 77.824z m-96.256-81.92h92.16v-71.68l-92.16-61.44v133.12zM513.024 489.472c-64.512 0-116.736-52.224-116.736-116.736S449.536 256 513.024 256s116.736 52.224 116.736 116.736-52.224 116.736-116.736 116.736z m0-151.552c-18.432 0-34.816 15.36-34.816 34.816s15.36 34.816 34.816 34.816 34.816-15.36 34.816-34.816S532.48 337.92 513.024 337.92zM512 1017.856c-22.528 0-40.96-18.432-40.96-40.96v-163.84c0-22.528 18.432-40.96 40.96-40.96s40.96 18.432 40.96 40.96v163.84c0 22.528-18.432 40.96-40.96 40.96zM351.232 953.344c-22.528 0-40.96-18.432-40.96-40.96v-66.56c0-22.528 18.432-40.96 40.96-40.96s40.96 18.432 40.96 40.96v66.56c0 22.528-18.432 40.96-40.96 40.96zM673.792 953.344c-22.528 0-40.96-18.432-40.96-40.96v-66.56c0-22.528 18.432-40.96 40.96-40.96s40.96 18.432 40.96 40.96v66.56c0 22.528-18.432 40.96-40.96 40.96z" fill="#1b59f8" p-id="4957"></path></svg> MIT Licensed</div>
+</div>
+
+<script>
+    // 简单的验证码刷新逻辑
+    const captcha = document.getElementById('captcha');
+    captcha.addEventListener('click', () => {
+        const chars = '0123456789ABCDEF';
+        let code = '';
+        for(let i=0; i<4; i++) {
+            code += chars[Math.floor(Math.random() * chars.length)];
+        }
+        captcha.innerText = code;
+    });
+</script>
+
+</body>
+</html>
