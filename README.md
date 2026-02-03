@@ -43,8 +43,8 @@
 <table>
     <tr> <td style="width:50%;"> <img src="assets/01-login-01.png" alt=""> </td><td style="width:50%;"><img src="assets/02-login-02.png" alt=""></td></tr>
     <tr> <td style="width:50%;"> <img src="assets/03-login-03.png" alt=""> </td><td style="width:50%;"><img src="assets/04-login-04.png" alt=""></td></tr>
-    <tr> <td style="width:50%;"> <img src="assets/05-dashboard.png" alt=""> </td><td style="width:50%;"><img src="assets/06-workbench.png" alt=""></td></tr>
     <tr> <td style="width:50%;"> <img src="assets/39-login-05.png" alt=""> </td><td style="width:50%;"><img src="assets/40-login-06.png" alt=""></td></tr>
+    <tr> <td style="width:50%;"> <img src="assets/05-dashboard.png" alt=""> </td><td style="width:50%;"><img src="assets/06-workbench.png" alt=""></td></tr>
     <tr> <td style="width:50%;"> <img src="assets/09-dashboard.png" alt=""> </td><td style="width:50%;"> <img src="assets/07-bulletin-board.png" alt=""> </td></tr>
     <tr> <td style="width:50%;"> <img src="assets/10-dashboard.png" alt=""> </td><td style="width:50%;"> <img src="assets/08-person-center.png" alt=""> </td></tr>
     <tr> <td style="width:50%;"> <img src="assets/11-user-list.png" alt=""> </td><td style="width:50%;"> <img src="assets/12-dept-list.png" alt=""> </td></tr>
