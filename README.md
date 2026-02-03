@@ -25,6 +25,7 @@
 #### 更新日志
 
 ```
+2026-02-03      对核心配置文件中的首页和个人中心页面进行封装,方便用户在第一个使用时对模板进行定制化配置
 2026-02-02      首页点击菜单或者选项卡后,选项卡+面包屑+内容显示添加动画效果
 2026-01-29      第一个正式版v1.0发布
 2026-01-12      零帧起手
@@ -136,3 +137,13 @@ yaya-layui-admin-plus
 ```
 #### 致谢
 感谢 [Layui](https://layui.dev)、[Echarts](https://echarts.apache.org/)、[xm-select](https://xm-select.com/file/xm-select/v1.2.4/#/component/install)、[Vue](https://vuejs.org/)、[BootStrap5](https://getbootstrap.com/)、[Element Plus](https://element-plus.org/)、[Naive UI](https://www.naiveui.com/)、[View UI Plus](https://www.iviewui.com/) 等前端跨框架支持;以及 [Gemini](https://gemini.google.com/app)、[Grok](https://grok.com/)、[Qwen](https://www.qianwen.com/chat)、[豆包](https://www.doubao.com/chat/) 等模型的支持。
+
+## 💖 捐赠 (Sponsor)
+
+如果 <strong>YaYa模板</strong> 对你的业务有所助益，请考虑通过捐赠来支持一hàhà.
+
+|                       微信                        |                       支付宝                        |
+|:-----------------------------------------------:|:------------------------------------------------:|
+| <img src="assets/pay/wx-pay.png" width="200" /> | <img src="assets/pay/ali-pay.jpg" width="190" /> |
+
+> Good Luck Every Day 🚀✨
