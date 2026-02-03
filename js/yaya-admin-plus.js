@@ -374,6 +374,19 @@ layui.use(function (){
      * 恢复选项卡到上一次显示的历史
      */
     function setTabs() {
+
+        /*
+         *  默认首页的yayaId和yaya-url和welcomeYayaTitle标题
+         *  个人中心的yayaId和yaya-url和personYayaTitle标题
+         */
+        let welcomeYayaId='999999999';
+        let welcomeYayaTitle='仪表盘';
+        let welcomeYayaUrl='views/dashboard.html';
+        let personYayaId='888888888';
+        let personYayaTitle='个人中心';
+        let personYayaUrl='views/personal_center.html';
+
+
         let yaya = layui.data('yaya');
         if(yaya && Object.keys(yaya).length>0){
             //获取yayaId
@@ -381,30 +394,30 @@ layui.use(function (){
             //获取需要选项卡展示的菜单内容对象
             let $menu = $(`.layui-menu li[yaya-id=${yayaId}]`);
             //获取地址
-            let $yayaUrl = yayaId!=='888888888'?$menu.attr("yaya-url"):'views/personal_center.html';
+            let $yayaUrl = yayaId!==personYayaId?$menu.attr("yaya-url"):personYayaUrl;
             //名称
-            let $yayaTitle = yayaId!=='888888888'?$menu.attr("yaya-title"):'个人中心';
+            let $yayaTitle = yayaId!==personYayaId?$menu.attr("yaya-title"):personYayaTitle;
 
-            if(yayaId==='999999999'){ //默认仪表盘
+            if(yayaId===welcomeYayaId){ //默认仪表盘
                 tabs.render({
                     elem: '#yaya-right-tab',
                     className:'yaya-tabs',
                     header: [
                         {
-                            title: '仪表盘',
+                            title: welcomeYayaTitle,
                             closable:false,
-                            id:'999999999'
+                            id:welcomeYayaId
                         }
                     ],
                     body: [
                         {
                             /* 默认页面,如果换新的页面,修改此页面 */
-                            content: '<iframe style="border: none;width: 100%;height: 100%;" src="views/dashboard.html"></iframe>',
-                            id:'999999999'
+                            content: `<iframe style="border: none;width: 100%;height: 100%;" src='${welcomeYayaUrl}'></iframe>`,
+                            id:welcomeYayaId
                         }
                     ],
                     closable:true,
-                    index: '999999999'
+                    index: welcomeYayaId
                 });
             }else {
                 tabs.render({
@@ -412,9 +425,9 @@ layui.use(function (){
                     className:'yaya-tabs',
                     header: [
                         {
-                            title: '仪表盘',
+                            title: welcomeYayaTitle,
                             closable:false,
-                            id:'999999999'
+                            id:welcomeYayaId
                         },
                         {
                             title: $yayaTitle,
@@ -425,8 +438,8 @@ layui.use(function (){
                     body: [
                         {
                             /* 默认页面,如果换新的页面,修改此页面 */
-                            content: '<iframe style="border: none;width: 100%;height: 100%;" src="views/dashboard.html"></iframe>',
-                            id:'999999999'
+                            content: `<iframe style="border: none;width: 100%;height: 100%;" src='${welcomeYayaUrl}'></iframe>`,
+                            id:welcomeYayaId
                         },
                         {
                             /* 默认页面,如果换新的页面,修改此页面 */
@@ -445,20 +458,20 @@ layui.use(function (){
                 className:'yaya-tabs',
                 header: [
                     {
-                        title: '仪表盘',
+                        title: welcomeYayaTitle,
                         closable:false,
-                        id:'999999999'
+                        id:welcomeYayaId
                     }
                 ],
                 body: [
                     {
                         /* 默认页面,如果换新的页面,修改此页面 */
-                        content: '<iframe style="border: none;width: 100%;height: 100%;" src="views/dashboard.html"></iframe>',
-                        id:'999999999'
+                        content: `<iframe style="border: none;width: 100%;height: 100%;" src='${welcomeYayaUrl}'></iframe>`,
+                        id:welcomeYayaId
                     }
                 ],
                 closable:true,
-                index: '999999999'
+                index: welcomeYayaId
             });
         }
 
