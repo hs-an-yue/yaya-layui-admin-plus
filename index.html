@@ -23,8 +23,10 @@
        开发者信息:
             产品设计: 夜泊1990
             产品开发: 夜泊1990
+            产品维护: 夜泊1990
             联系邮箱: hd1611756908@163.com
             个人博客: https://hs-an-yue.github.io/
+            个人B站 : https://space.bilibili.com/514155929/
     -->
     <div class="yaya-container">
         <!--左侧-->
@@ -36,14 +38,15 @@
                 <!-- 标题 -->
                 <h4>丫A丫A</h4>
             </div>
-            <!-- 导航菜单 采用的手风琴效果,如果取消手风琴效果，删除掉ul标签中的 lay-accordion 属性即可 -->
+            <!-- 导航菜单 采用的手风琴效果 -->
             <ul class="layui-menu" id="yaya-menu" lay-accordion>
-                <!-- 菜单项 -->
+                <!-- 菜单项-默认菜单 -->
                 <li yaya-id="999999999" yaya-url="views/dashboard.html" yaya-title="仪表盘" onclick="yaya_add('999999999', '仪表盘', 'views/dashboard.html')" class="layui-menu-item-checked"><!-- 默认选中 -->
                     <div class="layui-menu-body-title">
                         <a><span><i class="layui-icon layui-icon-chart-screen"></i>&nbsp;&nbsp;仪表盘</span></a>
                     </div>
                 </li>
+                <!-- 其它菜单由后端动态生成 ... -->
             </ul>
         </div>
         <!--右侧-->
