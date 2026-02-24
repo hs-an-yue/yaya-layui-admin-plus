@@ -8,7 +8,7 @@
 #### <div align="center"> 基于前端框架Layui2.13+开发的一套极简后台管理模板 </div>
 <div align="center">
 	<a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/Layui-%3E=2.13.3-magenta"></a>
-    <a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/YaYa Layui Admin Plus-v1.3-deeppink"></a>
+    <a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/YaYa Layui Admin Plus-v1.4-deeppink"></a>
 	<a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/Author-%E5%A4%9C%E6%B3%8A1990-quartz"></a>
     <a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/LICENSE-MIT-tomato"></a>
 </div>
@@ -344,22 +344,12 @@ children    : 子菜单,如果不存在为空
     1. yaya-admin-plus.js (大概在24行~50行) 向后端发送AJAX请求,获取菜单数据
 ```
 
-#### 参与贡献
+#### 🚀 参与贡献
 ```
 一个人+AI: 产品、开发、文档撰写、推广、后期维护...
 
 联系邮箱: hd1611756908@163.com
 ```
-#### 致谢
+#### 💖 致谢
 
 感谢 [Layui](https://layui.dev)、[Echarts](https://echarts.apache.org/)、[xm-select](https://xm-select.com/file/xm-select/v1.2.4/#/component/install)、[Vue](https://vuejs.org/)、[BootStrap5](https://getbootstrap.com/)、[Element Plus](https://element-plus.org/)、[Naive UI](https://www.naiveui.com/)、[View UI Plus](https://www.iviewui.com/) 等前端跨框架支持;以及 [Gemini](https://gemini.google.com/app)、[Grok](https://grok.com/)、[Qwen](https://www.qianwen.com/chat)、[豆包](https://www.doubao.com/chat/) 等模型的支持。
-
-## 💖 捐赠 (Sponsor)
-
-如果 <strong>YaYa模板</strong> 对你的业务有所助益，请考虑通过捐赠来支持一hàhà.
-
-|                       微信                        |                       支付宝                        |
-|:-----------------------------------------------:|:------------------------------------------------:|
-| <img src="assets/pay/wx-pay.png" width="200" /> | <img src="assets/pay/ali-pay.jpg" width="190" /> |
-
-> Good Luck Every Day 🚀✨
