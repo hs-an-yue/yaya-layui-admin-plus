@@ -384,7 +384,7 @@ layui.use(function (){
         let welcomeYayaUrl='views/dashboard.html';
         let personYayaId='888888888';
         let personYayaTitle='个人中心';
-        let personYayaUrl='views/personal_center.html';
+        let personYayaUrl='views/personal-center.html';
 
 
         let yaya = layui.data('yaya');

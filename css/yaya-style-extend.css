@@ -382,3 +382,35 @@
     cursor:not-allowed!important;
     opacity:0.4
 }
+/* 按钮大小 */
+.yaya-btn-large{
+    padding: 20px 40px;
+    font-size: 24px;
+}
+.yaya-btn-small{
+    height: 24px;
+    font-size: 12px;
+}
+
+.yaya-btn-round-large{
+    padding: 20px 40px;
+    font-size: 24px;
+}
+.yaya-btn-round-small{
+    height: 24px;
+    font-size: 12px;
+}
+
+.yaya-btn-circle-large{
+    padding: 20px;
+}
+.yaya-btn-circle-large>i{
+    font-size: 24px;
+}
+.yaya-btn-circle-small{
+    height: 24px;
+    width: 24px;
+}
+.yaya-btn-circle-small>i{
+    font-size: 12px;
+}

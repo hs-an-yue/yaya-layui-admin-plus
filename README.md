@@ -8,7 +8,7 @@
 #### <div align="center"> 基于前端框架Layui2.13+开发的一套极简后台管理模板 </div>
 <div align="center">
 	<a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/Layui-%3E=2.13.3-magenta"></a>
-    <a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/YaYa Layui Admin Plus-v1.4-deeppink"></a>
+    <a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/YaYa Layui Admin Plus-v1.5-deeppink"></a>
 	<a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/Author-%E5%A4%9C%E6%B3%8A1990-quartz"></a>
     <a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/LICENSE-MIT-tomato"></a>
 </div>
@@ -19,7 +19,7 @@
 #### 开发初衷
 
 ```
-1. 零构建: 让开发回归简洁，不需要复杂的脚手架
+1. 零构建: 告别脚手架,让开发回归简洁
 2. 快速交付: 引入即用,无需编译等待
 3. 易于维护: 回归标准,代码直观,成本低,对后端开发者极度友好
 ```
@@ -106,6 +106,7 @@ yaya-layui-admin-plus
 ├────── index.css               # index.html首页的核心css
 ├────── menu.css                # index.html首页中左侧导航区域(菜单+LOGO+TITLE)的核心css
 ├────── yaya-common.css         # 整个模板中大部分页面需要用到的公共css配置在这里(这个属于个人喜好)
+├────── yaya-style-extend.css         # yaya-layui-admin-plus模板扩展样式(按钮扩展+图标扩展等)
 ├── data                        # yaya-layui-admin-plus模板中的测试数据(例如左侧菜单生成数据,用户测试数据,部门测试数据等)
 ├── image                       # yaya-layui-admin-plus模板中用到的图片(登陆页面的背景图、网站用到的图标等)
 ├── js                          # yaya-layui-admin-plus模板中的核心JS文件
@@ -119,8 +120,8 @@ yaya-layui-admin-plus
 ├────── dashboard.html		# 仪表盘页(首页)
 ├────── dept-list.html		# 部门页(内容由模型生成)
 ├────── login-log.html		# 登陆日志页(内容由模型生成)
-├────── personal_center.html	# 个人中心页
-├────── pwd_change.html		# 修改密码页
+├────── personal-center.html	# 个人中心页
+├────── pwd-change.html		# 修改密码页
 ├────── system-log.html		# 系统日志页(内容由模型生成)
 ├────── template.html		# 模板页(复制整个页面生成新的页面，比较快，没什么实际意义)
 ├────── test1.html		# 多级测试页1 - 内容由模型生成 - 其它前端技术(BootStrap5)应用页
@@ -228,7 +229,7 @@ yaya-layui-admin-plus
                     参数3: 点击个人中心跳转的具体的页面地址
                 a标签中的内容,一般与参数2相同    
              -->
-            <dd><a onclick="yaya_add('888888888','个人中心','views/personal_center.html')">个人中心</a></dd>
+            <dd><a onclick="yaya_add('888888888','个人中心','views/personal-center.html')">个人中心</a></dd>
             <dd id="pwdChange"><a>修改密码</a></dd>
             <dd><a href="login.html">退出</a></dd>
         </dl>
@@ -236,7 +237,7 @@ yaya-layui-admin-plus
         2.1 第一部分修改的代码在setTabs()函数中
             let personYayaId='888888888'; //与上面的参数1对应
             let personYayaTitle='个人中心'; //与上面的参数2对应
-            let personYayaUrl='views/personal_center.html';//与上面的参数3对应
+            let personYayaUrl='views/personal-center.html';//与上面的参数3对应
             
         2.2 第二部分修改的代码在yaya_general_bread()函数中
             if(menu_id==='888888888'){ //888888888与上面的参数1对应
