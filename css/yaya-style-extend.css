@@ -1,0 +1,384 @@
+/* yaya-layui-admin-plus css样式扩展 2026/02/25 10:05:59;author:夜泊1990;email:hd1611756908@163.com;Licensed:MIT */
+
+/*
+ * 按钮扩展
+ */
+.yaya-btn{
+    padding: 8px 15px;
+    font-size: 14px;
+    border-radius: 4px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+    height: 32px;
+    white-space: nowrap;
+    cursor: pointer;
+    color: #606266;
+    text-align: center;
+    box-sizing: border-box;
+    outline: none;
+    transition: .1s;
+    font-weight: 500;
+    user-select: none;
+    vertical-align: middle;
+    background-color: white;
+    border: 1px solid #dcdfe6;
+}
+/* 默认伪类样式 */
+.yaya-default:hover{
+    color: #409eff;
+    border-color: #a0cfff;
+    background-color: #ecf5ff;
+    outline: none;
+}
+.yaya-primary{
+    color: white;
+    background-color: #409eff;
+    border-color: #409eff;
+    outline-color: #a0cfff;
+}
+.yaya-primary:hover{
+    color: white;
+    background-color: #79bbff;
+    border-color: #79bbff;
+    outline: none;
+}
+.yaya-success{
+    color: white;
+    background-color: #67c23a;
+    border-color: #67c23a;
+    outline-color: #b3e19d;
+}
+.yaya-success:hover{
+    color: white;
+    background-color: #95d475;
+    border-color: #95d475;
+    outline: none;
+}
+
+.yaya-info{
+    color: white;
+    background-color: #909399;
+    border-color: #909399;
+    outline-color: #c8c9cc;
+}
+.yaya-info:hover{
+    color: white;
+    background-color: #b1b3b8;
+    border-color: #b1b3b8;
+    outline: none;
+}
+.yaya-warning{
+    color: white;
+    background-color: #e6a23c;
+    border-color: #e6a23c;
+    outline-color: #f3d19e;
+}
+.yaya-warning:hover{
+    color: white;
+    background-color: #eebe77;
+    border-color: #eebe77;
+    outline: none;
+}
+.yaya-danger{
+    color: white;
+    background-color: #f56c6c;
+    border-color: #f56c6c;
+    outline-color: #fab6b6;
+}
+.yaya-danger:hover{
+    color: white;
+    background-color: #f89898;
+    border-color: #f89898;
+    outline: none;
+}
+.is-plain-primary{
+    color: #409eff;
+    background-color: #ecf5ff;
+    border-color: #a0cfff;
+}
+.is-plain-primary:hover{
+    color: white;
+    background-color: #409eff;
+}
+.is-plain-success{
+    color: #67c23a;
+    background-color: #f0f9eb;
+    border-color: #b3e19d;
+}
+.is-plain-success:hover{
+    color: white;
+    background-color: #67c23a;
+}
+.is-plain-info{
+    color: #909399;
+    background-color: #f4f4f5;
+    border-color: #c8c9cc;
+}
+.is-plain-info:hover{
+    color: white;
+    background-color: #909399;
+}
+.is-plain-warning{
+    color: #e6a23c;
+    background-color: #fdf6ec;
+    border-color: #f3d19e;
+}
+.is-plain-warning:hover{
+    color: white;
+    background-color: #e6a23c;
+}
+.is-plain-danger{
+    color: #f56c6c;
+    background-color: #fef0f0;
+    border-color: #fab6b6;
+}
+.is-plain-danger:hover{
+    color: white;
+    background-color: #f56c6c;
+}
+
+.is-round-default{
+    border-radius: 20px;
+}
+.is-round-default:hover{
+    color: #409eff;
+    border-color: #a0cfff;
+    background-color: #ecf5ff;
+    outline: none;
+    border-radius: 20px;
+}
+.is-round-primary{
+    color: #409eff;
+    background-color: #ecf5ff;
+    border-color: #a0cfff;
+    border-radius: 20px;
+}
+.is-round-primary:hover{
+    color: white;
+    background-color: #409eff;
+    border-radius: 20px;
+}
+.is-round-success{
+    color: #67c23a;
+    background-color: #f0f9eb;
+    border-color: #b3e19d;
+    border-radius: 20px;
+}
+.is-round-success:hover{
+    color: white;
+    background-color: #67c23a;
+    border-radius: 20px;
+}
+.is-round-info{
+    color: #909399;
+    background-color: #f4f4f5;
+    border-color: #c8c9cc;
+    border-radius: 20px;
+}
+.is-round-info:hover{
+    color: white;
+    background-color: #909399;
+    border-radius: 20px;
+}
+.is-round-warning{
+    color: #e6a23c;
+    background-color: #fdf6ec;
+    border-color: #f3d19e;
+    border-radius: 20px;
+}
+.is-round-warning:hover{
+    color: white;
+    background-color: #e6a23c;
+    border-radius: 20px;
+}
+.is-round-danger{
+    color: #f56c6c;
+    background-color: #fef0f0;
+    border-color: #fab6b6;
+    border-radius: 20px;
+}
+.is-round-danger:hover{
+    color: white;
+    background-color: #f56c6c;
+    border-radius: 20px;
+}
+
+.is-circle-default{
+    padding: 8px;
+    border-radius:50%;
+    width: 32px;
+    height: 32px;
+
+}
+.is-circle-default:hover{
+    color: #409eff;
+    border-color: #a0cfff;
+    background-color: #ecf5ff;
+    outline: none;
+    border-radius:50%;
+}
+
+.is-circle-info{
+    padding: 8px;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    color: white;
+    background-color: #909399;
+}
+.is-circle-info:hover{
+    color: #ffffff;
+    border-color: #b1b3b8;
+    background-color: #b1b3b8;
+    padding: 8px;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+}
+
+.is-circle-success{
+    padding: 8px;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    color: white;
+    background-color: #67c23a;
+}
+.is-circle-success:hover{
+    color: #ffffff;
+    border-color: #b3e19d;
+    background-color: #b3e19d;
+    padding: 8px;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+}
+
+.is-circle-primary{
+    padding: 8px;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    color: white;
+    background-color: #409eff;
+}
+.is-circle-primary:hover{
+    color: #ffffff;
+    border-color: #a0cfff;
+    background-color: #79bbff;
+    padding: 8px;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+}
+
+.is-circle-warning{
+    padding: 8px;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    color: white;
+    background-color: #e6a23c;
+}
+.is-circle-warning:hover{
+    color: white;
+    border-color: #eebb77;
+    background-color: #eebb77;
+    padding: 8px;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+}
+
+.is-circle-danger{
+    padding: 8px;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    color: white;
+    background-color: #f56c6c;
+}
+.is-circle-danger:hover{
+    color: white;
+    border-color: #f89898;
+    background-color: #f89898;
+    padding: 8px;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+}
+/*链接按钮*/
+.is-link-default{
+    border-color: transparent;
+    color: #606266;
+    background: transparent;
+    padding: 2px;
+    height: auto;
+}
+.is-link-default:hover{
+    color: #909399;
+}
+.is-link-primary{
+    border-color: transparent;
+    color: #409eff;
+    background: transparent;
+    padding: 2px;
+    height: auto;
+}
+.is-link-primary:hover{
+    color: #a0cfff;
+}
+
+.is-link-success{
+    border-color: transparent;
+    color: #67c23a;
+    background: transparent;
+    padding: 2px;
+    height: auto;
+}
+.is-link-success:hover{
+    color: #b3e19d;
+}
+
+.is-link-info{
+    border-color: transparent;
+    color: #909399;
+    background: transparent;
+    padding: 2px;
+    height: auto;
+}
+.is-link-info:hover{
+    color: #b1b3b8;
+}
+
+.is-link-warning{
+    border-color: transparent;
+    color: #e6a23c;
+    background: transparent;
+    padding: 2px;
+    height: auto;
+}
+.is-link-warning:hover{
+    color: #eebb77;
+}
+
+.is-link-danger{
+    border-color: transparent;
+    color: #f56c6c;
+    background: transparent;
+    padding: 2px;
+    height: auto;
+}
+.is-link-danger:hover{
+    color: #f89898;
+}
+
+/* 按钮禁用 */
+.yaya-btn-disabled,
+.yaya-btn-disabled:active,
+.yaya-btn-disabled:hover{
+    cursor:not-allowed!important;
+    opacity:0.4
+}

@@ -19,15 +19,15 @@
 #### 开发初衷
 
 ```
-1. 零构建: 让开发回归简洁
-2. 降低门槛: 无需学习复杂的脚手架
-3. 快速交付: 引入即用,无需编译等待
-4. 易于维护: 回归标准,代码直观,成本低,对后端开发者极度友好
+1. 零构建: 让开发回归简洁，不需要复杂的脚手架
+2. 快速交付: 引入即用,无需编译等待
+3. 易于维护: 回归标准,代码直观,成本低,对后端开发者极度友好
 ```
 
 #### 更新日志
 
 ```
+2026-02-25      新增组件管理菜单项[内部新增按钮管理和图标管理]
 2026-02-06      README.md添加【模板使用】部分
 2026-02-04      首页的图表显示比较丑,换个一个小清新图表
 2026-02-03      对核心配置文件中的首页和个人中心页面进行封装,方便用户在第一个使用时对模板进行定制化配置
@@ -57,6 +57,7 @@
     <tr> <td style="width:50%;"> <img src="assets/15-about.png" alt=""> </td><td style="width:50%;"> <img src="assets/16-pwd-change.png" alt=""> </td></tr>
     <tr> <td style="width:50%;"> <img src="assets/19-demo-bootstrap5.png" alt=""> </td><td style="width:50%;"> <img src="assets/20-demo-element-plus.png" alt=""> </td></tr>
     <tr> <td style="width:50%;"> <img src="assets/21-demo-naive-ui.png" alt=""> </td><td style="width:50%;"> <img src="assets/22-demo-view-ui.png" alt=""> </td></tr>
+    <tr> <td style="width:50%;"> <img src="assets/45-component-icon.png" alt=""> </td><td style="width:50%;"> <img src="assets/46-component-button.png" alt=""> </td></tr>
 </table>
 
 #### 项目下载和配置
