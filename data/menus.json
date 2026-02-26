@@ -308,6 +308,25 @@
           "updateTime": "2025-12-12 15:40:09",
           "roleId": null,
           "children": []
+        },
+        {
+          "menuId": 10026,
+          "menuTitle": "徽章和标签",
+          "menuIcon": "iconfont icon-CRMEB-wenzhangguanli-xianxing",
+          "menuType": 2,
+          "perms": null,
+          "menuUrl": "views/badge-tag-extend.html",
+          "menuLevel": 1,
+          "parentId": 0,
+          "orderNum": 1,
+          "menuStatus": 0,
+          "isDelete": 0,
+          "createById": 10000,
+          "updateById": 10000,
+          "createTime": "2025-12-05 14:41:13",
+          "updateTime": "2025-12-12 15:40:09",
+          "roleId": null,
+          "children": []
         }
       ]
     },

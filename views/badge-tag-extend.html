@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 响应式配置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../css/yaya-common.css">
+    <link rel="stylesheet" href="../css/yaya-style-extend.css">
+    <link rel="stylesheet" href="../font/iconfont.css">
+    <title>yaya-admin-plus</title>
+    <style>
+        .yaya-show-container{
+            border: 1px solid rgba(96,98,102,0.1);
+            border-radius: 5px;
+        }
+        .yaya-show-container>div{
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="yaya-container">
+        <div class="yaya-show-container">
+            <h2 style="color: #606266;padding-top: 5px;margin: 10px;">标签扩展</h2>
+            <div>
+                <h4>基础标签</h4>
+                <div style="margin-top: 10px;">
+                    <span class="yaya-tag yaya-tag-primary">Tag 1</span>
+                    <span class="yaya-tag yaya-tag-success">Tag 2</span>
+                    <span class="yaya-tag yaya-tag-info">Tag 3</span>
+                    <span class="yaya-tag yaya-tag-warning">Tag 4</span>
+                    <span class="yaya-tag yaya-tag-danger">Tag 5</span>
+                </div>
+                <div style="margin-top: 10px;">
+                    <span class="yaya-tag yaya-tag-light-primary">Tag 1</span>
+                    <span class="yaya-tag yaya-tag-light-success">Tag 2</span>
+                    <span class="yaya-tag yaya-tag-light-info">Tag 3</span>
+                    <span class="yaya-tag yaya-tag-light-warning">Tag 4</span>
+                    <span class="yaya-tag yaya-tag-light-danger">Tag 5</span>
+                </div>
+                <div style="margin: 10px 0;">
+                    <span class="yaya-tag yaya-tag-plain-primary">Tag 1</span>
+                    <span class="yaya-tag yaya-tag-plain-success">Tag 2</span>
+                    <span class="yaya-tag yaya-tag-plain-info">Tag 3</span>
+                    <span class="yaya-tag yaya-tag-plain-warning">Tag 4</span>
+                    <span class="yaya-tag yaya-tag-plain-danger">Tag 5</span>
+                </div>
+                <h4 style="margin-top: 15px;border-top: 1px solid #ccc;padding-top: 10px;">可移除标签</h4>
+                <div style="margin: 10px 0;">
+                    <span class="yaya-tag yaya-tag-light-primary yaya-x">Tag 1 <i class="layui-icon layui-icon-close"></i> </span>
+                    <span class="yaya-tag yaya-tag-light-success yaya-x">Tag 2 <i class="layui-icon layui-icon-close"></i></span>
+                    <span class="yaya-tag yaya-tag-light-info yaya-x">Tag 3 <i class="layui-icon layui-icon-close"></i></span>
+                    <span class="yaya-tag yaya-tag-light-warning yaya-x">Tag 4 <i class="layui-icon layui-icon-close"></i></span>
+                    <span class="yaya-tag yaya-tag-light-danger yaya-x">Tag 5 <i class="layui-icon layui-icon-close"></i></span>
+                </div>
+                <div>
+
+                </div>
+                <h4 style="margin-top: 15px;border-top: 1px solid #ccc;padding-top: 10px;">不同尺寸标签</h4>
+                <div style="margin-top: 10px;">
+                    <span class="yaya-tag yaya-tag-light-primary tag-large">Large</span>
+                    <span class="yaya-tag yaya-tag-light-primary">Default</span>
+                    <span class="yaya-tag yaya-tag-light-primary tag-small">Small</span>
+                </div>
+                <h4 style="margin-top: 15px;border-top: 1px solid #ccc;padding-top: 10px;">圆形标签</h4>
+                <div style="margin-top: 10px;">
+                    <span class="yaya-tag yaya-tag-primary is-round">Tag 1</span>
+                    <span class="yaya-tag yaya-tag-success is-round">Tag 2</span>
+                    <span class="yaya-tag yaya-tag-info is-round">Tag 3</span>
+                    <span class="yaya-tag yaya-tag-warning is-round">Tag 4</span>
+                    <span class="yaya-tag yaya-tag-danger is-round">Tag 5</span>
+                </div>
+                <div style="margin-top: 10px;">
+                    <span class="yaya-tag yaya-tag-light-primary is-round">Tag 1</span>
+                    <span class="yaya-tag yaya-tag-light-success is-round">Tag 2</span>
+                    <span class="yaya-tag yaya-tag-light-info is-round">Tag 3</span>
+                    <span class="yaya-tag yaya-tag-light-warning is-round">Tag 4</span>
+                    <span class="yaya-tag yaya-tag-light-danger is-round">Tag 5</span>
+                </div>
+                <div style="margin: 10px 0;">
+                    <span class="yaya-tag yaya-tag-plain-primary is-round">Tag 1</span>
+                    <span class="yaya-tag yaya-tag-plain-success is-round">Tag 2</span>
+                    <span class="yaya-tag yaya-tag-plain-info is-round">Tag 3</span>
+                    <span class="yaya-tag yaya-tag-plain-warning is-round">Tag 4</span>
+                    <span class="yaya-tag yaya-tag-plain-danger is-round">Tag 5</span>
+                </div>
+            </div>
+            <h2 style="color: #606266;margin: 10px;border-top: 1px solid #ccc;padding-top: 15px;">徽章扩展</h2>
+            <div>
+                <h4>基础徽章</h4>
+                <div style="margin-top: 10px;">
+                    <span class="badge">12</span>
+                    <span class="badge badge-primary">New</span>
+                    <span class="badge badge-success">Success</span>
+                </div>
+                <h4 style="margin-top: 15px;border-top: 1px solid #ccc;padding-top: 10px;">消息通知角标</h4>
+                <div style="margin-top: 10px;">
+                    <div class="notification-container">
+                        <span class="yaya-tag yaya-tag-light-primary">Tag 1</span>
+                        <span class="badge-dot">5</span>
+                    </div>
+                </div>
+                <div style="margin-top: 10px;">
+                    <div class="icon-wrapper">
+                        <div class="avatar"></div>
+                        <span class="dot"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../layui/layui.js"></script>
+</body>
+</html>

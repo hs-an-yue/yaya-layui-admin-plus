@@ -1,5 +1,4 @@
 /* yaya-layui-admin-plus css样式扩展 2026/02/25 10:05:59;author:夜泊1990;email:hd1611756908@163.com;Licensed:MIT */
-
 /*
  * 按钮扩展
  */
@@ -413,4 +412,203 @@
 }
 .yaya-btn-circle-small>i{
     font-size: 12px;
+}
+/* 标签扩展 */
+.yaya-tag{
+    display: inline-flex;
+    align-items: center;
+    max-width: 100%;
+    text-overflow: ellipsis;
+    padding: 0 9px;
+    color: white;
+    height: 24px;
+    justify-content:center;
+    vertical-align: middle;
+    line-height: 1;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 4px;
+    box-sizing: border-box;
+    white-space: nowrap;
+}
+.yaya-tag-primary{
+    background-color: #409eff;
+    border-color: #409eff;
+}
+.yaya-tag-success{
+    background-color: #67c23a;
+    border-color: #67c23a;
+}
+.yaya-tag-info{
+    background-color: #909399;
+    border-color: #909399;
+}
+.yaya-tag-warning{
+    background-color: #e6a23c;
+    border-color: #e6a23c;
+}
+.yaya-tag-danger{
+    background-color: #f56c6c;
+    border-color: #f56c6c;
+}
+
+.yaya-tag-light-primary{
+    background-color: #ecf5ff;
+    color: #409eff;
+    border-color: #d9ecff;
+}
+.yaya-tag-light-success{
+    background-color: #f0f9eb;
+    color: #67c23a;
+    border-color: #e1f3d8;
+}
+.yaya-tag-light-info{
+    background-color: #f4f4f5;
+    color: #909399;
+    border-color: #e9e9eb;
+}
+.yaya-tag-light-warning{
+    background-color: #fdf6ec;
+    color: #e6a23c;
+    border-color: #faecd8;
+}
+.yaya-tag-light-danger{
+    background-color: #fef0f0;
+    color: #f56c6c;
+    border-color: #fde2e2;
+}
+
+.yaya-tag-plain-primary{
+    background-color: #ffffff;
+    color: #409eff;
+    border-color: #a0cfff;
+}
+.yaya-tag-plain-success{
+    background-color: #ffffff;
+    color: #67c23a;
+    border-color: #b3e19d;
+}
+.yaya-tag-plain-info{
+    background-color: #ffffff;
+    color: #909399;
+    border-color: #c8c9cc;
+}
+.yaya-tag-plain-warning{
+    background-color: #ffffff;
+    color: #e6a23c;
+    border-color: #f3d19e;
+}
+.yaya-tag-plain-danger{
+    background-color: #ffffff;
+    color: #f56c6c;
+    border-color: #fab6b6;
+}
+/* 圆形标签 */
+.is-round{
+    border-radius: 9999px;
+}
+.yaya-x>i{
+    margin-left: 3px;
+    cursor: pointer;
+}
+/* 标签尺寸 */
+.tag-large{
+    padding: 0 15px;
+    height: 32px;
+}
+.tag-small{
+    height: 20px;
+    font-size: 12px;
+}
+/* 徽章 */
+.badge {
+    display: inline-block;
+    padding: 0.25em 0.6em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 10rem; /* 大圆角 */
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.badge-primary {
+    background-color: #409eff;
+    color: white;
+}
+.badge-success {
+    background-color: #67c23a;
+    color: white;
+}
+
+
+.notification-container {
+    position: relative; /* 父容器必须是相对定位 */
+    display: inline-block;
+}
+
+.badge-dot {
+    position: absolute;
+    top: -9px;
+    right: -9px;
+    background-color: #f56c6c;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 8px;
+    font-weight: bold;
+    border: 2px solid white; /* 增加描边使其在复杂背景下更清晰 */
+}
+/* 小红点徽章 */
+.icon-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.avatar {
+    width: 48px;
+    height: 48px;
+    background-color: #ddd;
+    border-radius: 8px;
+}
+
+.dot {
+    position: absolute;
+    top: 0;
+    right: 0;
+    /* 核心样式 */
+    width: 10px;
+    height: 10px;
+    background-color: #ff4d4f;
+    border-radius: 50%; /* 变成圆形 */
+    border: 2px solid #fff; /* 白色描边，增强在背景上的辨识度 */
+
+    /* 居中偏移修正：让红点中心对准父容器的顶点 */
+    transform: translate(50%, -50%);
+}
+.dot::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #ff4d4f;
+    animation: pulse 1.5s infinite ease-in-out;
+    z-index: -1;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+    100% {
+        transform: scale(2.5);
+        opacity: 0;
+    }
 }

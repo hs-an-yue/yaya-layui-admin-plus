@@ -27,6 +27,7 @@
 #### 更新日志
 
 ```
+2026-02-26      新增标签和徽章组件样式
 2026-02-25      新增组件管理菜单项[内部新增按钮管理和图标管理]
 2026-02-06      README.md添加【模板使用】部分
 2026-02-04      首页的图表显示比较丑,换个一个小清新图表
@@ -58,6 +59,7 @@
     <tr> <td style="width:50%;"> <img src="assets/19-demo-bootstrap5.png" alt=""> </td><td style="width:50%;"> <img src="assets/20-demo-element-plus.png" alt=""> </td></tr>
     <tr> <td style="width:50%;"> <img src="assets/21-demo-naive-ui.png" alt=""> </td><td style="width:50%;"> <img src="assets/22-demo-view-ui.png" alt=""> </td></tr>
     <tr> <td style="width:50%;"> <img src="assets/45-component-icon.png" alt=""> </td><td style="width:50%;"> <img src="assets/46-component-button.png" alt=""> </td></tr>
+    <tr> <td style="width:50%;"> <img src="assets/47-component-tag.png" alt=""> </td><td style="width:50%;"> <img src="assets/48-css-extend.png" alt=""> </td></tr>
 </table>
 
 #### 项目下载和配置
@@ -101,46 +103,46 @@ Github: git clone https://github.com/hs-an-yue/yaya-layui-admin-plus.git
 #### 项目结构
 ```
 yaya-layui-admin-plus
-├── assets                      # Gitee或者Github上README.md文件中显示的图片
-├── css                         # yaya-layui-admin-plus模板的核心css文件
-├────── index.css               # index.html首页的核心css
-├────── menu.css                # index.html首页中左侧导航区域(菜单+LOGO+TITLE)的核心css
-├────── yaya-common.css         # 整个模板中大部分页面需要用到的公共css配置在这里(这个属于个人喜好)
-├────── yaya-style-extend.css         # yaya-layui-admin-plus模板扩展样式(按钮扩展+图标扩展等)
-├── data                        # yaya-layui-admin-plus模板中的测试数据(例如左侧菜单生成数据,用户测试数据,部门测试数据等)
-├── image                       # yaya-layui-admin-plus模板中用到的图片(登陆页面的背景图、网站用到的图标等)
-├── js                          # yaya-layui-admin-plus模板中的核心JS文件
-├────── yaya-admin-plus.js      # yaya-layui-admin-plus模板的核心JS文件(包含整个模板的核心功能的核心函数,例如 左侧菜单实现、选项卡实现等)
-├────── xm-select.js            # 多功能下拉框库(第三方库)
-├────── echarts.min.js          # 图表库(第三方库)
-├── layui                       # Layui核心库
-├── views                       # yaya-layui-admin-plus模板中提供的一些案例页面(不喜欢可以全部删掉,用户自己重新添加)
-├────── about.html	        # 关于我页
-├────── bulletin_board.html     # 公告通知页(内容由模型生成)
-├────── dashboard.html		# 仪表盘页(首页)
-├────── dept-list.html		# 部门页(内容由模型生成)
-├────── login-log.html		# 登陆日志页(内容由模型生成)
-├────── personal-center.html	# 个人中心页
-├────── pwd-change.html		# 修改密码页
-├────── system-log.html		# 系统日志页(内容由模型生成)
-├────── template.html		# 模板页(复制整个页面生成新的页面，比较快，没什么实际意义)
-├────── test1.html		# 多级测试页1 - 内容由模型生成 - 其它前端技术(BootStrap5)应用页
-├────── test2.html		# 多级测试页2 - 内容由模型生成 - 其它前端技术(Element Plus)应用页
-├────── test3.html		# 多级测试页3 - 内容由模型生成 - 其它前端技术(Naive UI)应用页
-├────── test4.html		# 多级测试页4 - 内容由模型生成 - 其它前端技术(View UI Plus)应用页
-├────── user-list.html		# 用户页
-├────── workbench.html		# 工作台页
+├── assets                          # Gitee或者Github上README.md文件中显示的图片
+├── css                             # yaya-layui-admin-plus模板的核心css文件
+├────── index.css                   # index.html首页的核心css
+├────── menu.css                    # index.html首页中左侧导航区域(菜单+LOGO+TITLE)的核心css
+├────── yaya-common.css             # 整个模板中大部分页面需要用到的公共css配置在这里(这个属于个人喜好)
+├────── yaya-style-extend.css       # yaya-layui-admin-plus模板扩展样式(按钮扩展+图标扩展等)
+├── data                            # yaya-layui-admin-plus模板中的测试数据(例如左侧菜单生成数据,用户测试数据,部门测试数据等)
+├── image                           # yaya-layui-admin-plus模板中用到的图片(登陆页面的背景图、网站用到的图标等)
+├── js                              # yaya-layui-admin-plus模板中的核心JS文件
+├────── yaya-admin-plus.js          # yaya-layui-admin-plus模板的核心JS文件(包含整个模板的核心功能的核心函数,例如 左侧菜单实现、选项卡实现等)
+├────── xm-select.js                # 多功能下拉框库(第三方库)
+├────── echarts.min.js              # 图表库(第三方库)
+├── layui                           # Layui核心库
+├── views                           # yaya-layui-admin-plus模板中提供的一些案例页面(不喜欢可以全部删掉,用户自己重新添加)
+├────── about.html	                # 关于我页
+├────── bulletin_board.html         # 公告通知页(内容由模型生成)
+├────── dashboard.html		    # 仪表盘页(首页)
+├────── dept-list.html		    # 部门页(内容由模型生成)
+├────── login-log.html		    # 登陆日志页(内容由模型生成)
+├────── personal-center.html	    # 个人中心页
+├────── pwd-change.html		        # 修改密码页
+├────── system-log.html		        # 系统日志页(内容由模型生成)
+├────── template.html		        # 模板页(复制整个页面生成新的页面，比较快，没什么实际意义)
+├────── test1.html		            # 多级测试页1 - 内容由模型生成 - 其它前端技术(BootStrap5)应用页
+├────── test2.html		            # 多级测试页2 - 内容由模型生成 - 其它前端技术(Element Plus)应用页
+├────── test3.html		            # 多级测试页3 - 内容由模型生成 - 其它前端技术(Naive UI)应用页
+├────── test4.html		            # 多级测试页4 - 内容由模型生成 - 其它前端技术(View UI Plus)应用页
+├────── user-list.html		    # 用户页
+├────── workbench.html		    # 工作台页
 ├── .gitignore                  # Git配置文件,用于版本控制管理
 ├── DISCLAIMER.md               # 开源软件的免责声明文件
 ├── favicon.ico                 # yaya-layui-admin-plus模板在预览时,浏览器选项卡上显示的图标
 ├── index.html                  # yaya-layui-admin-plus模板首页
 ├── LICENSE                     # 开源软件的开源协议(MIT协议)
-├── login.html		        # 登录页1
-├── login2.html			# 登录页2
-├── login3.html			# 登录页3
-├── login4-government.html	# 登录页4(模型生成)
-├── login5-aerospace.html	# 登录页5(模型生成)
-├── login6-chemistry.html	# 登录页6(模型生成)
+├── login.html		            # 登录页1
+├── login2.html			        # 登录页2
+├── login3.html			        # 登录页3
+├── login4-government.html	    # 登录页4(模型生成)
+├── login5-aerospace.html	    # 登录页5(模型生成)
+├── login6-chemistry.html	    # 登录页6(模型生成)
 ├── README.md                   # yaya-layui-admin-plus模板的介绍文件
 
 ```
