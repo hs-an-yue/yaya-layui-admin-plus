@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 响应式配置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- LayUI css库 -->
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../css/yaya-common.css">
+    <link rel="stylesheet" href="../css/yaya-style-extend.css">
+    <title>yaya-admin-plus</title>
+    <style>
+        .yaya-show-container{
+            border: 1px solid rgba(96,98,102,0.1);
+            margin-bottom: 5px;
+        }
+        .yaya-show-container>div{
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="yaya-container">
+        <div class="yaya-show-container">
+            <h2 style="color: #606266;padding-top: 5px;margin: 10px;">面板表单扩展-单行条件-1-时间范围</h2>
+            <div class="yaya-panel">
+                <form class="layui-form">
+                    <div class="layui-row">
+                        <div class="layui-col-md3 layui-col-sm3 yaya-form-item">
+                            <label class="yaya-form-label">用户</label>
+                            <div class="yaya-input-block">
+                                <input type="text" placeholder="请输入" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-col-md3 layui-col-sm3 yaya-form-item">
+                            <label class="yaya-form-label">手机号</label>
+                            <div class="yaya-input-block">
+                                <input type="text" placeholder="请输入" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-col-md3 layui-col-sm3 yaya-form-item">
+                            <label class="yaya-form-label">时间范围</label>
+                            <div class="yaya-input-block">
+                                <input type="text" class="layui-input" id="shortcut-range-date" placeholder="时间范围">
+                            </div>
+                        </div>
+                        <div class="layui-col-md3 layui-col-sm3 yaya-form-item">
+                            <button type="button" class="yaya-btn yaya-primary">搜索</button>
+                            <button type="reset" class="yaya-btn" style="margin-left: 10px;">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="yaya-show-container">
+            <h2 style="color: #606266;padding-top: 5px;margin: 10px;">面板表单扩展-单行条件-2-下拉框</h2>
+            <div class="yaya-panel">
+                <form class="layui-form">
+                    <div class="layui-row">
+                        <div class="layui-col-md3 layui-col-sm3 yaya-form-item">
+                            <label class="yaya-form-label">用户</label>
+                            <div class="yaya-input-block">
+                                <input type="text" placeholder="请输入" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-col-md3 layui-col-sm3 yaya-form-item">
+                            <label class="yaya-form-label">手机号</label>
+                            <div class="yaya-input-block">
+                                <input type="text" placeholder="请输入" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-col-md3 layui-col-sm3 yaya-form-item">
+                            <label class="yaya-form-label">状态</label>
+                            <div class="yaya-input-block">
+                                <select>
+                                    <option value="">请选择</option>
+                                    <option value="AAA">选项 A</option>
+                                    <option value="BBB">选项 B</option>
+                                    <option value="CCC">选项 C</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-col-md3 layui-col-sm3 yaya-form-item" style="padding-top: 2px;">
+                            <button type="button" class="yaya-btn yaya-primary">搜索</button>
+                            <button type="reset" class="yaya-btn" style="margin-left: 10px;">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="yaya-show-container">
+            <h2 style="color: #606266;padding-top: 5px;margin: 10px;">面板表单扩展-多行条件</h2>
+            <div class="yaya-panel">
+                <form class="layui-form">
+                    <div class="layui-row">
+                        <div class="layui-col-md3 layui-col-sm3 yaya-form-item">
+                            <label class="yaya-form-label">用户</label>
+                            <div class="yaya-input-block">
+                                <input type="text" placeholder="请输入" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-col-md3 layui-col-sm3 yaya-form-item">
+                            <label class="yaya-form-label">用户</label>
+                            <div class="yaya-input-block">
+                                <input type="text" placeholder="请输入" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-col-md3 layui-col-sm3 yaya-form-item">
+                            <label class="yaya-form-label">手机号</label>
+                            <div class="yaya-input-block">
+                                <input type="text" placeholder="请输入" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-col-md3 layui-col-sm3 yaya-form-item">
+                            <label class="yaya-form-label">邮箱</label>
+                            <div class="yaya-input-block">
+                                <input type="text" placeholder="请输入" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-col-md3 layui-col-sm3 yaya-form-item">
+                            <label class="yaya-form-label">状态</label>
+                            <div class="yaya-input-block">
+                                <select>
+                                    <option value="">请选择</option>
+                                    <option value="AAA">选项 A</option>
+                                    <option value="BBB">选项 B</option>
+                                    <option value="CCC">选项 C</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-col-md3 layui-col-sm3 yaya-form-item" style="padding-top: 2px;">
+                            <button type="button" class="yaya-btn yaya-primary">搜索</button>
+                            <button type="reset" class="yaya-btn" style="margin-left: 10px;">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="yaya-show-container">
+            <h2 style="color: #606266;padding-top: 5px;margin: 10px;">面板表单扩展-圆角</h2>
+            <div class="yaya-panel">
+                <form class="layui-form">
+                    <div class="layui-row">
+                        <div class="layui-col-md3 layui-col-sm3 yaya-form-item">
+                            <label class="yaya-form-label">用户</label>
+                            <div class="yaya-input-block">
+                                <input type="text" placeholder="请输入" autocomplete="off" class="layui-input yaya-input-border-radius">
+                            </div>
+                        </div>
+                        <div class="layui-col-md3 layui-col-sm3 yaya-form-item">
+                            <label class="yaya-form-label">手机号</label>
+                            <div class="yaya-input-block">
+                                <input type="text" placeholder="请输入" autocomplete="off" class="layui-input yaya-input-border-radius">
+                            </div>
+                        </div>
+                        <div class="layui-col-md3 layui-col-sm3 yaya-form-item">
+                            <button type="button" class="yaya-btn yaya-primary">搜索</button>
+                            <button type="reset" class="yaya-btn" style="margin-left: 10px;">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="../layui/layui.js"></script>
+    <script>
+        layui.use(function (){
+            const laydate = layui.laydate;
+            laydate.render({
+                elem: "#shortcut-range-date",
+                type: "date",
+                range: true
+            });
+        });
+    </script>
+</body>
+</html>

@@ -123,7 +123,7 @@ layui.use(function (){
                 area: ['500px', '100%'],
                 shade: 0.1,
                 shadeClose: true,
-                content: 'views/bulletin_board.html'
+                content: 'views/bulletin-board.html'
             });
         },
         /* 主题修改 */

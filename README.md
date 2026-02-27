@@ -8,7 +8,7 @@
 #### <div align="center"> 基于前端框架Layui2.13+开发的一套极简后台管理模板 </div>
 <div align="center">
 	<a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/Layui-%3E=2.13.3-magenta"></a>
-    <a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/YaYa Layui Admin Plus-v1.5-deeppink"></a>
+    <a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/YaYa Layui Admin Plus-v1.7-deeppink"></a>
 	<a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/Author-%E5%A4%9C%E6%B3%8A1990-quartz"></a>
     <a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/LICENSE-MIT-tomato"></a>
 </div>
@@ -27,6 +27,7 @@
 #### 更新日志
 
 ```
+2026-02-27      新增列表条件搜索组件
 2026-02-26      新增标签和徽章组件样式
 2026-02-25      新增组件管理菜单项[内部新增按钮管理和图标管理]
 2026-02-06      README.md添加【模板使用】部分
@@ -60,6 +61,7 @@
     <tr> <td style="width:50%;"> <img src="assets/21-demo-naive-ui.png" alt=""> </td><td style="width:50%;"> <img src="assets/22-demo-view-ui.png" alt=""> </td></tr>
     <tr> <td style="width:50%;"> <img src="assets/45-component-icon.png" alt=""> </td><td style="width:50%;"> <img src="assets/46-component-button.png" alt=""> </td></tr>
     <tr> <td style="width:50%;"> <img src="assets/47-component-tag.png" alt=""> </td><td style="width:50%;"> <img src="assets/48-css-extend.png" alt=""> </td></tr>
+    <tr> <td style="width:50%;"> <img src="assets/49-panel-extend.png" alt=""> </td><td style="width:50%;"> <img src="assets/50-panel-search-extend.png" alt=""> </td></tr>
 </table>
 
 #### 项目下载和配置
@@ -118,10 +120,14 @@ yaya-layui-admin-plus
 ├── layui                           # Layui核心库
 ├── views                           # yaya-layui-admin-plus模板中提供的一些案例页面(不喜欢可以全部删掉,用户自己重新添加)
 ├────── about.html	                # 关于我页
-├────── bulletin_board.html         # 公告通知页(内容由模型生成)
-├────── dashboard.html		    # 仪表盘页(首页)
-├────── dept-list.html		    # 部门页(内容由模型生成)
-├────── login-log.html		    # 登陆日志页(内容由模型生成)
+├────── bulletin-board.html         # 公告通知页(内容由模型生成)
+├────── badge-tag-extend.html       # 徽章和标签扩展样式页
+├────── button-extend.html          # 按钮扩展样式页
+├────── iconfont-extend.html        # 字体图标扩展样式页
+├────── panel-extend.html           # 面板条件搜索扩展样式页
+├────── dashboard.html		        # 仪表盘页(首页)
+├────── dept-list.html		        # 部门页(内容由模型生成)
+├────── login-log.html		        # 登陆日志页(内容由模型生成)
 ├────── personal-center.html	    # 个人中心页
 ├────── pwd-change.html		        # 修改密码页
 ├────── system-log.html		        # 系统日志页(内容由模型生成)
@@ -130,20 +136,20 @@ yaya-layui-admin-plus
 ├────── test2.html		            # 多级测试页2 - 内容由模型生成 - 其它前端技术(Element Plus)应用页
 ├────── test3.html		            # 多级测试页3 - 内容由模型生成 - 其它前端技术(Naive UI)应用页
 ├────── test4.html		            # 多级测试页4 - 内容由模型生成 - 其它前端技术(View UI Plus)应用页
-├────── user-list.html		    # 用户页
-├────── workbench.html		    # 工作台页
-├── .gitignore                  # Git配置文件,用于版本控制管理
-├── DISCLAIMER.md               # 开源软件的免责声明文件
-├── favicon.ico                 # yaya-layui-admin-plus模板在预览时,浏览器选项卡上显示的图标
-├── index.html                  # yaya-layui-admin-plus模板首页
-├── LICENSE                     # 开源软件的开源协议(MIT协议)
-├── login.html		            # 登录页1
-├── login2.html			        # 登录页2
-├── login3.html			        # 登录页3
-├── login4-government.html	    # 登录页4(模型生成)
-├── login5-aerospace.html	    # 登录页5(模型生成)
-├── login6-chemistry.html	    # 登录页6(模型生成)
-├── README.md                   # yaya-layui-admin-plus模板的介绍文件
+├────── user-list.html		        # 用户页
+├────── workbench.html		        # 工作台页
+├── .gitignore                      # Git配置文件,用于版本控制管理
+├── DISCLAIMER.md                   # 开源软件的免责声明文件
+├── favicon.ico                     # yaya-layui-admin-plus模板在预览时,浏览器选项卡上显示的图标
+├── index.html                      # yaya-layui-admin-plus模板首页
+├── LICENSE                         # 开源软件的开源协议(MIT协议)
+├── login.html		                # 登录页1
+├── login2.html			            # 登录页2
+├── login3.html			            # 登录页3
+├── login4-government.html	        # 登录页4(模型生成)
+├── login5-aerospace.html	        # 登录页5(模型生成)
+├── login6-chemistry.html	        # 登录页6(模型生成)
+├── README.md                       # yaya-layui-admin-plus模板的介绍文件
 
 ```
 #### 项目运行

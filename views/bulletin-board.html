@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>公告通知</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            padding: 24px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .page-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .page-subtitle {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .notice-list {
+            list-style: none;
+        }
+
+        .notice-item {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            transition: box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .notice-item:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .notice-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .notice-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a1a;
+            flex: 1;
+            word-break: break-word;
+        }
+
+        .notice-important {
+            background-color: #ff4d4f;
+            color: white;
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: 12px;
+            flex-shrink: 0;
+        }
+
+        .notice-time {
+            color: #8c8c8c;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .notice-summary {
+            color: #595959;
+            font-size: 15px;
+            line-height: 1.5;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="page-header">
+        <h1 class="page-title">公告通知</h1>
+        <p class="page-subtitle">查看最新官方公告与重要通知</p>
+    </div>
+    <ul class="notice-list">
+        <li class="notice-item">
+            <div class="notice-header">
+                <div class="notice-title">关于2026年春节放假安排的通知</div>
+                <span class="notice-important">重要</span>
+            </div>
+            <div class="notice-time">2026年1月20日</div>
+            <div class="notice-summary">根据国家法定节假日安排，公司将于2026年1月28日至2月4日放假调休，共7天...</div>
+        </li>
+
+        <li class="notice-item">
+            <div class="notice-header">
+                <div class="notice-title">系统维护通知：1月25日凌晨2点至4点</div>
+                <span class="notice-important">重要</span>
+            </div>
+            <div class="notice-time">2026年1月22日</div>
+            <div class="notice-summary">为提升服务稳定性，平台将于1月25日凌晨进行数据库升级，期间服务将短暂中断...</div>
+        </li>
+
+        <li class="notice-item">
+            <div class="notice-header">
+                <div class="notice-title">2025年度优秀员工评选结果公示</div>
+            </div>
+            <div class="notice-time">2026年1月18日</div>
+            <div class="notice-summary">经部门推荐与综合评审，大鸭梨、小苹果等10位同事荣获“2025年度优秀员工”称号...</div>
+        </li>
+
+        <li class="notice-item">
+            <div class="notice-header">
+                <div class="notice-title">新办公区网络配置指南</div>
+            </div>
+            <div class="notice-time">2026年1月15日</div>
+            <div class="notice-summary">B座新办公区已启用，请参考附件中的Wi-Fi连接说明完成设备配置...</div>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>

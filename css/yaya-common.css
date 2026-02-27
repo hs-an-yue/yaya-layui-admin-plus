@@ -3,10 +3,10 @@
     padding: 0;
     margin: 0;
 }
+/* 显示容器 */
 .yaya-container{
     width: 98%;
     margin: 0 auto;
-    /*background-color: white;*/
     border-radius: 10px;
 }
 /* 添加动画 */
@@ -16,4 +16,55 @@
 }
 .card-hover:hover {
     transform: translateY(-2px);
+}
+/* 面板表单扩展 */
+.yaya-panel{
+    padding: 0 15px;
+    background-color: white;
+    border-radius: 4px;
+}
+.yaya-form-item{
+    display: flex;
+    height: 36px;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 5px 0;
+}
+.yaya-form-label{
+    display: inline-block;
+    height: 36px;
+    line-height: 36px;
+    float: right;
+    padding-left: 15px;
+}
+.yaya-input-block{
+    flex: 1;
+    height: 36px;
+    padding: 0 15px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+}
+.yaya-input-block>input{
+    height: 36px;
+}
+.yaya-input-block>.layui-form-select{
+    width: 100%;
+}
+/* 输入框获取焦点的颜色设置 */
+.layui-input:focus,.layui-textarea:focus {
+    border-color: #409eff!important;
+    box-shadow: 0 0 0 3px rgba(22,183,119,.08)
+}
+/* 下拉框颜色设置 */
+.layui-form-select dl dd.layui-this{
+    color: #1e9fff;
+}
+/* 输入框圆角 */
+.yaya-input-border-radius{
+    border-radius: 5px;
 }
