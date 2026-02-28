@@ -9,195 +9,487 @@
     <link rel="stylesheet" href="../css/yaya-common.css">
     <title>仪表盘</title>
     <style>
-        .yaya-container .dash-top,.dash-center{
-            border-radius: 5px;
-            margin-bottom: 10px;
+        :root {
+            /* 主题色定义 */
+            --color-users: #3b82f6;
+            --color-revenue: #10b981;
+            --color-active: #f59e0b;
+            --color-tasks: #8b5cf6;
+        
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-sub: #64748b;
+            --trend-up: #10b981;   /* 涨 - 绿色 */
+            --trend-down: #ef4444; /* 跌 - 红色 */
         }
-        .yaya-container .dash-top>div{
-            background-color: white;
-            height: 170px;
-            border-radius: 5px;
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+            width: 100%;
         }
-        .yaya-container .dash-center>div{
-            background-color: white;
+
+        .stat-card {
+            background: var(--card-bg);
+            padding: 1.1rem;
             border-radius: 5px;
-            height: 430px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            gap: 1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.03);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 顶部：图标 + 标题 */
+        .card-header {
+            display: flex;
             align-items: center;
+            justify-content: space-between;
+        }
+
+        .stat-title {
+            color: var(--text-sub);
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .stat-icon-wrapper {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        /* 动态背景色 */
+        .stat-card[data-type="users"] .stat-icon-wrapper { background: rgba(59, 130, 246, 0.1); color: var(--color-users); }
+        .stat-card[data-type="revenue"] .stat-icon-wrapper { background: rgba(16, 185, 129, 0.1); color: var(--color-revenue); }
+        .stat-card[data-type="active"] .stat-icon-wrapper { background: rgba(245, 158, 11, 0.1); color: var(--color-active); }
+        .stat-card[data-type="tasks"] .stat-icon-wrapper { background: rgba(139, 92, 246, 0.1); color: var(--color-tasks); }
+
+        .stat-card:hover .stat-icon-wrapper { transform: rotate(12deg) scale(1.1); }
+
+        .stat-icon-wrapper svg { width: 26px; height: 26px; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+
+        /* 中部：主数字 */
+        .main-value-box {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-main);
+            font-variant-numeric: tabular-nums;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        .stat-suffix {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-sub);
+        }
+
+        /* 底部：今日数据与趋势 */
+        .sub-stats {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding-top: 8px;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            font-size: 0.875rem;
+        }
+
+        .sub-label {
+            color: var(--text-sub);
+            font-weight: 500;
+        }
+
+        .sub-value {
+            font-weight: 700;
+            color: var(--text-main);
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* 趋势徽章 */
+        .trend-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2px 8px;
+            border-radius: 99px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-left: auto; /* 推到最右边 */
+        }
+
+        .trend-up {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--trend-up);
+        }
+
+        .trend-down {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: var(--trend-down);
+        }
+
+        .trend-icon { width: 14px; height: 14px; }
+
+        /* 加载状态 */
+        .loading .stat-value, 
+        .loading .sub-value {
+            color: transparent;
+            background: #e2e8f0;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .loading .stat-value { width: 120px; height: 2.5rem; }
+        .loading .sub-value { width: 60px; height: 1.2rem; }
+
+        .loading .stat-value::after,
+        .loading .sub-value::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+            animation: shimmer 1.5s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
     </style>
 </head>
 <body>
     <div class="yaya-container">
         <div class="layui-fluid">
-            <div class="layui-row layui-col-space10">
-                <div class="layui-col-md3 card-hover dash-top">
-                    <div>
-                        <div style="width: 85%;margin: 0 auto;">
-                            <!--第一行-->
-                            <div style="height: 65px;line-height: 65px;">
-                                <h2>用户量</h2>
-                            </div>
-                            <!--第二行-->
-                            <div style="height: 55px;display: flex;justify-content: space-between;">
-                                <span style="font-size: 1.55em;">5,000</span>
-                                <svg t="1769156388670" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5424" width="32" height="32"><path d="M665.6 821.028571c21.211429 0 38.4 16.786286 38.4 37.485715 0 20.699429-17.188571 37.485714-38.4 37.485714H358.4c-21.211429 0-38.4-16.786286-38.4-37.485714 0-20.699429 17.188571-37.485714 38.4-37.485715h307.2zM819.2 146.285714c42.422857 0 76.8 33.572571 76.8 74.971429v449.828571c0 41.398857-34.377143 74.971429-76.8 74.971429H204.8c-42.422857 0-76.8-33.572571-76.8-74.971429V221.257143C128 179.858286 162.377143 146.285714 204.8 146.285714h614.4zM320 371.2c-21.211429 0-38.4 16.786286-38.4 37.485714v149.942857c0 20.699429 17.188571 37.485714 38.4 37.485715 21.211429 0 38.4-16.786286 38.4-37.485715v-149.942857c0-20.699429-17.188571-37.485714-38.4-37.485714z m384 0c-21.211429 0-38.4 16.786286-38.4 37.485714v149.942857c0 20.699429 17.188571 37.485714 38.4 37.485715 21.211429 0 38.4-16.786286 38.4-37.485715v-149.942857c0-20.699429-17.188571-37.485714-38.4-37.485714zM512 296.228571c-21.211429 0-38.4 16.786286-38.4 37.485715v224.914285c0 20.699429 17.188571 37.485714 38.4 37.485715 21.211429 0 38.4-16.786286 38.4-37.485715v-224.914285c0-20.699429-17.188571-37.485714-38.4-37.485715z" p-id="5425" fill="#6666ff"></path></svg>
-                            </div>
-                            <!--第三行-->
-                            <div style="height: 50px;display: flex;justify-content: space-between;">
-                                <span style="font-weight: bold;">总用户量</span>
-                                <span>120,000</span>
-                            </div>
+            <div class="stats-container">
+                <!-- 卡片 1: 用户统计 -->
+                <div class="stat-card" data-type="users">
+                    <div class="card-header">
+                        <div class="stat-title">总用户量</div>
+                        <div class="stat-icon-wrapper">
+                            <svg viewBox="0 0 24 24" stroke="currentColor">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
                         </div>
                     </div>
-                </div>
-                <div class="layui-col-md3 card-hover dash-top">
-                    <div>
-                        <div style="width: 85%;margin: 0 auto;">
-                            <!--第一行-->
-                            <div style="height: 65px;line-height: 65px;">
-                                <h2>访问量</h2>
-                            </div>
-                            <!--第二行-->
-                            <div style="height: 55px;display: flex;justify-content: space-between;">
-                                <span style="font-size: 1.55em;">5,000</span>
-                                <svg t="1769157291512" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6650" width="32" height="32"><path d="M92.161 959.999h839.68c15.553 0 28.16-12.609 28.16-28.16s-12.608-28.16-28.16-28.16h-811.52V92.159c0-15.553-12.608-28.16-28.16-28.16s-28.16 12.608-28.16 28.16v839.68c0 15.552 12.608 28.16 28.16 28.16z m135.803-219.165c32.945 0 59.647-30.339 59.647-67.757 0-9.026-1.567-17.634-4.387-25.51l117.759-153.753a53.084 53.084 0 0 0 17.855 3.092c17.38 0 33.018-8.449 43.919-21.922l111.182 63.334c0.36 37.068 26.92 67.002 59.63 67.002 32.944 0 59.647-30.34 59.647-67.758 0-1.254-0.035-2.496-0.094-3.732l154.882-151.144c7.387 3.723 15.554 5.807 24.154 5.807 32.946 0 59.648-30.333 59.648-67.758 0-37.419-26.702-67.757-59.648-67.757-32.933 0-59.647 30.338-59.647 67.757 0 7.711 1.15 15.112 3.24 22.017L670.74 484.59c-10.196-9.246-23.11-14.787-37.173-14.787-16.215 0-30.912 7.365-41.665 19.297l-113.574-64.602c-2.106-35.248-27.924-63.108-59.491-63.108-32.935 0-59.648 30.34-59.648 67.758 0 10.268 2.022 19.996 5.621 28.717L248.922 609.631c-6.52-2.78-13.581-4.312-20.958-4.312-32.935 0-59.648 30.338-59.648 67.758 0 37.418 26.713 67.757 59.648 67.757z" fill="#16b777" p-id="6651"></path></svg>
-                            </div>
-                            <!--第三行-->
-                            <div style="height: 50px;display: flex;justify-content: space-between;">
-                                <span style="font-weight: bold;">总访问量</span>
-                                <span>1200,000</span>
-                            </div>
-                        </div>
+                    <div class="main-value-box">
+                        <div class="stat-value" data-target="0">0</div>
+                    </div>
+                    <div class="sub-stats">
+                        <span class="sub-label">今日访问:</span>
+                        <span class="sub-value" data-target="0">0</span>
+                        <!-- 趋势徽章 (由 JS 动态填充内容) -->
+                        <span class="trend-badge trend-up">
+                            <svg class="trend-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+                            <span class="trend-text">12%</span>
+                        </span>
                     </div>
                 </div>
-                <div class="layui-col-md3 card-hover dash-top">
-                    <div>
-                        <div style="width: 85%;margin: 0 auto;">
-                            <!--第一行-->
-                            <div style="height: 65px;line-height: 65px;">
-                                <h2>下载量</h2>
-                            </div>
-                            <!--第二行-->
-                            <div style="height: 55px;display: flex;justify-content: space-between;">
-                                <span style="font-size: 1.55em;">5,000</span>
-                                <svg t="1769157563181" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7738" width="32" height="32"><path d="M512 0C229.376 0 0 229.376 0 512s229.376 512 512 512 512-229.376 512-512S794.624 0 512 0z m99.84 641.536l-1.536 1.536-80.896 92.672s-0.512 0-0.512 0.512l-2.048 2.048-1.024 1.024c-1.024 0.512-1.536 1.024-2.56 1.536-0.512 0-1.024 0.512-1.024 0.512-1.024 0.512-2.048 0.512-3.072 1.024-0.512 0-1.024 0.512-1.536 0.512-1.024 0-2.048 0.512-3.072 0.512h-6.144c-1.024 0-2.048-0.512-2.56-0.512-0.512 0-1.024-0.512-1.536-0.512-1.024-0.512-2.048-0.512-2.56-1.024-0.512 0-1.024-0.512-1.536-0.512-1.024-0.512-1.536-1.024-2.56-2.048-0.512 0-0.512-0.512-1.024-0.512l-0.512-0.512-1.024-1.024-0.512-0.512-80.896-92.672c-8.704-9.216-8.704-24.064 0.512-32.768 9.216-8.704 24.064-8.704 32.768 0.512l1.536 1.536 40.448 46.08V512c0-12.8 10.24-23.04 23.04-23.04s23.04 10.24 23.04 23.04v146.944l40.448-46.08c8.192-9.728 22.528-11.264 32.768-3.584s11.264 22.016 3.584 32.256z m85.504 101.888h-23.04c-12.8 0-23.04-10.24-23.04-23.04s10.24-23.04 23.04-23.04h23.04c64 0 115.712-51.712 115.712-115.712 0-64-51.712-115.712-115.712-115.712-6.656 0-13.312 0.512-19.968 2.048-12.288 2.56-24.576-5.632-27.136-17.92 0-0.512 0-1.024-0.512-1.536-10.752-75.776-81.408-128.512-157.184-117.76-60.928 8.704-109.056 56.832-117.76 117.76-1.536 12.8-13.312 21.504-25.6 19.968-0.512 0-1.024 0-1.536-0.512-6.656-1.024-13.312-2.048-19.968-2.048-64 0-115.712 51.712-115.712 115.712 0 64 51.712 115.712 115.712 115.712h23.04c12.8 0 23.04 10.24 23.04 23.04s-10.24 23.04-23.04 23.04H327.68c-89.6 0-162.304-72.704-162.304-162.304S238.08 418.816 327.68 418.816h5.12C358.4 320 459.776 261.12 558.592 286.72c65.024 16.896 115.2 67.584 132.608 132.608h6.144c89.6 0 162.304 72.704 162.304 162.304-0.512 89.088-72.704 161.792-162.304 161.792z" fill="#8dd869" p-id="7739"></path></svg>
-                            </div>
-                            <!--第三行-->
-                            <div style="height: 50px;display: flex;justify-content: space-between;">
-                                <span style="font-weight: bold;">总下载量</span>
-                                <span>820,000</span>
-                            </div>
+
+                <!-- 卡片 2: 收入统计 -->
+                <div class="stat-card" data-type="revenue">
+                    <div class="card-header">
+                        <div class="stat-title">总收入</div>
+                        <div class="stat-icon-wrapper">
+                            <svg viewBox="0 0 24 24" stroke="currentColor">
+                                <line x1="12" y1="1" x2="12" y2="23"></line>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
                         </div>
                     </div>
+                    <div class="main-value-box">
+                        <span class="stat-suffix">¥</span>
+                        <div class="stat-value" data-target="0">0</div>
+                    </div>
+                    <div class="sub-stats">
+                        <span class="sub-label">今日入账:</span>
+                        <span class="sub-value" data-target="0">0</span>
+                        <span class="trend-badge trend-down">
+                            <svg class="trend-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            <span class="trend-text">2.4%</span>
+                        </span>
+                    </div>
                 </div>
-                <div class="layui-col-md3 card-hover dash-top">
-                    <div>
-                        <div style="width: 85%;margin: 0 auto;">
-                            <!--第一行-->
-                            <div style="height: 65px;line-height: 65px;">
-                                <h2>使用量</h2>
-                            </div>
-                            <!--第二行-->
-                            <div style="height: 55px;display: flex;justify-content: space-between;">
-                                <span style="font-size: 1.55em;">5,000</span>
-                                <svg t="1769157596135" class="icon" viewBox="0 0 1092 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8891" width="32" height="32"><path d="M491.965069 512.034131V81.709753C270.591027 100.413572 96.522632 286.291314 96.522632 512.034131a432.508766 432.508766 0 0 0 432.030931 432.030931 432.64529 432.64529 0 0 0 430.187854-391.961069h-426.638224a40.069862 40.069862 0 0 1-40.138124-40.069862zM709.926005 88.535964v252.569829h243.354443c-30.513166-93.177788-151.883208-219.05313-243.354443-252.569829zM528.553563 1024c-282.400373 0-511.965869-229.565496-511.965869-511.965869 0-282.400373 229.70202-511.965869 511.965869-511.965869h3.481368c21.434304 0.819145 39.865076 18.635558 39.865076 40.069862v431.826145h428.549563c22.116926 0 40.069862 17.952936 40.069862 40.069862 0 282.400373-229.633758 511.965869-511.965869 511.965869z m471.896007-602.959269H669.992667a40.069862 40.069862 0 0 1-40.069862-40.069862V40.138124c0-10.717152 4.368775-20.95647 11.877608-28.533564A40.95727 40.95727 0 0 1 670.470502 0.068262c145.261783 2.320912 369.980668 233.797747 369.980668 381.107393a39.933338 39.933338 0 0 1-40.0016 39.865076z" fill="#1b59f8" p-id="8892"></path></svg>
-                            </div>
-                            <!--第三行-->
-                            <div style="height: 50px;display: flex;justify-content: space-between;">
-                                <span style="font-weight: bold;">总使用量</span>
-                                <span>2000,000</span>
-                            </div>
+
+                <!-- 卡片 3: 活跃会话 -->
+                <div class="stat-card" data-type="active">
+                    <div class="card-header">
+                        <div class="stat-title">累计会话</div>
+                        <div class="stat-icon-wrapper">
+                            <svg viewBox="0 0 24 24" stroke="currentColor">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                            </svg>
                         </div>
+                    </div>
+                    <div class="main-value-box">
+                        <div class="stat-value" data-target="0">0</div>
+                        <span class="stat-suffix">+</span>
+                    </div>
+                    <div class="sub-stats">
+                        <span class="sub-label">当前在线:</span>
+                        <span class="sub-value" data-target="0">0</span>
+                        <span class="trend-badge trend-up">
+                            <svg class="trend-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+                            <span class="trend-text">5.1%</span>
+                        </span>
+                    </div>
+                </div>
+                
+                <!-- 卡片 4: 任务统计 -->
+                <div class="stat-card" data-type="tasks">
+                    <div class="card-header">
+                        <div class="stat-title">完成任务</div>
+                        <div class="stat-icon-wrapper">
+                            <svg viewBox="0 0 24 24" stroke="currentColor">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="main-value-box">
+                        <div class="stat-value" data-target="0">0</div>
+                    </div>
+                    <div class="sub-stats">
+                        <span class="sub-label">今日完成:</span>
+                        <span class="sub-value" data-target="0">0</span>
+                        <span class="trend-badge trend-up">
+                            <svg class="trend-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+                            <span class="trend-text">8.3%</span>
+                        </span>
                     </div>
                 </div>
             </div>
-            <div class="layui-row">
-                <div class="layui-col-md12 card-hover dash-center">
-                    <div>
-                        <div id="main" style="width: 1200px;height:430px;"></div>
-                    </div>
-                </div>
+            <div class="yaya-panel card-hover dash-center" style="margin-top: 10px;">
+                <div id="main" style="width: 1200px;height:430px;"></div>
             </div>
         </div>
     </div>
     <script src="../layui/layui.js"></script>
     <script src="../js/echarts.min.js"></script>
     <script>
-        layui.use(function(){
-            const myChart = echarts.init(document.getElementById('main'));
-            let option = {
-                color: ['#00DDFF'],
-                title: {
-                    text: '用户月活跃度'
-                },
-                grid: {
-                    left: '1%',   // 距离左侧边界
-                    right: '2%',  // 距离右侧边界
-                    top: '15%',   // 距离顶部边界
-                    bottom: '5%', // 距离底部边界
-                    containLabel: true // 关键：设置为 true 可以防止坐标轴标签溢出容器
-                },
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: {
-                        type: 'cross',
-                        label: {
-                            backgroundColor: '#6a7985'
-                        }
+        //图表
+        const myChart = echarts.init(document.getElementById('main'));
+        let option = {
+            color: ['#00DDFF'],
+            title: {
+                text: '用户月活跃度'
+            },
+            grid: {
+                left: '0',   // 距离左侧边界
+                right: '4%',  // 距离右侧边界
+                top: '15%',   // 距离顶部边界
+                bottom: '5%', // 距离底部边界
+                containLabel: true // 关键：设置为 true 可以防止坐标轴标签溢出容器
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                    label: {
+                        backgroundColor: '#6a7985'
                     }
-                },
-                toolbox: {
-                    feature: {
-                        saveAsImage: {}
+                }
+            },
+            toolbox: {
+                right: 30,
+                feature: {
+                    saveAsImage: {}
+                }
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月','8月','9月','10月','11月','12月']
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value'
+                }
+            ],
+            series: [
+                {
+                    name: 'pv',
+                    type: 'line',
+                    stack: 'Total',
+                    smooth: true,
+                    lineStyle: {
+                        width: 0
+                    },
+                    showSymbol: false,
+                    areaStyle: {
+                        opacity: 0.8,
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                            {
+                                offset: 0,
+                                color: 'rgb(0, 221, 255)'
+                            },
+                            {
+                                offset: 1,
+                                color: 'rgb(77, 119, 255)'
+                            }
+                        ])
+                    },
+                    emphasis: {
+                        focus: 'series'
+                    },
+                    data: [100, 200, 500, 400, 300, 600, 700,222,444,234,777,654]
+                }
+            ]
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+
+        // ---------------------------------------------------------------------
+
+        //统计卡片数据
+
+        //模拟后端数据
+        function fetchStatsData() {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve({
+                        users: { total: 12580, today: 342, trend: 12.5, isUp: true },
+                        revenue: { total: 89432.50, today: 4230.00, trend: 2.4, isUp: false },
+                        active: { total: 58920, today: 892, trend: 5.1, isUp: true },
+                        tasks: { total: 1500000, today: 1250, trend: 8.3, isUp: true }
+                    });
+                }, 1000);
+            });
+        }
+
+        /**
+         * 数字滚动动画函数
+         */
+        function animateValue(element, start, end, duration, isDecimal = false) {
+            if (start === end) {
+                // 即使相同也要格式化一下（比如加千分位）
+                element.textContent = isDecimal ? end.toFixed(2) : end.toLocaleString();
+                return;
+            }
+
+            const range = end - start;
+            let startTime = null;
+
+            function step(currentTime) {
+                if (!startTime) startTime = currentTime;
+                const progress = Math.min((currentTime - startTime) / duration, 1);
+
+                // Ease Out Quad (稍微平缓一点的曲线)
+                const easeProgress = 1 - (1 - progress) * (1 - progress);
+
+                const currentVal = start + (range * easeProgress);
+
+                if (isDecimal) {
+                    element.textContent = currentVal.toFixed(2);
+                } else {
+                    element.textContent = Math.floor(currentVal).toLocaleString();
+                }
+
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                } else {
+                    if (isDecimal) {
+                        element.textContent = end.toFixed(2);
+                    } else {
+                        element.textContent = end.toLocaleString();
                     }
-                },
-                xAxis: [
-                    {
-                        type: 'category',
-                        boundaryGap: false,
-                        data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月','8月','9月','10月','11月','12月']
+                }
+            }
+
+            window.requestAnimationFrame(step);
+        }
+
+
+        /**
+         * 初始化逻辑
+         */
+        async function initStats() {
+            const cards = document.querySelectorAll('.stat-card');
+            cards.forEach(card => card.classList.add('loading'));
+
+            try {
+                const data = await fetchStatsData();
+
+                // 配置映射
+                const config = [
+                    { type: 'users', key: 'users', decimal: false },
+                    { type: 'revenue', key: 'revenue', decimal: true },
+                    { type: 'active', key: 'active', decimal: false },
+                    { type: 'tasks', key: 'tasks', decimal: false }
+                ];
+
+                config.forEach(item => {
+                    const card = document.querySelector(`.stat-card[data-type="${item.type}"]`);
+                    if (!card) return;
+
+                    const itemData = data[item.key];
+
+                    // 1. 获取 DOM 元素
+                    const mainValueEl = card.querySelector('.stat-value');
+                    const subValueEl = card.querySelector('.sub-value');
+                    const trendBadge = card.querySelector('.trend-badge');
+                    const trendTextEl = card.querySelector('.trend-text');
+                    const trendIconSvg = trendBadge.querySelector('svg');
+
+                    // 2. 移除加载状态
+                    card.classList.remove('loading');
+
+                    // 3. 动画主数字 (总量) - 耗时 2秒
+                    animateValue(mainValueEl, 0, itemData.total, 2000, item.decimal);
+
+                    // 4. 动画副数字 (今日) - 耗时 1.5秒，稍微快一点
+                    // 注意：今日数据如果是金额，也需要小数处理
+                    animateValue(subValueEl, 0, itemData.today, 1500, item.decimal);
+
+                    // 5. 设置趋势样式
+                    trendTextEl.textContent = `${itemData.trend}%`;
+
+                    if (itemData.isUp) {
+                        trendBadge.className = 'trend-badge trend-up';
+                        // 向上箭头 SVG path
+                        trendIconSvg.innerHTML = '<polyline points="18 15 12 9 6 15"></polyline>';
+                    } else {
+                        trendBadge.className = 'trend-badge trend-down';
+                        // 向下箭头 SVG path
+                        trendIconSvg.innerHTML = '<polyline points="6 9 12 15 18 9"></polyline>';
                     }
-                ],
-                yAxis: [
-                    {
-                        type: 'value'
-                    }
-                ],
-                series: [
-                    {
-                        name: 'pv',
-                        type: 'line',
-                        stack: 'Total',
-                        smooth: true,
-                        lineStyle: {
-                            width: 0
-                        },
-                        showSymbol: false,
-                        areaStyle: {
-                            opacity: 0.8,
-                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                                {
-                                    offset: 0,
-                                    color: 'rgb(0, 221, 255)'
-                                },
-                                {
-                                    offset: 1,
-                                    color: 'rgb(77, 119, 255)'
-                                }
-                            ])
-                        },
-                        emphasis: {
-                            focus: 'series'
-                        },
-                        data: [100, 200, 500, 400, 300, 600, 700,222,444,234,777,654]
-                    }
-                ]
-            };
-            // 使用刚指定的配置项和数据显示图表。
-            myChart.setOption(option);
-        })
+                });
+
+            } catch (error) {
+                console.error("加载失败:", error);
+                cards.forEach(card => card.classList.remove('loading'));
+            }
+        }
+
+        //启动监听
+        document.addEventListener('DOMContentLoaded', initStats);
     </script>
 </body>
 </html>
