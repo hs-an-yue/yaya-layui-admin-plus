@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 5129039 */
-  src: url('iconfont.woff2?t=1772015330836') format('woff2'),
-       url('iconfont.woff?t=1772015330836') format('woff'),
-       url('iconfont.ttf?t=1772015330836') format('truetype');
+  src: url('iconfont.woff2?t=1772258581114') format('woff2'),
+       url('iconfont.woff?t=1772258581114') format('woff'),
+       url('iconfont.ttf?t=1772258581114') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,42 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-a-1_huaban1:before {
+  content: "\e637";
+}
+
+.icon-mti-quanxianguanli:before {
+  content: "\e926";
+}
+
+.icon-yibiaopan:before {
+  content: "\eb6e";
+}
+
+.icon-gongzuotaishouye:before {
+  content: "\e639";
+}
+
+.icon-gongyezujian-yibiaopan:before {
+  content: "\eb99";
+}
+
+.icon-gongzuotai:before {
+  content: "\e750";
+}
+
+.icon-yibiaopan1:before {
+  content: "\eae6";
+}
+
+.icon-icon_bumenguanli:before {
+  content: "\e626";
+}
+
+.icon-zhinengmofangicon_bumenguanli:before {
+  content: "\e605";
 }
 
 .icon-tubiao:before {

@@ -9,7 +9,6 @@
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    line-height: 1;
     height: 32px;
     white-space: nowrap;
     cursor: pointer;

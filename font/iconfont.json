@@ -6,6 +6,69 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "26856854",
+      "name": "钥匙/修改密码/开锁",
+      "font_class": "a-1_huaban1",
+      "unicode": "e637",
+      "unicode_decimal": 58935
+    },
+    {
+      "icon_id": "42868478",
+      "name": "mti-权限管理",
+      "font_class": "mti-quanxianguanli",
+      "unicode": "e926",
+      "unicode_decimal": 59686
+    },
+    {
+      "icon_id": "3868284",
+      "name": "仪表盘",
+      "font_class": "yibiaopan",
+      "unicode": "eb6e",
+      "unicode_decimal": 60270
+    },
+    {
+      "icon_id": "3978096",
+      "name": "工作台首页",
+      "font_class": "gongzuotaishouye",
+      "unicode": "e639",
+      "unicode_decimal": 58937
+    },
+    {
+      "icon_id": "4354245",
+      "name": "工业组件-仪表盘",
+      "font_class": "gongyezujian-yibiaopan",
+      "unicode": "eb99",
+      "unicode_decimal": 60313
+    },
+    {
+      "icon_id": "14163062",
+      "name": "工作台",
+      "font_class": "gongzuotai",
+      "unicode": "e750",
+      "unicode_decimal": 59216
+    },
+    {
+      "icon_id": "15660242",
+      "name": "仪表盘",
+      "font_class": "yibiaopan1",
+      "unicode": "eae6",
+      "unicode_decimal": 60134
+    },
+    {
+      "icon_id": "31953516",
+      "name": "icon_部门管理",
+      "font_class": "icon_bumenguanli",
+      "unicode": "e626",
+      "unicode_decimal": 58918
+    },
+    {
+      "icon_id": "38932514",
+      "name": "部门管理",
+      "font_class": "zhinengmofangicon_bumenguanli",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
       "icon_id": "7533297",
       "name": "图标",
       "font_class": "tubiao",

@@ -16,12 +16,16 @@
 #### 介绍
 `YaYa-Layui-Admin-Plus` 基于 [Layui](https://layui.dev/) 框架实现的一套 <strong>简单</strong>、<strong>方便</strong>、<strong>国产化</strong> 前端管理模板，`Layui`虽然是一套前端`UI`框架，但是作者设计的理念并不是为前端程序员设计，而是为了后端程序员设计，让后端程序员告别繁琐的前端配置，只需要简单的了解`HTML/CSS/JS`在加上`Layui`官网，就可以快速开发出属于自己的系统,`Layui`的`UI`组件没有那么丰富多彩，但是他的交互方式简单方便，结合后端程序可以快速建站。
 
-#### 开发初衷
+#### 设计初衷
 
 ```
-1. 零构建: 告别脚手架,让开发回归简洁
-2. 快速交付: 引入即用,无需编译等待
-3. 易于维护: 回归标准,代码直观,成本低,对后端开发者极度友好
+1. 作为一个后端开发，对前端生态的抓狂，需要一款简单一看就会的前端技术栈来降低前端的学习、开发和维护成本(特别是时间成本)
+2. 只针对电脑端(PC端)用户使用，不需要做移动端的兼容
+3. 抛弃目前主流的脚手架项目生成和构建方式，使用纯原生的方式进行开发(技术栈:html/css/js(JQuery))
+4. 重点就是这个模板要足够的简单，学习成本要足够的低，并且就算10年以后，来一个新手看这个项目的时候他的学习和使用成本也要足够低
+5. 为像我一样的小众群体(记不住Vue那套前端生态，但是还不得不进行前端开发和维护)提供一个新的技术解决方案
+6. 为中小型企业提供一套可以低成本开发和维护的前端技术解决方案
+7. 为一些人才紧缺的城市提供一套技术栈足够简单的前端技术解决方案
 ```
 
 #### 更新日志
@@ -62,6 +66,7 @@
     <tr> <td style="width:50%;"> <img src="assets/45-component-icon.png" alt=""> </td><td style="width:50%;"> <img src="assets/46-component-button.png" alt=""> </td></tr>
     <tr> <td style="width:50%;"> <img src="assets/47-component-tag.png" alt=""> </td><td style="width:50%;"> <img src="assets/48-css-extend.png" alt=""> </td></tr>
     <tr> <td style="width:50%;"> <img src="assets/49-panel-extend.png" alt=""> </td><td style="width:50%;"> <img src="assets/50-panel-search-extend.png" alt=""> </td></tr>
+    <tr> <td style="width:50%;"> <img src="assets/51-layout-1-extend.png" alt=""> </td><td style="width:50%;"> <img src="assets/52-layout-2-extend.png" alt=""> </td></tr>
 </table>
 
 #### 项目下载和配置
