@@ -8,7 +8,7 @@
 #### <div align="center"> 基于前端框架Layui2.13+开发的一套极简后台管理模板 </div>
 <div align="center">
 	<a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/Layui-%3E=2.13.3-magenta"></a>
-    <a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/YaYa Layui Admin Plus-v1.7-deeppink"></a>
+    <a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/YaYa Layui Admin Plus-v1.8-deeppink"></a>
 	<a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/Author-%E5%A4%9C%E6%B3%8A1990-quartz"></a>
     <a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/LICENSE-MIT-tomato"></a>
 </div>
@@ -19,7 +19,7 @@
 #### 设计初衷
 
 ```
-1. 作为一个后端开发，对前端生态的抓狂，需要一款简单一看就会的前端技术栈来降低前端的学习、开发和维护成本(特别是时间成本)
+1. 作为一个后端开发，对前端生态的抓狂，需要一款简单，一看就懂的前端技术栈来降低前端的学习、开发和维护成本(特别是时间成本)
 2. 只针对电脑端(PC端)用户使用，不需要做移动端的兼容
 3. 抛弃目前主流的脚手架项目生成和构建方式，使用纯原生的方式进行开发(技术栈:html/css/js(JQuery))
 4. 重点就是这个模板要足够的简单，学习成本要足够的低，并且就算10年以后，来一个新手看这个项目的时候他的学习和使用成本也要足够低
@@ -31,6 +31,7 @@
 #### 更新日志
 
 ```
+2026-02-28      新增布局组件，修改案例页面的样式为模板定义的样式，并且优化了几个不合理的样式
 2026-02-27      新增列表条件搜索组件
 2026-02-26      新增标签和徽章组件样式
 2026-02-25      新增组件管理菜单项[内部新增按钮管理和图标管理]
