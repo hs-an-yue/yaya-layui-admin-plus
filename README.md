@@ -5,7 +5,7 @@
 ---
 
 # <div align="center">YaYa-Layui-Admin-Plus</div>
-#### <div align="center"> 基于前端框架Layui2.13+开发的一套极简后台管理模板 </div>
+#### <div align="center"> 基于前端框架Layui2.13+开发的一套极简前端管理模板 </div>
 <div align="center">
 	<a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/Layui-%3E=2.13.3-magenta"></a>
     <a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/YaYa Layui Admin Plus-v1.9-deeppink"></a>
