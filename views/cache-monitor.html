@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>缓存监控仪表盘 - Redis & JDK</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <style>
+        :root {
+            --primary: #448aff; --bg: #f0f2f5; --card: #ffffff;
+        }
+        body { font-family: -apple-system, system-ui, sans-serif; background: var(--bg); margin: 0; padding: 20px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 1400px; margin: 0 auto; }
+        .card { background: var(--card); border-radius: 12px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .full-width { grid-column: span 2; }
+        h2 { margin-top: 0; font-size: 18px; color: #333; border-left: 5px solid var(--primary); padding-left: 12px; }
+
+        /* 表格样式 */
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th { background: #fafafa; text-align: left; padding: 12px; color: #666; font-size: 14px; border-bottom: 2px solid #eee; }
+        td { padding: 12px; border-bottom: 1px solid #eee; font-size: 14px; color: #444; }
+        .tag { padding: 2px 8px; border-radius: 4px; font-size: 12px; background: #e3f2fd; color: #1976d2; }
+
+        .chart-box { height: 350px; width: 100%; }
+    </style>
+</head>
+<body>
+
+<div class="grid">
+    <div class="card">
+        <h2>Redis 运行状态</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>参数项</th>
+                <th>当前值</th>
+                <th>描述</th>
+            </tr>
+            </thead>
+            <tbody id="redis-info">
+            <tr><td>版本</td><td><span class="tag">7.0.12</span></td><td>Redis Server Version</td></tr>
+            <tr><td>运行模式</td><td>Standalone</td><td>单机/集群</td></tr>
+            <tr><td>已用内存</td><td>156.42 MB</td><td>Used Memory</td></tr>
+            <tr><td>连接客户端</td><td>14</td><td>Connected Clients</td></tr>
+            <tr><td>运行时间</td><td>14天 2小时</td><td>Uptime</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>Redis Key 类型分布</h2>
+        <div id="redisPieChart" class="chart-box"></div>
+    </div>
+
+    <div class="card full-width">
+        <h2>JDK 本地缓存监控 (Caffeine/Guava)</h2>
+        <p style="font-size: 13px; color: #888;">对比不同 Cache 实例的命中率与条目数</p>
+        <div id="jdkBarChart" class="chart-box"></div>
+    </div>
+</div>
+
+<script>
+    // --- 1. 初始化 Redis 饼图 ---
+    const redisPie = echarts.init(document.getElementById('redisPieChart'));
+    redisPie.setOption({
+        tooltip: { trigger: 'item', formatter: '{b}: {c} ({d}%)' },
+        legend: { bottom: '5%', left: 'center' },
+        series: [{
+            name: 'Key分布',
+            type: 'pie',
+            radius: ['40%', '70%'],
+            avoidLabelOverlap: false,
+            itemStyle: { borderRadius: 10, borderColor: '#fff', borderWidth: 2 },
+            label: { show: false, position: 'center' },
+            emphasis: { label: { show: true, fontSize: 16, fontWeight: 'bold' } },
+            data: [
+                { value: 1048, name: 'String (字符串)', itemStyle: {color: '#5470c6'} },
+                { value: 735, name: 'Hash (哈希)', itemStyle: {color: '#91cc75'} },
+                { value: 580, name: 'List (列表)', itemStyle: {color: '#fac858'} },
+                { value: 484, name: 'Set (集合)', itemStyle: {color: '#ee6666'} },
+                { value: 300, name: 'ZSet (有序集合)', itemStyle: {color: '#73c0de'} }
+            ]
+        }]
+    });
+
+    // --- 2. 初始化 JDK 缓存柱状图 ---
+    const jdkBar = echarts.init(document.getElementById('jdkBarChart'));
+    jdkBar.setOption({
+        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+        legend: { data: ['条目数 (Size)', '命中率 (%)'] },
+        grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
+        xAxis: { type: 'category', data: ['UserCache', 'ProductCache', 'TokenCache', 'DictCache', 'ConfigCache'] },
+        yAxis: [
+            { type: 'value', name: '条目数', position: 'left' },
+            { type: 'value', name: '百分比', min: 0, max: 100, position: 'right', axisLabel: { formatter: '{value} %' } }
+        ],
+        series: [
+            {
+                name: '条目数 (Size)',
+                type: 'bar',
+                barWidth: '30%',
+                data: [1200, 5000, 800, 150, 45],
+                itemStyle: { color: '#448aff' }
+            },
+            {
+                name: '命中率 (%)',
+                type: 'line',
+                yAxisIndex: 1,
+                data: [88, 92, 99, 65, 40],
+                lineStyle: { width: 3 },
+                itemStyle: { color: '#ff9800' }
+            }
+        ]
+    });
+
+    // 窗口自适应
+    window.onresize = function() {
+        redisPie.resize();
+        jdkBar.resize();
+    };
+</script>
+
+</body>
+</html>

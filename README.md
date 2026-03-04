@@ -68,6 +68,7 @@
     <tr> <td style="width:50%;"> <img src="assets/47-component-tag.png" alt=""> </td><td style="width:50%;"> <img src="assets/48-css-extend.png" alt=""> </td></tr>
     <tr> <td style="width:50%;"> <img src="assets/49-panel-extend.png" alt=""> </td><td style="width:50%;"> <img src="assets/50-panel-search-extend.png" alt=""> </td></tr>
     <tr> <td style="width:50%;"> <img src="assets/51-layout-1-extend.png" alt=""> </td><td style="width:50%;"> <img src="assets/52-layout-2-extend.png" alt=""> </td></tr>
+    <tr> <td style="width:50%;"> <img src="assets/53-server-monitor.png" alt=""> </td><td style="width:50%;"> <img src="assets/54-cache-monitor.png" alt=""> </td></tr>
 </table>
 
 #### 项目下载和配置
