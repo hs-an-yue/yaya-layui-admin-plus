@@ -412,6 +412,10 @@
 .yaya-btn-circle-small>i{
     font-size: 12px;
 }
+/*宽度100%*/
+.yaya-fluid{
+    width: 100%;
+}
 /* 标签扩展 */
 .yaya-tag{
     display: inline-flex;

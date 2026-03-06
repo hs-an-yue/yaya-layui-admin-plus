@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 标签icon设置 -->
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+    <title>公告详情</title>
+    <style>
+        :root {
+            --primary-color: #409eff;
+            --danger-color: #f56c6c;
+            --warning-color: #e6a23c;
+            --success-color: #67c23a;
+            --text-main: #303133;
+            --text-secondary: #909399;
+            --border-color: #dcdfe6;
+        }
+
+        body {
+            font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+            color: var(--text-main);
+        }
+
+        /* 容器布局 */
+        .notice-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+        }
+
+        /* 顶部操作栏 */
+        .action-bar {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* 标题区域 */
+        .header-section {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .title-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .level-badge {
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .level-urgent { background-color: var(--danger-color); }
+        .level-important { background-color: var(--warning-color); }
+        .level-normal { background-color: var(--success-color); }
+
+        h1 { margin: 0; font-size: 28px; color: #2c3e50; }
+
+        /* 元数据展示 */
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .meta-item b { color: var(--text-main); margin-right: 5px; }
+
+        /* 正文区域 */
+        .notice-content {
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        /* 插图样式 */
+        .content-img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 20px auto;
+            border-radius: 4px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /* 表格样式 */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            table-layout: fixed;
+        }
+
+        .data-table th, .data-table td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: left;
+        }
+
+        .data-table th {
+            background-color: #f8f9fb;
+            color: var(--text-main);
+        }
+
+        /* 按钮样式 */
+        .btn {
+            padding: 8px 16px;
+            border: 1px solid var(--border-color);
+            background: #fff;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .btn:hover { opacity: 0.8; }
+
+        /* 打印适配 */
+        @media print {
+            .action-bar, .btn-confirm-wrapper { display: none; }
+            body { background: #fff; padding: 0; }
+            .notice-container { box-shadow: none; max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="notice-container">
+    <div class="header-section">
+        <div class="title-row">
+            <span id="noticeLevel" class="level-badge level-urgent">紧急</span>
+            <h1 id="noticeTitle">关于 2026 年数字化转型战略启动的通知</h1>
+        </div>
+        <div class="meta-grid">
+            <div class="meta-item"><b>发起人:</b> <span id="author">首席技术官 (CTO)</span></div>
+            <div class="meta-item"><b>发起时间:</b> <span id="createTime">2026-03-05 14:00</span></div>
+            <div class="meta-item"><b>公告类型:</b> <span id="noticeType">战略部署</span></div>
+        </div>
+    </div>
+
+    <article class="notice-content">
+        <p>各位同仁：</p>
+        <p>经集团董事会研究决定，即日起正式启动“2026数字化航行”计划。本计划旨在全面提升公司在人工智能、自动化生产线以及数据中台方面的核心竞争力。</p>
+        
+        <img src="https://picsum.photos/id/1/800/400" alt="战略图解" class="content-img">
+
+        <p>以下是第一批次启动的项目预算及负责人清单：</p>
+
+        <table class="data-table" id="projectTable">
+            <thead>
+                <tr>
+                    <th>项目名称</th>
+                    <th>责任部门</th>
+                    <th>预算(万元)</th>
+                    <th>预计完成时间</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>AI 智能调度系统</td>
+                    <td>研发中心</td>
+                    <td>500.00</td>
+                    <td>2026-08-12</td>
+                </tr>
+                <tr>
+                    <td>数据湖仓一体化</td>
+                    <td>大数据部</td>
+                    <td>320.00</td>
+                    <td>2026-11-30</td>
+                </tr>
+                <tr>
+                    <td>全自动包装线升级</td>
+                    <td>制造部</td>
+                    <td>1200.00</td>
+                    <td>2027-02-15</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>请各部门接此通知后，于本周五前提交初步执行方案。</p>
+    </article>
+</div>
+
+<script>
+
+    //页面初始化模拟 (处理不同级别颜色)
+    window.onload = function() {
+        const levelEl = document.getElementById('noticeLevel');
+        const level = levelEl.innerText;
+        
+        // 动态切换级别样式
+        if(level === '重要') {
+            levelEl.className = 'level-badge level-important';
+        } else if(level === '普通') {
+            levelEl.className = 'level-badge level-normal';
+        }
+    }
+</script>
+
+</body>
+</html>

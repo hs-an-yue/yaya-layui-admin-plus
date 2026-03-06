@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>响应式公告通知列表</title>
+    <style>
+        /* 1. 基础重置与变量 */
+        :root {
+            --primary-color: #409eff;
+            --danger-color: #f56c6c;
+            --bg-color: #f0f2f5;
+            --card-shadow: 0 2px 12px 0 rgba(0,0,0,0.05);
+            --card-hover-shadow: 0 8px 24px 0 rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+            background-color: var(--bg-color);
+            color: #303133;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        /* 2. 响应式容器布局 */
+        .container {
+            max-width: 1000px; /* 电脑端最大宽度 */
+            margin: 0 auto;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .page-title {
+            font-size: clamp(1.5rem, 5vw, 2rem); /* 字体大小随屏幕缩放 */
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+
+        /* 3. 列表卡片布局 */
+        .notice-list {
+            display: grid;
+            grid-template-columns: 1fr; /* 默认一列（手机端） */
+            gap: 20px;
+        }
+
+        /* 当屏幕宽度大于 768px 时（平板/电脑），可以考虑并排显示或保持单行加宽 */
+        @media (min-width: 768px) {
+            body { padding: 40px; }
+            /* 如果想在桌面端做成两列，可以取消下面注释 */
+            /* .notice-list { grid-template-columns: repeat(2, 1fr); } */
+        }
+
+        .notice-item {
+            display: block;
+            text-decoration: none;
+            background: #fff;
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: 1px solid #ebeef5;
+            color: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .notice-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--card-hover-shadow);
+            border-color: var(--primary-color);
+        }
+
+        /* 4. 公告内容细节 */
+        .notice-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            gap: 10px;
+        }
+
+        .notice-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            flex: 1;
+            transition: color 0.3s;
+        }
+
+        .notice-item:hover .notice-title {
+            color: var(--primary-color);
+        }
+
+        .badge-important {
+            background-color: var(--danger-color);
+            color: white;
+            font-size: 12px;
+            padding: 2px 10px;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        .notice-meta {
+            font-size: 14px;
+            color: #909399;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* 5. 核心：两行省略号实现 */
+        .notice-summary {
+            font-size: 15px;
+            color: #606266;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2; /* 限制显示两行 */
+            overflow: hidden;
+            text-overflow: ellipsis;
+            word-break: break-all;
+        }
+
+        /* 手机端微调 */
+        @media (max-width: 480px) {
+            .notice-item { padding: 18px; }
+            .notice-meta { flex-direction: column; align-items: flex-start; gap: 5px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header class="page-header">
+        <h1 class="page-title">最新公告通知</h1>
+        <p style="color: #909399;font-size: 14px;">获取实时资讯，掌握企业动态</p>
+    </header>
+
+    <div class="notice-list">
+        <a href="notice-detail.html" target="_blank" class="notice-item">
+            <div class="notice-header">
+                <h2 class="notice-title">关于2026年春节放假安排及节后开工准备的通知</h2>
+                <span class="badge-important">重要</span>
+            </div>
+            <div class="notice-meta">
+                <span>发布人：行政部</span>
+                <span>时间：2026-01-20</span>
+            </div>
+            <div class="notice-summary">
+                根据国家法定节假日安排并结合公司实际生产经营情况，公司将于2026年1月28日至2月4日放假调休。请各部门在放假前进行全面的安全检查，关闭非必要电源，妥善安排好值班人员。节后我们将于2月5日早上9点准时举行开工大吉动员会，届时会有开工利是发放，请各位同事准时出席。
+            </div>
+        </a>
+
+        <a href="detail_2.html" class="notice-item">
+            <div class="notice-header">
+                <h2 class="notice-title">系统例行维护：1月25日凌晨云端服务器升级</h2>
+                <span class="badge-important">重要</span>
+            </div>
+            <div class="notice-meta">
+                <span>发布人：IT部</span>
+                <span>时间：2026-01-22</span>
+            </div>
+            <div class="notice-summary">
+                为了提供更加稳定的服务体验，我们计划于本周六（1月25日）凌晨2:00至4:00对公司核心ERP系统及文件服务器进行硬件升级与带宽扩容。维护期间，OA系统及外部访问链接将暂时无法使用。请相关业务部门提前保存数据，避免在维护期间进行关键操作，由此带来的不便敬请谅解。
+            </div>
+        </a>
+
+        <a href="detail_3.html" class="notice-item">
+            <div class="notice-header">
+                <h2 class="notice-title">2025年度“卓越之星”优秀员工评选结果正式公示</h2>
+            </div>
+            <div class="notice-meta">
+                <span>发布人：人力资源部</span>
+                <span>时间：2026-01-18</span>
+            </div>
+            <div class="notice-summary">
+                经过历时一个月的部门初评、交叉民主投票以及高层管理委员会的最终审定，2025年度“卓越之星”优秀员工名单已经出炉。本次评选共产生10名获奖者，他们分别在技术创新、客户服务及成本节约方面做出了突出贡献。请获奖同事于下周五参加年度颁奖盛典。详细名单及事迹公示如下...
+            </div>
+        </a>
+    </div>
+</div>
+
+</body>
+</html>
