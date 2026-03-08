@@ -4,56 +4,174 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>服务器监控面板</title>
-    <!-- 引入ECharts -->
-    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
-    <!-- 引入Tailwind CSS用于样式（无需本地安装） -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style type="text/tailwindcss">
-        @layer utilities {
-            .card-shadow {
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    <style>
+        /* 全局样式重置和基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f8fafc;
+            min-height: 100vh;
+            padding: 16px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        @media (min-width: 768px) {
+            body {
+                padding: 32px;
             }
-            .bg-monitor {
-                background-color: #f8fafc;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        /* 页面标题样式 */
+        .page-title-section {
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .main-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 8px;
+        }
+
+        @media (min-width: 768px) {
+            .main-title {
+                font-size: 32px;
             }
+        }
+
+        .update-time-text {
+            color: #6b7280;
+            font-size: 16px;
+        }
+
+        /* 图表区域布局 */
+        .charts-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        @media (min-width: 1024px) {
+            .charts-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* 卡片通用样式 */
+        .card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            height: 400px;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 16px;
+        }
+
+        /* 图表容器样式 */
+        .chart-wrapper {
+            width: 100%;
+            height: 320px;
+        }
+
+        /* 应用列表表格样式 */
+        .app-list-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        .app-table {
+            width: 100%;
+            text-align: left;
+            border-collapse: collapse;
+        }
+
+        .app-table thead tr {
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .app-table th {
+            padding: 12px 16px;
+            font-weight: 600;
+            color: #4b5563;
+        }
+
+        .app-table tbody tr {
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .app-table tbody tr:hover {
+            background-color: #f9fafb;
+        }
+
+        .app-table td {
+            padding: 12px 16px;
+            color: #374151;
+        }
+
+        .app-name {
+            font-weight: 500;
+            color: #1f2937;
         }
     </style>
 </head>
-<body class="bg-monitor min-h-screen p-4 md:p-8">
-<div class="max-w-7xl mx-auto">
+<body>
+<div class="container">
     <!-- 页面标题 -->
-    <div class="mb-8 text-center">
-        <h1 class="text-3xl font-bold text-gray-800">服务器资源监控面板</h1>
-        <p class="mt-2 text-gray-500" id="update-time">最后更新：2026-03-03 10:00:00</p>
+    <div class="page-title-section">
+        <h1 class="main-title">服务器资源监控面板</h1>
+        <p class="update-time-text" id="update-time">最后更新：2026-03-03 10:00:00</p>
     </div>
 
     <!-- 图表区域：CPU/内存 + 网络流量 -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+    <div class="charts-container">
         <!-- CPU和内存使用率图表 -->
-        <div class="bg-white rounded-lg p-4 card-shadow h-[400px]">
-            <h2 class="text-xl font-semibold text-gray-700 mb-4">CPU & 内存使用率</h2>
-            <div id="cpu-memory-chart" class="w-full h-[320px]"></div>
+        <div class="card">
+            <h2 class="card-title">CPU & 内存使用率</h2>
+            <div id="cpu-memory-chart" class="chart-wrapper"></div>
         </div>
 
-        <!-- 网络流量图表 -->
-        <div class="bg-white rounded-lg p-4 card-shadow h-[400px]">
-            <h2 class="text-xl font-semibold text-gray-700 mb-4">网络流量 (MB/s)</h2>
-            <div id="network-chart" class="w-full h-[320px]"></div>
+        <!-- 网络流量图表（堆叠面积图） -->
+        <div class="card">
+            <h2 class="card-title">网络流量 (MB/s)</h2>
+            <div id="network-chart" class="chart-wrapper"></div>
         </div>
     </div>
 
     <!-- Top5 应用列表 -->
-    <div class="bg-white rounded-lg p-4 card-shadow">
-        <h2 class="text-xl font-semibold text-gray-700 mb-4">资源占用 Top5 应用</h2>
-        <div class="overflow-x-auto">
-            <table class="w-full text-left">
+    <div class="app-list-card">
+        <h2 class="card-title">资源占用 Top5 应用</h2>
+        <div class="table-wrapper">
+            <table class="app-table">
                 <thead>
-                <tr class="border-b border-gray-200">
-                    <th class="py-3 px-4 font-semibold text-gray-600">排名</th>
-                    <th class="py-3 px-4 font-semibold text-gray-600">应用名称</th>
-                    <th class="py-3 px-4 font-semibold text-gray-600">CPU 占比</th>
-                    <th class="py-3 px-4 font-semibold text-gray-600">内存占比</th>
-                    <th class="py-3 px-4 font-semibold text-gray-600">运行时间</th>
+                <tr>
+                    <th>排名</th>
+                    <th>应用名称</th>
+                    <th>CPU 占比</th>
+                    <th>内存占比</th>
+                    <th>运行时间</th>
                 </tr>
                 </thead>
                 <tbody id="app-list">
@@ -63,7 +181,7 @@
         </div>
     </div>
 </div>
-
+<script src="../js/echarts.min.js"></script>
 <script>
     // 初始化页面更新时间
     function updateTime() {
@@ -106,11 +224,17 @@
         const option = {
             tooltip: {
                 trigger: 'axis',
-                formatter: '{b}<br/>{a}: {c}%'
+                formatter: '{b}<br/>{a}: {c}%',
+                backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                borderColor: '#e2e8f0',
+                borderWidth: 1,
+                textStyle: { color: '#334155', fontSize: 11 },
+                padding: [8, 12]
             },
             legend: {
                 data: ['CPU 使用率', '内存使用率'],
-                top: 0
+                top: 0,
+                textStyle: { fontSize: 12 }
             },
             grid: {
                 left: '1%',
@@ -121,14 +245,18 @@
             xAxis: {
                 type: 'category',
                 boundaryGap: false,
-                data: timeAxis
+                data: timeAxis,
+                axisLabel: { fontSize: 11 },
+                axisLine: { lineStyle: { color: '#e2e8f0' } }
             },
             yAxis: {
                 type: 'value',
                 max: 100,
                 axisLabel: {
-                    formatter: '{value}%'
-                }
+                    formatter: '{value}%',
+                    fontSize: 11
+                },
+                splitLine: { lineStyle: { color: '#f1f5f9' } }
             },
             series: [
                 {
@@ -137,7 +265,13 @@
                     data: cpuData,
                     smooth: true,
                     itemStyle: { color: '#f56565' },
-                    areaStyle: { color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{ offset: 0, color: '#f5656533' }, { offset: 1, color: '#f5656500' }]) }
+                    lineStyle: { width: 2 },
+                    areaStyle: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                            { offset: 0, color: 'rgba(245, 101, 101, 0.3)' },
+                            { offset: 1, color: 'rgba(245, 101, 101, 0.05)' }
+                        ])
+                    }
                 },
                 {
                     name: '内存使用率',
@@ -145,7 +279,13 @@
                     data: memoryData,
                     smooth: true,
                     itemStyle: { color: '#38bdf8' },
-                    areaStyle: { color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{ offset: 0, color: '#38bdf833' }, { offset: 1, color: '#38bdf800' }]) }
+                    lineStyle: { width: 2 },
+                    areaStyle: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                            { offset: 0, color: 'rgba(56, 189, 248, 0.3)' },
+                            { offset: 1, color: 'rgba(56, 189, 248, 0.05)' }
+                        ])
+                    }
                 }
             ]
         };
@@ -154,7 +294,7 @@
         window.addEventListener('resize', () => myChart.resize());
     }
 
-    // 初始化网络流量图表
+    // 初始化网络流量图表（改为堆叠面积图）
     function initNetworkChart() {
         const timeAxis = generateTimeAxis();
         const uploadData = generateRandomData(timeAxis.length, 0.5, 5);
@@ -165,11 +305,27 @@
         const option = {
             tooltip: {
                 trigger: 'axis',
-                formatter: '{b}<br/>{a}: {c} MB/s'
+                // 自定义tooltip显示，增加总流量计算
+                formatter: function(params) {
+                    let total = 0;
+                    let html = params[0].name + '<br/>';
+                    params.forEach(item => {
+                        html += `${item.seriesName}: ${item.value} MB/s<br/>`;
+                        total += parseFloat(item.value);
+                    });
+                    html += `总流量: ${total.toFixed(1)} MB/s`;
+                    return html;
+                },
+                backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                borderColor: '#e2e8f0',
+                borderWidth: 1,
+                textStyle: { color: '#334155', fontSize: 11 },
+                padding: [8, 12]
             },
             legend: {
                 data: ['上传流量', '下载流量'],
-                top: 0
+                top: 0,
+                textStyle: { fontSize: 12 }
             },
             grid: {
                 left: '3%',
@@ -180,27 +336,51 @@
             xAxis: {
                 type: 'category',
                 boundaryGap: false,
-                data: timeAxis
+                data: timeAxis,
+                axisLabel: { fontSize: 11 },
+                axisLine: { lineStyle: { color: '#e2e8f0' } }
             },
             yAxis: {
                 type: 'value',
                 offset: 15,
                 axisLabel: {
-                    formatter: '{value} MB/s'
-                }
+                    formatter: '{value} MB/s',
+                    fontSize: 11
+                },
+                splitLine: { lineStyle: { color: '#f1f5f9' } },
+                // 设置Y轴最小值为0，更符合流量展示逻辑
+                min: 0
             },
             series: [
                 {
                     name: '上传流量',
-                    type: 'bar',
+                    type: 'line',
+                    stack: 'total', // 开启堆叠
                     data: uploadData,
-                    itemStyle: { color: '#f97316' }
+                    smooth: true, // 平滑曲线
+                    itemStyle: { color: '#f97316' },
+                    lineStyle: { width: 2 },
+                    areaStyle: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                            { offset: 0, color: 'rgba(249, 115, 22, 0.4)' },
+                            { offset: 1, color: 'rgba(249, 115, 22, 0.05)' }
+                        ])
+                    }
                 },
                 {
                     name: '下载流量',
-                    type: 'bar',
+                    type: 'line',
+                    stack: 'total', // 开启堆叠
                     data: downloadData,
-                    itemStyle: { color: '#10b981' }
+                    smooth: true, // 平滑曲线
+                    itemStyle: { color: '#10b981' },
+                    lineStyle: { width: 2 },
+                    areaStyle: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                            { offset: 0, color: 'rgba(16, 185, 129, 0.4)' },
+                            { offset: 1, color: 'rgba(16, 185, 129, 0.05)' }
+                        ])
+                    }
                 }
             ]
         };
@@ -222,14 +402,13 @@
         const tbody = document.getElementById('app-list');
         appData.forEach(app => {
             const tr = document.createElement('tr');
-            tr.className = 'border-b border-gray-100 hover:bg-gray-50';
 
             tr.innerHTML = `
-                    <td class="py-3 px-4 text-gray-700">${app.rank}</td>
-                    <td class="py-3 px-4 font-medium text-gray-800">${app.name}</td>
-                    <td class="py-3 px-4 text-gray-700">${app.cpu}</td>
-                    <td class="py-3 px-4 text-gray-700">${app.memory}</td>
-                    <td class="py-3 px-4 text-gray-700">${app.uptime}</td>
+                    <td>${app.rank}</td>
+                    <td class="app-name">${app.name}</td>
+                    <td>${app.cpu}</td>
+                    <td>${app.memory}</td>
+                    <td>${app.uptime}</td>
                 `;
 
             tbody.appendChild(tr);

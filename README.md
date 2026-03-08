@@ -173,6 +173,7 @@ yaya-layui-admin-plus
 
 * [01-YaYa-Layui-Admin-Plus 概述](https://hs-an-yue.github.io/2026/02/26/yaya/01-YaYa-Layui-Admin-Plus%E6%A6%82%E8%BF%B0/#more)
 * [02-YaYa-Layui-Admin-Plus 基础配置](https://hs-an-yue.github.io/2026/02/26/yaya/02-YaYa-Layui-Admin-Plus%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/#more)
+* [03-YaYa-Layui-Admin-Plus 视频教程](https://www.bilibili.com/video/BV14uA6zJEWZ/)
 
 #### 🚀 参与贡献
 ```

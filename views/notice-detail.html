@@ -35,13 +35,6 @@
             box-shadow: 0 2px 12px rgba(0,0,0,0.1);
         }
 
-        /* 顶部操作栏 */
-        .action-bar {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
 
         /* 标题区域 */
         .header-section {
@@ -66,8 +59,6 @@
         }
 
         .level-urgent { background-color: var(--danger-color); }
-        .level-important { background-color: var(--warning-color); }
-        .level-normal { background-color: var(--success-color); }
 
         h1 { margin: 0; font-size: 28px; color: #2c3e50; }
 
@@ -116,25 +107,6 @@
             background-color: #f8f9fb;
             color: var(--text-main);
         }
-
-        /* 按钮样式 */
-        .btn {
-            padding: 8px 16px;
-            border: 1px solid var(--border-color);
-            background: #fff;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: all 0.3s;
-        }
-
-        .btn-primary {
-            background-color: var(--primary-color);
-            color: white;
-            border-color: var(--primary-color);
-        }
-
-        .btn:hover { opacity: 0.8; }
-
         /* 打印适配 */
         @media print {
             .action-bar, .btn-confirm-wrapper { display: none; }

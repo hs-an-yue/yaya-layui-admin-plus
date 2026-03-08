@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>缓存监控仪表盘 - Redis & JDK</title>
-    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
     <style>
         :root {
             --primary: #448aff; --bg: #f0f2f5; --card: #ffffff;
@@ -57,7 +56,7 @@
         <div id="jdkBarChart" class="chart-box"></div>
     </div>
 </div>
-
+<script src="../js/echarts.min.js"></script>
 <script>
     // --- 1. 初始化 Redis 饼图 ---
     const redisPie = echarts.init(document.getElementById('redisPieChart'));
