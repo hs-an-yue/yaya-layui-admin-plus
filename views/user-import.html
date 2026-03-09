@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 响应式配置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- LayUI css库 -->
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../css/yaya-common.css">
+    <link rel="stylesheet" href="../css/yaya-style-extend.css">
+    <link rel="stylesheet" href="../font/iconfont.css">
+    <title>yaya-admin-plus</title>
+    <style>
+        :root {
+            --primary-color: #409EFF;
+            --success-color: #67C23A;
+            --info-color: #909399;
+            --bg-color: #f0f2f5;
+        }
+        body { font-family: "PingFang SC", "Helvetica Neue", Arial, sans-serif; background: var(--bg-color); margin: 0; padding: 10px; }
+        .container { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 280px 1fr; gap: 20px; }
+        
+        /* 左侧：说明与模板下载 */
+        .sidebar { background: #fff; border-radius: 8px; padding: 25px; box-shadow: 0 2px 12px rgba(0,0,0,0.05); }
+        .step-title { font-size: 16px; font-weight: bold; color: #303133; margin-bottom: 15px; display: flex; align-items: center; }
+        .step-num { width: 20px; height: 20px; background: var(--primary-color); color: #fff; border-radius: 50%; display: inline-flex; justify-content: center; align-items: center; font-size: 12px; margin-right: 8px; }
+        .desc-text { font-size: 13px; color: #606266; line-height: 1.8; margin-bottom: 20px; }
+        
+        .download-box { border: 1px solid #dcdfe6; border-radius: 6px; padding: 15px; text-align: center; background: #fafafa; }
+        .download-btn { display: inline-block;cursor: pointer; width: 100%; padding: 10px 0; background: #fff; border: 1px solid var(--primary-color); color: var(--primary-color); border-radius: 4px; text-decoration: none; font-size: 14px; transition: all 0.2s; }
+        .download-btn:hover { background: var(--primary-color); color: #fff; }
+
+        /* 配置项区域 */
+        .config-section { background: #fdf6ec; border: 1px solid #faecd8; padding: 15px; border-radius: 6px; margin-bottom: 20px; }
+        .checkbox-wrapper { display: flex; align-items: center; cursor: pointer; user-select: none; }
+        .checkbox-wrapper input { width: 18px; height: 18px; margin-right: 10px; cursor: pointer; }
+        .checkbox-label { font-size: 14px; color: #e6a23c; font-weight: 500; }
+
+        /* 右侧：上传主体 */
+        .main-content { background: #fff; border-radius: 8px; padding: 30px; box-shadow: 0 2px 12px rgba(0,0,0,0.05); }
+        .layui-upload-drag{border-radius: 5px;padding: 70px 0;}
+        .layui-upload-drag:hover { border-color: var(--primary-color); }
+        .layui-form-checked[lay-skin=primary]>i{
+            border-color: #409EFF!important;
+            background-color:#409EFF;
+        }
+    </style>
+</head>
+<body>
+    <div class="yaya-container">
+        <div class="container">
+            <div class="sidebar">
+                <div class="step-title"><span class="step-num">1</span> 准备工作</div>
+                <p class="desc-text">请先下载系统统一要求的 Excel 模板，按格式填写用户信息，否则会导致导入失败。</p>
+                
+                <div class="download-box">
+                    <div style="font-size: 12px; color: #909399; margin-bottom: 10px;">标准用户导入模板.xlsx</div>
+                    <a id="downloadUserTemplateFile" class="download-btn">点击下载模板</a>
+                </div>
+
+                <div style="margin-top: 30px;" class="step-title"><span class="step-num">2</span> 规则说明</div>
+                <ul class="desc-text" style="padding-left: 15px;">
+                    <li>单次支持最多 10000 行</li>
+                    <li>手机号为必填项且唯一</li>
+                    <li>租户|部门|角色字段请填编号</li>
+                </ul>
+            </div>
+
+            <div class="main-content">
+                <div class="step-title"><span class="step-num">3</span> 上传文件</div>
+                <div class="config-section">
+                    <label class="checkbox-wrapper layui-form">
+                        <input type="checkbox" id="cover">
+                        <span class="checkbox-label">覆盖已有用户数据,勾选后更新已存在数据.</span>
+                    </label>
+                </div>
+                <!-- 进度条 -->
+                <div class="layui-progress layui-progress-big" style="margin: 20px 0;" lay-showPercent="yes" lay-filter="filter-import">
+                    <div class="layui-progress-bar" lay-percent=""></div>
+                </div>
+                <div class="layui-upload-drag" style="display: block;" id="upload-excel-user-select">
+                    <i class="layui-icon layui-icon-upload" style="color: #409EFF;"></i> 
+                    <div>将文件拖拽到此处<span style="margin-top: 8px;">或者 <span style="color:var(--primary-color)">点击手动选择</span></span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../layui/layui.js"></script>
+    <script>
+
+    </script>
+</body>
+</html>

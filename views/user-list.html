@@ -149,6 +149,59 @@
                 range: true
             });
 
+
+            // 头部工具栏事件
+            table.on('toolbar(table-user)', function(obj){
+                //事件
+                let event = obj.event;
+                if(event==='add'){
+                    layer.open({
+                        type: 2, // page 层类型 iframe
+                        area: ['650px', '550px'],
+                        title: '添加',
+                        shade: 0.6, // 遮罩透明度
+                        shadeClose: true, // 点击遮罩区域，关闭弹层
+                        content: 'user-add.html',
+                        end: function(){
+                            //刷新表格
+                            table.reload('table-user');
+                        }
+                    });
+                }else if(event === 'userImport'){
+                    layer.open({
+                        type: 2, // page 层类型 iframe
+                        area: ['900px', '530px'],
+                        title: '用户导入',
+                        shade: 0.6, // 遮罩透明度
+                        shadeClose: true, // 点击遮罩区域，关闭弹层
+                        content: 'user-import.html',
+                        end: function(){
+                            //刷新表格
+                            table.reload('table-user');
+                        }
+                    });
+                }else if(event === 'batchDel'){
+                    //获取选中的数据
+                    let checkStatus = table.checkStatus('table-user');
+                    //获取要删除的用户ID
+                    let users = checkStatus.data;
+                    if(users && Object.keys(users).length>0){
+                        layer.confirm('确定删除吗？', function(index){
+                            console.log("删除...")
+                            //关闭弹窗
+                            layer.close(index);
+                            //刷新表格
+                            table.reload('table-user');
+                        });
+                    }else{
+                        layer.msg('请选择要删除的用户');
+                    }
+                } else{
+                    layer.msg("功能还在路上~");
+                }
+            });
+
+
             /* 用户列表 */
             table.render({
                 elem: '#table-user',

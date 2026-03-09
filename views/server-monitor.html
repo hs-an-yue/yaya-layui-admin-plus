@@ -13,45 +13,14 @@
         }
 
         body {
-            background-color: #f8fafc;
             min-height: 100vh;
-            padding: 16px;
+            padding: 0 20px 0 20px;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-        }
-
-        @media (min-width: 768px) {
-            body {
-                padding: 32px;
-            }
         }
 
         .container {
             max-width: 1280px;
             margin: 0 auto;
-        }
-
-        /* 页面标题样式 */
-        .page-title-section {
-            margin-bottom: 32px;
-            text-align: center;
-        }
-
-        .main-title {
-            font-size: 24px;
-            font-weight: 700;
-            color: #1f2937;
-            margin-bottom: 8px;
-        }
-
-        @media (min-width: 768px) {
-            .main-title {
-                font-size: 32px;
-            }
-        }
-
-        .update-time-text {
-            color: #6b7280;
-            font-size: 16px;
         }
 
         /* 图表区域布局 */
@@ -139,12 +108,6 @@
 </head>
 <body>
 <div class="container">
-    <!-- 页面标题 -->
-    <div class="page-title-section">
-        <h1 class="main-title">服务器资源监控面板</h1>
-        <p class="update-time-text" id="update-time">最后更新：2026-03-03 10:00:00</p>
-    </div>
-
     <!-- 图表区域：CPU/内存 + 网络流量 -->
     <div class="charts-container">
         <!-- CPU和内存使用率图表 -->
@@ -183,20 +146,6 @@
 </div>
 <script src="../js/echarts.min.js"></script>
 <script>
-    // 初始化页面更新时间
-    function updateTime() {
-        const now = new Date();
-        const formattedTime = now.toLocaleString('zh-CN', {
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit'
-        }).replace(/\//g, '-');
-        document.getElementById('update-time').textContent = `最后更新：${formattedTime}`;
-    }
-
     // 生成模拟的时间轴数据（最近1小时，每5分钟一个点）
     function generateTimeAxis() {
         const timeAxis = [];
@@ -417,13 +366,9 @@
 
     // 页面加载完成后初始化所有组件
     window.onload = function() {
-        updateTime(); // 更新时间
         initCpuMemoryChart(); // 初始化CPU/内存图表
         initNetworkChart(); // 初始化网络流量图表
         initAppList(); // 初始化应用列表
-
-        // 每10秒更新一次时间（模拟实时刷新）
-        setInterval(updateTime, 10000);
     };
 </script>
 </body>

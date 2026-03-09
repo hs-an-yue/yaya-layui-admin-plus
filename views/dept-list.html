@@ -47,6 +47,12 @@
                 </form>
             </div>
             <div class="yaya-panel" style="margin-top: 10px;">
+                <!-- 菜单操作按钮 -->
+                <div style="display: flex;flex-direction: row;justify-content: flex-end;padding: 10px;">
+                    <button id="del-dept" type="button" class="yaya-btn yaya-danger" style="margin-right: 10px;">删除</button>
+                    <button id="expandId" type="button" class="yaya-btn yaya-default" style="margin-right: 10px;">收起</button>
+                    <button id="add-dept" type="button" class="yaya-btn yaya-primary">添加</button>
+                </div>
                 <!-- 表格数据显示 -->
                 <table class="layui-hide" id="treeTable"></table>
             </div>
@@ -55,14 +61,37 @@
     <script src="../layui/layui.js"></script>
     <script>
         layui.use(function(){
+            const $ = layui.$;
             const treeTable = layui.treeTable;
             const laydate = layui.laydate;
+
+
+            //添加一级菜单
+            $("#add-dept").click(function(){
+                layer.open({
+                    type: 2, // page 层类型 iframe
+                    area: ['410px', '350px'],
+                    title: '添加',
+                    shade: 0.6, // 遮罩透明度
+                    shadeClose: true, // 点击遮罩区域，关闭弹层
+                    content: 'dept-add.html',
+                    end: function(){
+                        //刷新表格
+                        treeTable.reload('treeTable-dept');
+                    }
+                });
+            });
 
             //时间控件
             laydate.render({
                 elem: "#shortcut-range-date",
                 type: "date",
                 range: true
+            });
+
+            //树状表格收起
+            $("#expandId").click(function(){
+                treeTable.expandAll('treeTable', false);
             });
 
             //表格渲染
