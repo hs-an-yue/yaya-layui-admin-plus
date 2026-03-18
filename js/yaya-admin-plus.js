@@ -420,33 +420,40 @@ layui.use(function (){
                     index: welcomeYayaId
                 });
             }else {
+                //header
+                let header=[
+                    {
+                        title: welcomeYayaTitle,
+                        closable:false,
+                        id:welcomeYayaId
+                    }
+                ];
+                //body
+                let body=[
+                    {
+                        /* 默认页面,如果换新的页面,修改此页面 */
+                        content: `<iframe style="border: none;width: 100%;height: 100%;" src='${welcomeYayaUrl}'></iframe>`,
+                        id:welcomeYayaId
+                    }
+                ];
+                if($yayaTitle && yayaId && $yayaUrl && $yayaTitle.length>0 && $yayaUrl.length>0){
+                    header.push({
+                        title: $yayaTitle,
+                        closable:true,
+                        id:yayaId
+                    });
+                    body.push({
+                        /* 默认页面,如果换新的页面,修改此页面 */
+                        content: `<iframe style="border: none;width: 100%;height: 100%;" src="${$yayaUrl}"></iframe>`,
+                        id:yayaId
+                    });
+                }
+
                 tabs.render({
                     elem: '#yaya-right-tab',
                     className:'yaya-tabs',
-                    header: [
-                        {
-                            title: welcomeYayaTitle,
-                            closable:false,
-                            id:welcomeYayaId
-                        },
-                        {
-                            title: $yayaTitle,
-                            closable:true,
-                            id:yayaId
-                        }
-                    ],
-                    body: [
-                        {
-                            /* 默认页面,如果换新的页面,修改此页面 */
-                            content: `<iframe style="border: none;width: 100%;height: 100%;" src='${welcomeYayaUrl}'></iframe>`,
-                            id:welcomeYayaId
-                        },
-                        {
-                            /* 默认页面,如果换新的页面,修改此页面 */
-                            content: `<iframe style="border: none;width: 100%;height: 100%;" src="${$yayaUrl}"></iframe>`,
-                            id:yayaId
-                        }
-                    ],
+                    header: header,
+                    body: body,
                     closable:true,
                     index: yayaId
                 });
