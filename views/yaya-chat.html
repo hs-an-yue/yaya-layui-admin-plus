@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8" />
+    <title>高级 Chat UI（Markdown + 打字机）</title>
+
+    <!-- 先加载 highlight.js 再使用 -->
+    <link href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
+            background: #eef1f5;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 420px;
+            height: 90vh;
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .header {
+            padding: 14px;
+            text-align: center;
+            font-weight: 600;
+            border-bottom: 1px solid #eee;
+        }
+
+        #chat {
+            flex: 1;
+            padding: 16px;
+            overflow-y: auto;
+        }
+
+        .msg {
+            display: flex;
+            margin-bottom: 14px;
+            animation: fadeInUp 0.25s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #ccc;
+            margin-right: 8px;
+        }
+
+        .user .avatar {
+            order: 2;
+            margin-left: 8px;
+            margin-right: 0;
+            background: #4f46e5;
+        }
+
+        .bubble {
+            max-width: 72%;
+            padding: 10px 14px;
+            border-radius: 16px;
+            font-size: 14px;
+            line-height: 1.6;
+            word-break: break-word;
+        }
+
+        .assistant .bubble {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+        }
+
+        .user {
+            justify-content: flex-end;
+        }
+
+        .user .bubble {
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            color: white;
+        }
+
+        pre {
+            background: #f6f8fa;
+            padding: 10px;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        .cursor::after {
+            content: "|";
+            margin-left: 2px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50%, 100% { opacity: 1; }
+            25%, 75% { opacity: 0; }
+        }
+
+        .input-area {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #eee;
+            background: #fff;
+        }
+
+        input {
+            flex: 1;
+            border: none;
+            background: #f3f4f6;
+            border-radius: 999px;
+            padding: 10px 14px;
+            outline: none;
+        }
+
+        button {
+            margin-left: 8px;
+            border: none;
+            background: #4f46e5;
+            color: white;
+            border-radius: 999px;
+            padding: 10px 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">🤖 AI Chat</div>
+    <div id="chat"></div>
+
+    <div class="input-area">
+        <input id="input" placeholder="输入消息..." onkeydown="if(event.key==='Enter') send()" />
+        <button onclick="send()">发送</button>
+    </div>
+</div>
+
+<script>
+    const chat = document.getElementById('chat');
+
+    // 安全高亮函数（避免 hljs 未加载报错）
+    function safeHighlight(el) {
+        if (window.hljs) {
+            el.querySelectorAll('pre code').forEach(block => {
+                window.hljs.highlightElement(block);
+            });
+        }
+    }
+
+    function createMessage(role) {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'msg ' + role;
+
+        const avatar = document.createElement('div');
+        avatar.className = 'avatar';
+
+        const bubble = document.createElement('div');
+        bubble.className = 'bubble cursor';
+
+        if (role === 'assistant') {
+            wrapper.appendChild(avatar);
+            wrapper.appendChild(bubble);
+        } else {
+            wrapper.appendChild(bubble);
+            wrapper.appendChild(avatar);
+        }
+
+        chat.appendChild(wrapper);
+        chat.scrollTop = chat.scrollHeight;
+
+        return bubble;
+    }
+
+    function renderMarkdown(el, text) {
+        el.innerHTML = marked.parse(text);
+        safeHighlight(el);
+    }
+
+    async function typeText(el, text) {
+        let fullText = '';
+        for (let char of text) {
+            fullText += char;
+            renderMarkdown(el, fullText);
+            await new Promise(r => setTimeout(r, 10));
+            chat.scrollTop = chat.scrollHeight;
+        }
+        el.classList.remove('cursor');
+    }
+
+    async function typeStream(el, reader) {
+        const decoder = new TextDecoder('utf-8');
+        let fullText = '';
+
+        try {
+            while (true) {
+                const { value, done } = await reader.read();
+                if (done) break;
+
+                const chunk = decoder.decode(value);
+
+                for (let char of chunk) {
+                    fullText += char;
+                    renderMarkdown(el, fullText);
+                    await new Promise(r => setTimeout(r, 10));
+                }
+
+                chat.scrollTop = chat.scrollHeight;
+            }
+        } catch (err) {
+            console.error(err);
+            await typeText(el, "⚠️ 流式读取失败，请检查后端服务");
+        }
+
+        el.classList.remove('cursor');
+    }
+
+    // mock 测试流
+    async function mockStream() {
+        const text = `# 示例回复\n\n这是一个**Markdown 渲染**示例。\n\n\`\`\`js\nconsole.log("Hello World");\n\`\`\``;
+
+        const encoder = new TextEncoder();
+        const stream = new ReadableStream({
+            start(controller) {
+                let i = 0;
+                function push() {
+                    if (i < text.length) {
+                        controller.enqueue(encoder.encode(text[i]));
+                        i++;
+                        setTimeout(push, 20);
+                    } else {
+                        controller.close();
+                    }
+                }
+                push();
+            }
+        });
+
+        return stream.getReader();
+    }
+
+    async function send() {
+        const input = document.getElementById('input');
+        const text = input.value.trim();
+        if (!text) return;
+
+        const userBubble = createMessage('user');
+        userBubble.classList.remove('cursor');
+        userBubble.textContent = text;
+
+        input.value = '';
+
+        const botBubble = createMessage('assistant');
+
+        try {
+            const response = await fetch('http://localhost:3000/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: text })
+            });
+
+            if (!response.ok || !response.body) throw new Error('Network error');
+
+            const reader = response.body.getReader();
+            typeStream(botBubble, reader);
+
+        } catch (err) {
+            console.warn('fallback to mock:', err);
+            const reader = await mockStream();
+            typeStream(botBubble, reader);
+        }
+    }
+</script>
+
+</body>
+</html>
