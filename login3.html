@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="layui/css/layui.css">
     <title>AI 智能助手 - 登录</title>
     <style>
         * {
-            margin: 0;
-            padding: 0;
             box-sizing: border-box;
         }
         
@@ -196,7 +195,6 @@
         <div class="right-panel">
             <div class="tabs">
                 <div class="tab active" data-tab="1">短信登录</div>
-                <div class="tab" data-tab="2">手机登录</div>
                 <div class="tab" data-tab="3">账号登录</div>
             </div>
             
@@ -217,19 +215,6 @@
                 </div>
                 
                 <button class="login-btn" onclick="login()">登录 / 注册</button>
-            </div>
-            
-            <!-- 手机登录 -->
-            <div id="tab2" class="tab-content" style="display:none;">
-                <div class="form-group">
-                    <label>手机号</label>
-                    <input type="tel" placeholder="请输入手机号" style="padding:14px 16px; border-radius:12px; border:1px solid #e2e8f0; width:100%;">
-                </div>
-                <div class="form-group">
-                    <label>密码</label>
-                    <input type="password" placeholder="请输入登录密码" style="padding:14px 16px; border-radius:12px; border:1px solid #e2e8f0; width:100%;">
-                </div>
-                <button class="login-btn" onclick="login()">登录</button>
             </div>
             
             <!-- 账号登录 -->
