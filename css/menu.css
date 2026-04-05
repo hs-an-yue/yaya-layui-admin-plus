@@ -20,11 +20,14 @@
 /* 默认菜单的背景色 */
 .layui-menu{
     background-color: unset;/* 取消掉背景色 */
+    /* 设置边距 */
+    padding: 5px 8px;
 }
 /* 菜单标题默认字体 */
 .layui-menu li, .layui-menu-body-title, .layui-menu-body-title a{
     padding: 7px 15px;
     color: var(--sidebar-default-text);
+    border-radius: 8px;
 }
 /* 一级菜单选中字体 */
 .layui-menu .layui-menu-item-checked a, .layui-menu .layui-menu-item-checked2 a{
@@ -34,6 +37,7 @@
 .layui-menu li:hover{
     background-color: var(--sidebar-hover-bg);
     color: var(--sidebar-hover-text);
+    border-radius: 8px;
 }
 /* 菜单选中背景色 */
 .layui-menu .layui-menu-item-checked, .layui-menu .layui-menu-item-checked2{
