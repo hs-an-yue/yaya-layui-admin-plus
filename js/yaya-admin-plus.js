@@ -140,11 +140,11 @@ layui.use(function (){
                     <!-- 主题切换 -->
                     <form class="layui-form" style="width: 180px;padding-top: 10px;text-align: center;">
                         <input lay-filter="radio-theme" type="radio" name="theme" value="default" lay-skin="none" checked>
-                        <div lay-radio class="lay-skin-tag layui-badge">白色</div>
+                        <div lay-radio class="lay-skin-tag layui-badge">白-蓝</div>
                         <input lay-filter="radio-theme" type="radio" name="theme" value="dark1" lay-skin="none">
-                        <div lay-radio class="lay-skin-tag layui-badge">黑色-1</div>
+                        <div lay-radio class="lay-skin-tag layui-badge">白-绿</div>
                         <input lay-filter="radio-theme" type="radio" name="theme" value="dark2" lay-skin="none">
-                        <div lay-radio class="lay-skin-tag layui-badge">黑色-2</div>
+                        <div lay-radio class="lay-skin-tag layui-badge">黑-蓝</div>
                     </form>
                 `,
                 success: function(layero){
@@ -404,7 +404,7 @@ layui.use(function (){
                     className:'yaya-tabs',
                     header: [
                         {
-                            title: welcomeYayaTitle,
+                            title: `<span>${welcomeYayaTitle}</span>`,
                             closable:false,
                             id:welcomeYayaId
                         }
@@ -423,7 +423,7 @@ layui.use(function (){
                 //header
                 let header=[
                     {
-                        title: welcomeYayaTitle,
+                        title: `<span>${welcomeYayaTitle}</span>`,
                         closable:false,
                         id:welcomeYayaId
                     }
@@ -438,7 +438,7 @@ layui.use(function (){
                 ];
                 if($yayaTitle && yayaId && $yayaUrl && $yayaTitle.length>0 && $yayaUrl.length>0){
                     header.push({
-                        title: $yayaTitle,
+                        title: `<span>${$yayaTitle}</span>`,
                         closable:true,
                         id:yayaId
                     });
@@ -465,7 +465,7 @@ layui.use(function (){
                 className:'yaya-tabs',
                 header: [
                     {
-                        title: welcomeYayaTitle,
+                        title: `<span>${welcomeYayaTitle}</span>`,
                         closable:false,
                         id:welcomeYayaId
                     }
@@ -557,7 +557,7 @@ function yaya_add(menu_id, menu_title, menu_url) {
         //如果不存在
         if(!isExist){
             tabs.add('yaya-right-tab', {
-                title: menu_title,
+                title: `<span>${menu_title}</span>`,
                 id:menu_id,
                 content: '<iframe style="border: none;width: 100%;height: 100%;" src="'+menu_url+'"></iframe>',
                 done: function(data) {
