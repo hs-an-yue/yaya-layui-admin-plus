@@ -140,11 +140,11 @@ layui.use(function (){
                     <!-- 主题切换 -->
                     <form class="layui-form" style="width: 180px;padding-top: 10px;text-align: center;">
                         <input lay-filter="radio-theme" type="radio" name="theme" value="default" lay-skin="none" checked>
-                        <div lay-radio class="lay-skin-tag layui-badge">白-蓝</div>
+                        <div lay-radio class="lay-skin-tag layui-badge">黑-蓝</div>
                         <input lay-filter="radio-theme" type="radio" name="theme" value="dark1" lay-skin="none">
                         <div lay-radio class="lay-skin-tag layui-badge">白-绿</div>
                         <input lay-filter="radio-theme" type="radio" name="theme" value="dark2" lay-skin="none">
-                        <div lay-radio class="lay-skin-tag layui-badge">黑-蓝</div>
+                        <div lay-radio class="lay-skin-tag layui-badge">白-蓝</div>
                     </form>
                 `,
                 success: function(layero){
