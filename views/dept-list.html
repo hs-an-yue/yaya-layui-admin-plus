@@ -11,51 +11,49 @@
     <title>部门管理</title>
 </head>
 <body>
-    <div class="yaya-container">
-        <div class="layui-fluid">
-            <div class="yaya-panel">
-                <!-- 搜索条件 -->
-                <form class="layui-form" style="padding: 10px 0">
-                    <div class="layui-row">
-                        <div class="layui-col-md3 layui-col-sm3 yaya-form-item">
-                            <label class="yaya-form-label">部门</label>
-                            <div class="yaya-input-block">
-                                <input type="text" placeholder="部门" autocomplete="off" class="layui-input">
-                            </div>
-                        </div>
-                        <div class="layui-col-md3 layui-col-sm3 yaya-form-item">
-                            <label class="yaya-form-label">状态</label>
-                            <div class="yaya-input-block">
-                                <select>
-                                    <option value="">状态</option>
-                                    <option value="1">有效</option>
-                                    <option value="0">无效</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="layui-col-md3 layui-col-sm3 yaya-form-item">
-                            <label class="yaya-form-label">时间范围</label>
-                            <div class="yaya-input-block">
-                                <input type="text" class="layui-input" id="shortcut-range-date" placeholder="时间范围">
-                            </div>
-                        </div>
-                        <div class="layui-col-md3 layui-col-sm3 yaya-form-item">
-                            <button type="button" class="yaya-btn yaya-primary">搜索</button>
-                            <button type="reset" class="yaya-btn" style="margin-left: 10px;">重置</button>
+    <div class="yaya-box">
+        <div class="yaya-panel">
+            <!-- 搜索条件 -->
+            <form class="layui-form" style="padding: 10px 0">
+                <div class="layui-row">
+                    <div class="layui-col-md3 layui-col-sm3 yaya-form-item">
+                        <label class="yaya-form-label">部门</label>
+                        <div class="yaya-input-block">
+                            <input type="text" placeholder="部门" autocomplete="off" class="layui-input">
                         </div>
                     </div>
-                </form>
-            </div>
-            <div class="yaya-panel" style="margin-top: 10px;">
-                <!-- 菜单操作按钮 -->
-                <div style="display: flex;flex-direction: row;justify-content: flex-end;padding: 10px;">
-                    <button id="del-dept" type="button" class="yaya-btn yaya-danger" style="margin-right: 10px;">删除</button>
-                    <button id="expandId" type="button" class="yaya-btn yaya-default" style="margin-right: 10px;">收起</button>
-                    <button id="add-dept" type="button" class="yaya-btn yaya-primary">添加</button>
+                    <div class="layui-col-md3 layui-col-sm3 yaya-form-item">
+                        <label class="yaya-form-label">状态</label>
+                        <div class="yaya-input-block">
+                            <select>
+                                <option value="">状态</option>
+                                <option value="1">有效</option>
+                                <option value="0">无效</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-col-md3 layui-col-sm3 yaya-form-item">
+                        <label class="yaya-form-label">时间范围</label>
+                        <div class="yaya-input-block">
+                            <input type="text" class="layui-input" id="shortcut-range-date" placeholder="时间范围">
+                        </div>
+                    </div>
+                    <div class="layui-col-md3 layui-col-sm3 yaya-form-item">
+                        <button type="button" class="yaya-btn yaya-primary">搜索</button>
+                        <button type="reset" class="yaya-btn" style="margin-left: 10px;">重置</button>
+                    </div>
                 </div>
-                <!-- 表格数据显示 -->
-                <table class="layui-hide" id="treeTable"></table>
+            </form>
+        </div>
+        <div class="yaya-panel" style="margin-top: 10px;">
+            <!-- 菜单操作按钮 -->
+            <div style="display: flex;flex-direction: row;justify-content: flex-end;padding: 10px;">
+                <button id="del-dept" type="button" class="yaya-btn yaya-danger" style="margin-right: 10px;">删除</button>
+                <button id="expandId" type="button" class="yaya-btn yaya-default" style="margin-right: 10px;">收起</button>
+                <button id="add-dept" type="button" class="yaya-btn yaya-primary">添加</button>
             </div>
+            <!-- 表格数据显示 -->
+            <table class="layui-hide" id="treeTable"></table>
         </div>
     </div>
     <script src="../layui/layui.js"></script>

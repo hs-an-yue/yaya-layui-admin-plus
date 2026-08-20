@@ -181,114 +181,112 @@
     </style>
 </head>
 <body>
-    <div class="yaya-container">
-        <div class="layui-fluid">
-            <div class="stats-container">
-                <!-- 卡片 1: 用户统计 -->
-                <div class="stat-card" data-type="users">
-                    <div class="card-header">
-                        <div class="stat-title">总用户量</div>
-                        <div class="stat-icon-wrapper">
-                            <svg viewBox="0 0 24 24" stroke="currentColor">
-                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                                <circle cx="9" cy="7" r="4"></circle>
-                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                            </svg>
-                        </div>
+    <div class="yaya-box">
+        <div class="stats-container">
+            <!-- 卡片 1: 用户统计 -->
+            <div class="stat-card" data-type="users">
+                <div class="card-header">
+                    <div class="stat-title">总用户量</div>
+                    <div class="stat-icon-wrapper">
+                        <svg viewBox="0 0 24 24" stroke="currentColor">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
                     </div>
-                    <div class="main-value-box">
-                        <div class="stat-value" data-target="0">0</div>
-                        <span class="stat-suffix">&nbsp;</span>
-                    </div>
-                    <div class="sub-stats">
-                        <span class="sub-label">今日访问:</span>
-                        <span class="sub-value" data-target="0">0</span>
-                        <!-- 趋势徽章 (由 JS 动态填充内容) -->
-                        <span class="trend-badge trend-up">
+                </div>
+                <div class="main-value-box">
+                    <div class="stat-value" data-target="0">0</div>
+                    <span class="stat-suffix">&nbsp;</span>
+                </div>
+                <div class="sub-stats">
+                    <span class="sub-label">今日访问:</span>
+                    <span class="sub-value" data-target="0">0</span>
+                    <!-- 趋势徽章 (由 JS 动态填充内容) -->
+                    <span class="trend-badge trend-up">
                             <svg class="trend-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
                             <span class="trend-text">12%</span>
                         </span>
+                </div>
+            </div>
+
+            <!-- 卡片 2: 收入统计 -->
+            <div class="stat-card" data-type="revenue">
+                <div class="card-header">
+                    <div class="stat-title">总收入</div>
+                    <div class="stat-icon-wrapper">
+                        <svg viewBox="0 0 24 24" stroke="currentColor">
+                            <line x1="12" y1="1" x2="12" y2="23"></line>
+                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                        </svg>
                     </div>
                 </div>
-
-                <!-- 卡片 2: 收入统计 -->
-                <div class="stat-card" data-type="revenue">
-                    <div class="card-header">
-                        <div class="stat-title">总收入</div>
-                        <div class="stat-icon-wrapper">
-                            <svg viewBox="0 0 24 24" stroke="currentColor">
-                                <line x1="12" y1="1" x2="12" y2="23"></line>
-                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="main-value-box">
-                        <span class="stat-suffix">¥</span>
-                        <div class="stat-value" data-target="0">0</div>
-                    </div>
-                    <div class="sub-stats">
-                        <span class="sub-label">今日入账:</span>
-                        <span class="sub-value" data-target="0">0</span>
-                        <span class="trend-badge trend-down">
+                <div class="main-value-box">
+                    <span class="stat-suffix">¥</span>
+                    <div class="stat-value" data-target="0">0</div>
+                </div>
+                <div class="sub-stats">
+                    <span class="sub-label">今日入账:</span>
+                    <span class="sub-value" data-target="0">0</span>
+                    <span class="trend-badge trend-down">
                             <svg class="trend-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
                             <span class="trend-text">2.4%</span>
                         </span>
+                </div>
+            </div>
+
+            <!-- 卡片 3: 活跃会话 -->
+            <div class="stat-card" data-type="active">
+                <div class="card-header">
+                    <div class="stat-title">累计会话</div>
+                    <div class="stat-icon-wrapper">
+                        <svg viewBox="0 0 24 24" stroke="currentColor">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                        </svg>
                     </div>
                 </div>
-
-                <!-- 卡片 3: 活跃会话 -->
-                <div class="stat-card" data-type="active">
-                    <div class="card-header">
-                        <div class="stat-title">累计会话</div>
-                        <div class="stat-icon-wrapper">
-                            <svg viewBox="0 0 24 24" stroke="currentColor">
-                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="main-value-box">
-                        <div class="stat-value" data-target="0">0</div>
-                        <span class="stat-suffix">+</span>
-                    </div>
-                    <div class="sub-stats">
-                        <span class="sub-label">当前在线:</span>
-                        <span class="sub-value" data-target="0">0</span>
-                        <span class="trend-badge trend-up">
+                <div class="main-value-box">
+                    <div class="stat-value" data-target="0">0</div>
+                    <span class="stat-suffix">+</span>
+                </div>
+                <div class="sub-stats">
+                    <span class="sub-label">当前在线:</span>
+                    <span class="sub-value" data-target="0">0</span>
+                    <span class="trend-badge trend-up">
                             <svg class="trend-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
                             <span class="trend-text">5.1%</span>
                         </span>
+                </div>
+            </div>
+
+            <!-- 卡片 4: 任务统计 -->
+            <div class="stat-card" data-type="tasks">
+                <div class="card-header">
+                    <div class="stat-title">完成任务</div>
+                    <div class="stat-icon-wrapper">
+                        <svg viewBox="0 0 24 24" stroke="currentColor">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
                     </div>
                 </div>
-                
-                <!-- 卡片 4: 任务统计 -->
-                <div class="stat-card" data-type="tasks">
-                    <div class="card-header">
-                        <div class="stat-title">完成任务</div>
-                        <div class="stat-icon-wrapper">
-                            <svg viewBox="0 0 24 24" stroke="currentColor">
-                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="main-value-box">
-                        <div class="stat-value" data-target="0">0</div>
-                        <span class="stat-suffix">&nbsp;</span>
-                    </div>
-                    <div class="sub-stats">
-                        <span class="sub-label">今日完成:</span>
-                        <span class="sub-value" data-target="0">0</span>
-                        <span class="trend-badge trend-up">
+                <div class="main-value-box">
+                    <div class="stat-value" data-target="0">0</div>
+                    <span class="stat-suffix">&nbsp;</span>
+                </div>
+                <div class="sub-stats">
+                    <span class="sub-label">今日完成:</span>
+                    <span class="sub-value" data-target="0">0</span>
+                    <span class="trend-badge trend-up">
                             <svg class="trend-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
                             <span class="trend-text">8.3%</span>
                         </span>
-                    </div>
                 </div>
             </div>
-            <div class="yaya-panel card-hover dash-center" style="margin-top: 10px;">
-                <div id="main" style="width: 1200px;height:430px;"></div>
-            </div>
+        </div>
+        <div class="yaya-panel card-hover dash-center" style="margin-top: 10px;">
+            <div id="main" style="width: 100%;height:430px;"></div>
         </div>
     </div>
     <script src="../layui/layui.js"></script>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 标签icon设置 -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <title>AI 智能助手 - 登录</title>
+    <style>
+        /* --- 基础样式重置 --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei",
+            "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #a5d6ff, #e0f0ff);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* --- 主容器布局 --- */
+        .container {
+            display: flex;
+            max-width: 1100px;
+            width: 100%;
+            min-height: 620px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            box-shadow: 0 30px 80px rgba(100, 150, 255, 0.3);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        /* --- 左侧 AI 视觉区域 --- */
+        .left-panel {
+            flex: 1;
+            padding: 60px 50px;
+            background: linear-gradient(180deg, #f0f8ff, #e0f0ff);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .ai-cube {
+            width: 180px;
+            height: 180px;
+            background: linear-gradient(145deg, #4a9eff, #1e7eff);
+            border-radius: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 25px 60px rgba(30, 126, 255, 0.5);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .ai-logo { font-size: 90px; font-weight: 900; color: white; text-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        .title { margin-top: 40px; font-size: 28px; font-weight: 700; color: #1e3a8a; }
+        .subtitle { color: #64748b; margin-top: 12px; line-height: 1.6; font-size: 16px; }
+
+        /* --- 右侧登录操作区域 --- */
+        .right-panel {
+            width: 450px;
+            padding: 50px 45px;
+            background: white;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tabs { display: flex; border-bottom: 2px solid #f1f5f9; margin-bottom: 30px; }
+        .tab {
+            flex: 1; padding: 14px 0; text-align: center; font-size: 16px; cursor: pointer;
+            transition: all 0.3s; color: #94a3b8; position: relative;
+        }
+        .tab.active { color: #1e7eff; font-weight: 600; }
+        .tab.active::after {
+            content: ""; position: absolute; bottom: -2px; left: 20%; width: 60%; height: 3px;
+            background: #1e7eff; border-radius: 3px;
+        }
+
+        .tab-content-wrapper { min-height: 320px; display: flex; flex-direction: column; }
+        .tab-content { display: none; width: 100%; }
+        .fade-in-active { display: block; animation: fadeInUp 0.5s ease forwards; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- 表单样式 --- */
+        .form-group { margin-bottom: 20px; }
+        label.input-label { display: block; margin-bottom: 8px; color: #64748b; font-size: 14px; }
+        input[type="text"], input[type="password"] {
+            padding: 14px 16px; border-radius: 12px; border: 1px solid #e2e8f0;
+            width: 100%; outline: none; transition: all 0.3s; font-size: 15px;
+        }
+        input:focus { border-color: #1e7eff; box-shadow: 0 0 0 4px rgba(30, 126, 255, 0.1); }
+
+        .login-btn {
+            width: 100%; padding: 16px;
+            background: linear-gradient(90deg, #1e7eff, #3b9eff);
+            color: white; border: none; border-radius: 12px;
+            font-size: 17px; font-weight: 600; cursor: pointer;
+            margin-top: 10px; transition: all 0.3s;
+        }
+        .login-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(30, 126, 255, 0.3); }
+
+        /* --- 扫码区域 --- */
+        .qrcode-container { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .qrcode-box {
+            position: relative; width: 180px; height: 180px; padding: 10px;
+            border: 1px solid #e2e8f0; border-radius: 16px; background: #fff; margin-bottom: 15px;
+        }
+        .qrcode-box img { width: 100%; height: 100%; }
+
+        /* --- 新设计的协议区域 (Agreement Section) --- */
+        .footer-agreement {
+            margin-top: 30px;
+            display: flex;
+            align-items: flex-start; /* 顶部对齐，防止文本换行时复选框偏离 */
+            gap: 10px;
+            padding: 15px;
+            background-color: #f8fafc; /* 浅灰色背景块 */
+            border-radius: 12px;
+            transition: background 0.3s;
+        }
+
+        .footer-agreement:hover { background-color: #f1f5f9; }
+
+        /* 自定义复选框容器 */
+        .checkbox-wrapper {
+            position: relative;
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0; /* 防止复选框被挤压 */
+            margin-top: 2px;
+        }
+
+        /* 隐藏原生 Checkbox */
+        .checkbox-wrapper input[type="checkbox"] {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0; width: 0;
+        }
+
+        /* 自定义美化的 Checkmark */
+        .checkmark {
+            position: absolute;
+            top: 0; left: 0;
+            height: 18px; width: 18px;
+            background-color: #fff;
+            border: 2px solid #cbd5e1;
+            border-radius: 5px;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* 悬停效果 */
+        .checkbox-wrapper:hover input ~ .checkmark { border-color: #1e7eff; }
+
+        /* 选中状态 */
+        .checkbox-wrapper input:checked ~ .checkmark {
+            background-color: #1e7eff;
+            border-color: #1e7eff;
+        }
+
+        /* 选中后的打勾图标 */
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+            left: 5px; top: 1px;
+            width: 5px; height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        .checkbox-wrapper input:checked ~ .checkmark:after { display: block; }
+
+        /* 文本排版 */
+        .agreement-text {
+            font-size: 13px;
+            color: #64748b;
+            line-height: 1.5;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .agreement-text a {
+            color: #1e7eff;
+            text-decoration: none;
+            font-weight: 500;
+            margin: 0 2px;
+            border-bottom: 1.5px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .agreement-text a:hover {
+            border-bottom-color: #1e7eff;
+            opacity: 0.8;
+        }
+
+        /* --- 响应式适配 --- */
+        @media (max-width: 900px) {
+            .container { flex-direction: column; max-width: 480px; min-height: auto; }
+            .left-panel { padding: 40px 30px; }
+            .ai-cube { width: 100px; height: 100px; }
+            .ai-logo { font-size: 50px; }
+            .right-panel { width: 100%; padding: 30px 25px; }
+            .tab-content-wrapper { min-height: 280px; }
+        }
+
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="left-panel">
+        <div class="ai-cube"><div class="ai-logo">Ai</div></div>
+        <div class="title">强大AI助手</div>
+        <div class="subtitle">更智能的图文理解能力<br>让复杂工作变得简单高效</div>
+    </div>
+
+    <div class="right-panel">
+        <div class="tabs">
+            <div class="tab active" data-tab="1">账号登录</div>
+            <div class="tab" data-tab="3">APP扫码</div>
+        </div>
+
+        <div class="tab-content-wrapper">
+            <div id="tab1" class="tab-content fade-in-active">
+                <div class="form-group">
+                    <label class="input-label">账号</label>
+                    <input type="text" placeholder="账号">
+                </div>
+                <div class="form-group">
+                    <label class="input-label">密码</label>
+                    <input type="password" placeholder="请输入密码">
+                </div>
+                <div style="text-align: right; margin-bottom: 20px;">
+                    <a href="#" style="font-size: 13px; color: #94a3b8; text-decoration: none;">忘记密码？</a>
+                </div>
+                <button class="login-btn" onclick="handleLogin()">立即登录</button>
+            </div>
+
+            <div id="tab3" class="tab-content">
+                <div class="qrcode-container">
+                    <div class="qrcode-box">
+                        <img src="image/qr.png" alt="QR">
+                    </div>
+                    <div class="qrcode-desc">请使用 <span>AI助手 App</span> 扫码</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-agreement">
+            <label class="checkbox-wrapper">
+                <input type="checkbox" id="agreeCheck" checked>
+                <span class="checkmark"></span>
+            </label>
+            <div class="agreement-text" onclick="document.getElementById('agreeCheck').click()">
+                我已阅读并完全同意
+                <a href="#" onclick="event.stopPropagation()">《用户服务协议》</a>
+                与
+                <a href="#" onclick="event.stopPropagation()">《隐私政策条款》</a>
+                并授权该平台获取相关必要信息。
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 选项卡切换逻辑
+    document.querySelectorAll('.tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+            if (this.classList.contains('active')) return;
+            const targetId = 'tab' + this.getAttribute('data-tab');
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('fade-in-active');
+                content.style.display = 'none';
+            });
+            const target = document.getElementById(targetId);
+            target.style.display = 'block';
+            void target.offsetWidth;
+            target.classList.add('fade-in-active');
+        });
+    });
+
+    function handleLogin() {
+        const isAgreed = document.getElementById('agreeCheck').checked;
+        if (!isAgreed) {
+            alert("请先阅读并同意用户协议与隐私政策");
+            return;
+        }
+        alert("🎉 登录成功！");
+    }
+</script>
+
+</body>
+</html>

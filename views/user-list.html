@@ -41,8 +41,8 @@
     </style>
 </head>
 <body>
-    <div class="yaya-container">
-        <div class="layui-fluid yaya-user-content">
+    <div class="yaya-box">
+        <div class="yaya-user-content">
             <div class="yaya-user-left">
                 <!-- 部门搜索框 -->
                 <div class="layui-form" style="margin-top: 10px;">
@@ -315,7 +315,7 @@
                 tree.render({
                     elem: '#dept-tree',
                     data: data,
-                    onlyIconControl: true,  // 是否仅允许节点左侧图标控制展开收缩
+                    showLine: false,  // 是否仅允许节点左侧图标控制展开收缩
                     customName:{
                         id: 'deptId',
                         title: 'deptName',

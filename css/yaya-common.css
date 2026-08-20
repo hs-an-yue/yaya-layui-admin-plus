@@ -4,10 +4,13 @@
     margin: 0;
 }
 /* 显示容器 */
-.yaya-container{
-    width: 99%;
-    margin: 0 auto;
+.yaya-box{
+    /* 新的页面内嵌到主页面的宽度 */
+    width: 98%;
+    /* 页面圆角 */
     border-radius: 10px;
+    /* 新的页面距离顶部选项卡的距离,并且水平居中 */
+    margin: 10px auto 0;
 }
 /* 添加动画 */
 .card-hover{

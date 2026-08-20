@@ -2,17 +2,17 @@
 *{padding: 0;margin: 0;}
 /* 默认主题 */
 :root{
-    --logo-color:#409eff;                       /* LOGO主题默认颜色 */
-    --sidebar-bg:#1c1e23; 				        /* 左侧导航栏Dark主题背景色 */
-    --sidebar-default-text: #f2f2f2cc;          /* 菜单默认字体颜色 */
-    --sidebar-select-text: #fafafa; 	        /* 菜单选中字体颜色 */
-    --sidebar-select-bg: #2e3033; 		        /* 菜单选中背景颜色 */
-    --sidebar-hover-bg: #2e3033; 		        /* 鼠标划过菜单伪类背景颜色 */
-    --sidebar-hover-text: #fafafa; 		        /* 鼠标划过菜单伪类字体颜色 */
-    --sidebar-icon-text: #ffffffb3; 		    /* 鼠标划过菜单伪类字体颜色 */
-    --tab-hover-text: #409eff; 		            /* 选项卡鼠标移到字体上面的伪类字体颜色 */
-    --tab-select-text: #ffffff; 		        /* 选项卡选中字体颜色 */
-    --tab-select-bg: #409eff;                   /* 选项卡选中的背景色 */
+    --logo-color:#1890ff;                  /* LOGO主题默认颜色 */
+    --sidebar-bg:#ffffff; 				   /* 左侧导航栏默认背景色 */
+    --sidebar-default-text: #000000CC;     /* 菜单默认字体颜色 */
+    --sidebar-select-text: #1890ff; 	   /* 菜单选中字体颜色 */
+    --sidebar-select-bg: #f8f8f8; 		   /* 菜单选中背景颜色 */
+    --sidebar-hover-bg: #f8f8f8; 		   /* 鼠标划过菜单伪类背景颜色 */
+    --sidebar-hover-text: #1890ff; 		   /* 鼠标划过菜单伪类字体颜色 */
+    --sidebar-icon-text: #000000CC; 	   /* 鼠标划过菜单伪类字体颜色 */
+    --tab-hover-text: #1890ff; 		       /* 选项卡鼠标移到字体上面的伪类字体颜色 */
+    --tab-select-text: #ffffff; 		   /* 选项卡选中字体颜色 */
+    --tab-select-bg: #1890ff;               /* 选项卡选中的背景色 */
 }
 /* Dark1主题 */
 [data-theme="dark1"]{
@@ -30,17 +30,17 @@
 }
 /* Dark2主题 */
 [data-theme="dark2"]{
-    --logo-color:#1890ff;                  /* LOGO主题默认颜色 */
-    --sidebar-bg:#ffffff; 				   /* 左侧导航栏默认背景色 */
-    --sidebar-default-text: #000000CC;     /* 菜单默认字体颜色 */
-    --sidebar-select-text: #1890ff; 	   /* 菜单选中字体颜色 */
-    --sidebar-select-bg: #f8f8f8; 		   /* 菜单选中背景颜色 */
-    --sidebar-hover-bg: #f8f8f8; 		   /* 鼠标划过菜单伪类背景颜色 */
-    --sidebar-hover-text: #1890ff; 		   /* 鼠标划过菜单伪类字体颜色 */
-    --sidebar-icon-text: #000000CC; 	   /* 鼠标划过菜单伪类字体颜色 */
-    --tab-hover-text: #1890ff; 		       /* 选项卡鼠标移到字体上面的伪类字体颜色 */
-    --tab-select-text: #ffffff; 		   /* 选项卡选中字体颜色 */
-    --tab-select-bg: #1890ff;               /* 选项卡选中的背景色 */
+    --logo-color:#409eff;                       /* LOGO主题默认颜色 */
+    --sidebar-bg:#1c1e23; 				        /* 左侧导航栏Dark主题背景色 */
+    --sidebar-default-text: #f2f2f2cc;          /* 菜单默认字体颜色 */
+    --sidebar-select-text: #fafafa; 	        /* 菜单选中字体颜色 */
+    --sidebar-select-bg: #2e3033; 		        /* 菜单选中背景颜色 */
+    --sidebar-hover-bg: #2e3033; 		        /* 鼠标划过菜单伪类背景颜色 */
+    --sidebar-hover-text: #fafafa; 		        /* 鼠标划过菜单伪类字体颜色 */
+    --sidebar-icon-text: #ffffffb3; 		    /* 鼠标划过菜单伪类字体颜色 */
+    --tab-hover-text: #409eff; 		            /* 选项卡鼠标移到字体上面的伪类字体颜色 */
+    --tab-select-text: #ffffff; 		        /* 选项卡选中字体颜色 */
+    --tab-select-bg: #409eff;                   /* 选项卡选中的背景色 */
 }
 
 /* 主题配置页面 样式 start */
@@ -55,15 +55,15 @@
     background-color: #16b777 !important;
 }
 /* 主题配置页面 样式 end */
-
 a{
     cursor: pointer;
 }
+/* 总布局容器 */
 .yaya-container{
     /*高度100%*/
     height: 100vh;
     /*宽度100%*/
-    width: 100vw;
+    width: 100%;
     /*flex布局*/
     display: flex;
 }
@@ -78,7 +78,6 @@ a{
 /*首页右侧*/
 .yaya-right{
     flex: 1;
-    height: 100%;
     transition: width 0.3s ease;/* 当宽度发生变化时，进行动画重排 */
     background-color: #f1f3f6;
 }
@@ -87,14 +86,17 @@ a{
     width: 100%;
     height: 47px;
     background-color: #fff;
-    border-bottom: 1px solid #ebe6e7;
     display: flex;
+    position: relative;
+    z-index: 10;
+    /* 向下阴影 */
+    box-shadow: 0 4px 6px -4px rgba(0, 0, 0, 0.12);
 }
 /* 首页右侧-页面选项卡 */
-#yaya-right-tab{
-    /* 内容区+tab区域总高度 */
-    height: calc(100vh - 48px);
-}
+/*#yaya-right-tab{
+    !* 内容区+tab区域总高度 *!
+    height: calc(100vh - 47px);
+}*/
 /* 选项卡默认样式覆盖 */
 .yaya-tabs>.layui-tabs-header{
     background-color: #ffffff; /*选项卡背景色设置*/
@@ -165,10 +167,6 @@ a{
     background-color: #ffffff;
     padding: 0 25px;
 }
-/* 内容区距离选项卡的距离 */
-.layui-tabs-body{
-    padding: 14px 0 !important;
-}
 /* 选项卡超长后出现的左右滚动标签 */
 .layui-tabs-bar .layui-icon{
     font-size: 10px;
@@ -206,10 +204,14 @@ a{
     border-radius: 3px;
     font-size: 13px;
 }
-
+/* 选项卡默认内边距 */
+.layui-tabs-body{
+    padding:  unset;
+}
 /* 内容显示动画样式 */
 .yaya-tabs>.layui-tabs-body>.layui-tabs-item{
     opacity: 0;
     transform: translateX(-10px);
     animation: fadeInRight .4s ease forwards;
+    height: calc(100vh - 97px);/* 修复iframe标签复容器高度计算错误造成的内嵌页面右侧滚动条到不了底的问题 顶部导航栏高度(47)+选项卡高度(40)+页面到顶部的高度(10px)=97px  */
 }

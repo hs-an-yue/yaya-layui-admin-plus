@@ -91,6 +91,7 @@ layui.use(function (){
                     tabs.closeMult('yaya-right-tab', data.mode, index); // 批量关闭标签
                 }
             }
+            $('#yaya-right-tab .layui-tabs-header').css('left', '0px');
         }
     });
 
@@ -140,11 +141,11 @@ layui.use(function (){
                     <!-- 主题切换 -->
                     <form class="layui-form" style="width: 180px;padding-top: 10px;text-align: center;">
                         <input lay-filter="radio-theme" type="radio" name="theme" value="default" lay-skin="none" checked>
-                        <div lay-radio class="lay-skin-tag layui-badge">黑-蓝</div>
+                        <div lay-radio class="lay-skin-tag layui-badge">白-蓝</div>
                         <input lay-filter="radio-theme" type="radio" name="theme" value="dark1" lay-skin="none">
                         <div lay-radio class="lay-skin-tag layui-badge">白-绿</div>
                         <input lay-filter="radio-theme" type="radio" name="theme" value="dark2" lay-skin="none">
-                        <div lay-radio class="lay-skin-tag layui-badge">白-蓝</div>
+                        <div lay-radio class="lay-skin-tag layui-badge">黑-蓝</div>
                     </form>
                 `,
                 success: function(layero){
@@ -218,7 +219,20 @@ layui.use(function (){
             key:'yayaId',
             value:$tabId
         })
+        //获取iframe,刷新
+        refreshIframe($tabId);
     })
+
+    /**
+     * 获取指定的iframe页面 ,此函数的作用是在tabs选项卡切换时造成首页图表宽度丢失的BUG修复
+     * @param {*} layId iframe标记ID
+     */
+    function refreshIframe(layId) {
+        let iframe = $(".layui-tabs-body .layui-tabs-item[lay-id='" + layId + "']").find("iframe")[0];
+        if (iframe) {
+            iframe.contentWindow.location.reload();
+        }
+    }
 
     /**
      * 关闭选项卡事件

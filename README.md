@@ -2,31 +2,35 @@
     <img src="assets/yaya-layui-admin-plus.png" alt="yaya" style="width: 50%;">
 </div>
 
-#### <div align="center"> 基于前端框架Layui2.13+开发的一套极简前端管理模板 </div>
+#### <div align="center"> 基于Layui2.13+实现的一套极简前端管理模板 </div>
 <div align="center">
-	<a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/Layui-%3E=2.13.3-magenta"></a>
-    <a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/YaYa Layui Admin Plus-v2.1-deeppink"></a>
-	<a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/Author-%E5%A4%9C%E6%B3%8A1990-quartz"></a>
+	<a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/Layui-%3E=2.13+-magenta"></a>
+    <a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/YaYa Layui Admin Plus-v2.2-deeppink"></a>
+	<a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/作者-%E5%A4%9C%E6%B3%8A1990-quartz"></a>
     <a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/LICENSE-MIT-tomato"></a>
 </div>
 
 #### 介绍
-`YaYa-Layui-Admin-Plus` 基于 [Layui](https://layui.dev/) 框架实现的一套 ***简单***、***方便***、***国产化*** 前端管理模板，针对 ***PC*** 端设计，抛弃当前主流的脚手架项目构建方式，返璞归真，采用纯原生开发，只需要了解简单的 ***HTML\CSS\JS*** 即可快速上手。
-`YaYa`前端模板的配套服务端震撼发布[YaYa-boot](https://gitee.com/ukoko/yaya-boot)
+`YaYa-Layui-Admin-Plus`是一套基于[LayUI](https://layui.dev/)实现的前端管理模板，
+
 #### 设计初衷
+```
+1. 降低开发成本: 程序员只需要会简单的HTML/CSS/JS即可快速上手开发,开发成本极低,对应的学习成本也极低.
+2. 降低维护成本: 简单的技术栈对应着较低的维护成本(人员招聘成本,技术学习时间成本等)
+
+🌟 需要一套简单的技术栈,让公司在岗位招聘的时候可以有更多灵活的选择,项目支撑很多年后依然充满活力. 🚀
+```
+#### 在线预览
 
 ```
-1. 设计一套针对电脑端(PC端)用户使用的前端模板
-2. 抛弃目前主流的脚手架项目生成和构建方式，使用纯原生的方式进行设计和实现(技术栈:html/css/js(JQuery))
-3. 原生设计，原生开发，兼容前端其它技术栈，降低学习、维护成本
-4. 为像我一样的小众群体(记不住Vue那套前端生态，但是还不得不进行前端开发和维护)提供一个新的技术解决方案
-5. 为中小型企业提供一套可以低成本开发和维护的前端技术解决方案
-6. 为一些人才紧缺的城市提供一套技术栈足够简单的前端技术解决方案
+预览地址 : http://106.14.27.178/
+账号密码 : root/123456
 ```
 
 #### 更新日志
 
 ```
+2026-08-19      升级Layui版本库到v2.13.9,修复iframe嵌入的页面滚动条不能到浏览器底部的问题 🆕
 2026-04-06      左侧菜单选中样式优化,顶部选项卡样式优化,主题优化,Layui库升级,其它样式优化 🆕🚀🎉✈️
 2026-03-04      新增系统监控页面,优化其它样式,发布v2.0-stable版本 🆕🚀🎉💪
 2026-02-28      新增布局组件，修改案例页面的样式为模板定义的样式，并且优化了几个不合理的样式，首页统计样式调整
@@ -41,48 +45,30 @@
 2026-01-12      零帧起手
 ```
 
-#### 在线预览
 
-```angular17html
-地址        : http://106.14.27.178/
-用户名密码   : admin/123456
-注意: 验证码只有1位字符， 数据每半小时重置一次
-```
 
 #### 模板预览
 
 <table>
-    <tr> <td style="width:50%;"> <img src="assets/01-login-01.png" alt=""> </td><td style="width:50%;"><img src="assets/02-login-02.png" alt=""></td></tr>
     <tr> <td style="width:50%;"> <img src="assets/03-login-03.png" alt=""> </td><td style="width:50%;"><img src="assets/04-login-04.png" alt=""></td></tr>
-    <tr> <td style="width:50%;"> <img src="assets/39-login-05.png" alt=""> </td><td style="width:50%;"><img src="assets/40-login-06.png" alt=""></td></tr>
     <tr> <td style="width:50%;"> <img src="assets/05-dashboard.png" alt=""> </td><td style="width:50%;"><img src="assets/06-workbench.png" alt=""></td></tr>
     <tr> <td style="width:50%;"> <img src="assets/09-dashboard.png" alt=""> </td><td style="width:50%;"> <img src="assets/07-bulletin-board.png" alt=""> </td></tr>
-    <tr> <td style="width:50%;"> <img src="assets/10-dashboard.png" alt=""> </td><td style="width:50%;"> <img src="assets/08-person-center.png" alt=""> </td></tr>
-    <tr> <td style="width:50%;"> <img src="assets/11-user-list.png" alt=""> </td><td style="width:50%;"> <img src="assets/12-dept-list.png" alt=""> </td></tr>
-    <tr> <td style="width:50%;"> <img src="assets/13-user-log.png" alt=""> </td><td style="width:50%;"> <img src="assets/14-sys-log.png" alt=""> </td></tr>
-    <tr> <td style="width:50%;"> <img src="assets/15-about.png" alt=""> </td><td style="width:50%;"> <img src="assets/16-pwd-change.png" alt=""> </td></tr>
-    <tr> <td style="width:50%;"> <img src="assets/19-demo-bootstrap5.png" alt=""> </td><td style="width:50%;"> <img src="assets/20-demo-element-plus.png" alt=""> </td></tr>
-    <tr> <td style="width:50%;"> <img src="assets/21-demo-naive-ui.png" alt=""> </td><td style="width:50%;"> <img src="assets/22-demo-view-ui.png" alt=""> </td></tr>
-    <tr> <td style="width:50%;"> <img src="assets/45-component-icon.png" alt=""> </td><td style="width:50%;"> <img src="assets/46-component-button.png" alt=""> </td></tr>
-    <tr> <td style="width:50%;"> <img src="assets/47-component-tag.png" alt=""> </td><td style="width:50%;"> <img src="assets/48-css-extend.png" alt=""> </td></tr>
-    <tr> <td style="width:50%;"> <img src="assets/49-panel-extend.png" alt=""> </td><td style="width:50%;"> <img src="assets/50-panel-search-extend.png" alt=""> </td></tr>
-    <tr> <td style="width:50%;"> <img src="assets/51-layout-1-extend.png" alt=""> </td><td style="width:50%;"> <img src="assets/52-layout-2-extend.png" alt=""> </td></tr>
     <tr> <td style="width:50%;"> <img src="assets/53-server-monitor.png" alt=""> </td><td style="width:50%;"> <img src="assets/54-cache-monitor.png" alt=""> </td></tr>
 </table>
 
 #### 项目下载和配置
 
-1.  代码克隆
+1. 代码克隆
 ```
 Gitee : git clone https://gitee.com/ukoko/yaya-layui-admin-plus.git
 或者
 Github: git clone https://github.com/hs-an-yue/yaya-layui-admin-plus.git
 ```
-2.  开发工具选择
+2. 开发工具选择
 ```
 开发工具建议选择 vscode 为什么呢? ↓↓↓↓↓↓↓↓↓↓↓↓ 请看下面 ↓↓↓↓↓↓↓↓↓↓↓↓
 ```
-3.  开发工具配置(可选)
+3. 开发工具配置(可选)
 ```
 如果不需要进行前后端联调，这个步骤省略。
 在进行前端+后端开发联调时很容易出现跨域问题,使用vscode开发工具可以很方便的解决跨域，解决方式如下:
@@ -125,36 +111,30 @@ yaya-layui-admin-plus
 ├────── echarts.min.js              # 图表库(第三方库)
 ├── layui                           # Layui核心库
 ├── views                           # yaya-layui-admin-plus模板中提供的一些案例页面(不喜欢可以全部删掉,用户自己重新添加)
-├────── about.html	                # 关于我页
+├────── about.html	            # 关于我
 ├────── bulletin-board.html         # 公告通知页(内容由模型生成)
 ├────── badge-tag-extend.html       # 徽章和标签扩展样式页
 ├────── button-extend.html          # 按钮扩展样式页
-├────── iconfont-extend.html        # 字体图标扩展样式页
+├────── extend-iconfont.html        # 字体图标扩展样式页
 ├────── panel-extend.html           # 面板条件搜索扩展样式页
-├────── dashboard.html		        # 仪表盘页(首页)
-├────── dept-list.html		        # 部门页(内容由模型生成)
-├────── login-log.html		        # 登陆日志页(内容由模型生成)
+├────── dashboard.html		    # 仪表盘页(首页)
+├────── dept-list.html		    # 部门页(内容由模型生成)
 ├────── personal-center.html	    # 个人中心页
-├────── pwd-change.html		        # 修改密码页
-├────── system-log.html		        # 系统日志页(内容由模型生成)
-├────── template.html		        # 模板页(复制整个页面生成新的页面，比较快，没什么实际意义)
-├────── test1.html		            # 多级测试页1 - 内容由模型生成 - 其它前端技术(BootStrap5)应用页
-├────── test2.html		            # 多级测试页2 - 内容由模型生成 - 其它前端技术(Element Plus)应用页
-├────── test3.html		            # 多级测试页3 - 内容由模型生成 - 其它前端技术(Naive UI)应用页
-├────── test4.html		            # 多级测试页4 - 内容由模型生成 - 其它前端技术(View UI Plus)应用页
-├────── user-list.html		        # 用户页
-├────── workbench.html		        # 工作台页
+├────── pwd-change.html		    # 修改密码页
+├────── template.html		    # 模板页(复制整个页面生成新的页面，比较快，没什么实际意义)
+├────── menu1.html		        # 多级测试页1 
+├────── menu2.html		        # 多级测试页2
+├────── menu3.html		        # 多级测试页3
+├────── menu4.html		        # 多级测试页4
+├────── user-list.html		    # 用户页
+├────── workbench.html		    # 工作台页
 ├── .gitignore                      # Git配置文件,用于版本控制管理
 ├── DISCLAIMER.md                   # 开源软件的免责声明文件
 ├── favicon.ico                     # yaya-layui-admin-plus模板在预览时,浏览器选项卡上显示的图标
 ├── index.html                      # yaya-layui-admin-plus模板首页
 ├── LICENSE                         # 开源软件的开源协议(MIT协议)
-├── login.html		                # 登录页1
-├── login2.html			            # 登录页2
-├── login3.html			            # 登录页3
-├── login4-government.html	        # 登录页4(模型生成)
-├── login5-aerospace.html	        # 登录页5(模型生成)
-├── login6-chemistry.html	        # 登录页6(模型生成)
+├── login1.html		            # 登录页1
+├── login2-government.html	    # 登录页2(模型生成) 适合政企的登录页
 ├── README.md                       # yaya-layui-admin-plus模板的介绍文件
 
 ```
@@ -167,18 +147,10 @@ yaya-layui-admin-plus
     <tr> <td> <img src="assets/18-vscode-show.png" alt=""> </td></tr>
 </table>
 
-#### YaYa模板的成神之路
-
-* [01-YaYa-Layui-Admin-Plus 概述](https://hs-an-yue.github.io/2026/02/26/yaya/01-YaYa-Layui-Admin-Plus%E6%A6%82%E8%BF%B0/#more)
-* [02-YaYa-Layui-Admin-Plus 基础配置](https://hs-an-yue.github.io/2026/02/26/yaya/02-YaYa-Layui-Admin-Plus%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/#more)
-* [03-YaYa-Layui-Admin-Plus 视频教程](https://www.bilibili.com/video/BV14uA6zJEWZ/)
-
 #### 🚀 参与贡献
-```
-一个人+AI: 产品、开发、文档撰写、推广、后期维护...
 
-联系邮箱: hd1611756908@163.com
-```
+> 一人团队  -- 联系邮箱: hd1611756908@163.com
+
 #### 💖 致谢
 
 感谢 [Layui](https://layui.dev)、[Echarts](https://echarts.apache.org/)、[xm-select](https://xm-select.com/file/xm-select/v1.2.4/#/component/install)、[Vue](https://vuejs.org/)、[BootStrap5](https://getbootstrap.com/)、[Element Plus](https://element-plus.org/)、[Naive UI](https://www.naiveui.com/)、[View UI Plus](https://www.iviewui.com/) 等前端跨框架支持;以及 [Gemini](https://gemini.google.com/app)、[Grok](https://grok.com/)、[Qwen](https://www.qianwen.com/chat)、[豆包](https://www.doubao.com/chat/) 等模型的支持。
