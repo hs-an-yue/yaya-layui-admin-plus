@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 响应式配置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- LayUI css库 -->
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <!-- icons字体图标库 -->
+    <link rel="stylesheet" href="../font/bootstrap-icons.css">
+    <!-- 公共样式 -->
+    <link rel="stylesheet" href="../css/yaya-common.css">
+    <!-- 扩展样式 -->
+    <link rel="stylesheet" href="../css/yaya-style-extend.css">
+    <title>yaya-admin-plus</title>
+</head>
+<body>
+    <div class="yaya-box-fluid">
+        <div class="yaya-panel">
+            <h1>色彩推荐</h1>
+        </div>
+        <div class="yaya-panel" style="margin-top: 10px">
+            <h2>主色</h2>
+            <div style="color: #939292;padding: 10px 0;">目前网站的比较流行颜色为明亮的蓝色</div>
+            <div style="width: 420px;height: 120px;cursor: pointer;">
+                <div style="height: 80px;width: 100%;background-color: #409EFF;display: flex;flex-direction: column;justify-content: center;border-top-left-radius: 5px;border-top-right-radius: 5px;">
+                    <p style="font-size: 14px;color: #ffffff;text-align: center;">主色</p>
+                    <p style="font-size: 14px;color: #ffffff;text-align: center;">#409EFF</p>
+                </div>
+                <div style="height: 40px;width: 100%;display: flex;flex-direction: row;justify-content: flex-start;">
+                    <div style="line-height: 40px;text-align:center;color: white;height: 40px;width: 70px;background-color: #337ecc;border-bottom-left-radius: 5px;">#337ecc</div>
+                    <div style="line-height: 40px;text-align:center;color: white;height: 40px;width: 70px;background-color: #79bbff;">#79bbff</div>
+                    <div style="line-height: 40px;text-align:center;color: #5a5151;height: 40px;width: 70px;background-color: #a0cfff;">#a0cfff</div>
+                    <div style="line-height: 40px;text-align:center;color: #b68b8b;height: 40px;width: 70px;background-color: #c6e2ff;">#c6e2ff</div>
+                    <div style="line-height: 40px;text-align:center;color: #736868;height: 40px;width: 70px;background-color: #d9ecff;">#d9ecff</div>
+                    <div style="line-height: 40px;text-align:center;color: #a19797;height: 40px;width: 70px;background-color: #ecf5ff;border-bottom-right-radius: 5px;">#ecf5ff</div>
+                </div>
+            </div>
+        </div>
+        <div class="yaya-panel" style="margin-top: 10px;">
+            <h2>辅助色</h2>
+            <div style="color: #939292;padding: 10px 0;">除了主色外,还有在不同场景下使用不同的颜色(例如:警告、危险等...)</div>
+            <div style="width: 420px;height: 120px;cursor: pointer;">
+                <div style="height: 80px;width: 100%;background-color: #67C23A;display: flex;flex-direction: column;justify-content: center;border-top-left-radius: 5px;border-top-right-radius: 5px;">
+                    <p style="font-size: 14px;color: #ffffff;text-align: center;">Success</p>
+                    <p style="font-size: 14px;color: #ffffff;text-align: center;">#67C23A</p>
+                </div>
+                <div style="height: 40px;width: 100%;display: flex;flex-direction: row;justify-content: flex-start;">
+                    <div style="line-height: 40px;text-align:center;color: white;height: 40px;width: 70px;background-color: #529b2e;border-bottom-left-radius: 5px;">#529b2e</div>
+                    <div style="line-height: 40px;text-align:center;color: white;height: 40px;width: 70px;background-color: #95d475;">#95d475</div>
+                    <div style="line-height: 40px;text-align:center;color: #5a5151;height: 40px;width: 70px;background-color: #b3e19d;">#b3e19d</div>
+                    <div style="line-height: 40px;text-align:center;color: #b68b8b;height: 40px;width: 70px;background-color: #d1edc4;">#d1edc4</div>
+                    <div style="line-height: 40px;text-align:center;color: #736868;height: 40px;width: 70px;background-color: #e1f3d8;">#e1f3d8</div>
+                    <div style="line-height: 40px;text-align:center;color: #a19797;height: 40px;width: 70px;background-color: #f0f9eb;border-bottom-right-radius: 5px;">#f0f9eb</div>
+                </div>
+            </div>
+
+            <div style="width: 420px;height: 120px;cursor: pointer;margin-top: 20px;">
+                <div style="height: 80px;width: 100%;background-color: #E6A23C;display: flex;flex-direction: column;justify-content: center;border-top-left-radius: 5px;border-top-right-radius: 5px;">
+                    <p style="font-size: 14px;color: #ffffff;text-align: center;">Warning</p>
+                    <p style="font-size: 14px;color: #ffffff;text-align: center;">#E6A23C</p>
+                </div>
+                <div style="height: 40px;width: 100%;display: flex;flex-direction: row;justify-content: flex-start;">
+                    <div style="line-height: 40px;text-align:center;color: white;height: 40px;width: 70px;background-color: #b88230;border-bottom-left-radius: 5px;">#b88230</div>
+                    <div style="line-height: 40px;text-align:center;color: white;height: 40px;width: 70px;background-color: #eebe77;">#eebe77</div>
+                    <div style="line-height: 40px;text-align:center;color: #5a5151;height: 40px;width: 70px;background-color: #f3d19e;">#f3d19e</div>
+                    <div style="line-height: 40px;text-align:center;color: #b68b8b;height: 40px;width: 70px;background-color: #f8e3c5;">#f8e3c5</div>
+                    <div style="line-height: 40px;text-align:center;color: #736868;height: 40px;width: 70px;background-color: #faecd8;">#faecd8</div>
+                    <div style="line-height: 40px;text-align:center;color: #a19797;height: 40px;width: 70px;background-color: #fdf6ec;border-bottom-right-radius: 5px;">#fdf6ec</div>
+                </div>
+            </div>
+
+            <div style="width: 420px;height: 120px;cursor: pointer;margin-top: 20px;">
+                <div style="height: 80px;width: 100%;background-color: #F56C6C;display: flex;flex-direction: column;justify-content: center;border-top-left-radius: 5px;border-top-right-radius: 5px;">
+                    <p style="font-size: 14px;color: #ffffff;text-align: center;">Danger</p>
+                    <p style="font-size: 14px;color: #ffffff;text-align: center;">#F56C6C</p>
+                </div>
+                <div style="height: 40px;width: 100%;display: flex;flex-direction: row;justify-content: flex-start;">
+                    <div style="line-height: 40px;text-align:center;color: white;height: 40px;width: 70px;background-color: #c45656;border-bottom-left-radius: 5px;">#c45656</div>
+                    <div style="line-height: 40px;text-align:center;color: white;height: 40px;width: 70px;background-color: #f89898;">#f89898</div>
+                    <div style="line-height: 40px;text-align:center;color: #5a5151;height: 40px;width: 70px;background-color: #fab6b6;">#fab6b6</div>
+                    <div style="line-height: 40px;text-align:center;color: #b68b8b;height: 40px;width: 70px;background-color: #fcd3d3;">#fcd3d3</div>
+                    <div style="line-height: 40px;text-align:center;color: #736868;height: 40px;width: 70px;background-color: #fde2e2;">#fde2e2</div>
+                    <div style="line-height: 40px;text-align:center;color: #a19797;height: 40px;width: 70px;background-color: #fef0f0;border-bottom-right-radius: 5px;">#fef0f0</div>
+                </div>
+            </div>
+
+            <div style="width: 420px;height: 120px;cursor: pointer;margin-top: 20px;">
+                <div style="height: 80px;width: 100%;background-color: #909399;display: flex;flex-direction: column;justify-content: center;border-top-left-radius: 5px;border-top-right-radius: 5px;">
+                    <p style="font-size: 14px;color: #ffffff;text-align: center;">Info</p>
+                    <p style="font-size: 14px;color: #ffffff;text-align: center;">#909399</p>
+                </div>
+                <div style="height: 40px;width: 100%;display: flex;flex-direction: row;justify-content: flex-start;">
+                    <div style="line-height: 40px;text-align:center;color: white;height: 40px;width: 70px;background-color: #73767a;border-bottom-left-radius: 5px;">#73767a</div>
+                    <div style="line-height: 40px;text-align:center;color: white;height: 40px;width: 70px;background-color: #b1b3b8;">#b1b3b8</div>
+                    <div style="line-height: 40px;text-align:center;color: #5a5151;height: 40px;width: 70px;background-color: #c8c9cc;">#c8c9cc</div>
+                    <div style="line-height: 40px;text-align:center;color: #b68b8b;height: 40px;width: 70px;background-color: #dedfe0;">#dedfe0</div>
+                    <div style="line-height: 40px;text-align:center;color: #736868;height: 40px;width: 70px;background-color: #e9e9eb;">#e9e9eb</div>
+                    <div style="line-height: 40px;text-align:center;color: #a19797;height: 40px;width: 70px;background-color: #f4f4f5;border-bottom-right-radius: 5px;">#f4f4f5</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="yaya-panel" style="margin-top: 10px;padding-bottom: 100px;">
+            <h2>中性色</h2>
+            <div style="color: #939292;padding: 10px 0;">中性色用于文本、背景和边框颜色等...</div>
+            <div class="layui-row layui-col-space16">
+                <div class="layui-col-md3">
+                    <div style="background-color: #303133;height: 140px;border-radius: 10px;">
+                        <div style="padding: 20px 0 0 40px;">
+                            <p style="color: #fff;">Primary Text</p>
+                            <p style="color: #fff;">#303133</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <div style="background-color: #cdd0d6;height: 140px;border-radius: 10px;">
+                        <div style="padding: 20px 0 0 40px;">
+                            <p style="color: #000;">Darker Border</p>
+                            <p style="color: #000;">#cdd0d6</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <div style="background-color: #E6E8EB;height: 140px;border-radius: 10px;">
+                        <div style="padding: 20px 0 0 40px;">
+                            <p style="color: #000;">Primary Text</p>
+                            <p style="color: #000;">#E6E8EB</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <div style="background-color: #000000;height: 140px;border-radius: 10px;">
+                        <div style="padding: 20px 0 0 40px;">
+                            <p style="color: #fff;">Basic Black</p>
+                            <p style="color: #fff;">#000000</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-row layui-col-space16">
+                <div class="layui-col-md3">
+                    <div style="background-color: #606266;height: 140px;border-radius: 10px;">
+                        <div style="padding: 20px 0 0 40px;">
+                            <p style="color: #fff;">Regular Text</p>
+                            <p style="color: #fff;">#606266</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <div style="background-color: #D4D7DE;height: 140px;border-radius: 10px;">
+                        <div style="padding: 20px 0 0 40px;">
+                            <p style="color: #000;">Dark Border</p>
+                            <p style="color: #000;">#D4D7DE</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <div style="background-color: #EBEDF0;height: 140px;border-radius: 10px;">
+                        <div style="padding: 20px 0 0 40px;">
+                            <p style="color: #000;">Dark Fill</p>
+                            <p style="color: #000;">#EBEDF0</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <div style="height: 140px;border-radius: 10px;border: 1px solid #ccc;">
+                        <div style="padding: 20px 0 0 40px;">
+                            <p style="color: #000;">Basic White</p>
+                            <p style="color: #000;">#FFFFFF</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-row layui-col-space16">
+                <div class="layui-col-md3">
+                    <div style="background-color: #909399;height: 140px;border-radius: 10px;">
+                        <div style="padding: 20px 0 0 40px;">
+                            <p style="color: #fff;">Secondary Text</p>
+                            <p style="color: #fff;">#909399</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <div style="background-color: #DCDFE6;height: 140px;border-radius: 10px;">
+                        <div style="padding: 20px 0 0 40px;">
+                            <p style="color: #000;">Base Border</p>
+                            <p style="color: #000;">#DCDFE6</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <div style="background-color: #F0F2F5;height: 140px;border-radius: 10px;">
+                        <div style="padding: 20px 0 0 40px;">
+                            <p style="color: #000;">Base Fill</p>
+                            <p style="color: #000;">#F0F2F5</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <div style="height: 140px;border-radius: 10px;background-color: #FAFCFF;">
+                        <div style="padding: 20px 0 0 40px;">
+                            <p style="color: #000;">Extra-light Fill</p>
+                            <p style="color: #000;">#FAFCFF</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="layui-row layui-col-space16">
+                <div class="layui-col-md3">
+                    <div style="background-color: #A8ABB2;height: 140px;border-radius: 10px;">
+                        <div style="padding: 20px 0 0 40px;">
+                            <p style="color: #fff;">Placeholder Text</p>
+                            <p style="color: #fff;">#A8ABB2</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <div style="background-color: #E4E7ED;height: 140px;border-radius: 10px;">
+                        <div style="padding: 20px 0 0 40px;">
+                            <p style="color: #000;">Light Border</p>
+                            <p style="color: #000;">#E4E7ED</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <div style="background-color: #F5F7FA;height: 140px;border-radius: 10px;">
+                        <div style="padding: 20px 0 0 40px;">
+                            <p style="color: #000;">Light Fill</p>
+                            <p style="color: #000;">#F5F7FA</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <div style="height: 140px;border-radius: 10px;background-color: #F2F3F5;">
+                        <div style="padding: 20px 0 0 40px;">
+                            <p style="color: #000;">Page Background</p>
+                            <p style="color: #000;">#F2F3F5</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-row layui-col-space16">
+                <div class="layui-col-md3">
+                    <div style="background-color: #C0C4CC;height: 140px;border-radius: 10px;">
+                        <div style="padding: 20px 0 0 40px;">
+                            <p style="color: #fff;">Disabled Text</p>
+                            <p style="color: #fff;">#C0C4CC</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <div style="background-color: #EBEEF5;height: 140px;border-radius: 10px;">
+                        <div style="padding: 20px 0 0 40px;">
+                            <p style="color: #000;">Lighter Border</p>
+                            <p style="color: #000;">#EBEEF5</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <div style="background-color: #FAFAFA;height: 140px;border-radius: 10px;">
+                        <div style="padding: 20px 0 0 40px;">
+                            <p style="color: #000;">Lighter Fill</p>
+                            <p style="color: #000;">#FAFAFA</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <div style="height: 140px;border-radius: 10px;background-color: #F2F6FC;">
+                        <div style="padding: 20px 0 0 40px;">
+                            <p style="color: #000;">Extra-light Border</p>
+                            <p style="color: #000;">#F2F6FC</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

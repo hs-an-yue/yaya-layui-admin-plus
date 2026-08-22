@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 响应式配置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../css/yaya-common.css">
+    <link rel="stylesheet" href="../css/yaya-style-extend.css">
+    <link rel="stylesheet" href="../font/bootstrap-icons.css">
+    <title>yaya-admin-plus</title>
+    <style>
+        .yaya-show-container{
+            border: 1px solid rgba(96,98,102,0.1);
+            border-radius: 5px;
+        }
+        .yaya-show-container>div{
+            padding: 10px;
+            border-bottom: 1px solid rgba(204, 204, 204, 0.27);
+        }
+    </style>
+</head>
+<body>
+    <div class="yaya-box-fluid">
+        <div class="yaya-panel" style="padding: 10px;">
+            <div class="yaya-show-container">
+                <h2 style="color: #606266;padding-top: 5px;margin: 10px;">按钮扩展</h2>
+                <div>
+                    <button type="button" class="yaya-btn yaya-default" >Default</button>
+                    <button type="button" class="yaya-btn yaya-primary">Primary</button>
+                    <button type="button" class="yaya-btn yaya-success">Success</button>
+                    <button type="button" class="yaya-btn yaya-info">Info</button>
+                    <button type="button" class="yaya-btn yaya-warning">Warning</button>
+                    <button type="button" class="yaya-btn yaya-danger">Danger</button>
+                    <pre class="layui-code code-demo" lay-options="{theme: 'dark'}" style="margin-top: 20px;">
+<button type="button" class="yaya-btn yaya-default" >Default</button>
+<button type="button" class="yaya-btn yaya-primary">Primary</button>
+<button type="button" class="yaya-btn yaya-success">Success</button>
+<button type="button" class="yaya-btn yaya-info">Info</button>
+<button type="button" class="yaya-btn yaya-warning">Warning</button>
+<button type="button" class="yaya-btn yaya-danger">Danger</button>
+                    </pre>
+                </div>
+                <div>
+                    <button type="button" class="yaya-btn yaya-default">Plain</button>
+                    <button type="button" class="yaya-btn is-plain-primary">Primary</button>
+                    <button type="button" class="yaya-btn is-plain-success">Success</button>
+                    <button type="button" class="yaya-btn is-plain-info">Info</button>
+                    <button type="button" class="yaya-btn is-plain-warning">Warning</button>
+                    <button type="button" class="yaya-btn is-plain-danger">Danger</button>
+                    <pre class="layui-code code-demo" lay-options="{theme: 'dark'}" style="margin-top: 20px;">
+<button type="button" class="yaya-btn yaya-default">Plain</button>
+<button type="button" class="yaya-btn is-plain-primary">Primary</button>
+<button type="button" class="yaya-btn is-plain-success">Success</button>
+<button type="button" class="yaya-btn is-plain-info">Info</button>
+<button type="button" class="yaya-btn is-plain-warning">Warning</button>
+<button type="button" class="yaya-btn is-plain-danger">Danger</button>
+                    </pre>
+                </div>
+                <div>
+                    <button class="yaya-btn is-round-default" type="button">Round</button>
+                    <button class="yaya-btn is-round-primary" type="button">Primary</button>
+                    <button class="yaya-btn is-round-success" type="button">Success</button>
+                    <button class="yaya-btn is-round-info" type="button">Info</button>
+                    <button class="yaya-btn is-round-warning" type="button">Warning</button>
+                    <button class="yaya-btn is-round-danger" type="button">Danger</button>
+                    <pre class="layui-code code-demo" lay-options="{theme: 'dark'}" style="margin-top: 20px;">
+<button type="button" class="yaya-btn is-round-default">Round</button>
+<button type="button" class="yaya-btn is-round-primary">Primary</button>
+<button type="button" class="yaya-btn is-round-success">Success</button>
+<button type="button" class="yaya-btn is-round-info">Info</button>
+<button type="button" class="yaya-btn is-round-warning">Warning</button>
+<button type="button" class="yaya-btn is-round-danger">Danger</button>
+                    </pre>
+                </div>
+                <div>
+                    <button type="button" class="yaya-btn is-circle-default">
+                        <i class="bi bi-search"></i>
+                    </button>
+                    <button type="button" class="yaya-btn is-circle-info">
+                        <i class="bi bi-messenger"></i>
+                    </button>
+                    <button type="button" class="yaya-btn is-circle-success">
+                        <i class="bi bi-check-lg"></i>
+                    </button>
+                    <button type="button" class="yaya-btn is-circle-primary">
+                        <i class="bi bi-check2-circle"></i>
+                    </button>
+                    <button type="button" class="yaya-btn is-circle-warning">
+                        <i class="bi bi-currency-pound"></i>
+                    </button>
+                    <button type="button" class="yaya-btn is-circle-danger">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                    <pre class="layui-code code-demo" lay-options="{theme: 'dark'}" style="margin-top: 20px;">
+<button type="button" class="yaya-btn is-circle-default"><i class="bi bi-search"></i></button>
+<button type="button" class="yaya-btn is-circle-info"><i class="bi bi-messenger"></i></button>
+<button type="button" class="yaya-btn is-circle-success"><i class="bi bi-check-lg"></i></button>
+<button type="button" class="yaya-btn is-circle-primary"><i class="bi bi-check2-circle"></i></button>
+<button type="button" class="yaya-btn is-circle-warning"><i class="bi bi-currency-pound"></i></button>
+<button type="button" class="yaya-btn is-circle-danger"><i class="bi bi-trash"></i></button>
+                    </pre>
+                </div>
+
+                <h2 style="color: #606266;margin: 10px;border-top: 1px solid #ccc;padding-top: 15px;">禁用按钮</h2>
+                <div>
+                    <button class="yaya-btn yaya-default yaya-btn-disabled" type="button">Default</button>
+                    <button class="yaya-btn yaya-primary yaya-btn-disabled" type="button">Primary</button>
+                    <button class="yaya-btn yaya-success yaya-btn-disabled" type="button">Success</button>
+                    <button class="yaya-btn yaya-info yaya-btn-disabled" type="button">Info</button>
+                    <button class="yaya-btn yaya-warning yaya-btn-disabled" type="button">Warning</button>
+                    <button class="yaya-btn yaya-danger yaya-btn-disabled" type="button">Danger</button>
+                    <pre class="layui-code code-demo" lay-options="{theme: 'dark'}" style="margin-top: 20px;">
+<button type="button" class="yaya-btn yaya-default yaya-btn-disabled">Default</button>
+<button type="button" class="yaya-btn yaya-primary yaya-btn-disabled">Primary</button>
+<button type="button" class="yaya-btn yaya-success yaya-btn-disabled">Success</button>
+<button type="button" class="yaya-btn yaya-info yaya-btn-disabled">Info</button>
+<button type="button" class="yaya-btn yaya-warning yaya-btn-disabled">Warning</button>
+<button type="button" class="yaya-btn yaya-danger yaya-btn-disabled">Danger</button>
+                    </pre>
+                </div>
+
+                <h2 style="color: #606266;margin: 10px;border-top: 1px solid #ccc;padding-top: 15px;">链接按钮</h2>
+                <div>
+                    <button class="yaya-btn is-link-default" type="button">Default</button>
+                    <button class="yaya-btn is-link-primary" type="button">Primary</button>
+                    <button class="yaya-btn is-link-success" type="button">Success</button>
+                    <button class="yaya-btn is-link-info" type="button">Info</button>
+                    <button class="yaya-btn is-link-warning" type="button">Warning</button>
+                    <button class="yaya-btn is-link-danger" type="button">Danger</button>
+                    <button class="yaya-btn is-link-danger yaya-btn-disabled" type="button">禁用</button>
+                    <pre class="layui-code code-demo" lay-options="{theme: 'dark'}" style="margin-top: 20px;">
+<button type="button" class="yaya-btn is-link-default">Default</button>
+<button type="button" class="yaya-btn is-link-primary">Primary</button>
+<button type="button" class="yaya-btn is-link-success">Success</button>
+<button type="button" class="yaya-btn is-link-info">Info</button>
+<button type="button" class="yaya-btn is-link-warning">Warning</button>
+<button type="button" class="yaya-btn is-link-danger">Danger</button>
+<button type="button" class="yaya-btn is-link-danger yaya-btn-disabled">禁用</button>
+                    </pre>
+                </div>
+
+                <h2 style="color: #606266;margin: 10px;border-top: 1px solid #ccc;padding-top: 15px;">图标按钮</h2>
+                <div>
+                    <button class="yaya-btn yaya-primary" type="button">
+                        <i class="bi bi-skip-start-circle-fill"></i>
+                    </button>
+                    <button class="yaya-btn yaya-primary" type="button">
+                        <i class="bi bi-stop-circle-fill"></i>
+                    </button>
+                    <button class="yaya-btn yaya-primary" type="button">
+                        <i class="bi bi-terminal-fill"></i>
+                    </button>
+                    <button class="yaya-btn yaya-primary" type="button">
+                        <i class="bi bi-search-heart-fill"></i><span style="margin-left: 5px;">Search</span>
+                    </button>
+                    <button class="yaya-btn yaya-primary" type="button">
+                        <span style="margin-right: 5px;">Upload</span><i class="bi bi-cloud-upload-fill"></i>
+                    </button>
+                    <pre class="layui-code code-demo" lay-options="{theme: 'dark'}" style="margin-top: 20px;">
+<button class="yaya-btn yaya-primary" type="button"><i class="bi bi-skip-start-circle-fill"></i></button>
+<button class="yaya-btn yaya-primary" type="button"><i class="bi bi-stop-circle-fill"></i></button>
+<button class="yaya-btn yaya-primary" type="button"><i class="bi bi-terminal-fill"></i></button>
+<button class="yaya-btn yaya-primary" type="button"><i class="bi bi-search-heart-fill"></i><span style="margin-left: 5px;">Search</span></button>
+<button class="yaya-btn yaya-primary" type="button"><span style="margin-right: 5px;">Upload</span><i class="bi bi-cloud-upload-fill"></i></button>
+                    </pre>
+                </div>
+
+                <h2 style="color: #606266;margin: 10px;border-top: 1px solid #ccc;padding-top: 15px;">调整尺寸</h2>
+                <div>
+                    <div style="padding: 10px">
+                        <button class="yaya-btn yaya-default yaya-btn-large" type="button">Large</button>
+                        <button class="yaya-btn yaya-default" type="button">Default</button>
+                        <button class="yaya-btn yaya-default yaya-btn-small" type="button">Small</button>
+                        <pre class="layui-code code-demo" lay-options="{theme: 'dark'}" style="margin-top: 20px;">
+<button class="yaya-btn yaya-default yaya-btn-large" type="button">Large</button>
+<button class="yaya-btn yaya-default" type="button">Default</button>
+<button class="yaya-btn yaya-default yaya-btn-small" type="button">Small</button>
+                        </pre>
+                    </div>
+                    <div style="padding: 10px">
+                        <button class="yaya-btn is-round-default yaya-btn-round-large" type="button">Large</button>
+                        <button class="yaya-btn is-round-default" type="button">Default</button>
+                        <button class="yaya-btn is-round-default yaya-btn-round-small" type="button">Small</button>
+                        <pre class="layui-code code-demo" lay-options="{theme: 'dark'}" style="margin-top: 20px;">
+<button class="yaya-btn is-round-default yaya-btn-round-large" type="button">Large</button>
+<button class="yaya-btn is-round-default" type="button">Default</button>
+<button class="yaya-btn is-round-default yaya-btn-round-small" type="button">Small</button>
+                        </pre>
+                    </div>
+                    <div style="padding: 10px">
+                        <button type="button" class="yaya-btn is-circle-default yaya-btn-circle-large">
+                            <i class="layui-icon layui-icon-search"></i>
+                        </button>
+                        <button type="button" class="yaya-btn is-circle-default">
+                            <i class="layui-icon layui-icon-search"></i>
+                        </button>
+                        <button type="button" class="yaya-btn is-circle-default yaya-btn-circle-small">
+                            <i class="layui-icon layui-icon-search"></i>
+                        </button>
+                    </div>
+                    <pre class="layui-code code-demo" lay-options="{theme: 'dark'}" style="margin-top: 20px;">
+<button type="button" class="yaya-btn is-circle-default yaya-btn-circle-large"><i class="layui-icon layui-icon-search"></i></button>
+<button type="button" class="yaya-btn is-circle-default"><i class="layui-icon layui-icon-search"></i></button>
+<button type="button" class="yaya-btn is-circle-default yaya-btn-circle-small"><i class="layui-icon layui-icon-search"></i></button>
+                    </pre>
+                </div>
+
+                <h2 style="color: #606266;margin: 10px;border-top: 1px solid #ccc;padding-top: 15px;">流式按钮(100%)</h2>
+                <div>
+                    <div style="padding: 10px">
+                        <div class="layui-row layui-col-space10">
+                            <div class="layui-col-md6">
+                                <button class="yaya-btn yaya-primary yaya-fluid" type="button">Primary</button>
+                            </div>
+                            <div class="layui-col-md6">
+                                <button class="yaya-btn yaya-success yaya-fluid" type="button">Success</button>
+                            </div>
+                        </div>
+                        <pre class="layui-code code-demo" lay-options="{theme: 'dark'}" style="margin-top: 20px;">
+<button class="yaya-btn yaya-primary yaya-fluid" type="button">Primary</button>
+<button class="yaya-btn yaya-success yaya-fluid" type="button">Success</button>
+                        </pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../layui/layui.js"></script>
+    <script>
+        layui.use(function(){
+            // code
+            layui.code({
+                elem: '.code-demo'
+            });
+        })
+    </script>
+</body>
+</html>

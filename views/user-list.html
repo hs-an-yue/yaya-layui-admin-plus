@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../layui/css/layui.css">
     <link rel="stylesheet" href="../css/yaya-common.css">
     <link rel="stylesheet" href="../css/yaya-style-extend.css">
-    <link rel="stylesheet" href="../font/iconfont.css">
+    <link rel="stylesheet" href="../font/bootstrap-icons.css">
     <title>用户管理</title>
     <style>
         .yaya-user-content{
@@ -41,7 +41,7 @@
     </style>
 </head>
 <body>
-    <div class="yaya-box">
+    <div class="yaya-box-fluid">
         <div class="yaya-user-content">
             <div class="yaya-user-left">
                 <!-- 部门搜索框 -->
@@ -215,12 +215,12 @@
                 defaultToolbar:[],
                 toolbar:`
                     <div>
-                        <button type="button" lay-event="add" class="yaya-btn is-plain-primary"><i class="iconfont icon-CRMEB-jia"></i>新增</button>
+                        <button type="button" lay-event="add" class="yaya-btn is-plain-primary"><i class="layui-icon layui-icon-addition"></i>新增</button>
                         <button type="button" lay-event="userImport" class="yaya-btn is-plain-success"><i class="layui-icon layui-icon-upload-drag"></i>导入</button>
                         <button type="button" lay-event="batchDel" class="yaya-btn is-plain-danger"><i class="layui-icon layui-icon-delete"></i>删除</button>
-                        <button type="button" lay-event="resetPwd" class="yaya-btn is-plain-info"><i class="iconfont icon-a-1_huaban1"></i>重置密码</button>
+                        <button type="button" lay-event="resetPwd" class="yaya-btn is-plain-info"><i class="layui-icon layui-icon-refresh-3"></i>重置密码</button>
                         <button type="button" lay-event="userEnable" class="yaya-btn is-plain-warning"><i class="layui-icon layui-icon-vercode"></i>用户解封</button>
-                        <button type="button" lay-event="userDisEnable" class="yaya-btn yaya-default"><i class="layui-icon layui-icon-lock"></i>用户封禁</button>
+                        <button type="button" lay-event="userDisEnable" class="yaya-btn yaya-default"><i class="layui-icon layui-icon-close-fill"></i>用户封禁</button>
                     </div>
                 `,
                 cols: [[

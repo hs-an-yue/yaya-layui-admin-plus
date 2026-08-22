@@ -415,6 +415,7 @@
 /*宽度100%*/
 .yaya-fluid{
     width: 100%;
+    padding: 19px 0;
 }
 /* 标签扩展 */
 .yaya-tag{
@@ -509,6 +510,7 @@
 .is-round{
     border-radius: 9999px;
 }
+/* 标签 移除标记 */
 .yaya-x>i{
     margin-left: 3px;
     cursor: pointer;

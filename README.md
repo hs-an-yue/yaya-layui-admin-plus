@@ -11,14 +11,14 @@
 </div>
 
 #### 介绍
-`YaYa-Layui-Admin-Plus`是一套基于[LayUI](https://layui.dev/)实现的前端管理模板，
+`YaYa-Layui-Admin-Plus`是一套基于[LayUI](https://layui.dev/)实现的前端管理模板，项目采用原始单页独立的构建方式，不依赖脚手架，开发者只需要掌握简单的HTML/CSS/JS基础知识即可快速上手开发，开发和维护成本极低。
 
 #### 设计初衷
 ```
 1. 降低开发成本: 程序员只需要会简单的HTML/CSS/JS即可快速上手开发,开发成本极低,对应的学习成本也极低.
 2. 降低维护成本: 简单的技术栈对应着较低的维护成本(人员招聘成本,技术学习时间成本等)
 
-🌟 需要一套简单的技术栈,让公司在岗位招聘的时候可以有更多灵活的选择,项目支撑很多年后依然充满活力. 🚀
+🌟 需要一套简单的技术栈,降低学习、开发和维护成本. 🚀
 ```
 #### 在线预览
 
@@ -30,9 +30,10 @@
 #### 更新日志
 
 ```
-2026-08-19      升级Layui版本库到v2.13.9,修复iframe嵌入的页面滚动条不能到浏览器底部的问题 🆕
-2026-04-06      左侧菜单选中样式优化,顶部选项卡样式优化,主题优化,Layui库升级,其它样式优化 🆕🚀🎉✈️
-2026-03-04      新增系统监控页面,优化其它样式,发布v2.0-stable版本 🆕🚀🎉💪
+2026-08-22      删除无效页面,新增案例页面,优化一些现有页面,新增图标库 🆕 🚀🔥👏💪
+2026-08-19      升级Layui版本库到v2.13.9,修复iframe嵌入的页面滚动条不能到浏览器底部的问题
+2026-04-06      左侧菜单选中样式优化,顶部选项卡样式优化,主题优化,Layui库升级,其它样式优化
+2026-03-04      新增系统监控页面,优化其它样式,发布v2.0-stable版本 
 2026-02-28      新增布局组件，修改案例页面的样式为模板定义的样式，并且优化了几个不合理的样式，首页统计样式调整
 2026-02-27      新增列表条件搜索组件
 2026-02-26      新增标签和徽章组件样式
@@ -53,7 +54,6 @@
     <tr> <td style="width:50%;"> <img src="assets/03-login-03.png" alt=""> </td><td style="width:50%;"><img src="assets/04-login-04.png" alt=""></td></tr>
     <tr> <td style="width:50%;"> <img src="assets/05-dashboard.png" alt=""> </td><td style="width:50%;"><img src="assets/06-workbench.png" alt=""></td></tr>
     <tr> <td style="width:50%;"> <img src="assets/09-dashboard.png" alt=""> </td><td style="width:50%;"> <img src="assets/07-bulletin-board.png" alt=""> </td></tr>
-    <tr> <td style="width:50%;"> <img src="assets/53-server-monitor.png" alt=""> </td><td style="width:50%;"> <img src="assets/54-cache-monitor.png" alt=""> </td></tr>
 </table>
 
 #### 项目下载和配置
@@ -153,4 +153,4 @@ yaya-layui-admin-plus
 
 #### 💖 致谢
 
-感谢 [Layui](https://layui.dev)、[Echarts](https://echarts.apache.org/)、[xm-select](https://xm-select.com/file/xm-select/v1.2.4/#/component/install)、[Vue](https://vuejs.org/)、[BootStrap5](https://getbootstrap.com/)、[Element Plus](https://element-plus.org/)、[Naive UI](https://www.naiveui.com/)、[View UI Plus](https://www.iviewui.com/) 等前端跨框架支持;以及 [Gemini](https://gemini.google.com/app)、[Grok](https://grok.com/)、[Qwen](https://www.qianwen.com/chat)、[豆包](https://www.doubao.com/chat/) 等模型的支持。
+感谢 [Layui](https://layui.dev)、[Echarts](https://echarts.apache.org/)、[xm-select](https://xm-select.com/file/xm-select/v1.2.4/#/component/install)、[BootStrap5](https://getbootstrap.com/)、[Element Plus](https://element-plus.org/) 等前端跨框架支持.

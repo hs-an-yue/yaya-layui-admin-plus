@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 响应式配置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- LayUI css库 -->
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <!-- icons字体图标库 -->
+    <link rel="stylesheet" href="../font/bootstrap-icons.css">
+    <!-- 公共样式 -->
+    <link rel="stylesheet" href="../css/yaya-common.css">
+    <!-- 扩展样式 -->
+    <link rel="stylesheet" href="../css/yaya-style-extend.css">
+    <title>yaya-admin-plus</title>
+    <style>
+        /* 单选框默认颜色覆盖 */
+        .layui-form-radio:hover>*, .layui-form-radioed, .layui-form-radioed>i{
+            color: #409eff;
+        }
+    </style>
+</head>
+<body>
+    <div class="yaya-box-fluid">
+        <div class="yaya-panel">
+            <form class="layui-form">
+                <input type="hidden" name="userId">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">用户名称</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="nickname"  placeholder="请输入名称" class="layui-input yaya-input-border-radius">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">用户手机</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="phone"  placeholder="请输入手机" class="layui-input yaya-input-border-radius">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">用户邮箱</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="email"  placeholder="请输入邮箱" class="layui-input yaya-input-border-radius">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">用户性别</label>
+                    <div class="layui-input-block" id="sex">
+                        <input type="radio" name="sex" value="1" title="男" checked>
+                        <input type="radio" name="sex" value="0" title="女">
+                        <input type="radio" name="sex" value="2" title="保密">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <button class="layui-btn layui-btn-normal layui-btn-radius layui-btn-fluid" type="button" >用户更新</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="../layui/layui.js"></script>
+</body>
+</html>

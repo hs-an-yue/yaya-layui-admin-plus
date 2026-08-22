@@ -82,8 +82,7 @@
                             </a>
                             <dl class="layui-nav-child">
                                 <dd><a onclick="yaya_add('888888888','个人中心','views/personal-center.html')">个人中心</a></dd>
-                                <dd id="pwdChange"><a>修改密码</a></dd>
-                                <dd><a href="#">退出</a></dd>
+                                <dd><a href="#">退出登录</a></dd>
                             </dl>
                         </li>
                     </ul>
@@ -97,25 +96,5 @@
     </div>
     <script src="layui/layui.js"></script>
     <script src="js/yaya-admin-plus.js"></script>
-    <script>
-        layui.use(function (){
-            const $ = layui.$;
-            const layer = layui.layer;
-
-            /* 修改密码 */
-            $("#pwdChange").click(function (){
-                layer.open({
-                    type: 2,
-                    title: '修改密码',
-                    shadeClose: true,
-                    shade: 0.3,
-                    offset:'100px',
-                    area: ['350px', '300px'],
-                    content: 'views/pwd-change.html'
-                });
-
-            })
-        });
-    </script>
 </body>
 </html>
