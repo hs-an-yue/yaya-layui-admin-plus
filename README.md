@@ -2,7 +2,7 @@
     <img src="assets/yaya-layui-admin-plus.png" alt="yaya" style="width: 50%;">
 </div>
 
-#### <div align="center"> 基于Layui2.13+实现的一套极简前端管理模板 </div>
+### <div align="center"> 基于Layui2.13+实现的一套极简前端管理模板 </div>
 <div align="center">
 	<a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/Layui-%3E=2.13+-magenta"></a>
     <a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/YaYa Layui Admin Plus-v2.2-deeppink"></a>
@@ -10,24 +10,39 @@
     <a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/LICENSE-MIT-tomato"></a>
 </div>
 
-#### 介绍
+## 介绍
 `YaYa-Layui-Admin-Plus`是一套基于[LayUI](https://layui.dev/)实现的前端管理模板，项目采用原始单页独立的构建方式，不依赖脚手架，开发者只需要掌握简单的HTML/CSS/JS基础知识即可快速上手开发，开发和维护成本极低。
 
-#### 设计初衷
+## 设计初衷
 ```
 1. 降低开发成本: 程序员只需要会简单的HTML/CSS/JS即可快速上手开发,开发成本极低,对应的学习成本也极低.
 2. 降低维护成本: 简单的技术栈对应着较低的维护成本(人员招聘成本,技术学习时间成本等)
 
 🌟 需要一套简单的技术栈,降低学习、开发和维护成本. 🚀
 ```
-#### 在线预览
+## 在线预览
 
 ```
 预览地址 : http://106.14.27.178/
 账号密码 : root/123456
 ```
 
-#### 更新日志
+## 学习路线
+
+<img src="assets/15-yaya-layui-admin-plus-study-line.png" alt="15">
+
+## 模板预览
+
+<table>
+    <tr> <td style="width:50%;"> <img src="assets/01-login-01.png" alt=""> </td><td style="width:50%;"><img src="assets/02-login-02.png" alt=""></td></tr>
+    <tr> <td style="width:50%;"> <img src="assets/03-dashboard.png" alt=""> </td><td style="width:50%;"><img src="assets/04-workbench.png" alt=""></td></tr>
+    <tr> <td style="width:50%;"> <img src="assets/05-dashboard.png" alt=""> </td><td style="width:50%;"> <img src="assets/06-workbench.png" alt=""> </td></tr>
+    <tr> <td style="width:50%;"> <img src="assets/07-user-list.png" alt=""> </td><td style="width:50%;"> <img src="assets/08-menu-list.png" alt=""> </td></tr>
+    <tr> <td style="width:50%;"> <img src="assets/09-color-list.png" alt=""> </td><td style="width:50%;"> <img src="assets/10-button-list.png" alt=""> </td></tr>
+    <tr> <td style="width:50%;"> <img src="assets/11-person-center.png" alt=""> </td><td style="width:50%;"> <img src="assets/12-menu-tree.png" alt=""> </td></tr>
+</table>
+
+## 更新日志
 
 ```
 2026-08-22      删除无效页面,新增案例页面,优化一些现有页面,新增图标库 🆕 🚀🔥👏💪
@@ -46,29 +61,71 @@
 2026-01-12      零帧起手
 ```
 
+## 项目结构
+```
+yaya-layui-admin-plus
+├── assets                                  # README.md文件中显示的图片
+├── css                                     # 核心css文件
+├────── index.css                               # index.html首页css样式配置文件
+├────── menu.css                                # index.html页面左侧菜单栏的css样式配置文件
+├────── yaya-common.css                         # 为YaYa模板布局提供了一些常见样式，布局容器、比如容器鼠标移入添加动画、布局面板等
+├────── yaya-style-extend.css                   # 为YaYa模板提供了一些扩展样式，例如按钮扩展、标签徽章扩展等
+├── data                                    # 模拟数据
+├── image                                   # 图片(图标、LOGO等)
+├── js                                      # 核心JS文件
+├────── yaya-admin-plus.js                      # YaYa模板核心文件,包含菜单生成、选项卡操作、面包屑功能等
+├────── xm-select.js                            # 多功能下拉框库(第三方库)
+├────── echarts.min.js                          # 图表库(第三方库)
+├── layui                                   # Layui核心库
+├── views                                   # DEMO页面
+├────── dashboard.html	                        # 仪表盘页
+├────── dept-add.html	                        # 部门添加
+├────── dept-list.html	                        # 部门列表
+├────── extend-about.html	                # 关于我
+├────── extend-badge.html                       # 徽章和标签扩展
+├────── extend-button.html                      # 按钮扩展
+├────── extend-color.html                       # 颜色推荐
+├────── extend-iconfont.html                    # 字体图标扩展
+├────── extend-layout-1.html                    # 布局1(紧凑)
+├────── extend-layout-2.html                    # 布局2(舒缓)
+├────── extend-search.html                      # 条件搜索扩展
+├────── menu-list.html                          # 菜单树形列表
+├────── notice-detail.html	                # 消息详情
+├────── notice-list.html	                # 消息列表
+├────── personal-center.html	                # 个人中心页
+├────── personal-center-password-edit.html	# 个人中心修改密码
+├────── personal-center-user-edit.html		# 个人中心修改用户
+├────── tree-menu1.html		                # 多级菜单1
+├────── tree-menu2.html		                # 多级菜单2
+├────── tree-menu3.html		                # 多级菜单3
+├────── tree-menu4.html		                # 多级菜单4
+├────── user-add.html		                # 用户添加
+├────── user-import.html		        # 用户导入
+├────── user-list.html		                # 用户列表
+├────── workbench.html		                # 工作台
+├── .gitignore                              # git版本忽略文件
+├── DISCLAIMER.md                           # 开源软件的免责声明文件
+├── favicon.ico                             # 浏览器选项卡上显示的图标
+├── index.html                              # 项目首页
+├── LICENSE                                 # 开源协议
+├── login1.html		                    # 登录页1
+├── login2-government.html	            # 登录页2-适合政企的登录页
+├── README.md                               # 介绍文件
+```
 
+## 项目下载和配置
 
-#### 模板预览
-
-<table>
-    <tr> <td style="width:50%;"> <img src="assets/03-login-03.png" alt=""> </td><td style="width:50%;"><img src="assets/04-login-04.png" alt=""></td></tr>
-    <tr> <td style="width:50%;"> <img src="assets/05-dashboard.png" alt=""> </td><td style="width:50%;"><img src="assets/06-workbench.png" alt=""></td></tr>
-    <tr> <td style="width:50%;"> <img src="assets/09-dashboard.png" alt=""> </td><td style="width:50%;"> <img src="assets/07-bulletin-board.png" alt=""> </td></tr>
-</table>
-
-#### 项目下载和配置
-
-1. 代码克隆
+### 1. 代码克隆
 ```
 Gitee : git clone https://gitee.com/ukoko/yaya-layui-admin-plus.git
 或者
 Github: git clone https://github.com/hs-an-yue/yaya-layui-admin-plus.git
 ```
-2. 开发工具选择
+### 2. 开发工具选择
 ```
 开发工具建议选择 vscode 为什么呢? ↓↓↓↓↓↓↓↓↓↓↓↓ 请看下面 ↓↓↓↓↓↓↓↓↓↓↓↓
 ```
-3. 开发工具配置(可选)
+### 3. 开发工具配置(可选)
 ```
 如果不需要进行前后端联调，这个步骤省略。
 在进行前端+后端开发联调时很容易出现跨域问题,使用vscode开发工具可以很方便的解决跨域，解决方式如下:
@@ -91,66 +148,18 @@ Github: git clone https://github.com/hs-an-yue/yaya-layui-admin-plus.git
 3. 配置预览    
 ```
 <table>
-    <tr> <td> <img src="assets/17-vscode-proxy.png" alt=""> </td></tr>
+    <tr> <td> <img src="assets/13-vscode-proxy.png" alt=""> </td></tr>
 </table>
 
-#### 项目结构
-```
-yaya-layui-admin-plus
-├── assets                          # Gitee或者Github上README.md文件中显示的图片
-├── css                             # yaya-layui-admin-plus模板的核心css文件
-├────── index.css                   # index.html首页的核心css
-├────── menu.css                    # index.html首页中左侧导航区域(菜单+LOGO+TITLE)的核心css
-├────── yaya-common.css             # 整个模板中大部分页面需要用到的公共css配置在这里(这个属于个人喜好)
-├────── yaya-style-extend.css       # yaya-layui-admin-plus模板扩展样式(按钮扩展+图标扩展等)
-├── data                            # yaya-layui-admin-plus模板中的测试数据(例如左侧菜单生成数据,用户测试数据,部门测试数据等)
-├── image                           # yaya-layui-admin-plus模板中用到的图片(登陆页面的背景图、网站用到的图标等)
-├── js                              # yaya-layui-admin-plus模板中的核心JS文件
-├────── yaya-admin-plus.js          # yaya-layui-admin-plus模板的核心JS文件(包含整个模板的核心功能的核心函数,例如 左侧菜单实现、选项卡实现等)
-├────── xm-select.js                # 多功能下拉框库(第三方库)
-├────── echarts.min.js              # 图表库(第三方库)
-├── layui                           # Layui核心库
-├── views                           # yaya-layui-admin-plus模板中提供的一些案例页面(不喜欢可以全部删掉,用户自己重新添加)
-├────── about.html	            # 关于我
-├────── bulletin-board.html         # 公告通知页(内容由模型生成)
-├────── badge-tag-extend.html       # 徽章和标签扩展样式页
-├────── button-extend.html          # 按钮扩展样式页
-├────── extend-iconfont.html        # 字体图标扩展样式页
-├────── panel-extend.html           # 面板条件搜索扩展样式页
-├────── dashboard.html		    # 仪表盘页(首页)
-├────── dept-list.html		    # 部门页(内容由模型生成)
-├────── personal-center.html	    # 个人中心页
-├────── pwd-change.html		    # 修改密码页
-├────── template.html		    # 模板页(复制整个页面生成新的页面，比较快，没什么实际意义)
-├────── menu1.html		        # 多级测试页1 
-├────── menu2.html		        # 多级测试页2
-├────── menu3.html		        # 多级测试页3
-├────── menu4.html		        # 多级测试页4
-├────── user-list.html		    # 用户页
-├────── workbench.html		    # 工作台页
-├── .gitignore                      # Git配置文件,用于版本控制管理
-├── DISCLAIMER.md                   # 开源软件的免责声明文件
-├── favicon.ico                     # yaya-layui-admin-plus模板在预览时,浏览器选项卡上显示的图标
-├── index.html                      # yaya-layui-admin-plus模板首页
-├── LICENSE                         # 开源软件的开源协议(MIT协议)
-├── login1.html		            # 登录页1
-├── login2-government.html	    # 登录页2(模型生成) 适合政企的登录页
-├── README.md                       # yaya-layui-admin-plus模板的介绍文件
-
-```
-#### 项目运行
+## 项目运行
 ```
 双击项目中的index.html页面,右键按照下面图示进行项目启动
 ```
 
 <table>
-    <tr> <td> <img src="assets/18-vscode-show.png" alt=""> </td></tr>
+    <tr> <td> <img src="assets/14-vscode-show.png" alt=""> </td></tr>
 </table>
 
-#### 🚀 参与贡献
+## 🚀 参与贡献
 
 > 一人团队  -- 联系邮箱: hd1611756908@163.com
-
-#### 💖 致谢
-
-感谢 [Layui](https://layui.dev)、[Echarts](https://echarts.apache.org/)、[xm-select](https://xm-select.com/file/xm-select/v1.2.4/#/component/install)、[BootStrap5](https://getbootstrap.com/)、[Element Plus](https://element-plus.org/) 等前端跨框架支持.

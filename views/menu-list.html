@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="../layui/css/layui.css">
     <link rel="stylesheet" href="../css/yaya-common.css">
     <link rel="stylesheet" href="../css/yaya-style-extend.css">
-    <title>部门管理</title>
+    <link rel="stylesheet" href="../font/bootstrap-icons.css">
+    <title>菜单管理</title>
 </head>
 <body>
     <div class="yaya-box-fluid">
@@ -17,9 +18,9 @@
             <form class="layui-form" style="padding: 10px 0">
                 <div class="layui-row">
                     <div class="layui-col-md3 layui-col-sm3 yaya-form-item">
-                        <label class="yaya-form-label">部门</label>
+                        <label class="yaya-form-label">菜单名</label>
                         <div class="yaya-input-block">
-                            <input type="text" placeholder="部门" autocomplete="off" class="layui-input yaya-input-border-radius">
+                            <input type="text" placeholder="菜单名" autocomplete="off" class="layui-input yaya-input-border-radius">
                         </div>
                     </div>
                     <div class="layui-col-md3 layui-col-sm3 yaya-form-item">
@@ -33,12 +34,6 @@
                         </div>
                     </div>
                     <div class="layui-col-md3 layui-col-sm3 yaya-form-item">
-                        <label class="yaya-form-label">时间范围</label>
-                        <div class="yaya-input-block">
-                            <input type="text" class="layui-input yaya-input-border-radius" id="shortcut-range-date" placeholder="时间范围">
-                        </div>
-                    </div>
-                    <div class="layui-col-md3 layui-col-sm3 yaya-form-item">
                         <button type="button" class="yaya-btn yaya-primary">搜索</button>
                         <button type="reset" class="yaya-btn" style="margin-left: 10px;">重置</button>
                     </div>
@@ -49,7 +44,6 @@
             <!-- 菜单操作按钮 -->
             <div style="display: flex;flex-direction: row;justify-content: flex-end;padding: 10px;">
                 <button id="del-dept" type="button" class="yaya-btn yaya-danger" style="margin-right: 10px;">删除</button>
-                <button id="expandId" type="button" class="yaya-btn yaya-default" style="margin-right: 10px;">收起</button>
                 <button id="add-dept" type="button" class="yaya-btn yaya-primary">添加</button>
             </div>
             <!-- 表格数据显示 -->
@@ -59,48 +53,39 @@
     <script src="../layui/layui.js"></script>
     <script>
         layui.use(function(){
-            const $ = layui.$;
+
             const treeTable = layui.treeTable;
-            const laydate = layui.laydate;
-
-
-            //添加一级菜单
-            $("#add-dept").click(function(){
-                layer.open({
-                    type: 2, // page 层类型 iframe
-                    area: ['410px', '350px'],
-                    title: '添加',
-                    shade: 0.6, // 遮罩透明度
-                    shadeClose: true, // 点击遮罩区域，关闭弹层
-                    content: 'dept-add.html',
-                    end: function(){
-                        //刷新表格
-                        treeTable.reload('treeTable-dept');
-                    }
-                });
-            });
-
-            //时间控件
-            laydate.render({
-                elem: "#shortcut-range-date",
-                type: "date",
-                range: true
-            });
-
-            //树状表格收起
-            $("#expandId").click(function(){
-                treeTable.expandAll('treeTable', false);
-            });
 
             //表格渲染
             treeTable.render({
                 elem: '#treeTable',
-                url: '../data/depts.json',
+                url: '../data/menu-tree.json',
                 skin:'line',
                 cols: [[
                     {type: 'checkbox', fixed: 'left'},
-                    {field: 'deptId', title: 'ID',  sort: true, fixed: 'left'},
-                    {field: 'deptName', title: '部门名称',width:300},
+                    {field: 'menuId', title: '编号', fixed: 'left'},
+                    {field: 'menuTitle', title: '菜单名称',width:300},
+                    {field: 'perms', title: '权限'},
+                    {
+                        title: '图表',
+                        templet:function (row){
+                            let menuIcon = row.menuIcon;
+                            return `<i class="${menuIcon}"></i>`;
+                        }
+                    },
+                    {
+                        title: '类型',
+                        templet:function (row){
+                            let menuType = row.menuType;
+                            if(menuType===1){
+                                return `<span class="yaya-tag yaya-tag-light-primary tag-small">文档</span>`;
+                            }else if(menuType===2){
+                                return `<span class="yaya-tag yaya-tag-light-success tag-small">链接</span>`;
+                            }else {
+                                return `<span class="yaya-tag yaya-tag-light-warning tag-small">按钮</span>`;
+                            }
+                        }
+                    },
                     {field: 'orderNum', title: '序号'},
                     {
                         title: '状态',
@@ -113,9 +98,10 @@
                             }
                         }
                     },
-                    {field: 'createTime', title: '创建时间'},
+                    {field: 'createTime', title: '创建时间',width: 180},
                     {
                         title: "操作",
+                        width: 180,
                         templet:function (){
                             let str='<button class="yaya-btn is-link-primary yaya-btn-small" type="button">更新</button>';
                             str+='<button class="yaya-btn is-link-danger yaya-btn-small" type="button">删除</button>';
@@ -126,12 +112,12 @@
                 ]],
                 tree:{
                     customName:{
-                        id:'deptId',
-                        name:'deptName'
+                        id:'menuId',
+                        name:'menuTitle',
+                        icon:'menuIcon'
                     },
                     view:{
-                        showIcon:false,
-                        expandAllDefault:true
+                        expandAllDefault:false
                     }
 
                 },
