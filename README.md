@@ -5,8 +5,8 @@
 ### <div align="center"> 基于Layui2.13+实现的一套极简前端管理模板 </div>
 <div align="center">
 	<a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/Layui-%3E=2.13+-magenta"></a>
-    <a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/YaYa Layui Admin Plus-v2.2-deeppink"></a>
-	<a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/作者-%E5%A4%9C%E6%B3%8A1990-quartz"></a>
+    <a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/YaYa Layui Admin Plus-v3.0-deeppink"></a>
+	<a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/作者-YaYa-quartz"></a>
     <a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/LICENSE-MIT-tomato"></a>
 </div>
 
@@ -14,12 +14,9 @@
 `YaYa-Layui-Admin-Plus`是一套基于[LayUI](https://layui.dev/)实现的前端管理模板，项目采用原始单页独立的构建方式，不依赖脚手架，开发者只需要掌握简单的HTML/CSS/JS基础知识即可快速上手，开发和维护成本极低。
 
 ## 设计初衷
-```
-🌟 需要一套简单的前端技术栈,降低学习、开发和维护成本. 
 
-1. 降低开发成本: 程序员只需要会简单的HTML/CSS/JS即可快速上手开发,开发成本极低,对应的学习成本也极低.
-2. 降低维护成本: 简单的技术栈对应着较低的维护成本(人员招聘成本,技术学习时间成本等)
-```
+> 🌟 需要一套最简单的技术栈，来降低前端的学习、开发和维护成本。
+
 ## 在线预览
 
 ```
@@ -31,7 +28,7 @@
 
 <img src="assets/15-yaya-layui-admin-plus-study-line.png" alt="15">
 
-## 模板预览
+## 页面预览
 
 <table>
     <tr> <td style="width:50%;"> <img src="assets/01-login-01.png" alt=""> </td><td style="width:50%;"><img src="assets/02-login-02.png" alt=""></td></tr>
