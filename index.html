@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="css/menu.css">
     <!-- 第三方图标库(bootstrap)css -->
     <link rel="stylesheet" href="font/bootstrap-icons.css">
+    <!-- YaYa 扩展样式 -->
+    <link rel="stylesheet" href="css/yaya-style-extend.css">
 </head>
 <body>
     <!--
@@ -70,7 +72,10 @@
                 <!-- 工具条右侧内容 -->
                 <div class="yaya-right-bar-right">
                     <!--消息提示-->
-                    <img lay-on="bell-icon" style="width: 16px;height: 16px;margin-right: 10px;" src="image/icon/bell.png" alt="bell">
+                    <div class="notification-container">
+                        <img lay-on="bell-icon" style="width: 17px;height: 17px;margin-right: 10px;" src="image/icon/bell.png" alt="bell">
+                        <span class="dot" style="width: 6px;height: 6px;left: 6px;top: 3px;"></span>
+                    </div>
                     <!--主题配置-->
                     <img lay-on="theme-icon" style="width: 16px;height: 16px;" src="image/icon/theme.png" alt="theme">
                     <!--用户信息-->

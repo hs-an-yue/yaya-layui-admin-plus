@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 响应式配置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- LayUI css库 -->
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <!-- icons字体图标库 -->
+    <link rel="stylesheet" href="../font/bootstrap-icons.css">
+    <!-- 公共样式 -->
+    <link rel="stylesheet" href="../css/yaya-common.css">
+    <!-- 扩展样式 -->
+    <link rel="stylesheet" href="../css/yaya-style-extend.css">
+    <title>yaya-admin-plus</title>
+</head>
+<body>
+    <div class="yaya-box-fluid">
+        <!-- 搜索条件 -->
+        <div class="yaya-panel">
+            <form class="layui-form">
+                <div class="layui-row">
+                    <div class="layui-col-md3 layui-col-sm3 yaya-form-item">
+                        <label class="yaya-form-label">用户</label>
+                        <div class="yaya-input-block">
+                            <input type="text" placeholder="请输入" autocomplete="off" class="layui-input yaya-input-border-radius">
+                        </div>
+                    </div>
+                    <div class="layui-col-md3 layui-col-sm3 yaya-form-item">
+                        <label class="yaya-form-label">手机号</label>
+                        <div class="yaya-input-block">
+                            <input type="text" placeholder="请输入" autocomplete="off" class="layui-input yaya-input-border-radius">
+                        </div>
+                    </div>
+                    <div class="layui-col-md3 layui-col-sm3 yaya-form-item">
+                        <label class="yaya-form-label">时间范围</label>
+                        <div class="yaya-input-block">
+                            <input type="text" class="layui-input yaya-input-border-radius" id="shortcut-range-date" placeholder="时间范围">
+                        </div>
+                    </div>
+                    <div class="layui-col-md3 layui-col-sm3 yaya-form-item">
+                        <button type="button" class="yaya-btn yaya-primary"><i class="bi bi-search" style="margin-right: 5px;"></i>搜索</button>
+                        <button type="reset" class="yaya-btn yaya-default" style="margin-left: 10px;"><i class="bi bi-arrow-clockwise" style="margin-right: 5px;"></i> 重置</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- 表格显示 -->
+        <div class="yaya-panel" style="margin-top: 10px;">
+            <table class="layui-hide" id="ID-table-demo-parse"></table>
+        </div>
+    </div>
+    <script src="../layui/layui.js"></script>
+    <script>
+        layui.use(function (){
+            const table  = layui.table ;
+            const laydate = layui.laydate;
+
+            //时间控件
+            laydate.render({
+                elem: "#shortcut-range-date",
+                type: "date",
+                range: true
+            });
+
+            //表格数据显示
+            table.render({
+                elem: '#ID-table-demo-parse',
+                url:'../data/test1.json',
+                skin:'line',
+                response: {
+                    statusCode: 200 // 重新规定成功的状态码为 200，table 组件默认为 0
+                },
+                // 将原始数据解析成 table 组件所规定的数据格式
+                parseData: function(res){
+                    return {
+                        "code": res.status, //解析接口状态
+                        "msg": res.message, //解析提示文本
+                        "count": res.total, //解析数据长度
+                        "data": res.rows.item //解析数据列表
+                    };
+                },
+                cols: [[
+                    {field:'id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true},
+                    {field:'username', title:'用户名', width:120},
+                    {field:'email', title:'邮箱', width:150},
+                    {field:'experience', title:'积分', width:100, sort: true},
+                    {field:'sex', title:'性别', width:80, sort: true},
+                    {field:'sign', title:'签名'},
+                    {field:'joinTime', title:'加入时间', width:120}
+                ]],
+                page:{
+                    prev:"上一页",
+                    next:"下一页",
+                    theme:"#409EFF"
+                }
+            });
+
+        });
+    </script>
+</body>
+</html>

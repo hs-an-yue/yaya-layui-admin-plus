@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- 标签icon设置 -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <link rel="stylesheet" href="css/yaya-common.css">
+    <link rel="stylesheet" href="css/yaya-style-extend.css">
+    <link rel="stylesheet" href="font/bootstrap-icons.css">
+  <title>企业管理系统 - 登录</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Inter, system-ui, sans-serif;
+    }
+    :root {
+      --primary: #165DFF;
+      --primary-hover: #0E4BDB;
+      --bgLight: #F7F8FA;
+      --textGray: #667085;
+      --borderGray: #E5E7EB;
+      --textDark: #1D2939;
+      --textMid: #344054;
+    }
+    body {
+      background-color: var(--bgLight);
+      min-height: 100vh;
+    }
+    .container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    @media (min-width: 1024px) {
+      .container {
+        flex-direction: row;
+      }
+    }
+    /* 左侧动画区域 */
+    .left-panel {
+      width: 100%;
+      min-height: 320px;
+      background: linear-gradient(to bottom right, #EDF4FF, #F0F6FF);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      overflow: hidden;
+      position: relative;
+    }
+    @media (min-width: 1024px) {
+      .left-panel {
+        width: 50%;
+        min-height: auto;
+      }
+    }
+    .circle {
+      position: absolute;
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+    }
+    .circle-1 {
+      width: 16rem;
+      height: 16rem;
+      background-color: rgba(22, 93, 255, 0.05);
+    }
+    .circle-2 {
+      width: 11rem;
+      height: 11rem;
+      background-color: rgba(22, 93, 255, 0.08);
+      animation-delay: 1s;
+    }
+    .circle-3 {
+      width: 8rem;
+      height: 8rem;
+      background-color: rgba(22, 93, 255, 0.10);
+      animation-delay: 2s;
+    }
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0px); }
+    }
+    .content-wrap {
+      position: relative;
+      z-index: 10;
+      max-width: 26rem;
+    }
+    .svg-box {
+      width: 100%;
+    }
+    .bar {
+      animation: pulseSlow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    @keyframes pulseSlow {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+    .title-left {
+      margin-top: 2rem;
+      text-align: center;
+      font-size: 28px;
+      font-weight: bold;
+      color: var(--textDark);
+    }
+    .desc-left {
+      margin-top: 0.75rem;
+      text-align: center;
+      font-size: 1rem;
+      color: var(--textGray);
+    }
+    /* 右侧表单区域 */
+    .right-panel {
+      width: 100%;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1.5rem;
+    }
+    @media (min-width: 1024px) {
+      .right-panel {
+        width: 50%;
+        padding: 3rem 4rem;
+      }
+    }
+    .form-wrap {
+      width: 100%;
+      max-width: 24rem;
+    }
+    .form-header h1 {
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--textDark);
+    }
+    .form-header p {
+      margin-top: 0.5rem;
+      color: var(--textGray);
+      font-size: 1rem;
+    }
+    .form-item label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--textMid);
+      margin-bottom: 0.5rem;
+    }
+    .form-header>p{
+        padding: 5px 0 20px 0;
+    }
+    .layui-input-wrap .layui-input-prefix, .layui-input-wrap .layui-input-split, .layui-input-wrap .layui-input-suffix{
+        line-height: 45px;
+    }
+  </style>
+</head>
+<body>
+    <div class="container">
+    <!-- 左侧动画区域 -->
+    <div class="left-panel">
+      <div class="circle circle-1"></div>
+      <div class="circle circle-2"></div>
+      <div class="circle circle-3"></div>
+      <div class="content-wrap">
+        <svg viewBox="0 0 400 320" class="svg-box">
+          <!-- 背景网格 -->
+          <g stroke="#D6E4FF" stroke-width="1">
+            <line x1="50" y1="60" x2="350" y2="60"/>
+            <line x1="50" y1="120" x2="350" y2="120"/>
+            <line x1="50" y1="180" x2="350" y2="180"/>
+            <line x1="50" y1="240" x2="350" y2="240"/>
+            <line x1="80" y1="40" x2="80" y2="260"/>
+            <line x1="160" y1="40" x2="160" y2="260"/>
+            <line x1="240" y1="40" x2="240" y2="260"/>
+            <line x1="320" y1="40" x2="320" y2="260"/>
+          </g>
+          <!-- 数据柱状图 -->
+          <rect class="bar" x="100" y="160" width="40" height="80" rx="4" fill="#165DFF"/>
+          <rect class="bar" x="170" y="120" width="40" height="120" rx="4" fill="#4080FF"/>
+          <rect class="bar" x="240" y="80" width="40" height="160" rx="4" fill="#69B1FF"/>
+          <!-- 团队图标 -->
+          <circle cx="310" cy="100" r="22" fill="#165DFF"/>
+          <circle cx="300" cy="160" r="16" fill="#4080FF"/>
+          <circle cx="325" cy="170" r="14" fill="#69B1FF"/>
+          <!-- 连接线 -->
+          <path d="M120 160 Q200 100 310 100" stroke="#165DFF" stroke-width="2" fill="none"/>
+        </svg>
+        <div class="title-left">YaYa企业管理平台</div>
+        <div class="desc-left">高效协同 · 数字化管理 · 安全稳定</div>
+      </div>
+    </div>
+    <!-- 右侧登录表单区域 -->
+    <div class="right-panel">
+      <div class="form-wrap">
+        <div class="form-header">
+          <h1>欢迎登录</h1>
+          <p>请输入账号信息登录系统</p>
+        </div>
+          <form class="layui-form">
+              <div class="demo-login-container">
+                  <div class="layui-form-item">
+                      <div class="layui-input-wrap">
+                          <div class="layui-input-prefix">
+                              <i class="bi bi-person" style="font-size: 20px;color: #5f5f5f;"></i>
+                          </div>
+                          <input style="height: 45px;" type="text" name="username" value="" lay-verify="required" placeholder="用户名" lay-reqtext="请填写用户名" autocomplete="off" class="layui-input yaya-input-border-radius" lay-affix="clear">
+                      </div>
+                  </div>
+                  <div class="layui-form-item">
+                      <div class="layui-input-wrap">
+                          <div class="layui-input-prefix">
+                              <i class="layui-icon layui-icon-password"></i>
+                          </div>
+                          <input style="height: 45px;"  type="password" name="password" value="" lay-verify="required" placeholder="密   码" lay-reqtext="请填写密码" autocomplete="off" class="layui-input yaya-input-border-radius" lay-affix="eye">
+                      </div>
+                  </div>
+                  <div class="layui-form-item">
+                      <div class="layui-row">
+                          <div class="layui-col-xs7">
+                              <div class="layui-input-wrap">
+                                  <div class="layui-input-prefix">
+                                      <i class="layui-icon layui-icon-vercode"></i>
+                                  </div>
+                                  <input style="height: 45px;"  type="text" name="captcha"  lay-verify="required" placeholder="验证码" lay-reqtext="请填写验证码" autocomplete="off" class="layui-input yaya-input-border-radius" lay-affix="clear">
+                              </div>
+                          </div>
+                          <div class="layui-col-xs5">
+                              <div style="margin-left: 10px;">
+                                  <img src="image/captcha.gif" alt="captcha">
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="layui-form-item">
+                      <input type="checkbox" name="remember" lay-skin="primary" title="记住密码">
+                      <a  style="float: right; margin-top: 7px;cursor: pointer;">忘记密码？</a>
+                  </div>
+                  <div class="layui-form-item">
+                      <button class="yaya-btn yaya-primary yaya-fluid" type="button">登录</button>
+                  </div>
+              </div>
+          </form>
+      </div>
+    </div>
+    </div>
+    <script src="layui/layui.js"></script>
+    <script>
+
+    </script>
+</body>
+</html>

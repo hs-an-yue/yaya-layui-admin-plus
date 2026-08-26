@@ -552,6 +552,7 @@
 .notification-container {
     position: relative; /* 父容器必须是相对定位 */
     display: inline-block;
+    cursor: pointer;/*手势*/
 }
 
 .badge-dot {
