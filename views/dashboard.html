@@ -21,6 +21,13 @@
             --text-sub: #64748b;
             --trend-up: #10b981;   /* 涨 - 绿色 */
             --trend-down: #ef4444; /* 跌 - 红色 */
+
+            --primary: #409EFF;
+            --text: #1f2937;
+            --muted: #8b95a7;
+            --line: #edf0f5;
+            --bg: #f5f7fa;
+            --card: #fff;
         }
 
         .stats-container {
@@ -178,6 +185,100 @@
             0% { transform: translateX(-100%); }
             100% { transform: translateX(100%); }
         }
+
+        .card {
+            background: #fff;
+            border: 1px solid #f0f2f6;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(31, 41, 55, .025);
+        }
+
+        .card-content {
+            height: 61px;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #f1f3f6;
+        }
+
+
+        /* 标题 */
+        .card-title {
+            font-size: 15px;
+            font-weight: 650;
+        }
+
+        .card-sub {
+            font-size: 11px;
+            color: #a0a8b5;
+            margin-left: 8px;
+            font-weight: 400;
+        }
+
+
+        /* Tab */
+        .tabs {
+            display: flex;
+            gap: 18px;
+
+            font-size: 12px;
+            color: #9aa3b2;
+        }
+
+        .tabs span {
+            cursor: pointer;
+            padding: 5px 0;
+
+            transition: .2s;
+        }
+
+        .tabs span:hover {
+            color: var(--primary);
+        }
+
+        .tabs .selected {
+            color: var(--primary);
+            font-weight: 600;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        /* 图表 */
+        .chart {
+            height: 300px;
+            padding: 5px 8px 8px;
+        }
+        /* 数据概览 */
+        .data-summary {
+            display: flex;
+            gap: 36px;
+            padding: 18px 20px 0;
+        }
+        .summary-item {
+            display: flex;
+            align-items: center;
+        }
+        .summary-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #409EFF;
+            margin-right: 8px;
+        }
+        .summary-label {
+            color: #8b95a7;
+            font-size: 12px;
+        }
+        .summary-value {
+            margin-left: 8px;
+            font-size: 18px;
+            font-weight: 650;
+            color: #1f2937;
+        }
+        /* 浏览量颜色 */
+        .summary-item.views .summary-dot {
+            background: #67C23A;
+        }
     </style>
 </head>
 <body>
@@ -286,89 +387,34 @@
             </div>
         </div>
         <div class="yaya-panel card-hover dash-center" style="margin-top: 10px;">
-            <div id="main" style="width: 100%;height:430px;"></div>
+
+            <!-- 图表 -->
+            <div class="card">
+                <!-- 标题 -->
+                <div class="card-content">
+                    <div>
+                        <span class="card-title">访问趋势</span>
+                        <span class="card-sub">近 15 天数据</span>
+                    </div>
+                    <!-- Tab -->
+                    <div class="tabs" id="trendTabs">
+                        <span class="selected" data-type="visits"> 访问量 </span>
+                        <span data-type="views"> 浏览量 </span>
+                    </div>
+                </div>
+                <!-- ECharts -->
+                <div id="trendChart" class="chart"></div>
+            </div>
         </div>
     </div>
     <script src="../layui/layui.js"></script>
     <script src="../js/echarts.min.js"></script>
     <script>
-        //图表
-        const myChart = echarts.init(document.getElementById('main'));
-        let option = {
-            color: ['#00DDFF'],
-            title: {
-                text: '用户月活跃度'
-            },
-            grid: {
-                left: '0',   // 距离左侧边界
-                right: '1%',  // 距离右侧边界
-                top: '15%',   // 距离顶部边界
-                bottom: '5%', // 距离底部边界
-                containLabel: true // 关键：设置为 true 可以防止坐标轴标签溢出容器
-            },
-            tooltip: {
-                trigger: 'axis',
-                axisPointer: {
-                    type: 'cross',
-                    label: {
-                        backgroundColor: '#6a7985'
-                    }
-                }
-            },
-            toolbox: {
-                right: 30,
-                feature: {
-                    saveAsImage: {}
-                }
-            },
-            xAxis: [
-                {
-                    type: 'category',
-                    boundaryGap: false,
-                    data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月','8月','9月','10月','11月','12月']
-                }
-            ],
-            yAxis: [
-                {
-                    type: 'value'
-                }
-            ],
-            series: [
-                {
-                    name: 'pv',
-                    type: 'line',
-                    stack: 'Total',
-                    smooth: true,
-                    lineStyle: {
-                        width: 0
-                    },
-                    showSymbol: false,
-                    areaStyle: {
-                        opacity: 0.8,
-                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                            {
-                                offset: 0,
-                                color: 'rgb(0, 221, 255)'
-                            },
-                            {
-                                offset: 1,
-                                color: 'rgb(77, 119, 255)'
-                            }
-                        ])
-                    },
-                    emphasis: {
-                        focus: 'series'
-                    },
-                    data: [100, 200, 500, 400, 300, 600, 700,222,444,234,777,654]
-                }
-            ]
-        };
-        // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
+
+
+
 
         // ---------------------------------------------------------------------
-
-        //统计卡片数据
 
         //模拟后端数据
         function fetchStatsData() {
@@ -487,6 +533,319 @@
                 cards.forEach(card => card.classList.remove('loading'));
             }
         }
+
+
+        /**
+         * 初始化 ECharts
+         */
+        const chartDom = document.getElementById('trendChart');
+        const chart = echarts.init(chartDom);
+        /**
+         * 近 15 天
+         */
+        const dates = [
+            '08/15',
+            '08/16',
+            '08/17',
+            '08/18',
+            '08/19',
+            '08/20',
+            '08/21',
+            '08/22',
+            '08/23',
+            '08/24',
+            '08/25',
+            '08/26',
+            '08/27',
+            '08/28',
+            '08/29'
+        ];
+        /**
+         * 访问量
+         */
+        const visits = [
+            4250,
+            4680,
+            4510,
+            5230,
+            5480,
+            5120,
+            5860,
+            6020,
+            5740,
+            6310,
+            6480,
+            7050,
+            7380,
+            7820,
+            8426
+        ];
+        /**
+         * 浏览量
+         */
+        const views = [
+            6120,
+            6450,
+            6280,
+            7010,
+            7240,
+            6930,
+            7590,
+            7820,
+            7410,
+            8240,
+            8460,
+            9180,
+            9510,
+            10020,
+            10860
+        ];
+
+
+        /**
+         * 创建渐变
+         */
+        function createGradient() {
+            return new echarts.graphic.LinearGradient(
+                0,
+                0,
+                0,
+                1,
+                [
+                    {
+                        offset: 0,
+                        color: 'rgba(64,158,255,.18)'
+                    },
+                    {
+                        offset: 1,
+                        color: 'rgba(64,158,255,.01)'
+                    }
+                ]
+            );
+
+        }
+
+
+        /**
+         * 渲染图表
+         */
+        function renderChart(type) {
+
+            const isVisits = type === 'visits';
+
+            const data = isVisits
+                ? visits
+                : views;
+
+            const name = isVisits
+                ? '访问量'
+                : '浏览量';
+            chart.setOption({
+                animationDuration: 500,
+                /**
+                 * Tooltip
+                 */
+                tooltip: {
+
+                    trigger: 'axis',
+
+                    backgroundColor: '#fff',
+
+                    borderColor: '#edf0f5',
+
+                    borderWidth: 1,
+
+                    textStyle: {
+                        color: '#344054',
+                        fontSize: 12
+                    },
+
+                    padding: [9, 12],
+
+                    axisPointer: {
+                        type: 'line',
+
+                        lineStyle: {
+                            color: '#d9dee7',
+                            type: 'dashed'
+                        }
+                    },
+
+                    formatter: function(params) {
+
+                        const item = params[0];
+
+                        return `
+                    <div style="
+                        margin-bottom:6px;
+                        color:#98a2b3;
+                        font-size:11px;
+                    ">
+                        ${item.axisValue}
+                    </div>
+
+                    <div style="
+                        display:flex;
+                        align-items:center;
+                    ">
+
+                        <span style="
+                            display:inline-block;
+                            width:7px;
+                            height:7px;
+                            border-radius:50%;
+                            background:#409EFF;
+                            margin-right:7px;
+                        "></span>
+
+                        <span>
+                            ${name}
+                        </span>
+
+                        <strong style="
+                            margin-left:16px;
+                            color:#1f2937;
+                        ">
+                            ${Number(item.value).toLocaleString()}
+                        </strong>
+
+                    </div>
+                `;
+                    }
+                },
+                /**
+                 * 网格
+                 */
+                grid: {
+                    left: 45,
+                    right: 22,
+                    top: 20,
+                    bottom: 30
+                },
+                /**
+                 * X轴
+                 */
+                xAxis: {
+
+                    type: 'category',
+
+                    boundaryGap: false,
+
+                    data: dates,
+
+                    axisLine: {
+
+                        lineStyle: {
+                            color: '#edf0f5'
+                        }
+                    },
+
+                    axisTick: {
+                        show: false
+                    },
+
+                    axisLabel: {
+
+                        color: '#9aa3b2',
+
+                        fontSize: 10
+                    }
+                },
+
+
+                /**
+                 * Y轴
+                 */
+                yAxis: {
+                    type: 'value',
+                    splitNumber: 4,
+                    axisLabel: {
+                        color: '#a0a8b5',
+                        fontSize: 10,
+                        formatter: function(value) {
+                            if (value >= 10000) {
+                                return (
+                                    value / 10000
+                                ).toFixed(1) + '万';
+                            }
+                            if (value >= 1000) {
+                                return (
+                                    value / 1000
+                                ).toFixed(1) + 'k';
+                            }
+                            return value;
+                        }
+                    },
+                    axisLine: {
+                        show: false
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    splitLine: {
+                        lineStyle: {
+                            color: '#f2f4f7'
+                        }
+                    }
+                },
+                /**
+                 * 曲线
+                 */
+                series: [
+                    {
+                        name: name,
+                        type: 'line',
+                        smooth: true,
+                        symbol: 'none',
+                        data: data,
+                        lineStyle: {
+                            width: 3,
+                            color: '#409EFF'
+                        },
+                        itemStyle: {
+                            color: '#409EFF'
+                        },
+                        areaStyle: {
+                            color: createGradient()
+                        },
+                        emphasis: {
+                            focus: 'series'
+                        }
+                    }
+                ]
+            });
+
+        }
+
+
+
+        /**
+         * 默认访问量
+         */
+        renderChart('visits');
+
+        /**
+         * Tab切换
+         */
+        document.querySelectorAll('#trendTabs span')
+            .forEach(tab => {
+                tab.addEventListener(
+                    'click', function() {
+                        document.querySelectorAll('#trendTabs span').forEach(item => {
+                                item.classList.remove(
+                                    'selected'
+                                );
+                            });
+                        this.classList.add(
+                            'selected'
+                        );
+                        renderChart(
+                            this.dataset.type
+                        );
+                    }
+                );
+            });
+
 
         //启动监听
         document.addEventListener('DOMContentLoaded', initStats);
