@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <!-- 响应式配置 -->
@@ -23,13 +23,6 @@
             border-radius: 5px;
             overflow-y: auto;
             overflow-x: auto;
-        }
-        /* 滚动条样式 */
-        .yaya-user-left {
-            /* 滚动条宽度：auto, thin, 或 none */
-            scrollbar-width: thin;
-            /* 滚动条颜色：前者为滑块(thumb)颜色，后者为轨道(track)颜色 */
-            scrollbar-color: #ffffff #f1f1f1;
         }
         .yaya-user-right{
             width: 79%;
@@ -185,7 +178,7 @@
                     let checkStatus = table.checkStatus('table-user');
                     //获取要删除的用户ID
                     let users = checkStatus.data;
-                    if(users && Object.keys(users).length>0){
+                    if(users && users.length>0){
                         layer.confirm('确定删除吗？', function(index){
                             console.log("删除...")
                             //关闭弹窗
@@ -201,6 +194,17 @@
                 }
             });
 
+            // 行操作事件(操作列:更新/删除/详情)
+            table.on('tool(table-user)', function(obj){
+                if(obj.event === 'update'){
+                    layer.msg("功能还在路上~");
+                }else if(obj.event === 'del'){
+                    layer.msg("功能还在路上~");
+                }else if(obj.event === 'detail'){
+                    layer.msg("功能还在路上~");
+                }
+            });
+
 
             /* 用户列表 */
             table.render({
@@ -210,7 +214,7 @@
                 page: {
                     prev:'上一页',
                     next:'下一页',
-                    theme:'#1e9fff'
+                    theme:'#409eff'
                 },
                 defaultToolbar:[],
                 toolbar:`
@@ -288,11 +292,11 @@
                     {
                         title: '操作',
                         fixed: 'right',
-                        width: 150,
+                        width: 180,
                         templet: function(row){
-                            let str='<button class="yaya-btn is-link-warning yaya-btn-small" type="button">更新</button>';
-                            str+='<button class="yaya-btn is-link-danger yaya-btn-small" type="button">删除</button>';
-                            str+='<button class="yaya-btn is-link-success yaya-btn-small" type="button">详情</button>';
+                            let str='<button class="yaya-btn is-link-warning yaya-btn-small" type="button" lay-event="update">更新</button>';
+                            str+='<button class="yaya-btn is-link-danger yaya-btn-small" type="button" lay-event="del">删除</button>';
+                            str+='<button class="yaya-btn is-link-success yaya-btn-small" type="button" lay-event="detail">详情</button>';
                             return str;
                         }
                     }

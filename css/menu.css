@@ -27,7 +27,7 @@
 .layui-menu li, .layui-menu-body-title, .layui-menu-body-title a{
     padding: 7px 15px;
     color: var(--sidebar-default-text);
-    border-radius: 8px;
+    border-radius: 6px;
 }
 /* 一级菜单选中字体 */
 .layui-menu .layui-menu-item-checked a, .layui-menu .layui-menu-item-checked2 a{
@@ -37,7 +37,7 @@
 .layui-menu li:hover{
     background-color: var(--sidebar-hover-bg);
     color: var(--sidebar-hover-text);
-    border-radius: 8px;
+    border-radius: 6px;
 }
 /* 菜单选中背景色 */
 .layui-menu .layui-menu-item-checked, .layui-menu .layui-menu-item-checked2{
@@ -55,9 +55,9 @@
 }
 /* 右键提示样式 */
 .layui-dropdown-menu .layui-menu-body-title{
-    color: #000 !important;
+    color: var(--yaya-text-1) !important;
 }
 .layui-dropdown-menu li:hover{
-    color: #fff !important;
-    background-color: #f8f8f8 !important;
+    color: var(--yaya-text-1) !important;
+    background-color: var(--yaya-hover) !important;
 }

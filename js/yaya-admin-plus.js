@@ -150,53 +150,25 @@ layui.use(function (){
                 `,
                 success: function(layero){
                     //回显
-                    let yaya = layui.data('yaya');
-                    if(yaya && Object.keys(yaya).length>0){
-                        if(yaya.theme && yaya.theme.length>0){
-                            let body = $(layero);
-                            if(yaya.theme === 'default'){//默认颜色
-                                body.find('input[value="dark1"]').prop('checked', false);
-                                body.find('input[value="dark2"]').prop('checked', false);
-                                body.find('input[value="default"]').prop('checked', true);
-                            }else if(yaya.theme === 'dark1'){
-                                body.find('input[value="dark1"]').prop('checked', true);
-                                body.find('input[value="dark2"]').prop('checked', false);
-                                body.find('input[value="default"]').prop('checked', false);
-                            }else {
-                                body.find('input[value="dark1"]').prop('checked', false);
-                                body.find('input[value="dark2"]').prop('checked', true);
-                                body.find('input[value="default"]').prop('checked', false);
-                            }
-                        }
-                    }
+                    let theme = (layui.data('yaya')||{}).theme || 'default';
+                    $(layero).find('input[name="theme"][value="'+theme+'"]').prop('checked', true);
                     //刷新表单(不刷新表单样式不会生效,开关样式,会以默认多选框的样式显示)
                     form.render();
                     //单选框事件
                     form.on('radio(radio-theme)', function (obj) {
                         let value = obj.elem.value;
                         if(value==='default'){
-                            //default
+                            //默认主题
                             htmlEl.removeAttribute("data-theme")
-                            //保存到本地存储
-                            layui.data('yaya',{
-                                key:'theme',
-                                value:'default'
-                            });
-                        }else if(value==='dark1'){
-                            //dark主题
-                            htmlEl.setAttribute('data-theme', 'dark1');
-                            layui.data('yaya',{
-                                key:'theme',
-                                value:'dark1'
-                            });
                         }else {
-                            //dark主题
-                            htmlEl.setAttribute('data-theme', 'dark2');
-                            layui.data('yaya',{
-                                key:'theme',
-                                value:'dark2'
-                            });
+                            //暗色主题
+                            htmlEl.setAttribute('data-theme', value);
                         }
+                        //保存到本地存储
+                        layui.data('yaya',{
+                            key:'theme',
+                            value:value
+                        });
                     });
                 }
             });
@@ -220,7 +192,7 @@ layui.use(function (){
             value:$tabId
         })
         //获取iframe,刷新
-        refreshIframe($tabId);
+        //refreshIframe($tabId);
     })
 
     /**
@@ -256,37 +228,10 @@ layui.use(function (){
      * @param htmlEl 通过 此函数获取 const htmlEl = document.documentElement; 获取整个html对象
      */
     function setTheme(htmlEl){
-        let yaya = layui.data('yaya');
-        //恢复主题
-        if(yaya && Object.keys(yaya).length>0){
-            if(yaya.theme && Object.keys(yaya.theme).length>0){
-                const yaya = layui.data('yaya');
-                if(yaya && Object.keys(yaya).length>0){
-                    //获取主题名
-                    let theme = yaya.theme;
-                    if(theme && theme.length>0){
-                        if(theme === 'dark1'){
-                            //暗色主题1
-                            htmlEl.setAttribute('data-theme', 'dark1');
-                        }else if(theme === 'dark2'){
-                            //暗色主题2
-                            htmlEl.setAttribute('data-theme', 'dark2');
-                        }else {
-                            //默认主题
-                            htmlEl.removeAttribute("data-theme")
-                        }
-                    }else {
-                        //默认主题
-                        htmlEl.removeAttribute("data-theme")
-                    }
-                }else {
-                    //默认主题
-                    htmlEl.removeAttribute("data-theme")
-                }
-            }else {
-                //默认主题
-                htmlEl.removeAttribute("data-theme")
-            }
+        let yaya = layui.data('yaya') || {};
+        if(yaya.theme === 'dark1' || yaya.theme === 'dark2'){
+            //暗色主题
+            htmlEl.setAttribute('data-theme', yaya.theme);
         }else {
             //默认主题
             htmlEl.removeAttribute("data-theme")
@@ -452,13 +397,13 @@ layui.use(function (){
                 ];
                 if($yayaTitle && yayaId && $yayaUrl && $yayaTitle.length>0 && $yayaUrl.length>0){
                     header.push({
-                        title: `<span>${$yayaTitle}</span>`,
+                        title: `<span>${yaya_escape($yayaTitle)}</span>`,
                         closable:true,
                         id:yayaId
                     });
                     body.push({
                         /* 默认页面,如果换新的页面,修改此页面 */
-                        content: `<iframe style="border: none;width: 100%;height: 100%;" src="${$yayaUrl}"></iframe>`,
+                        content: `<iframe style="border: none;width: 100%;height: 100%;" src="${yaya_escape($yayaUrl)}"></iframe>`,
                         id:yayaId
                     });
                 }
@@ -530,13 +475,13 @@ function yaya_general_bread(menu_id='') {
         //转换
         let str=[];
         if(arr.length===1){
-            str.push(`<a class="yaya-breadcrumb-first"><cite>${arr[0]}</cite></a>`);
+            str.push(`<a class="yaya-breadcrumb-first"><cite>${yaya_escape(arr[0])}</cite></a>`);
         }else {
             $.each(arr,function (i) {
                 if(i===0){
-                    str.push(`<a class="yaya-breadcrumb-first"><cite>${arr[i]}</cite></a>`);
+                    str.push(`<a class="yaya-breadcrumb-first"><cite>${yaya_escape(arr[i])}</cite></a>`);
                 }else {
-                    str.push(`<a>${arr[i]}</a>`);
+                    str.push(`<a>${yaya_escape(arr[i])}</a>`);
                 }
             });
         }
@@ -571,9 +516,9 @@ function yaya_add(menu_id, menu_title, menu_url) {
         //如果不存在
         if(!isExist){
             tabs.add('yaya-right-tab', {
-                title: `<span>${menu_title}</span>`,
+                title: `<span>${yaya_escape(menu_title)}</span>`,
                 id:menu_id,
-                content: '<iframe style="border: none;width: 100%;height: 100%;" src="'+menu_url+'"></iframe>',
+                content: '<iframe style="border: none;width: 100%;height: 100%;" src="'+yaya_escape(menu_url)+'"></iframe>',
                 done: function(data) {
                     dropdown.render($.extend({}, dropdownInst.config, {
                         elem: data.headerItem // 新标签头元素
@@ -589,6 +534,33 @@ function yaya_add(menu_id, menu_title, menu_url) {
     }else {
         console.error("菜单跳转失败,缺少必要参数",menu_id,menu_title,menu_url)
     }
+}
+
+/**
+ * HTML转义:把后台数据中的HTML特殊字符转成实体,按纯文本显示,防止注入
+ * 用于标签属性、标签内容等普通HTML位置
+ * @param str           需要转义的字符串
+ * @returns {string}    转义后的字符串
+ */
+function yaya_escape(str) {
+    return String(str == null ? '' : str).replace(/[&<>"']/g, function (s) {
+        return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s];
+    });
+}
+
+/**
+ * 内联事件属性转义:onclick="xx('数据')"这类场景,数据先按JS字符串转义再按HTML转义
+ * 防止数据中的引号、换行破坏onclick中的JS代码
+ * @param str           需要转义的字符串
+ * @returns {string}    转义后的字符串
+ */
+function yaya_escape_attr(str) {
+    return yaya_escape(
+        String(str == null ? '' : str)
+            .replace(/[\r\n]+/g, ' ')   //换行会截断JS字符串,替换为空格
+            .replace(/\\/g, '\\\\')     //反斜杠转义
+            .replace(/'/g, "\\'")       //单引号转义
+    );
 }
 
 /**
@@ -623,20 +595,21 @@ function yaya_general_menu(list=[],field={}) {
              *  第二类: 可以点击，但是不能跳转，但是能展开子菜单
              */
             if(menuType===2){//可以跳转的菜单
+                //普通HTML位置用yaya_escape,内联onclick里用yaya_escape_attr
                 str+=`
-                    <li yaya-id="${menuId}" yaya-title="${menuTitle}" yaya-url="${menuUrl}" onclick="yaya_add('${menuId}','${menuTitle}','${menuUrl}')">
+                    <li yaya-id="${yaya_escape(menuId)}" yaya-title="${yaya_escape(menuTitle)}" yaya-url="${yaya_escape(menuUrl)}" onclick="yaya_add('${yaya_escape_attr(menuId)}','${yaya_escape_attr(menuTitle)}','${yaya_escape_attr(menuUrl)}')">
                         <div class="layui-menu-body-title">
-                            <a><span><i class="${menuIcon}"></i>&nbsp;&nbsp;${menuTitle}</span></a>
+                            <a><span><i class="${yaya_escape(menuIcon)}"></i>&nbsp;&nbsp;${yaya_escape(menuTitle)}</span></a>
                         </div>
-                    </li>   
+                    </li>
                 `;
             }else { //展开子菜单的菜单
                 if(children && children.length>0){
                     if(menuType===1){//展开子菜单菜单项
                         str+=`
-                            <li yaya-id="${menuId}" class="layui-menu-item-group layui-menu-item-up">
+                            <li yaya-id="${yaya_escape(menuId)}" class="layui-menu-item-group layui-menu-item-up">
                                 <div class="layui-menu-body-title">
-                                    <a><span><i class="${menuIcon}"></i>&nbsp;&nbsp;${menuTitle}</span></a><i class="layui-icon layui-icon-up"></i>
+                                    <a><span><i class="${yaya_escape(menuIcon)}"></i>&nbsp;&nbsp;${yaya_escape(menuTitle)}</span></a><i class="layui-icon layui-icon-up"></i>
                                 </div>
                         `;
                             str+=`<ul>`;

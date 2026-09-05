@@ -52,7 +52,7 @@
 .layui-form-checked>.lay-skin-tag,
 .layui-form-radioed>.lay-skin-tag {
     color: #fff !important;
-    background-color: #16b777 !important;
+    background-color: var(--tab-select-bg) !important;/* 跟随当前主题色 */
 }
 /* 主题配置页面 样式 end */
 a{

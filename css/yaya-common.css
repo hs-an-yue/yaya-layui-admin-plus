@@ -3,12 +3,94 @@
     padding: 0;
     margin: 0;
 }
+
+/*
+ * ======================== YaYa 设计令牌（Elysia 风格） ========================
+ * 所有内页均引入本文件，修改此处令牌即可完成全站内容区换肤
+ * 首页外壳变量（LOGO/侧边菜单/工具条/选项卡）见 css/index.css
+ */
+:root{
+    /* 主色 */
+    --yaya-primary:#409eff;
+    --yaya-primary-hover:#79bbff;
+    --yaya-primary-active:#337ecc;
+    --yaya-primary-border:#a0cfff;
+    --yaya-primary-bg:#ecf5ff;
+    --yaya-primary-border-light:#d9ecff;
+    /* 成功 */
+    --yaya-success:#67c23a;
+    --yaya-success-hover:#95d475;
+    --yaya-success-active:#529b2e;
+    --yaya-success-border:#b3e19d;
+    --yaya-success-bg:#f0f9eb;
+    --yaya-success-border-light:#e1f3d8;
+    /* 警告 */
+    --yaya-warning:#ffae1f;
+    --yaya-warning-hover:#ffc662;
+    --yaya-warning-active:#cc8b19;
+    --yaya-warning-border:#ffd78f;
+    --yaya-warning-bg:#fff7e9;
+    --yaya-warning-border-light:#ffefd2;
+    /* 危险 */
+    --yaya-danger:#ff4d4f;
+    --yaya-danger-hover:#ff8284;
+    --yaya-danger-active:#cc3e3f;
+    --yaya-danger-border:#ffa6a7;
+    --yaya-danger-bg:#ffeded;
+    --yaya-danger-border-light:#ffdbdc;
+    /* 信息 */
+    --yaya-info:#909399;
+    --yaya-info-hover:#b1b3b8;
+    --yaya-info-active:#73767a;
+    --yaya-info-border:#c8c9cc;
+    --yaya-info-bg:#f4f4f5;
+    --yaya-info-border-light:#e9e9eb;
+    /* 文字（蓝紫调灰阶，主文字不用纯黑） */
+    --yaya-text-1:#323251;
+    --yaya-text-2:#4d5875;
+    --yaya-text-3:#7987a1;
+    --yaya-text-4:#949eb7;
+    /* 灰阶与底色 */
+    --yaya-gray-100:#f9fafb;
+    --yaya-gray-200:#f2f4f5;
+    --yaya-gray-300:#e6eaeb;
+    --yaya-gray-400:#dbdfe1;
+    --yaya-bg:#fafbfc;
+    --yaya-card:#ffffff;
+    --yaya-hover:#edeff0;
+    --yaya-selected:#f2f4f5;
+    /* 边框/描边/阴影 */
+    --yaya-border:#e2e8ee;
+    --yaya-card-border:rgba(0,0,0,.08);
+    --yaya-shadow:0 1px 3px rgba(0,0,0,.03),0 1px 2px -1px rgba(0,0,0,.08);
+    /* 圆角 */
+    --yaya-radius-lg:12px;
+    --yaya-radius-md:6px;
+    --yaya-radius-sm:4px;
+}
+
+/* 全局滚动条（细滑块+圆角） */
+::-webkit-scrollbar{
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track{
+    background-color: var(--yaya-gray-200);
+}
+::-webkit-scrollbar-thumb{
+    border-radius: 5px;
+    background-color: #ccc;
+}
+::-webkit-scrollbar-thumb:hover{
+    background-color: #b0abab;
+}
+
 /* 显示容器 - 紧凑全局容器 */
 .yaya-box-fluid{
     /* 新的页面内嵌到主页面的宽度 */
     width: 98%;
     /* 页面圆角 */
-    border-radius: 5px;
+    border-radius: var(--yaya-radius-lg);
     /* 新的页面距离顶部选项卡的距离,并且水平居中 */
     margin: 10px auto 0;
 }
@@ -31,13 +113,16 @@
 /* 给边框添加动画，当鼠标移动到容器上时，容器会上下浮动 */
 .card-hover:hover {
     transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,.08);
 }
 
-/* 布局面板 */
+/* 布局面板（轻阴影 + 描边 + 大圆角卡片） */
 .yaya-panel{
     padding: 15px;
-    background-color: white;
-    border-radius: 4px;
+    background-color: var(--yaya-card);
+    border: 1px solid var(--yaya-card-border);
+    border-radius: var(--yaya-radius-lg);
+    box-shadow: var(--yaya-shadow);
 }
 
 
@@ -58,6 +143,7 @@
     line-height: 36px;
     float: right;
     padding-left: 15px;
+    color: var(--yaya-text-2);
 }
 /* 搜索条件 - 输入框样式 */
 .yaya-input-block{
@@ -82,18 +168,18 @@
 
 /* 修改Layui框架默认的输入框获取焦点后颜色设置 */
 .layui-input:focus,.layui-textarea:focus {
-    border-color: #409eff!important;
-    box-shadow: 0 0 0 3px rgba(22,183,119,.08)
+    border-color: var(--yaya-primary)!important;
+    box-shadow: 0 0 0 3px rgba(64,158,255,.12)
 }
 /* 修改Layui框架默认的下拉框颜色设置 */
 .layui-form-select dl dd.layui-this{
-    color: #1e9fff;
+    color: var(--yaya-primary);
 }
 /* 给Layui框架的输入框设置圆角,设置到input标签的class属性中 */
 .yaya-input-border-radius{
-    border-radius: 5px;
+    border-radius: var(--yaya-radius-md);
 }
 /* 给Layui框架的下拉框,设置成圆角 */
 .layui-form-select .layui-input{
-    border-radius: 5px;
+    border-radius: var(--yaya-radius-md);
 }

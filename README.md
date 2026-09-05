@@ -5,13 +5,13 @@
 ### <div align="center"> 基于Layui2.13+实现的一套极简前端管理模板 </div>
 <div align="center">
 	<a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/Layui-%3E=2.13+-magenta"></a>
-    <a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/YaYa Layui Admin Plus-v3.0-deeppink"></a>
+    <a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/YaYa Layui Admin Plus-v3.2-deeppink"></a>
 	<a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/作者-YaYa-quartz"></a>
     <a href="https://gitee.com/ukoko/yaya-layui-admin-plus"><img alt="abc" src="https://img.shields.io/badge/LICENSE-MIT-tomato"></a>
 </div>
 
 ## 介绍
-`YaYa-Layui-Admin-Plus`是一套基于[LayUI](https://layui.dev/)实现的前端管理模板，项目采用原始单页独立的构建方式，不依赖脚手架，开发者只需要掌握简单的HTML/CSS/JS基础知识即可快速上手，开发和维护成本极低。
+`YaYa-Layui-Admin-Plus`是基于[LayUI](https://layui.dev/)实现的前端管理模板，项目采用原始单页独立的构建方式，不依赖脚手架，开发者只需要掌握简单的HTML/CSS/JS基础知识即可快速上手，开发和维护成本极低。
 
 ## 设计初衷
 
@@ -24,17 +24,12 @@
 账号密码 : root/123456
 ```
 
-## 学习路线
-
-<img src="assets/15-yaya-layui-admin-plus-study-line.png" alt="15">
-
 ## 页面预览
 
 <table>
     <tr> <td style="width:50%;"> <img src="assets/01-login-01.png" alt=""> </td><td style="width:50%;"><img src="assets/02-login-02.png" alt=""></td></tr>
     <tr> <td style="width:50%;"> <img src="assets/16-login-03.png" alt=""> </td><td style="width:50%;"><img src="assets/17-login-04.png" alt=""></td></tr>
     <tr> <td style="width:50%;"> <img src="assets/03-dashboard.png" alt=""> </td><td style="width:50%;"><img src="assets/04-workbench.png" alt=""></td></tr>
-    <tr> <td style="width:50%;"> <img src="assets/05-dashboard.png" alt=""> </td><td style="width:50%;"> <img src="assets/06-workbench.png" alt=""> </td></tr>
     <tr> <td style="width:50%;"> <img src="assets/07-user-list.png" alt=""> </td><td style="width:50%;"> <img src="assets/08-menu-list.png" alt=""> </td></tr>
     <tr> <td style="width:50%;"> <img src="assets/09-color-list.png" alt=""> </td><td style="width:50%;"> <img src="assets/10-button-list.png" alt=""> </td></tr>
     <tr> <td style="width:50%;"> <img src="assets/11-person-center.png" alt=""> </td><td style="width:50%;"> <img src="assets/12-menu-tree.png" alt=""> </td></tr>
@@ -96,6 +91,12 @@ yaya-layui-admin-plus
 ├── login4.html	                            # 登录页4-B端登录页面
 ├── README.md                               # 介绍文件
 ```
+
+
+## 学习路线
+
+<img src="assets/15-yaya-layui-admin-plus-study-line.png" alt="15">
+
 
 ## 快速使用
 

@@ -5,14 +5,15 @@
 .yaya-btn{
     padding: 8px 15px;
     font-size: 14px;
-    border-radius: 4px;
-    display: inline-flex;
+    border-radius: var(--yaya-radius-md);
+    display: inline-flex;/* 弹性布局:配合下方justify/align实现内容水平+垂直居中 */
     justify-content: center;
     align-items: center;
+    line-height: 1;
     height: 32px;
     white-space: nowrap;
     cursor: pointer;
-    color: #606266;
+    color: var(--yaya-text-2);
     text-align: center;
     box-sizing: border-box;
     outline: none;
@@ -21,185 +22,185 @@
     user-select: none;
     vertical-align: middle;
     background-color: white;
-    border: 1px solid #dcdfe6;
+    border: 1px solid var(--yaya-border);
 }
 /* 默认伪类样式 */
 .yaya-default:hover{
-    color: #409eff;
-    border-color: #a0cfff;
-    background-color: #ecf5ff;
+    color: var(--yaya-primary);
+    border-color: var(--yaya-primary-border);
+    background-color: var(--yaya-primary-bg);
     outline: none;
 }
 .yaya-primary{
     color: white;
-    background-color: #409eff;
-    border-color: #409eff;
-    outline-color: #a0cfff;
+    background-color: var(--yaya-primary);
+    border-color: var(--yaya-primary);
+    outline-color: var(--yaya-primary-border);
 }
 .yaya-primary:hover{
     color: white;
-    background-color: #79bbff;
-    border-color: #79bbff;
+    background-color: var(--yaya-primary-hover);
+    border-color: var(--yaya-primary-hover);
     outline: none;
 }
 .yaya-success{
     color: white;
-    background-color: #67c23a;
-    border-color: #67c23a;
-    outline-color: #b3e19d;
+    background-color: var(--yaya-success);
+    border-color: var(--yaya-success);
+    outline-color: var(--yaya-success-border);
 }
 .yaya-success:hover{
     color: white;
-    background-color: #95d475;
-    border-color: #95d475;
+    background-color: var(--yaya-success-hover);
+    border-color: var(--yaya-success-hover);
     outline: none;
 }
 
 .yaya-info{
     color: white;
-    background-color: #909399;
-    border-color: #909399;
-    outline-color: #c8c9cc;
+    background-color: var(--yaya-info);
+    border-color: var(--yaya-info);
+    outline-color: var(--yaya-info-border);
 }
 .yaya-info:hover{
     color: white;
-    background-color: #b1b3b8;
-    border-color: #b1b3b8;
+    background-color: var(--yaya-info-hover);
+    border-color: var(--yaya-info-hover);
     outline: none;
 }
 .yaya-warning{
     color: white;
-    background-color: #e6a23c;
-    border-color: #e6a23c;
-    outline-color: #f3d19e;
+    background-color: var(--yaya-warning);
+    border-color: var(--yaya-warning);
+    outline-color: var(--yaya-warning-border);
 }
 .yaya-warning:hover{
     color: white;
-    background-color: #eebe77;
-    border-color: #eebe77;
+    background-color: var(--yaya-warning-hover);
+    border-color: var(--yaya-warning-hover);
     outline: none;
 }
 .yaya-danger{
     color: white;
-    background-color: #f56c6c;
-    border-color: #f56c6c;
-    outline-color: #fab6b6;
+    background-color: var(--yaya-danger);
+    border-color: var(--yaya-danger);
+    outline-color: var(--yaya-danger-border);
 }
 .yaya-danger:hover{
     color: white;
-    background-color: #f89898;
-    border-color: #f89898;
+    background-color: var(--yaya-danger-hover);
+    border-color: var(--yaya-danger-hover);
     outline: none;
 }
 .is-plain-primary{
-    color: #409eff;
-    background-color: #ecf5ff;
-    border-color: #a0cfff;
+    color: var(--yaya-primary);
+    background-color: var(--yaya-primary-bg);
+    border-color: var(--yaya-primary-border);
 }
 .is-plain-primary:hover{
     color: white;
-    background-color: #409eff;
+    background-color: var(--yaya-primary);
 }
 .is-plain-success{
-    color: #67c23a;
-    background-color: #f0f9eb;
-    border-color: #b3e19d;
+    color: var(--yaya-success);
+    background-color: var(--yaya-success-bg);
+    border-color: var(--yaya-success-border);
 }
 .is-plain-success:hover{
     color: white;
-    background-color: #67c23a;
+    background-color: var(--yaya-success);
 }
 .is-plain-info{
-    color: #909399;
-    background-color: #f4f4f5;
-    border-color: #c8c9cc;
+    color: var(--yaya-info);
+    background-color: var(--yaya-info-bg);
+    border-color: var(--yaya-info-border);
 }
 .is-plain-info:hover{
     color: white;
-    background-color: #909399;
+    background-color: var(--yaya-info);
 }
 .is-plain-warning{
-    color: #e6a23c;
-    background-color: #fdf6ec;
-    border-color: #f3d19e;
+    color: var(--yaya-warning);
+    background-color: var(--yaya-warning-bg);
+    border-color: var(--yaya-warning-border);
 }
 .is-plain-warning:hover{
     color: white;
-    background-color: #e6a23c;
+    background-color: var(--yaya-warning);
 }
 .is-plain-danger{
-    color: #f56c6c;
-    background-color: #fef0f0;
-    border-color: #fab6b6;
+    color: var(--yaya-danger);
+    background-color: var(--yaya-danger-bg);
+    border-color: var(--yaya-danger-border);
 }
 .is-plain-danger:hover{
     color: white;
-    background-color: #f56c6c;
+    background-color: var(--yaya-danger);
 }
 
 .is-round-default{
     border-radius: 20px;
 }
 .is-round-default:hover{
-    color: #409eff;
-    border-color: #a0cfff;
-    background-color: #ecf5ff;
+    color: var(--yaya-primary);
+    border-color: var(--yaya-primary-border);
+    background-color: var(--yaya-primary-bg);
     outline: none;
     border-radius: 20px;
 }
 .is-round-primary{
-    color: #409eff;
-    background-color: #ecf5ff;
-    border-color: #a0cfff;
+    color: var(--yaya-primary);
+    background-color: var(--yaya-primary-bg);
+    border-color: var(--yaya-primary-border);
     border-radius: 20px;
 }
 .is-round-primary:hover{
     color: white;
-    background-color: #409eff;
+    background-color: var(--yaya-primary);
     border-radius: 20px;
 }
 .is-round-success{
-    color: #67c23a;
-    background-color: #f0f9eb;
-    border-color: #b3e19d;
+    color: var(--yaya-success);
+    background-color: var(--yaya-success-bg);
+    border-color: var(--yaya-success-border);
     border-radius: 20px;
 }
 .is-round-success:hover{
     color: white;
-    background-color: #67c23a;
+    background-color: var(--yaya-success);
     border-radius: 20px;
 }
 .is-round-info{
-    color: #909399;
-    background-color: #f4f4f5;
-    border-color: #c8c9cc;
+    color: var(--yaya-info);
+    background-color: var(--yaya-info-bg);
+    border-color: var(--yaya-info-border);
     border-radius: 20px;
 }
 .is-round-info:hover{
     color: white;
-    background-color: #909399;
+    background-color: var(--yaya-info);
     border-radius: 20px;
 }
 .is-round-warning{
-    color: #e6a23c;
-    background-color: #fdf6ec;
-    border-color: #f3d19e;
+    color: var(--yaya-warning);
+    background-color: var(--yaya-warning-bg);
+    border-color: var(--yaya-warning-border);
     border-radius: 20px;
 }
 .is-round-warning:hover{
     color: white;
-    background-color: #e6a23c;
+    background-color: var(--yaya-warning);
     border-radius: 20px;
 }
 .is-round-danger{
-    color: #f56c6c;
-    background-color: #fef0f0;
-    border-color: #fab6b6;
+    color: var(--yaya-danger);
+    background-color: var(--yaya-danger-bg);
+    border-color: var(--yaya-danger-border);
     border-radius: 20px;
 }
 .is-round-danger:hover{
     color: white;
-    background-color: #f56c6c;
+    background-color: var(--yaya-danger);
     border-radius: 20px;
 }
 
@@ -211,9 +212,9 @@
 
 }
 .is-circle-default:hover{
-    color: #409eff;
-    border-color: #a0cfff;
-    background-color: #ecf5ff;
+    color: var(--yaya-primary);
+    border-color: var(--yaya-primary-border);
+    background-color: var(--yaya-primary-bg);
     outline: none;
     border-radius:50%;
 }
@@ -224,12 +225,12 @@
     width: 32px;
     height: 32px;
     color: white;
-    background-color: #909399;
+    background-color: var(--yaya-info);
 }
 .is-circle-info:hover{
     color: #ffffff;
-    border-color: #b1b3b8;
-    background-color: #b1b3b8;
+    border-color: var(--yaya-info-hover);
+    background-color: var(--yaya-info-hover);
     padding: 8px;
     border-radius: 50%;
     width: 32px;
@@ -242,12 +243,12 @@
     width: 32px;
     height: 32px;
     color: white;
-    background-color: #67c23a;
+    background-color: var(--yaya-success);
 }
 .is-circle-success:hover{
     color: #ffffff;
-    border-color: #b3e19d;
-    background-color: #b3e19d;
+    border-color: var(--yaya-success-border);
+    background-color: var(--yaya-success-border);
     padding: 8px;
     border-radius: 50%;
     width: 32px;
@@ -260,12 +261,12 @@
     width: 32px;
     height: 32px;
     color: white;
-    background-color: #409eff;
+    background-color: var(--yaya-primary);
 }
 .is-circle-primary:hover{
     color: #ffffff;
-    border-color: #a0cfff;
-    background-color: #79bbff;
+    border-color: var(--yaya-primary-border);
+    background-color: var(--yaya-primary-hover);
     padding: 8px;
     border-radius: 50%;
     width: 32px;
@@ -278,12 +279,12 @@
     width: 32px;
     height: 32px;
     color: white;
-    background-color: #e6a23c;
+    background-color: var(--yaya-warning);
 }
 .is-circle-warning:hover{
     color: white;
-    border-color: #eebb77;
-    background-color: #eebb77;
+    border-color: var(--yaya-warning-hover);
+    background-color: var(--yaya-warning-hover);
     padding: 8px;
     border-radius: 50%;
     width: 32px;
@@ -296,12 +297,12 @@
     width: 32px;
     height: 32px;
     color: white;
-    background-color: #f56c6c;
+    background-color: var(--yaya-danger);
 }
 .is-circle-danger:hover{
     color: white;
-    border-color: #f89898;
-    background-color: #f89898;
+    border-color: var(--yaya-danger-hover);
+    background-color: var(--yaya-danger-hover);
     padding: 8px;
     border-radius: 50%;
     width: 32px;
@@ -310,67 +311,67 @@
 /*链接按钮*/
 .is-link-default{
     border-color: transparent;
-    color: #606266;
+    color: var(--yaya-text-2);
     background: transparent;
     padding: 2px;
     height: auto;
 }
 .is-link-default:hover{
-    color: #909399;
+    color: var(--yaya-info);
 }
 .is-link-primary{
     border-color: transparent;
-    color: #409eff;
+    color: var(--yaya-primary);
     background: transparent;
     padding: 2px;
     height: auto;
 }
 .is-link-primary:hover{
-    color: #a0cfff;
+    color: var(--yaya-primary-border);
 }
 
 .is-link-success{
     border-color: transparent;
-    color: #67c23a;
+    color: var(--yaya-success);
     background: transparent;
     padding: 2px;
     height: auto;
 }
 .is-link-success:hover{
-    color: #b3e19d;
+    color: var(--yaya-success-border);
 }
 
 .is-link-info{
     border-color: transparent;
-    color: #909399;
+    color: var(--yaya-info);
     background: transparent;
     padding: 2px;
     height: auto;
 }
 .is-link-info:hover{
-    color: #b1b3b8;
+    color: var(--yaya-info-hover);
 }
 
 .is-link-warning{
     border-color: transparent;
-    color: #e6a23c;
+    color: var(--yaya-warning);
     background: transparent;
     padding: 2px;
     height: auto;
 }
 .is-link-warning:hover{
-    color: #eebb77;
+    color: var(--yaya-warning-hover);
 }
 
 .is-link-danger{
     border-color: transparent;
-    color: #f56c6c;
+    color: var(--yaya-danger);
     background: transparent;
     padding: 2px;
     height: auto;
 }
 .is-link-danger:hover{
-    color: #f89898;
+    color: var(--yaya-danger-hover);
 }
 
 /* 按钮禁用 */
@@ -382,25 +383,31 @@
 }
 /* 按钮大小 */
 .yaya-btn-large{
-    padding: 20px 40px;
+    height: 44px;
+    padding: 0 40px;
     font-size: 24px;
 }
 .yaya-btn-small{
     height: 24px;
+    padding: 0 11px;
     font-size: 12px;
 }
 
 .yaya-btn-round-large{
-    padding: 20px 40px;
+    height: 44px;
+    padding: 0 40px;
     font-size: 24px;
 }
 .yaya-btn-round-small{
     height: 24px;
+    padding: 0 15px;
     font-size: 12px;
 }
 
 .yaya-btn-circle-large{
-    padding: 20px;
+    width: 56px;
+    height: 56px;
+    padding: 0;
 }
 .yaya-btn-circle-large>i{
     font-size: 24px;
@@ -408,6 +415,7 @@
 .yaya-btn-circle-small{
     height: 24px;
     width: 24px;
+    padding: 0;
 }
 .yaya-btn-circle-small>i{
     font-size: 12px;
@@ -415,7 +423,8 @@
 /*宽度100%*/
 .yaya-fluid{
     width: 100%;
-    padding: 19px 0;
+    height: 40px;
+    padding: 0 15px;
 }
 /* 标签扩展 */
 .yaya-tag{
@@ -435,76 +444,76 @@
     white-space: nowrap;
 }
 .yaya-tag-primary{
-    background-color: #409eff;
-    border-color: #409eff;
+    background-color: var(--yaya-primary);
+    border-color: var(--yaya-primary);
 }
 .yaya-tag-success{
-    background-color: #67c23a;
-    border-color: #67c23a;
+    background-color: var(--yaya-success);
+    border-color: var(--yaya-success);
 }
 .yaya-tag-info{
-    background-color: #909399;
-    border-color: #909399;
+    background-color: var(--yaya-info);
+    border-color: var(--yaya-info);
 }
 .yaya-tag-warning{
-    background-color: #e6a23c;
-    border-color: #e6a23c;
+    background-color: var(--yaya-warning);
+    border-color: var(--yaya-warning);
 }
 .yaya-tag-danger{
-    background-color: #f56c6c;
-    border-color: #f56c6c;
+    background-color: var(--yaya-danger);
+    border-color: var(--yaya-danger);
 }
 
 .yaya-tag-light-primary{
-    background-color: #ecf5ff;
-    color: #409eff;
-    border-color: #d9ecff;
+    background-color: var(--yaya-primary-bg);
+    color: var(--yaya-primary);
+    border-color: var(--yaya-primary-border-light);
 }
 .yaya-tag-light-success{
-    background-color: #f0f9eb;
-    color: #67c23a;
-    border-color: #e1f3d8;
+    background-color: var(--yaya-success-bg);
+    color: var(--yaya-success);
+    border-color: var(--yaya-success-border-light);
 }
 .yaya-tag-light-info{
-    background-color: #f4f4f5;
-    color: #909399;
-    border-color: #e9e9eb;
+    background-color: var(--yaya-info-bg);
+    color: var(--yaya-info);
+    border-color: var(--yaya-info-border-light);
 }
 .yaya-tag-light-warning{
-    background-color: #fdf6ec;
-    color: #e6a23c;
-    border-color: #faecd8;
+    background-color: var(--yaya-warning-bg);
+    color: var(--yaya-warning);
+    border-color: var(--yaya-warning-border-light);
 }
 .yaya-tag-light-danger{
-    background-color: #fef0f0;
-    color: #f56c6c;
-    border-color: #fde2e2;
+    background-color: var(--yaya-danger-bg);
+    color: var(--yaya-danger);
+    border-color: var(--yaya-danger-border-light);
 }
 
 .yaya-tag-plain-primary{
     background-color: #ffffff;
-    color: #409eff;
-    border-color: #a0cfff;
+    color: var(--yaya-primary);
+    border-color: var(--yaya-primary-border);
 }
 .yaya-tag-plain-success{
     background-color: #ffffff;
-    color: #67c23a;
-    border-color: #b3e19d;
+    color: var(--yaya-success);
+    border-color: var(--yaya-success-border);
 }
 .yaya-tag-plain-info{
     background-color: #ffffff;
-    color: #909399;
-    border-color: #c8c9cc;
+    color: var(--yaya-info);
+    border-color: var(--yaya-info-border);
 }
 .yaya-tag-plain-warning{
     background-color: #ffffff;
-    color: #e6a23c;
-    border-color: #f3d19e;
+    color: var(--yaya-warning);
+    border-color: var(--yaya-warning-border);
 }
 .yaya-tag-plain-danger{
     background-color: #ffffff;
-    color: #f56c6c;
-    border-color: #fab6b6;
+    color: var(--yaya-danger);
+    border-color: var(--yaya-danger-border);
 }
 /* 圆形标签 */
 .is-round{
@@ -535,16 +544,16 @@
     white-space: nowrap;
     vertical-align: baseline;
     border-radius: 10rem; /* 大圆角 */
-    background-color: #e0e0e0;
-    color: #333;
+    background-color: var(--yaya-gray-300);
+    color: var(--yaya-text-1);
 }
 
 .badge-primary {
-    background-color: #409eff;
+    background-color: var(--yaya-primary);
     color: white;
 }
 .badge-success {
-    background-color: #67c23a;
+    background-color: var(--yaya-success);
     color: white;
 }
 
@@ -559,7 +568,7 @@
     position: absolute;
     top: -9px;
     right: -9px;
-    background-color: #f56c6c;
+    background-color: var(--yaya-danger);
     color: white;
     border-radius: 50%;
     padding: 2px 6px;
@@ -587,7 +596,7 @@
     /* 核心样式 */
     width: 10px;
     height: 10px;
-    background-color: #ff4d4f;
+    background-color: var(--yaya-danger);
     border-radius: 50%; /* 变成圆形 */
     border: 2px solid #fff; /* 白色描边，增强在背景上的辨识度 */
 
@@ -602,7 +611,7 @@
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background-color: #ff4d4f;
+    background-color: var(--yaya-danger);
     animation: pulse 1.5s infinite ease-in-out;
     z-index: -1;
 }

@@ -1,854 +1,610 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <!-- 响应式配置 -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- LayUI css库 -->
     <link rel="stylesheet" href="../layui/css/layui.css">
+    <!-- YaYa 通用样式库(含 --yaya-* 设计令牌) -->
     <link rel="stylesheet" href="../css/yaya-common.css">
+    <!-- 第三方图标库(bootstrap)css -->
+    <link rel="stylesheet" href="../font/bootstrap-icons.css">
     <title>仪表盘</title>
     <style>
-        :root {
-            /* 主题色定义 */
-            --color-users: #3b82f6;
-            --color-revenue: #10b981;
-            --color-active: #f59e0b;
-            --color-tasks: #8b5cf6;
-        
-            --card-bg: #ffffff;
-            --text-main: #0f172a;
-            --text-sub: #64748b;
-            --trend-up: #10b981;   /* 涨 - 绿色 */
-            --trend-down: #ef4444; /* 跌 - 红色 */
-
-            --primary: #409EFF;
-            --text: #1f2937;
-            --muted: #8b95a7;
-            --line: #edf0f5;
-            --bg: #f5f7fa;
-            --card: #fff;
+        body{
+            color: var(--yaya-text-1);
         }
-
-        .stats-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 24px;
-            width: 100%;
+        /* ================= 通用卡片 ================= */
+        /* 行改为flex布局,让同一行卡片等高对齐 */
+        .layui-row{
+            display: flex;
+            flex-wrap: wrap;
         }
-
-        .stat-card {
-            background: var(--card-bg);
-            padding: 1.1rem;
-            border-radius: 5px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        .dash-card{
+            background-color: var(--yaya-card);
+            border: 1px solid var(--yaya-card-border);
+            border-radius: var(--yaya-radius-lg);
+            box-shadow: var(--yaya-shadow);
+            padding: 20px;
+            height: 100%;/* 撑满列高,保证同行卡片底边对齐 */
+            box-sizing: border-box;
+        }
+        /* 可伸缩卡片:内容区自动撑满剩余高度(用于折线图卡片) */
+        .card-flex{
             display: flex;
             flex-direction: column;
-            gap: 1rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid rgba(0,0,0,0.03);
-            position: relative;
-            overflow: hidden;
         }
-
-        .stat-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.1);
-        }
-
-        /* 顶部：图标 + 标题 */
-        .card-header {
+        /* 卡片头:左侧标题+副标题,右侧扩展区 */
+        .card-head{
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
-
-        .stat-title {
-            color: var(--text-sub);
-            font-size: 0.875rem;
+        .card-head h4{
+            font-size: 16px;
             font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+            color: var(--yaya-text-1);
         }
+        .card-sub{
+            margin-top: 4px;
+            font-size: 13px;
+            color: var(--yaya-text-3);
+        }
+        /* 涨跌百分比 */
+        .trend-up{ color: var(--yaya-success-active); font-weight: 600; }
+        .trend-down{ color: var(--yaya-danger); font-weight: 600; }
 
-        .stat-icon-wrapper {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
+        /* ================= 第一行:统计卡片 ================= */
+        .stat-card{
+            cursor: default;
+            transition: all .2s ease;
+        }
+        .stat-card:hover{
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,.08);
+        }
+        .stat-title{
+            font-size: 13px;
+            color: var(--yaya-text-3);
+        }
+        .stat-value{
+            margin-top: 8px;
+            font-size: 30px;
+            font-weight: 700;
+            line-height: 1.1;
+            color: var(--yaya-text-1);
+            font-variant-numeric: tabular-nums;
+        }
+        .stat-foot{
+            margin-top: 8px;
+            font-size: 13px;
+            color: var(--yaya-text-3);
+        }
+        /* 右上角图标芯片 */
+        .stat-icon{
+            width: 46px;
+            height: 46px;
+            border-radius: 10px;
+            background-color: var(--yaya-primary-bg);
+            color: var(--yaya-primary);
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 20px;
             flex-shrink: 0;
-            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
-        /* 动态背景色 */
-        .stat-card[data-type="users"] .stat-icon-wrapper { background: rgba(59, 130, 246, 0.1); color: var(--color-users); }
-        .stat-card[data-type="revenue"] .stat-icon-wrapper { background: rgba(16, 185, 129, 0.1); color: var(--color-revenue); }
-        .stat-card[data-type="active"] .stat-icon-wrapper { background: rgba(245, 158, 11, 0.1); color: var(--color-active); }
-        .stat-card[data-type="tasks"] .stat-icon-wrapper { background: rgba(139, 92, 246, 0.1); color: var(--color-tasks); }
-
-        .stat-card:hover .stat-icon-wrapper { transform: rotate(12deg) scale(1.1); }
-
-        .stat-icon-wrapper svg { width: 26px; height: 26px; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
-
-        /* 中部：主数字 */
-        .main-value-box {
-            display: flex;
-            align-items: baseline;
-            gap: 6px;
-        }
-
-        .stat-value {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--text-main);
-            font-variant-numeric: tabular-nums;
-            line-height: 1.1;
-            letter-spacing: -0.02em;
-        }
-
-        .stat-suffix {
-            font-size: 1.5rem;
+        /* ================= 第二行:图表卡片 ================= */
+        #barChart{ height: 250px; width: 100%; }
+        #lineChart{ height: 330px; width: 100%; flex: 1 1 auto; min-height: 300px; }
+        /* 用户概述 */
+        .overview-title{
+            margin-top: 16px;
+            font-size: 16px;
             font-weight: 600;
-            color: var(--text-sub);
         }
-
-        /* 底部：今日数据与趋势 */
-        .sub-stats {
+        .overview-desc{
+            margin-top: 6px;
+            font-size: 14px;
+            color: var(--yaya-text-2);
+        }
+        /* 用户概述 - 4项小统计 */
+        .mini-stats{
+            margin-top: 16px;
             display: flex;
-            align-items: center;
-            gap: 8px;
-            padding-top: 8px;
-            border-top: 1px solid rgba(0,0,0,0.05);
-            font-size: 0.875rem;
+            flex-wrap: wrap;
+            gap: 36px;
         }
-
-        .sub-label {
-            color: var(--text-sub);
-            font-weight: 500;
-        }
-
-        .sub-value {
+        .mini-stats .num{
+            font-size: 24px;
             font-weight: 700;
-            color: var(--text-main);
+            color: var(--yaya-text-1);
             font-variant-numeric: tabular-nums;
         }
+        .mini-stats .label{
+            margin-top: 4px;
+            font-size: 12px;
+            color: var(--yaya-text-4);
+        }
 
-        /* 趋势徽章 */
-        .trend-badge {
-            display: inline-flex;
+        /* ================= 第三行:新用户表格 ================= */
+        /* 本月/上月/今年 切换按钮组 */
+        .seg{
+            display: flex;
+            background-color: var(--yaya-gray-200);
+            border-radius: 8px;
+            padding: 3px;
+        }
+        .seg button{
+            border: none;
+            background: transparent;
+            padding: 5px 14px;
+            font-size: 13px;
+            color: var(--yaya-text-3);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all .2s ease;
+        }
+        .seg button.active{
+            background-color: var(--yaya-card);
+            color: var(--yaya-text-1);
+            box-shadow: 0 1px 3px rgba(0,0,0,.08);
+        }
+        /* 用户表格 */
+        .user-table{
+            width: 100%;
+            margin-top: 10px;
+            border-collapse: collapse;
+        }
+        .user-table th{
+            text-align: left;
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--yaya-text-4);
+            padding: 12px 8px;
+        }
+        .user-table td{
+            padding: 12px 8px;
+            font-size: 14px;
+            border-top: 1px solid var(--yaya-gray-200);
+        }
+        .user-table .avatar{
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+        /* 进度条 */
+        .progress-cell{
+            display: flex;
             align-items: center;
-            gap: 4px;
-            padding: 2px 8px;
-            border-radius: 99px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            margin-left: auto; /* 推到最右边 */
+            gap: 10px;
         }
-
-        .trend-up {
-            background-color: rgba(16, 185, 129, 0.1);
-            color: var(--trend-up);
-        }
-
-        .trend-down {
-            background-color: rgba(239, 68, 68, 0.1);
-            color: var(--trend-down);
-        }
-
-        .trend-icon { width: 14px; height: 14px; }
-
-        /* 加载状态 */
-        .loading .stat-value, 
-        .loading .sub-value {
-            color: transparent;
-            background: #e2e8f0;
-            border-radius: 4px;
-            position: relative;
+        .progress-track{
+            flex: 1;
+            max-width: 150px;
+            height: 6px;
+            border-radius: 3px;
+            background-color: var(--yaya-gray-200);
             overflow: hidden;
         }
-        
-        .loading .stat-value { width: 120px; height: 2.5rem; }
-        .loading .sub-value { width: 60px; height: 1.2rem; }
-
-        .loading .stat-value::after,
-        .loading .sub-value::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
-            animation: shimmer 1.5s infinite;
+        .progress-bar{
+            height: 100%;
+            border-radius: 3px;
+        }
+        .progress-num{
+            font-size: 13px;
+            color: var(--yaya-text-2);
+            min-width: 34px;
+            text-align: right;
+            font-variant-numeric: tabular-nums;
         }
 
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
+        /* ================= 第三行:动态 ================= */
+        .feed-item{
+            padding: 14px 0;
+            font-size: 14px;
+            border-bottom: 1px solid var(--yaya-gray-200);
+            color: var(--yaya-text-2);
         }
+        .feed-item:last-child{ border-bottom: none; }
+        .feed-item .name{ color: var(--yaya-text-1); font-weight: 500; }
+        .feed-item .link{ color: var(--yaya-primary); cursor: pointer; }
+        .feed-item .link:hover{ color: var(--yaya-primary-hover); }
 
-        .card {
-            background: #fff;
-            border: 1px solid #f0f2f6;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(31, 41, 55, .025);
-        }
-
-        .card-content {
-            height: 61px;
-            padding: 0 20px;
+        /* ================= 第三行:代办事项 ================= */
+        .todo-item{
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid #f1f3f6;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--yaya-gray-200);
         }
-
-
-        /* 标题 */
-        .card-title {
-            font-size: 15px;
-            font-weight: 650;
-        }
-
-        .card-sub {
-            font-size: 11px;
-            color: #a0a8b5;
-            margin-left: 8px;
-            font-weight: 400;
-        }
-
-
-        /* Tab */
-        .tabs {
-            display: flex;
-            gap: 18px;
-
-            font-size: 12px;
-            color: #9aa3b2;
-        }
-
-        .tabs span {
+        .todo-item:last-child{ border-bottom: none; }
+        .todo-item input[type="checkbox"]{
+            width: 16px;
+            height: 16px;
+            margin-top: 2px;
+            accent-color: var(--yaya-primary);
             cursor: pointer;
-            padding: 5px 0;
-
-            transition: .2s;
+            flex-shrink: 0;
         }
-
-        .tabs span:hover {
-            color: var(--primary);
+        .todo-item .todo-title{
+            font-size: 14px;
+            color: var(--yaya-text-1);
         }
-
-        .tabs .selected {
-            color: var(--primary);
-            font-weight: 600;
-            border-bottom: 2px solid var(--primary);
-        }
-
-        /* 图表 */
-        .chart {
-            height: 300px;
-            padding: 5px 8px 8px;
-        }
-        /* 数据概览 */
-        .data-summary {
-            display: flex;
-            gap: 36px;
-            padding: 18px 20px 0;
-        }
-        .summary-item {
-            display: flex;
-            align-items: center;
-        }
-        .summary-dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: #409EFF;
-            margin-right: 8px;
-        }
-        .summary-label {
-            color: #8b95a7;
+        .todo-item .todo-time{
+            margin-top: 3px;
             font-size: 12px;
-        }
-        .summary-value {
-            margin-left: 8px;
-            font-size: 18px;
-            font-weight: 650;
-            color: #1f2937;
-        }
-        /* 浏览量颜色 */
-        .summary-item.views .summary-dot {
-            background: #67C23A;
+            color: var(--yaya-text-4);
         }
     </style>
 </head>
 <body>
     <div class="yaya-box-fluid">
-        <div class="stats-container">
-            <!-- 卡片 1: 用户统计 -->
-            <div class="stat-card" data-type="users">
-                <div class="card-header">
-                    <div class="stat-title">总用户量</div>
-                    <div class="stat-icon-wrapper">
-                        <svg viewBox="0 0 24 24" stroke="currentColor">
-                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="9" cy="7" r="4"></circle>
-                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                        </svg>
+        <!-- ============ 第一行:统计卡片 ============ -->
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md3 layui-col-sm6">
+                <div class="dash-card stat-card">
+                    <div class="card-head">
+                        <div>
+                            <div class="stat-title">总访问次数</div>
+                            <div class="stat-value">9120</div>
+                        </div>
+                        <div class="stat-icon"><i class="bi bi-clock"></i></div>
                     </div>
-                </div>
-                <div class="main-value-box">
-                    <div class="stat-value" data-target="0">0</div>
-                    <span class="stat-suffix">&nbsp;</span>
-                </div>
-                <div class="sub-stats">
-                    <span class="sub-label">今日访问:</span>
-                    <span class="sub-value" data-target="0">0</span>
-                    <!-- 趋势徽章 (由 JS 动态填充内容) -->
-                    <span class="trend-badge trend-up">
-                            <svg class="trend-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
-                            <span class="trend-text">12%</span>
-                        </span>
+                    <div class="stat-foot">较上周 <span class="trend-up">+20%</span></div>
                 </div>
             </div>
-
-            <!-- 卡片 2: 收入统计 -->
-            <div class="stat-card" data-type="revenue">
-                <div class="card-header">
-                    <div class="stat-title">总收入</div>
-                    <div class="stat-icon-wrapper">
-                        <svg viewBox="0 0 24 24" stroke="currentColor">
-                            <line x1="12" y1="1" x2="12" y2="23"></line>
-                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                        </svg>
+            <div class="layui-col-md3 layui-col-sm6">
+                <div class="dash-card stat-card">
+                    <div class="card-head">
+                        <div>
+                            <div class="stat-title">在线访客数</div>
+                            <div class="stat-value">182</div>
+                        </div>
+                        <div class="stat-icon"><i class="bi bi-people"></i></div>
                     </div>
-                </div>
-                <div class="main-value-box">
-                    <span class="stat-suffix">¥</span>
-                    <div class="stat-value" data-target="0">0</div>
-                </div>
-                <div class="sub-stats">
-                    <span class="sub-label">今日入账:</span>
-                    <span class="sub-value" data-target="0">0</span>
-                    <span class="trend-badge trend-down">
-                            <svg class="trend-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                            <span class="trend-text">2.4%</span>
-                        </span>
+                    <div class="stat-foot">较上周 <span class="trend-up">+10%</span></div>
                 </div>
             </div>
-
-            <!-- 卡片 3: 活跃会话 -->
-            <div class="stat-card" data-type="active">
-                <div class="card-header">
-                    <div class="stat-title">累计会话</div>
-                    <div class="stat-icon-wrapper">
-                        <svg viewBox="0 0 24 24" stroke="currentColor">
-                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-                        </svg>
+            <div class="layui-col-md3 layui-col-sm6">
+                <div class="dash-card stat-card">
+                    <div class="card-head">
+                        <div>
+                            <div class="stat-title">点击量</div>
+                            <div class="stat-value">9520</div>
+                        </div>
+                        <div class="stat-icon"><i class="bi bi-activity"></i></div>
                     </div>
-                </div>
-                <div class="main-value-box">
-                    <div class="stat-value" data-target="0">0</div>
-                    <span class="stat-suffix">+</span>
-                </div>
-                <div class="sub-stats">
-                    <span class="sub-label">当前在线:</span>
-                    <span class="sub-value" data-target="0">0</span>
-                    <span class="trend-badge trend-up">
-                            <svg class="trend-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
-                            <span class="trend-text">5.1%</span>
-                        </span>
+                    <div class="stat-foot">较上周 <span class="trend-down">+12%</span></div>
                 </div>
             </div>
-
-            <!-- 卡片 4: 任务统计 -->
-            <div class="stat-card" data-type="tasks">
-                <div class="card-header">
-                    <div class="stat-title">完成任务</div>
-                    <div class="stat-icon-wrapper">
-                        <svg viewBox="0 0 24 24" stroke="currentColor">
-                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                        </svg>
+            <div class="layui-col-md3 layui-col-sm6">
+                <div class="dash-card stat-card">
+                    <div class="card-head">
+                        <div>
+                            <div class="stat-title">新用户</div>
+                            <div class="stat-value">156</div>
+                        </div>
+                        <div class="stat-icon"><i class="bi bi-pie-chart"></i></div>
                     </div>
-                </div>
-                <div class="main-value-box">
-                    <div class="stat-value" data-target="0">0</div>
-                    <span class="stat-suffix">&nbsp;</span>
-                </div>
-                <div class="sub-stats">
-                    <span class="sub-label">今日完成:</span>
-                    <span class="sub-value" data-target="0">0</span>
-                    <span class="trend-badge trend-up">
-                            <svg class="trend-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
-                            <span class="trend-text">8.3%</span>
-                        </span>
+                    <div class="stat-foot">较上周 <span class="trend-up">+30%</span></div>
                 </div>
             </div>
         </div>
-        <div class="yaya-panel card-hover dash-center" style="margin-top: 10px;">
 
-            <!-- 图表 -->
-            <div class="card">
-                <!-- 标题 -->
-                <div class="card-content">
-                    <div>
-                        <span class="card-title">访问趋势</span>
-                        <span class="card-sub">近 15 天数据</span>
-                    </div>
-                    <!-- Tab -->
-                    <div class="tabs" id="trendTabs">
-                        <span class="selected" data-type="visits"> 访问量 </span>
-                        <span data-type="views"> 浏览量 </span>
+        <!-- ============ 第二行:柱状图卡片 + 访问量折线卡片 ============ -->
+        <div class="layui-row layui-col-space15" style="margin-top: 15px;">
+            <!-- 左:月度柱状图 + 用户概述 -->
+            <div class="layui-col-md5">
+                <div class="dash-card">
+                    <div id="barChart"></div>
+                    <div class="overview-title">用户概述</div>
+                    <div class="card-sub">比上周 <span class="trend-up">+23%</span></div>
+                    <div class="overview-desc">我们为您创建了多个选项，可将它们组合在一起并定制为像素完美的页面</div>
+                    <div class="mini-stats">
+                        <div>
+                            <div class="num">32k</div>
+                            <div class="label">总用户量</div>
+                        </div>
+                        <div>
+                            <div class="num">128k</div>
+                            <div class="label">总访问量</div>
+                        </div>
+                        <div>
+                            <div class="num">1.2k</div>
+                            <div class="label">日访问量</div>
+                        </div>
+                        <div>
+                            <div class="num">+5%</div>
+                            <div class="label">周同比</div>
+                        </div>
                     </div>
                 </div>
-                <!-- ECharts -->
-                <div id="trendChart" class="chart"></div>
+            </div>
+            <!-- 右:访问量平滑折线图 -->
+            <div class="layui-col-md7">
+                <div class="dash-card card-flex">
+                    <div class="card-head">
+                        <div>
+                            <h4>访问量</h4>
+                            <div class="card-sub">今年增长 <span class="trend-up">+15%</span></div>
+                        </div>
+                    </div>
+                    <div id="lineChart"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============ 第三行:新用户 + 动态 + 代办事项 ============ -->
+        <div class="layui-row layui-col-space15" style="margin-top: 15px;">
+            <!-- 左:新用户表格 -->
+            <div class="layui-col-md6">
+                <div class="dash-card">
+                    <div class="card-head">
+                        <div>
+                            <h4>新用户</h4>
+                            <div class="card-sub">这个月增长 <span class="trend-up">+20%</span></div>
+                        </div>
+                        <!-- 切换按钮组 -->
+                        <div class="seg" id="userSeg">
+                            <button type="button" class="active">本月</button>
+                            <button type="button">上月</button>
+                            <button type="button">今年</button>
+                        </div>
+                    </div>
+                    <table class="user-table">
+                        <thead>
+                        <tr>
+                            <th style="width: 38%;">头像</th>
+                            <th style="width: 20%;">地区</th>
+                            <th style="width: 14%;">性别</th>
+                            <th>进度</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><img class="avatar" src="../image/avatar.gif" alt=""><span>中小鱼</span></td>
+                            <td>北京</td>
+                            <td>女</td>
+                            <td>
+                                <div class="progress-cell">
+                                    <div class="progress-track"><div class="progress-bar" style="width: 60%;background-color: var(--yaya-primary);"></div></div>
+                                    <span class="progress-num">60%</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><img class="avatar" src="../image/avatar.gif" alt=""><span>何小荷</span></td>
+                            <td>深圳</td>
+                            <td>男</td>
+                            <td>
+                                <div class="progress-cell">
+                                    <div class="progress-track"><div class="progress-bar" style="width: 20%;background-color: var(--yaya-primary);"></div></div>
+                                    <span class="progress-num">20%</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><img class="avatar" src="../image/avatar.gif" alt=""><span>薛辞淰</span></td>
+                            <td>上海</td>
+                            <td>男</td>
+                            <td>
+                                <div class="progress-cell">
+                                    <div class="progress-track"><div class="progress-bar" style="width: 60%;background-color: var(--yaya-warning);"></div></div>
+                                    <span class="progress-num">60%</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><img class="avatar" src="../image/avatar.gif" alt=""><span>发呆草</span></td>
+                            <td>长沙</td>
+                            <td>女</td>
+                            <td>
+                                <div class="progress-cell">
+                                    <div class="progress-track"><div class="progress-bar" style="width: 50%;background-color: var(--yaya-text-2);"></div></div>
+                                    <span class="progress-num">50%</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><img class="avatar" src="../image/avatar.gif" alt=""><span>甜筒</span></td>
+                            <td>浙江</td>
+                            <td>男</td>
+                            <td>
+                                <div class="progress-cell">
+                                    <div class="progress-track"><div class="progress-bar" style="width: 70%;background-color: var(--yaya-danger);"></div></div>
+                                    <span class="progress-num">70%</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><img class="avatar" src="../image/avatar.gif" alt=""><span>冷月呆呆</span></td>
+                            <td>湖北</td>
+                            <td>男</td>
+                            <td>
+                                <div class="progress-cell">
+                                    <div class="progress-track"><div class="progress-bar" style="width: 90%;background-color: var(--yaya-success);"></div></div>
+                                    <span class="progress-num">90%</span>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- 中:动态 -->
+            <div class="layui-col-md3">
+                <div class="dash-card">
+                    <div class="card-head">
+                        <div>
+                            <h4>动态</h4>
+                            <div class="card-sub">新增 <span class="trend-up">+6</span></div>
+                        </div>
+                    </div>
+                    <div class="feed-item"><span class="name">中小鱼</span> 关注了 <span class="link">薛辞淰</span></div>
+                    <div class="feed-item"><span class="name">何小荷</span> 发表文章 <span class="link">Vue3 + Typescript +</span></div>
+                    <div class="feed-item"><span class="name">中小鱼</span> 关注了 <span class="link">薛辞淰</span></div>
+                    <div class="feed-item"><span class="name">何小荷</span> 发表文章 <span class="link">Vue3 + Typescript +</span></div>
+                    <div class="feed-item"><span class="name">薛辞淰</span> 提出问题 <span class="link">主题可以配置吗</span></div>
+                    <div class="feed-item"><span class="name">发呆草</span> 兑换了物品 <span class="link">《奇特的一生》</span></div>
+                </div>
+            </div>
+            <!-- 右:代办事项 -->
+            <div class="layui-col-md3">
+                <div class="dash-card">
+                    <div class="card-head">
+                        <div>
+                            <h4>代办事项</h4>
+                            <div class="card-sub">待处理 <span class="trend-down">3</span></div>
+                        </div>
+                    </div>
+                    <div class="todo-item">
+                        <input type="checkbox" checked>
+                        <div>
+                            <div class="todo-title">查看今天工作内容</div>
+                            <div class="todo-time">上午 09:30</div>
+                        </div>
+                    </div>
+                    <div class="todo-item">
+                        <input type="checkbox" checked>
+                        <div>
+                            <div class="todo-title">回复邮件</div>
+                            <div class="todo-time">上午 10:30</div>
+                        </div>
+                    </div>
+                    <div class="todo-item">
+                        <input type="checkbox" checked>
+                        <div>
+                            <div class="todo-title">工作汇报整理</div>
+                            <div class="todo-time">上午 11:00</div>
+                        </div>
+                    </div>
+                    <div class="todo-item">
+                        <input type="checkbox">
+                        <div>
+                            <div class="todo-title">产品需求会议</div>
+                            <div class="todo-time">下午 02:00</div>
+                        </div>
+                    </div>
+                    <div class="todo-item">
+                        <input type="checkbox">
+                        <div>
+                            <div class="todo-title">整理会议内容</div>
+                            <div class="todo-time">下午 03:00</div>
+                        </div>
+                    </div>
+                    <div class="todo-item">
+                        <input type="checkbox">
+                        <div>
+                            <div class="todo-title">明天工作计划</div>
+                            <div class="todo-time">下午 06:30</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <script src="../layui/layui.js"></script>
     <script src="../js/echarts.min.js"></script>
     <script>
+        layui.use(function (){
+            const $ = layui.$;
 
-
-
-
-        // ---------------------------------------------------------------------
-
-        //模拟后端数据
-        function fetchStatsData() {
-            return new Promise((resolve) => {
-                setTimeout(() => {
-                    resolve({
-                        users: { total: 12580, today: 342, trend: 12.5, isUp: true },
-                        revenue: { total: 89432.50, today: 4230.00, trend: 2.4, isUp: false },
-                        active: { total: 58920, today: 892, trend: 5.1, isUp: true },
-                        tasks: { total: 1500000, today: 1250, trend: 8.3, isUp: true }
-                    });
-                }, 1000);
-            });
-        }
-
-        /**
-         * 数字滚动动画函数
-         */
-        function animateValue(element, start, end, duration, isDecimal = false) {
-            if (start === end) {
-                // 即使相同也要格式化一下（比如加千分位）
-                element.textContent = isDecimal ? end.toFixed(2) : end.toLocaleString();
-                return;
-            }
-
-            const range = end - start;
-            let startTime = null;
-
-            function step(currentTime) {
-                if (!startTime) startTime = currentTime;
-                const progress = Math.min((currentTime - startTime) / duration, 1);
-
-                // Ease Out Quad (稍微平缓一点的曲线)
-                const easeProgress = 1 - (1 - progress) * (1 - progress);
-
-                const currentVal = start + (range * easeProgress);
-
-                if (isDecimal) {
-                    element.textContent = currentVal.toFixed(2);
-                } else {
-                    element.textContent = Math.floor(currentVal).toLocaleString();
-                }
-
-                if (progress < 1) {
-                    window.requestAnimationFrame(step);
-                } else {
-                    if (isDecimal) {
-                        element.textContent = end.toFixed(2);
-                    } else {
-                        element.textContent = end.toLocaleString();
-                    }
-                }
-            }
-
-            window.requestAnimationFrame(step);
-        }
-
-
-        /**
-         * 初始化逻辑
-         */
-        async function initStats() {
-            const cards = document.querySelectorAll('.stat-card');
-            cards.forEach(card => card.classList.add('loading'));
-
-            try {
-                const data = await fetchStatsData();
-
-                // 配置映射
-                const config = [
-                    { type: 'users', key: 'users', decimal: false },
-                    { type: 'revenue', key: 'revenue', decimal: true },
-                    { type: 'active', key: 'active', decimal: false },
-                    { type: 'tasks', key: 'tasks', decimal: false }
-                ];
-
-                config.forEach(item => {
-                    const card = document.querySelector(`.stat-card[data-type="${item.type}"]`);
-                    if (!card) return;
-
-                    const itemData = data[item.key];
-
-                    // 1. 获取 DOM 元素
-                    const mainValueEl = card.querySelector('.stat-value');
-                    const subValueEl = card.querySelector('.sub-value');
-                    const trendBadge = card.querySelector('.trend-badge');
-                    const trendTextEl = card.querySelector('.trend-text');
-                    const trendIconSvg = trendBadge.querySelector('svg');
-
-                    // 2. 移除加载状态
-                    card.classList.remove('loading');
-
-                    // 3. 动画主数字 (总量) - 耗时 2秒
-                    animateValue(mainValueEl, 0, itemData.total, 2000, item.decimal);
-
-                    // 4. 动画副数字 (今日) - 耗时 1.5秒，稍微快一点
-                    // 注意：今日数据如果是金额，也需要小数处理
-                    animateValue(subValueEl, 0, itemData.today, 1500, item.decimal);
-
-                    // 5. 设置趋势样式
-                    trendTextEl.textContent = `${itemData.trend}%`;
-
-                    if (itemData.isUp) {
-                        trendBadge.className = 'trend-badge trend-up';
-                        // 向上箭头 SVG path
-                        trendIconSvg.innerHTML = '<polyline points="18 15 12 9 6 15"></polyline>';
-                    } else {
-                        trendBadge.className = 'trend-badge trend-down';
-                        // 向下箭头 SVG path
-                        trendIconSvg.innerHTML = '<polyline points="6 9 12 15 18 9"></polyline>';
-                    }
-                });
-
-            } catch (error) {
-                console.error("加载失败:", error);
-                cards.forEach(card => card.classList.remove('loading'));
-            }
-        }
-
-
-        /**
-         * 初始化 ECharts
-         */
-        const chartDom = document.getElementById('trendChart');
-        const chart = echarts.init(chartDom);
-        /**
-         * 近 15 天
-         */
-        const dates = [
-            '08/15',
-            '08/16',
-            '08/17',
-            '08/18',
-            '08/19',
-            '08/20',
-            '08/21',
-            '08/22',
-            '08/23',
-            '08/24',
-            '08/25',
-            '08/26',
-            '08/27',
-            '08/28',
-            '08/29'
-        ];
-        /**
-         * 访问量
-         */
-        const visits = [
-            4250,
-            4680,
-            4510,
-            5230,
-            5480,
-            5120,
-            5860,
-            6020,
-            5740,
-            6310,
-            6480,
-            7050,
-            7380,
-            7820,
-            8426
-        ];
-        /**
-         * 浏览量
-         */
-        const views = [
-            6120,
-            6450,
-            6280,
-            7010,
-            7240,
-            6930,
-            7590,
-            7820,
-            7410,
-            8240,
-            8460,
-            9180,
-            9510,
-            10020,
-            10860
-        ];
-
-
-        /**
-         * 创建渐变
-         */
-        function createGradient() {
-            return new echarts.graphic.LinearGradient(
-                0,
-                0,
-                0,
-                1,
-                [
-                    {
-                        offset: 0,
-                        color: 'rgba(64,158,255,.18)'
-                    },
-                    {
-                        offset: 1,
-                        color: 'rgba(64,158,255,.01)'
-                    }
-                ]
-            );
-
-        }
-
-
-        /**
-         * 渲染图表
-         */
-        function renderChart(type) {
-
-            const isVisits = type === 'visits';
-
-            const data = isVisits
-                ? visits
-                : views;
-
-            const name = isVisits
-                ? '访问量'
-                : '浏览量';
-            chart.setOption({
-                animationDuration: 500,
-                /**
-                 * Tooltip
-                 */
-                tooltip: {
-
-                    trigger: 'axis',
-
-                    backgroundColor: '#fff',
-
-                    borderColor: '#edf0f5',
-
-                    borderWidth: 1,
-
-                    textStyle: {
-                        color: '#344054',
-                        fontSize: 12
-                    },
-
-                    padding: [9, 12],
-
-                    axisPointer: {
-                        type: 'line',
-
-                        lineStyle: {
-                            color: '#d9dee7',
-                            type: 'dashed'
-                        }
-                    },
-
-                    formatter: function(params) {
-
-                        const item = params[0];
-
-                        return `
-                    <div style="
-                        margin-bottom:6px;
-                        color:#98a2b3;
-                        font-size:11px;
-                    ">
-                        ${item.axisValue}
-                    </div>
-
-                    <div style="
-                        display:flex;
-                        align-items:center;
-                    ">
-
-                        <span style="
-                            display:inline-block;
-                            width:7px;
-                            height:7px;
-                            border-radius:50%;
-                            background:#409EFF;
-                            margin-right:7px;
-                        "></span>
-
-                        <span>
-                            ${name}
-                        </span>
-
-                        <strong style="
-                            margin-left:16px;
-                            color:#1f2937;
-                        ">
-                            ${Number(item.value).toLocaleString()}
-                        </strong>
-
-                    </div>
-                `;
-                    }
+            /* ============ 柱状图(月度) ============ */
+            const barDom = document.getElementById('barChart');
+            const barChart = echarts.init(barDom);
+            barChart.setOption({
+                grid:{ left: 40, right: 10, top: 10, bottom: 25 },
+                tooltip:{
+                    trigger: 'item'
                 },
-                /**
-                 * 网格
-                 */
-                grid: {
-                    left: 45,
-                    right: 22,
-                    top: 20,
-                    bottom: 30
-                },
-                /**
-                 * X轴
-                 */
-                xAxis: {
-
+                xAxis:{
                     type: 'category',
-
-                    boundaryGap: false,
-
-                    data: dates,
-
-                    axisLine: {
-
-                        lineStyle: {
-                            color: '#edf0f5'
-                        }
-                    },
-
-                    axisTick: {
-                        show: false
-                    },
-
-                    axisLabel: {
-
-                        color: '#9aa3b2',
-
-                        fontSize: 10
-                    }
+                    data: ['1月','2月','3月','4月','5月','6月','7月','8月','9月'],
+                    axisLine: { show: false },
+                    axisTick: { show: false },
+                    axisLabel: { color: '#949eb7' }
                 },
-
-
-                /**
-                 * Y轴
-                 */
-                yAxis: {
+                yAxis:{
                     type: 'value',
-                    splitNumber: 4,
-                    axisLabel: {
-                        color: '#a0a8b5',
-                        fontSize: 10,
-                        formatter: function(value) {
-                            if (value >= 10000) {
-                                return (
-                                    value / 10000
-                                ).toFixed(1) + '万';
-                            }
-                            if (value >= 1000) {
-                                return (
-                                    value / 1000
-                                ).toFixed(1) + 'k';
-                            }
-                            return value;
-                        }
-                    },
-                    axisLine: {
-                        show: false
-                    },
-                    axisTick: {
-                        show: false
-                    },
-                    splitLine: {
-                        lineStyle: {
-                            color: '#f2f4f7'
-                        }
-                    }
+                    max: 210,
+                    interval: 30,
+                    axisLine: { show: false },
+                    axisTick: { show: false },
+                    axisLabel: { color: '#949eb7' },
+                    splitLine: { lineStyle: { type: 'dashed', color: '#e6eaeb' } }
                 },
-                /**
-                 * 曲线
-                 */
-                series: [
-                    {
-                        name: name,
-                        type: 'line',
-                        smooth: true,
-                        symbol: 'none',
-                        data: data,
-                        lineStyle: {
-                            width: 3,
-                            color: '#409EFF'
-                        },
-                        itemStyle: {
-                            color: '#409EFF'
-                        },
-                        areaStyle: {
-                            color: createGradient()
-                        },
-                        emphasis: {
-                            focus: 'series'
-                        }
-                    }
-                ]
+                series:[{
+                    type: 'bar',
+                    barWidth: 22,
+                    itemStyle: {
+                        color: '#409eff',
+                        borderRadius: [6, 6, 0, 0]
+                    },
+                    data: [155, 95, 145, 75, 185, 95, 170, 115, 155]
+                }]
             });
 
-        }
-
-
-
-        /**
-         * 默认访问量
-         */
-        renderChart('visits');
-
-        /**
-         * Tab切换
-         */
-        document.querySelectorAll('#trendTabs span')
-            .forEach(tab => {
-                tab.addEventListener(
-                    'click', function() {
-                        document.querySelectorAll('#trendTabs span').forEach(item => {
-                                item.classList.remove(
-                                    'selected'
-                                );
-                            });
-                        this.classList.add(
-                            'selected'
-                        );
-                        renderChart(
-                            this.dataset.type
-                        );
-                    }
-                );
+            /* ============ 访问量平滑面积折线图 ============ */
+            const lineDom = document.getElementById('lineChart');
+            const lineChart = echarts.init(lineDom);
+            lineChart.setOption({
+                grid:{ left: 40, right: 15, top: 20, bottom: 30 },
+                tooltip:{
+                    trigger: 'axis',
+                    axisPointer: { lineStyle: { color: '#dbdfe1', type: 'dashed' } }
+                },
+                xAxis:{
+                    type: 'category',
+                    boundaryGap: false,
+                    data: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
+                    axisLine: { show: false },
+                    axisTick: { show: false },
+                    axisLabel: { color: '#949eb7' }
+                },
+                yAxis:{
+                    type: 'value',
+                    max: 70,
+                    interval: 10,
+                    axisLine: { show: false },
+                    axisTick: { show: false },
+                    axisLabel: { color: '#949eb7' },
+                    splitLine: { lineStyle: { type: 'dashed', color: '#e6eaeb' } }
+                },
+                series:[{
+                    type: 'line',
+                    smooth: true,
+                    symbol: 'none',
+                    lineStyle: { color: '#409eff', width: 2 },
+                    itemStyle: { color: '#409eff' },
+                    areaStyle: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                            { offset: 0, color: 'rgba(64,158,255,.18)' },
+                            { offset: 1, color: 'rgba(64,158,255,.01)' }
+                        ])
+                    },
+                    data: [50, 28, 40, 20, 70, 35, 65, 30, 35, 22, 40, 45]
+                }]
             });
 
+            /* ============ 容器尺寸变化时自动重绘(修复选项卡切换后图表宽度丢失问题) ============ */
+            new ResizeObserver(function (){
+                if(barDom.clientWidth > 0){ barChart.resize(); }
+            }).observe(barDom);
+            new ResizeObserver(function (){
+                if(lineDom.clientWidth > 0){ lineChart.resize(); }
+            }).observe(lineDom);
 
-        //启动监听
-        document.addEventListener('DOMContentLoaded', initStats);
+            /* ============ 本月/上月/今年 切换按钮组 ============ */
+            $('#userSeg button').on('click', function (){
+                $('#userSeg button').removeClass('active');
+                $(this).addClass('active');
+            });
+        })
     </script>
 </body>
 </html>

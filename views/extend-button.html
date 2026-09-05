@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <!-- 响应式配置 -->
@@ -8,15 +8,23 @@
     <link rel="stylesheet" href="../css/yaya-common.css">
     <link rel="stylesheet" href="../css/yaya-style-extend.css">
     <link rel="stylesheet" href="../font/bootstrap-icons.css">
-    <title>yaya-admin-plus</title>
+    <title>按钮扩展</title>
     <style>
-        .yaya-show-container{
-            border: 1px solid rgba(96,98,102,0.1);
-            border-radius: 5px;
-        }
+        /* 演示容器:仅提供章节分隔,卡片外观由外层 .yaya-panel 提供 */
         .yaya-show-container>div{
             padding: 10px;
-            border-bottom: 1px solid rgba(204, 204, 204, 0.27);
+            border-bottom: 1px solid var(--yaya-border);
+        }
+        /* 最后一个章节不画分隔线 */
+        .yaya-show-container>div:last-child{
+            border-bottom: none;
+        }
+        /* 章节标题 */
+        .sec-title{
+            margin: 15px 10px 10px;
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--yaya-text-2);
         }
     </style>
 </head>
@@ -24,7 +32,7 @@
     <div class="yaya-box-fluid">
         <div class="yaya-panel" style="padding: 10px;">
             <div class="yaya-show-container">
-                <h2 style="color: #606266;padding-top: 5px;margin: 10px;">按钮扩展</h2>
+                <h2 class="sec-title" style="margin-top: 5px;">按钮扩展</h2>
                 <div>
                     <button type="button" class="yaya-btn yaya-default" >Default</button>
                     <button type="button" class="yaya-btn yaya-primary">Primary</button>
@@ -102,7 +110,7 @@
                     </pre>
                 </div>
 
-                <h2 style="color: #606266;margin: 10px;border-top: 1px solid #ccc;padding-top: 15px;">禁用按钮</h2>
+                <h2 class="sec-title">禁用按钮</h2>
                 <div>
                     <button class="yaya-btn yaya-default yaya-btn-disabled" type="button">Default</button>
                     <button class="yaya-btn yaya-primary yaya-btn-disabled" type="button">Primary</button>
@@ -120,7 +128,7 @@
                     </pre>
                 </div>
 
-                <h2 style="color: #606266;margin: 10px;border-top: 1px solid #ccc;padding-top: 15px;">链接按钮</h2>
+                <h2 class="sec-title">链接按钮</h2>
                 <div>
                     <button class="yaya-btn is-link-default" type="button">Default</button>
                     <button class="yaya-btn is-link-primary" type="button">Primary</button>
@@ -140,7 +148,7 @@
                     </pre>
                 </div>
 
-                <h2 style="color: #606266;margin: 10px;border-top: 1px solid #ccc;padding-top: 15px;">图标按钮</h2>
+                <h2 class="sec-title">图标按钮</h2>
                 <div>
                     <button class="yaya-btn yaya-primary" type="button">
                         <i class="bi bi-skip-start-circle-fill"></i>
@@ -166,7 +174,7 @@
                     </pre>
                 </div>
 
-                <h2 style="color: #606266;margin: 10px;border-top: 1px solid #ccc;padding-top: 15px;">调整尺寸</h2>
+                <h2 class="sec-title">调整尺寸</h2>
                 <div>
                     <div style="padding: 10px">
                         <button class="yaya-btn yaya-default yaya-btn-large" type="button">Large</button>
@@ -206,7 +214,7 @@
                     </pre>
                 </div>
 
-                <h2 style="color: #606266;margin: 10px;border-top: 1px solid #ccc;padding-top: 15px;">流式按钮(100%)</h2>
+                <h2 class="sec-title">流式按钮(100%)</h2>
                 <div>
                     <div style="padding: 10px">
                         <div class="layui-row layui-col-space10">

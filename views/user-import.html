@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <!-- 响应式配置 -->
@@ -13,18 +13,18 @@
     <style>
         :root {
             --primary-color: #409EFF;
-            --success-color: #67C23A;
+            --success-color: #13deb9;
             --info-color: #909399;
-            --bg-color: #f0f2f5;
+            --bg-color: #fafbfc;
         }
         body { font-family: "PingFang SC", "Helvetica Neue", Arial, sans-serif; background: var(--bg-color); margin: 0; padding: 10px; }
         .container { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 280px 1fr; gap: 20px; }
         
         /* 左侧：说明与模板下载 */
         .sidebar { background: #fff; border-radius: 8px; padding: 25px; box-shadow: 0 2px 12px rgba(0,0,0,0.05); }
-        .step-title { font-size: 16px; font-weight: bold; color: #303133; margin-bottom: 15px; display: flex; align-items: center; }
+        .step-title { font-size: 16px; font-weight: bold; color: #323251; margin-bottom: 15px; display: flex; align-items: center; }
         .step-num { width: 20px; height: 20px; background: var(--primary-color); color: #fff; border-radius: 50%; display: inline-flex; justify-content: center; align-items: center; font-size: 12px; margin-right: 8px; }
-        .desc-text { font-size: 13px; color: #606266; line-height: 1.8; margin-bottom: 20px; }
+        .desc-text { font-size: 13px; color: #4d5875; line-height: 1.8; margin-bottom: 20px; }
         
         .download-box { border: 1px solid #dcdfe6; border-radius: 6px; padding: 15px; text-align: center; background: #fafafa; }
         .download-btn { display: inline-block;cursor: pointer; width: 100%; padding: 10px 0; background: #fff; border: 1px solid var(--primary-color); color: var(--primary-color); border-radius: 4px; text-decoration: none; font-size: 14px; transition: all 0.2s; }
@@ -34,7 +34,7 @@
         .config-section { background: #fdf6ec; border: 1px solid #faecd8; padding: 15px; border-radius: 6px; margin-bottom: 20px; }
         .checkbox-wrapper { display: flex; align-items: center; cursor: pointer; user-select: none; }
         .checkbox-wrapper input { width: 18px; height: 18px; margin-right: 10px; cursor: pointer; }
-        .checkbox-label { font-size: 14px; color: #e6a23c; font-weight: 500; }
+        .checkbox-label { font-size: 14px; color: #ffae1f; font-weight: 500; }
 
         /* 右侧：上传主体 */
         .main-content { background: #fff; border-radius: 8px; padding: 30px; box-shadow: 0 2px 12px rgba(0,0,0,0.05); }

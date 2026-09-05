@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <!-- 响应式配置 -->
@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="css/index.css">
     <!-- 首页-操作导航菜 css库 -->
     <link rel="stylesheet" href="css/menu.css">
+    <!-- YaYa 设计令牌(内容区通用变量,供扩展样式的红点/徽章等引用) -->
+    <link rel="stylesheet" href="css/yaya-common.css">
     <!-- 第三方图标库(bootstrap)css -->
     <link rel="stylesheet" href="font/bootstrap-icons.css">
     <!-- YaYa 扩展样式 -->
@@ -83,7 +85,7 @@
                         <li class="layui-nav-item" lay-unselect>
                             <a href="javascript:">
                                 <img src="image/avatar.gif" class="layui-nav-img" alt="avatar">
-                                <span style="color: #1f1f1f;font-size: 12px;">蜡笔小新</span>
+                                <span style="color: var(--yaya-text-1);font-size: 12px;">蜡笔小新</span>
                             </a>
                             <dl class="layui-nav-child">
                                 <dd><a onclick="yaya_add('888888888','个人中心','views/personal-center.html')">个人中心</a></dd>
