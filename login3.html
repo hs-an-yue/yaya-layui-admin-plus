@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- 标签icon设置 -->
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <link rel="stylesheet" href="font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/yaya-common.css">
+    <link rel="stylesheet" href="css/yaya-style-extend.css">
     <title>AI助手 - 登录</title>
     <style>
         * {
@@ -30,6 +34,11 @@
             background-color: rgba(79, 70, 229, 0.12);
             animation: float 8s ease-in-out infinite;
         }
+        .dot::after{
+            background-color: unset;
+        }
+        .demo-login-container{width: 320px; margin: 21px auto 0;}
+        .demo-login-other .layui-icon{position: relative; display: inline-block; margin: 0 2px; top: 2px; font-size: 26px;}
         @keyframes float {
             0%, 100% {
                 transform: translateY(0px);
@@ -217,118 +226,71 @@
                     <path d="M8.5 1.866a1 1 0 1 0-1 0V3h-2A4.5 4.5 0 0 0 1 7.5V8a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1v1a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-1a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1v-.5A4.5 4.5 0 0 0 10.5 3h-2V1.866ZM14 7.5V13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V7.5A3.5 3.5 0 0 1 5.5 4h5A3.5 3.5 0 0 1 14 7.5Z"/>
                 </svg>
             </div>
-            <h1>AI助手平台</h1>
+            <h1>YaYa系统</h1>
             <p>欢迎回来，请登录您的账号</p>
         </div>
-
-        <form id="loginForm">
-            <div class="form-item">
-                <label>账号</label>
-                <div class="input-wrap">
-                    <span class="icon-left">
-                        <!-- user图标 -->
-                        <svg viewBox="0 0 24 24">
-                            <path d="M12 4a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4z"/>
-                        </svg>
-                    </span>
-                    <input id="username" type="text" class="form-input" placeholder="账号/邮箱">
+        <!-- 登录页面 -->
+        <form class="layui-form">
+            <div class="demo-login-container">
+                <div class="layui-form-item">
+                    <div class="layui-input-wrap">
+                        <div class="layui-input-prefix">
+                            <i class="layui-icon layui-icon-username"></i>
+                        </div>
+                        <input type="text" name="username"  lay-verify="required" placeholder="用户名" lay-reqtext="请填写用户名" autocomplete="off" class="layui-input yaya-input-border-radius" lay-affix="clear">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-wrap">
+                        <div class="layui-input-prefix">
+                            <i class="layui-icon layui-icon-password"></i>
+                        </div>
+                        <input type="password" name="password" lay-verify="required" placeholder="密   码" lay-reqtext="请填写密码" autocomplete="off" class="layui-input yaya-input-border-radius" lay-affix="eye">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <input type="checkbox" name="remember" lay-skin="primary" title="记住密码">
+                    <a href="#forget" style="float: right; margin-top: 7px;">忘记密码？</a>
+                </div>
+                <div class="layui-form-item">
+                    <button type="button" class="yaya-btn yaya-primary yaya-fluid" lay-submit lay-filter="login">登录</button>
                 </div>
             </div>
-
-            <div class="form-item">
-                <label>密码</label>
-                <div class="input-wrap">
-                    <span class="icon-left">
-                        <!-- lock图标 -->
-                        <svg viewBox="0 0 24 24">
-                            <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
-                        </svg>
-                    </span>
-                    <input id="password" type="password" class="form-input" placeholder="密码">
-                    <span id="togglePwd" class="icon-right">
-                        <!-- eye‑slash 默认隐藏密码图标 -->
-                        <svg id="iconEyeSlash" viewBox="0 0 24 24">
-                            <path d="M2 5.27L3.28 4 20 20.72 18.73 22l-3.08-3.08c-1.15.38-2.37.58-3.65.58-5 0-9-3.27-9-8 0-1.73.64-3.33 1.74-4.54L2 5.27M12 9a3 3 0 0 1 3 3 3 3 0 0 1-.17 1L11 9.17A3 3 0 0 1 12 9m0-5c5 0 9 3.27 9 8 0 1.73-.64 3.33-1.74 4.54l-2.52-2.52A5 5 0 0 0 7.97 9l-2.5-2.5C6.66 5.64 8.27 4 12 4z"/>
-                        </svg>
-                        <!-- eye 查看密码图标，默认隐藏 -->
-                        <svg id="iconEye" style="display:none;" viewBox="0 0 24 24">
-                            <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5M12 17a5 5 0 0 1-5-5 5 5 0 0 1 5-5 5 5 0 0 1 5 5 5 5 0 0 1-5 5m0-8a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/>
-                        </svg>
-                    </span>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <label class="remember-box">
-                    <input type="checkbox" id="remember">
-                    <span>记住我</span>
-                </label>
-                <a href="#" class="link-text">忘记密码？</a>
-            </div>
-
-            <button id="submitBtn" type="submit" class="submit-btn">登录</button>
         </form>
-
-        <div id="tipMsg" class="tip-msg hidden"></div>
     </div>
+    <script src="layui/layui.js"></script>
+    <script src="js/mockApi.js"></script>
+    <script>
 
-<script>
-    const loginForm = document.getElementById('loginForm');
-    const username = document.getElementById('username');
-    const password = document.getElementById('password');
-    const togglePwd = document.getElementById('togglePwd');
-    const iconEyeSlash = document.getElementById('iconEyeSlash');
-    const iconEye = document.getElementById('iconEye');
-    const tipMsg = document.getElementById('tipMsg');
-    const submitBtn = document.getElementById('submitBtn');
+        layui.use(function (){
+            const form = layui.form;
+            const layer = layui.layer;
 
-    // 显示/隐藏密码切换SVG图标
-    togglePwd.addEventListener('click', () => {
-        if(password.type === 'password'){
-            password.type = 'text';
-            iconEyeSlash.style.display = 'none';
-            iconEye.style.display = 'block';
-        }else{
-            password.type = 'password';
-            iconEyeSlash.style.display = 'block';
-            iconEye.style.display = 'none';
-        }
-    })
+            //基于Layui框架实现的提交表单事件
+            form.on('submit(login)', function(data){
+                let field = data.field; // 获取表单字段值
 
-    // 表单提交校验
-    loginForm.addEventListener('submit', function(e){
-        e.preventDefault();
-        tipMsg.classList.remove('hidden','text-red','text-green');
+                //调用模拟登录接口
+                MockApi.login(field).then(res=>{
+                    if(res.code===0){
+                        //跳转到index.html
+                        location.href="index.html";
+                    }else {
+                        layer.msg(res.msg);
+                    }
+                }).catch(e=>{
+                    layer.msg(e);
+                    console.error("异常:",e)
+                });
 
-        const userVal = username.value.trim();
-        const pwdVal = password.value.trim();
 
-        if(!userVal){
-            tipMsg.innerText = '请输入账号';
-            tipMsg.classList.add('text-red');
-            tipMsg.classList.remove('hidden');
-            return;
-        }
-        if(!pwdVal){
-            tipMsg.innerText = '请输入密码';
-            tipMsg.classList.add('text-red');
-            tipMsg.classList.remove('hidden');
-            return;
-        }
+                return false; // 阻止默认 form 跳转
+            });
 
-        // 模拟登录请求
-        submitBtn.disabled = true;
-        submitBtn.innerText = "登录中...";
 
-        setTimeout(()=>{
-            tipMsg.innerText = "登录成功！正在跳转AI工作台";
-            tipMsg.classList.add('text-green');
-            tipMsg.classList.remove('hidden');
-            submitBtn.disabled = false;
-            submitBtn.innerText = "登录";
-            // window.location.href = "/dashboard"; //实际项目跳转后台
-        },1200)
-    })
-</script>
+
+        });
+
+    </script>
 </body>
 </html>

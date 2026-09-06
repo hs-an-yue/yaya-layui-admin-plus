@@ -89,7 +89,7 @@
                             </a>
                             <dl class="layui-nav-child">
                                 <dd><a onclick="yaya_add('888888888','个人中心','views/personal-center.html')">个人中心</a></dd>
-                                <dd><a href="#">退出登录</a></dd>
+                                <dd id="logout"><a href="#">退出登录</a></dd>
                             </dl>
                         </li>
                     </ul>
@@ -102,6 +102,22 @@
         </div>
     </div>
     <script src="layui/layui.js"></script>
+    <script src="js/mockApi.js"></script>
     <script src="js/yaya-admin-plus.js"></script>
+    <script>
+        layui.use(function (){
+            const $  =layui.$;
+
+            //退出
+            $("#logout").click(function (){
+                MockApi.logout().then(res=>{
+                    console.log(res);
+                    if(res.code===0){
+                        location.href="login3.html"
+                    }
+                })
+            })
+        });
+    </script>
 </body>
 </html>

@@ -92,15 +92,9 @@ yaya-layui-admin-plus
 ├── README.md                               # 介绍文件
 ```
 
+## 最佳实践
 
-## 学习路线
-
-<img src="assets/15-yaya-layui-admin-plus-study-line.png" alt="15">
-
-
-## 快速使用
-
-[YaYa-Layui-Admin-Plus 快速使用](https://hs-an-yue.github.io/2026/08/23/yaya/yaya-layui-admin-plus%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/#more)
+[YaYa-Layui-Admin-Plus 最佳实践](https://hs-an-yue.github.io/2026/08/23/yaya/yaya-layui-admin-plus%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/#more)
 
 ## 🚀 联系邮箱
 
